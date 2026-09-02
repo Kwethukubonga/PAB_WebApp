@@ -1,0 +1,116 @@
+@page
+@{
+    var s = HttpContext.Strings();
+    var en = s.IsEnglish;
+    ViewData["Title"] = s.Nav.Contact;
+
+    const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-400";
+    const string labelCls = "block text-sm font-medium text-stone-700 mb-1.5";
+
+    var subjects = en
+        ? new[] { "General Enquiry", "Volunteering", "Donations & Partnerships", "Media", "Other" }
+        : new[] { "Umbuzo Jikelele", "Ukuba Sisithi Ngobuyisi", "Iminikelo Nemibambano", "Abezindaba", "Enye into" };
+
+    var messagePlaceholder = s.Pick("Write your message here...", "Bhala umyalezo wakho apha...");
+
+    var details = new[]
+    {
+        ("📞", s.Pick("Phone", "Umnxeba"),            "+27 21 000 0000",            s.Pick("Mon–Fri, 8am–5pm", "Mvulo–Lwesihlanu, 8am–5pm")),
+        ("✉️", s.Pick("Email", "I-imeyili"),          "info@philisaabafazi.org.za", s.Pick("Response within 24–48 hours", "Impendulo phakathi kwe-24–48 yeyure")),
+        ("📍", s.Pick("Address", "Idilesi"),          s.Pick("Lavender Hill, Cape Town", "eLavender Hill, eKapa"), s.Pick("Western Cape, South Africa", "Ntshona Kapa, eMzantsi Afrika")),
+        ("🚨", s.Pick("Crisis Line", "Umgca Wongxamiseko"), "+27 21 000 0001",      s.Pick("Available 24/7", "Iyafumaneka 24/7"))
+    };
+}
+
+<section class="py-20 bg-purple-900 text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Get in Touch", "Qhagamshelana")</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-5" style="font-family: Lora, serif;">@s.Pick("Contact Us", "Qhagamshelana Nathi")</h1>
+        <p class="text-purple-100 text-lg max-w-xl mx-auto leading-relaxed">
+            @s.Pick("We'd love to hear from you — whether you're seeking support, wanting to volunteer, or looking to partner with us.",
+                    "Sithanda ukuva kuwe — nokuba ufuna inkxaso, ufuna ukuba sisithi ngobuyisi, okanye ufuna ukuditana nathi.")
+        </p>
+    </div>
+</section>
+
+<section class="py-20 bg-[#fffbf5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-14">
+
+            <!-- Message form -->
+            <div class="lg:col-span-3">
+                <h2 class="text-2xl font-bold text-stone-900 mb-7" style="font-family: Lora, serif;">@s.Pick("Send Us a Message", "Sithumelele Umyalezo")</h2>
+
+                <div data-contact-success hidden class="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
+                    <p class="text-5xl mb-4" aria-hidden="true">✓</p>
+                    <h3 class="font-bold text-green-800 text-xl mb-2" style="font-family: Lora, serif;">@s.Pick("Message Sent!", "Umyalezo Uthunyelwe!")</h3>
+                    <p class="text-green-700 text-sm">
+                        @s.Pick("Thank you for reaching out. Our team will respond within 1–2 business days.",
+                                "Enkosi ngokunxibelelana nathi. Iqela lethu liza kuphendula phakathi kweentsuku ezi-1–2 zomsebenzi.")
+                    </p>
+                </div>
+
+                <form method="post" data-contact-form class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="@labelCls" for="c-name">@s.Pick("Full Name", "Igama Eligcweleyo") *</label>
+                            <input id="c-name" name="Name" required type="text" placeholder="Nomsa Dlamini" class="@inputCls" />
+                        </div>
+                        <div>
+                            <label class="@labelCls" for="c-email">@s.Pick("Email Address", "I-imeyili")</label>
+                            <input id="c-email" name="Email" type="email" placeholder="nomsa@@email.com" class="@inputCls" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="@labelCls" for="c-phone">@s.Pick("Phone Number", "Inombolo yoMxhentsi")</label>
+                            <input id="c-phone" name="Phone" type="tel" placeholder="071 000 0000" class="@inputCls" />
+                        </div>
+                        <div>
+                            <label class="@labelCls" for="c-subject">@s.Pick("Subject", "Isihloko") *</label>
+                            <select id="c-subject" name="Subject" required class="@inputCls">
+                                <option value="">@s.Pick("Select a subject", "Khetha isihloko")</option>
+                                @foreach (var subject in subjects)
+                                {
+                                    <option value="@subject">@subject</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="@labelCls" for="c-message">@s.Pick("Message", "Umyalezo") *</label>
+                        <textarea id="c-message" name="Message" required rows="6"
+                                  placeholder="@messagePlaceholder"
+                                  class="@inputCls resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
+                        @s.Pick("Send Message", "Thumela Umyalezo")
+                    </button>
+                </form>
+            </div>
+
+            <!-- Details -->
+            <div class="lg:col-span-2 space-y-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Our Details", "Iinkcukacha Zethu")</h2>
+                    <dl class="space-y-5">
+                        @foreach (var (icon, label, value, sub) in details)
+                        {
+                            <div class="flex items-start gap-4">
+                                <span class="text-xl flex-shrink-0 mt-0.5" aria-hidden="true">@icon</span>
+                                <div>
+                                    <dt class="font-semibold text-stone-800 text-sm">@label</dt>
+                                    <dd class="text-stone-700 text-sm">@value</dd>
+                                    <dd class="text-stone-400 text-xs">@sub</dd>
+                                </div>
+                            </div>
+                        }
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
