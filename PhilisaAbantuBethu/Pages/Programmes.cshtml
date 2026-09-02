@@ -1,0 +1,61 @@
+@page
+@{
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s.Nav.Programmes;
+}
+
+<section class="py-20 bg-purple-900 text-white text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1400&h=400&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto px-4">
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Do", "Esikwenzayo")</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-5" style="font-family: Lora, serif;">@s.Nav.Programmes</h1>
+        <p class="text-purple-100 text-lg leading-relaxed max-w-xl mx-auto">
+            @s.Pick("Nine programmes, one mission — to uplift and empower every person who walks through our doors.",
+                    "Iinkqubo ezisithoba, umsebenzi omnye — ukuphakamisa nokunika amandla wonke umntu ofika emahasini ethu.")
+        </p>
+    </div>
+</section>
+
+<section class="py-20 bg-[#fffbf5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach (var prog in SiteData.Programmes)
+            {
+                <a href="/Programmes/@prog.Id"
+                   class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group border border-stone-100 flex flex-col">
+                    <div class="h-52 overflow-hidden bg-stone-200 relative">
+                        <img src="https://images.unsplash.com/@(prog.ImageId)?w=500&h=280&fit=crop&auto=format"
+                             alt="@prog.Title"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="p-6 flex flex-col flex-1">
+                        <p class="text-[11px] font-bold uppercase tracking-widest mb-2" style="color: @prog.Accent;">@prog.Tagline</p>
+                        <h2 class="font-bold text-stone-900 text-xl mb-3 leading-snug" style="font-family: Lora, serif;">@prog.Title</h2>
+                        <p class="text-stone-500 text-sm leading-relaxed mb-6 flex-1">@prog.Description</p>
+                        <span class="inline-flex items-center gap-2 text-sm font-semibold text-purple-700 group-hover:text-purple-900 transition-colors mt-auto">
+                            @s.Pick("Learn More", "Funda Ngakumbi")
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover:translate-x-1 transition-transform" aria-hidden="true">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="py-16 bg-amber-50 border-t border-amber-100 text-center">
+    <div class="max-w-2xl mx-auto px-4">
+        <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need Support?", "Ufuna Uncedo?")</h2>
+        <p class="text-stone-600 mb-6 text-sm">
+            @s.Pick("Get in touch and our team will help guide you to the right programme.",
+                    "Qhagamshelana nathi kwaye iqela lethu liza kukunceda ukufumana inkqubo efanelekileyo.")
+        </p>
+        <a href="/Contact" class="inline-block bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
+            @s.Home.ContactUs
+        </a>
+    </div>
+</section>
