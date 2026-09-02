@@ -1,0 +1,140 @@
+@page
+@{
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s.Nav.Home;
+    var featured = SiteData.Programmes.Take(6).ToList();
+}
+
+<!-- Hero -->
+<section class="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-stone-900">
+    <img src="https://images.unsplash.com/photo-1620464225966-8482645f2db1?w=1600&h=900&fit=crop&auto=format"
+         alt="" aria-hidden="true"
+         class="absolute inset-0 w-full h-full object-cover opacity-40" />
+    <div class="absolute inset-0 bg-gradient-to-b from-purple-950/70 via-stone-900/60 to-stone-900/80"></div>
+
+    <div class="relative z-10 text-center px-4 max-w-3xl mx-auto py-20">
+        <p class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white/90 text-xs font-medium px-4 py-1.5 rounded-full mb-8 border border-white/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+            @s.Home.Badge
+        </p>
+
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-tight mb-4" style="font-family: Lora, serif;">
+            @s.Home.HeroHeading
+        </h1>
+        <p class="text-2xl md:text-3xl font-medium text-amber-300 mb-8" style="font-family: Lora, serif;">
+            @s.Home.HeroSub
+        </p>
+        <p class="text-white/80 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+            @s.Home.HeroParagraph
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="/Contact"
+               class="bg-purple-700 hover:bg-purple-600 text-white font-bold px-10 py-4 rounded-full text-lg transition-all shadow-xl hover:shadow-purple-900/50 hover:-translate-y-0.5 w-full sm:w-auto text-center">
+                @s.Home.ContactUs
+            </a>
+            <a href="/Programmes"
+               class="bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/30 text-white font-semibold px-8 py-4 rounded-full text-base transition-all w-full sm:w-auto text-center">
+                @s.Home.ExplorePrograms
+            </a>
+        </div>
+
+        <p class="text-white/40 text-sm mt-8">@s.Home.ServiceNote</p>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 animate-bounce" aria-hidden="true">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+</section>
+
+<!-- Programmes preview -->
+<section class="py-20 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Do", "Esikwenzayo")</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-3" style="font-family: Lora, serif;">
+                @s.Home.ProgrammesSectionTitle
+            </h2>
+            <p class="text-stone-500 max-w-xl mx-auto">@s.Home.ProgrammesSectionSub</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+            @foreach (var prog in featured)
+            {
+                <a href="/Programmes/@prog.Id"
+                   class="block bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-md transition-all group">
+                    <div class="h-40 overflow-hidden bg-stone-200">
+                        <img src="https://images.unsplash.com/@(prog.ImageId)?w=500&h=220&fit=crop&auto=format"
+                             alt="@prog.Title"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-stone-900 text-base mb-1 leading-snug" style="font-family: Lora, serif;">@prog.Title</h3>
+                        <p class="text-stone-500 text-sm leading-relaxed line-clamp-2">@prog.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+
+        <div class="text-center">
+            <a href="/Programmes"
+               class="inline-block border-2 border-purple-700 text-purple-700 hover:bg-purple-700 hover:text-white font-semibold px-8 py-3 rounded-full transition-all text-sm">
+                @s.Home.ViewAll
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Resources + Contact strip -->
+<section class="py-16 bg-[#fffbf5] border-t border-stone-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="bg-white rounded-2xl border border-stone-100 shadow-sm p-8 flex flex-col">
+                <p class="text-2xl mb-4" aria-hidden="true">📋</p>
+                <h3 class="text-xl font-bold text-stone-900 mb-2" style="font-family: Lora, serif;">@s.Home.ResourcesTitle</h3>
+                <p class="text-stone-500 text-sm leading-relaxed mb-6 flex-1">@s.Home.ResourcesSub</p>
+                <a href="/Resources" class="inline-flex items-center gap-2 text-purple-700 font-semibold hover:text-purple-900 transition-colors group/btn text-sm">
+                    @s.Home.ViewResources
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover/btn:translate-x-1 transition-transform" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="bg-purple-900 rounded-2xl p-8 flex flex-col text-white">
+                <p class="text-2xl mb-4" aria-hidden="true">💬</p>
+                <h3 class="text-xl font-bold mb-2" style="font-family: Lora, serif;">@s.Home.ContactTitle</h3>
+                <p class="text-purple-200 text-sm leading-relaxed mb-6 flex-1">@s.Home.ContactSub</p>
+                <a href="/Contact" class="inline-flex items-center gap-2 text-amber-300 font-semibold hover:text-amber-200 transition-colors group/btn text-sm">
+                    @s.Home.ContactUs
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover/btn:translate-x-1 transition-transform" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Closing call to action -->
+<section class="py-20 bg-amber-50 border-t border-amber-100 text-center">
+    <div class="max-w-2xl mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">
+            @s.Home.HeroHeading
+        </h2>
+        <p class="text-stone-600 text-lg mb-8 leading-relaxed max-w-md mx-auto">
+            @s.Pick("Reach out to us — no account needed, no judgment. Just tell us how we can help.",
+                    "Sondelana nathi — akukho akhawunti efunekayo, akukho sigwebo. Sixelele nje ukuba sinokunceda njani.")
+        </p>
+        <a href="/Contact"
+           class="inline-block bg-purple-700 hover:bg-purple-800 text-white font-bold px-12 py-4 rounded-full text-lg transition-all shadow-lg hover:shadow-purple-900/30 hover:-translate-y-0.5">
+            @s.Home.ContactUs
+        </a>
+        <p class="text-stone-400 text-sm mt-4">
+            @s.Pick("Free and confidential.", "Mahhala kwaye yimfihlo.")
+        </p>
+    </div>
+</section>

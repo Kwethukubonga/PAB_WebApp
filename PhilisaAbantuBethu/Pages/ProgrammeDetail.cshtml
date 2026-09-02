@@ -1,0 +1,133 @@
+@page "/Programmes/{id}"
+@{
+    var s = HttpContext.Strings();
+    var prog = SiteData.FindProgramme(RouteData.Values["id"]?.ToString());
+    ViewData["Title"] = prog.Title;
+
+    var gallery = new[]
+    {
+        "photo-1509099836639-18ba1795216d",
+        "photo-1509099927777-1b8a87bc3b21",
+        "photo-1509099863731-ef4bff19e808",
+        "photo-1567057419565-4349c49d8a04"
+    };
+
+    var successStories = new[]
+    {
+        new
+        {
+            Name = "Amahle, 34",
+            Quote = "This programme changed my life. I came in with nothing and left with a skill, a certificate, and the confidence to start my own business.",
+            QuoteXh = "Le nkqubo yatshintsha ubomi bam. Ndafika ndingenalutshintsho kwaye ndaphuma nendlela, isatifiketi, kunye nolutho lokwakha ishishini lam."
+        },
+        new
+        {
+            Name = "Thembeka, 28",
+            Quote = "I didn't know where to turn. Philisa Abafazi Bethu didn't just help me — they believed in me when I couldn't believe in myself.",
+            QuoteXh = "Bendingazi apho ndiya khona. I-Philisa Abafazi Bethu ayandinceda nje kuphela — bankholwa ngam xa bendingakholwa ngam ndim."
+        }
+    };
+}
+
+<!-- Hero -->
+<section class="relative h-72 md:h-96 overflow-hidden bg-stone-800">
+    <img src="https://images.unsplash.com/@(prog.ImageId)?w=1400&h=500&fit=crop&auto=format"
+         alt="@prog.Title"
+         class="absolute inset-0 w-full h-full object-cover opacity-60" />
+    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+        <a href="/Programmes" class="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-4 transition-colors">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            @s.Nav.Programmes
+        </a>
+        <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color: @prog.Accent;">@prog.Tagline</p>
+        <h1 class="text-3xl md:text-5xl font-bold text-white" style="font-family: Lora, serif;">@prog.Title</h1>
+    </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-14">
+        <div class="lg:col-span-2 space-y-12">
+
+            <div>
+                <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Overview", "Isishwankathelo")</h2>
+                <p class="text-stone-600 leading-relaxed">@prog.Overview</p>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Objectives", "Iinjongo")</h2>
+                <ul class="space-y-3">
+                    @foreach (var obj in prog.Objectives)
+                    {
+                        <li class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5" style="background-color: @(prog.Accent)20;">
+                                <svg width="10" height="10" fill="none" stroke="@prog.Accent" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="text-stone-600 leading-relaxed">@obj</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Activities", "Imisebenzi")</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    @foreach (var act in prog.Activities)
+                    {
+                        <div class="flex items-start gap-3 bg-stone-50 rounded-xl px-4 py-3.5 border border-stone-100">
+                            <span class="text-purple-500 mt-0.5 flex-shrink-0" aria-hidden="true">&#9670;</span>
+                            <span class="text-stone-600 text-sm leading-relaxed">@act</span>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya")</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    @for (var i = 0; i < gallery.Length; i++)
+                    {
+                        <div class="rounded-xl overflow-hidden bg-stone-200 @(i == 0 ? "h-52" : "h-40")">
+                            <img src="https://images.unsplash.com/@(gallery[i])?w=400&h=250&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Success Stories", "Amabali Empumelelo")</h2>
+                <div class="space-y-5">
+                    @foreach (var story in successStories)
+                    {
+                        <blockquote class="bg-purple-50 border-l-4 border-purple-600 rounded-r-xl p-6">
+                            <p class="text-stone-700 italic leading-relaxed mb-3">&ldquo;@s.Pick(story.Quote, story.QuoteXh)&rdquo;</p>
+                            <cite class="text-purple-700 font-semibold text-sm not-italic">— @story.Name</cite>
+                        </blockquote>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+            <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100 sticky top-24">
+                <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?")</h2>
+                <p class="text-stone-500 text-sm leading-relaxed mb-5">
+                    @s.Pick("Get in touch and our team will be in touch to guide you.",
+                            "Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.")
+                </p>
+                <div class="space-y-3">
+                    <a href="/Contact" class="block text-center w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 rounded-xl transition-colors text-sm">@s.Home.ContactUs</a>
+                    <a href="/Programmes" class="block text-center w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-3 rounded-xl transition-colors text-sm">@s.Nav.Programmes</a>
+                </div>
+                <p class="mt-5 pt-5 border-t border-stone-200 text-xs text-stone-400">
+                    @s.Pick("Free for qualifying community members.", "Mahhala kumalungu oluntu afanelekileyo.")
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

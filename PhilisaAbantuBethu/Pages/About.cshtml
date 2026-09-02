@@ -1,0 +1,171 @@
+@page
+@{
+    ViewData["Title"] = "About us";
+
+    var values = new[]
+    {
+        ("Ubuntu",      "🤝", "We believe in the African philosophy that a person is a person through other persons. Everything we do is grounded in this collective humanity."),
+        ("Dignity",     "💜", "Every individual we serve is treated with absolute respect and dignity, regardless of their circumstances or background."),
+        ("Compassion",  "❤️", "We lead with empathy. Our team listens deeply before acting, ensuring our responses are tailored to real needs."),
+        ("Empowerment", "✊", "We do not merely provide services — we build capacity. We want every person we help to become capable of helping others."),
+        ("Integrity",   "⚖️", "We are transparent in our operations, accountable to our communities, and honest in everything we do."),
+        ("Inclusivity", "🌍", "We welcome all people regardless of gender, religion, language, or background. Our doors are open to everyone in need.")
+    };
+
+    var team = new[]
+    {
+        ("Nomsa Dlamini",  "Executive Director",             "photo-1610722839611-f7837e1dd39f"),
+        ("Fatima Arendse", "Head of Social Work",            "photo-1509099863731-ef4bff19e808"),
+        ("Zanele Khumalo", "Women's Programme Manager",      "photo-1634538607545-58da50ad2f81"),
+        ("Thandi Ncube",   "Youth & Community Coordinator",  "photo-1623299678251-f7dfe3ce5f1b")
+    };
+
+    var historyImages = new[]
+    {
+        "photo-1509099836639-18ba1795216d",
+        "photo-1620464225966-8482645f2db1",
+        "photo-1509099927777-1b8a87bc3b21",
+        "photo-1632215861513-130b66fe97f4"
+    };
+}
+
+<!-- Page hero -->
+<section class="relative py-24 bg-purple-900 overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <img src="https://images.unsplash.com/photo-1633443315529-84fe2415585f?w=1400&h=500&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover" />
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">Our Story</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-5" style="font-family: Lora, serif;">About Us</h1>
+        <p class="text-purple-100 text-lg max-w-2xl mx-auto leading-relaxed">
+            Learn who we are, what drives us, and the values that guide every decision we make.
+        </p>
+    </div>
+</section>
+
+<!-- History -->
+<section class="py-20 bg-[#fffbf5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">Our History</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6 leading-snug" style="font-family: Lora, serif;">
+                    15 Years of Building Community
+                </h2>
+                <div class="space-y-4 text-stone-600 leading-relaxed">
+                    <p>
+                        Philisa Abafazi Bethu — meaning &ldquo;heal our women&rdquo; in isiZulu — was founded in 2009 by a group of
+                        determined women in Cape Town's northern suburbs who saw their neighbours suffering without support.
+                        What began as a small feeding scheme in a church hall has grown into one of the Western Cape's most
+                        comprehensive community welfare organisations.
+                    </p>
+                    <p>
+                        Over the years, we expanded our reach from food security to gender-based violence support, youth
+                        development, child welfare, and elder care, growing the network of programmes and partners that
+                        makes it easier for community members to access our services.
+                    </p>
+                    <p>
+                        Today, we serve over 14,200 families annually across 12 communities, powered by a committed team of
+                        staff and more than 320 volunteers.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                @for (var i = 0; i < historyImages.Length; i++)
+                {
+                    var height = (i == 0 || i == 3) ? "h-48" : "h-44";
+                    <div class="rounded-xl overflow-hidden bg-stone-200 @height">
+                        <img src="https://images.unsplash.com/@(historyImages[i])?w=300&h=250&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & vision -->
+<section class="py-20 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-purple-900 text-white rounded-2xl p-10">
+                <p class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-4">Our Mission</p>
+                <h2 class="text-2xl font-bold mb-4 leading-snug" style="font-family: Lora, serif;">
+                    To walk alongside communities in their most vulnerable moments.
+                </h2>
+                <p class="text-purple-100 leading-relaxed">
+                    We are committed to providing accessible, dignified, and holistic support services that address the root
+                    causes of poverty, inequality, and social exclusion — empowering individuals and families to build
+                    sustainable, fulfilling lives.
+                </p>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-10">
+                <p class="text-amber-700 text-xs font-semibold uppercase tracking-widest mb-4">Our Vision</p>
+                <h2 class="text-2xl font-bold text-stone-900 mb-4 leading-snug" style="font-family: Lora, serif;">
+                    Communities where every person thrives with dignity and hope.
+                </h2>
+                <p class="text-stone-600 leading-relaxed">
+                    We envision a South Africa where no woman is unsafe, no child goes hungry, no elder is forgotten, and no
+                    young person is without opportunity — a society where ubuntu is not just a word, but a lived reality.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core values -->
+<section class="py-20 bg-[#fffbf5]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">What We Stand For</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">Our Core Values</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach (var (title, icon, desc) in values)
+            {
+                <div class="bg-white rounded-2xl p-7 border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                    <p class="text-3xl mb-4" aria-hidden="true">@icon</p>
+                    <h3 class="font-bold text-stone-900 text-lg mb-2" style="font-family: Lora, serif;">@title</h3>
+                    <p class="text-stone-500 text-sm leading-relaxed">@desc</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="py-20 bg-stone-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">Leadership</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">Meet the Team</h2>
+            <p class="text-stone-500 mt-3">The dedicated people who make our work possible every day.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            @foreach (var (name, role, image) in team)
+            {
+                <div class="text-center group">
+                    <div class="w-full aspect-square rounded-2xl overflow-hidden bg-stone-200 mb-4 shadow-sm group-hover:shadow-md transition-shadow">
+                        <img src="https://images.unsplash.com/@(image)?w=300&h=300&fit=crop&auto=format"
+                             alt="@name"
+                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <h3 class="font-bold text-stone-900" style="font-family: Lora, serif;">@name</h3>
+                    <p class="text-stone-500 text-sm mt-1">@role</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 bg-purple-900 text-white text-center">
+    <div class="max-w-2xl mx-auto px-4">
+        <h2 class="text-3xl font-bold mb-4" style="font-family: Lora, serif;">Ready to Make a Difference?</h2>
+        <p class="text-purple-200 mb-8">Explore our programmes or reach out to learn how you can support or join our community.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/Programmes" class="bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold px-8 py-3 rounded-full transition-colors">Explore Programmes</a>
+            <a href="/Contact" class="border border-purple-400 text-white hover:bg-purple-800 font-semibold px-8 py-3 rounded-full transition-colors">Contact Us</a>
+        </div>
+    </div>
+</section>
