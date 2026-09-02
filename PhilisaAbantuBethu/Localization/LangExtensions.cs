@@ -5,7 +5,8 @@ public static class LangExtensions
     public const string CookieName = "pab_lang";
     private const string ItemKey = "pab_lang";
 
-    /// <summary>Current language: ?lang= wins, then the cookie, then English.</summary>
+    // Gets the current language for the request, based on query string, cookie, or defaulting to "en".
+
     public static string CurrentLang(this HttpContext ctx)
     {
         if (ctx.Items.TryGetValue(ItemKey, out var cached) && cached is string s) return s;
@@ -23,7 +24,8 @@ public static class LangExtensions
 
     public static SiteStrings Strings(this HttpContext ctx) => SiteStrings.For(ctx.CurrentLang());
 
-    /// <summary>Link back to the current page in the other language.</summary>
+    // Generates a URL that toggles the language between "en" and "xh"
+
     public static string LangToggleUrl(this HttpContext ctx)
     {
         var other = ctx.CurrentLang() == "en" ? "xh" : "en";
