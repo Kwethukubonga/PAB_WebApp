@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -28,4 +28,115 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Outfit', system-ui, sans-serif;
+    --font-serif: 'Lora', Georgia, serif;
+}
+
+html,
+body {
+    font-family: 'Outfit', system-ui, sans-serif;
+    background-color: #fffbf5;
+    color: #1c1008;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Lora', Georgia, serif;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(107, 33, 168, 0.25);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 33, 168, 0.5);
+}*/
+
+html { scroll-behavior: smooth }
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible 
+{
+
+    outline: 2px solid #7C3AED;
+    outline-offset: 2px;
+    border-radius: 4px;
+
+}
+
+/* Fallbakc line-clamp-* on older Tailwind builds */
+.line-clamp-1,
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.line-clamp-1 { -webkit-line-clamp: 1; }
+.line-clamp-2 { -webkit-line-clamp: 2; }
+
+/*
+    Skip link
+*/
+.skip-link 
+{
+
+    position: absolute;
+    left: -9999px;
+
+}
+.skip-link:focus 
+{
+
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    background: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+
+}
+
+@media (prefers-reduced-motion: reduce) 
+{
+
+    *, *::before, *::after 
+    {
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+
+    }
+
+}
+
+
+/* 
+    Selected-radio styling for the request form
+    Fallback for builds of Tailwind without 'has-[]' variant
+*/
+label:has(input[type="radio"]:checked) 
+{
+
+    border-color: #A855F7;
+    background-color: #FAF5FF;
+    color: #6B21A8;
+
 }
