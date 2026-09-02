@@ -1,4 +1,4 @@
-namespace PhilisaAbantuBethu.Models
+﻿namespace PhilisaAbantuBethu.Models
 {
     public class SupportRequest
     {
