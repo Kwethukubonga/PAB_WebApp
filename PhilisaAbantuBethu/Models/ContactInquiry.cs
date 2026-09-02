@@ -1,4 +1,4 @@
-﻿namespace PhilisaAbantuBethu.Model
+﻿namespace PhilisaAbantuBethu.Models
 {
     public class ContactInquiry
     {
