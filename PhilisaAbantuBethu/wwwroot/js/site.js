@@ -38,18 +38,4 @@
             if (icon) icon.classList.toggle('rotate-180', !isOpen);
         });
     });
-
-    /* ---------------------------------------------------------------
-       Contact form demo success panel (Pages/Contact.cshtml)
-       Remove this block once the form posts to a real handler.
-    --------------------------------------------------------------- */
-    var contactForm = document.querySelector('[data-contact-form]');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            contactForm.setAttribute('hidden', '');
-            var ok = document.querySelector('[data-contact-success]');
-            if (ok) { ok.removeAttribute('hidden'); ok.scrollIntoView({ block: 'center' }); }
-        });
-    }
 })();

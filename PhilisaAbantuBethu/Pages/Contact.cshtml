@@ -1,8 +1,10 @@
 @page
+@model ContactModel
 @{
     var s = HttpContext.Strings();
     var en = s.IsEnglish;
     ViewData["Title"] = s.Nav.Contact;
+    var sent = bool.TryParse(HttpContext.Request.Query["sent"], out var sentFlag) && sentFlag;
 
     const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-400";
     const string labelCls = "block text-sm font-medium text-stone-700 mb-1.5";
@@ -41,7 +43,7 @@
             <div class="lg:col-span-3">
                 <h2 class="text-2xl font-bold text-stone-900 mb-7" style="font-family: Lora, serif;">@s.Pick("Send Us a Message", "Sithumelele Umyalezo")</h2>
 
-                <div data-contact-success hidden class="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
+                <div data-contact-success hidden="@(!sent)" class="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
                     <p class="text-5xl mb-4" aria-hidden="true">✓</p>
                     <h3 class="font-bold text-green-800 text-xl mb-2" style="font-family: Lora, serif;">@s.Pick("Message Sent!", "Umyalezo Uthunyelwe!")</h3>
                     <p class="text-green-700 text-sm">
@@ -50,7 +52,7 @@
                     </p>
                 </div>
 
-                <form method="post" data-contact-form class="space-y-5">
+                <form method="post" data-contact-form hidden="@sent" class="space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-name">@s.Pick("Full Name", "Igama Eligcweleyo") *</label>
