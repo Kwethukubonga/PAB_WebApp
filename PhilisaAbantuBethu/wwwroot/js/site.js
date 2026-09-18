@@ -1,9 +1,9 @@
-/* Philisa Abantu Bethu — site-wide interactive behaviour. */
+
 (function () {
     'use strict';
 
     /* ---------------------------------------------------------------
-       Mobile navigation (header hamburger, Pages/Shared/_Layout.cshtml)
+       Mobile navigation 
     --------------------------------------------------------------- */
     document.querySelectorAll('[data-nav-toggle]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -16,7 +16,7 @@
     });
 
     /* ---------------------------------------------------------------
-       FAQ accordion (Pages/Resources.cshtml) — single panel open at a time
+       FAQ 
     --------------------------------------------------------------- */
     document.querySelectorAll('[data-faq-toggle]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -40,8 +40,7 @@
     });
 
     /* ---------------------------------------------------------------
-       Contact form demo success panel (Pages/Contact.cshtml)
-       Remove this block once the form posts to a real handler.
+       Contact form demo 
     --------------------------------------------------------------- */
     var contactForm = document.querySelector('[data-contact-form]');
     if (contactForm) {

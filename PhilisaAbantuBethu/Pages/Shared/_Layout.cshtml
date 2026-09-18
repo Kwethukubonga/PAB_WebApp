@@ -57,7 +57,7 @@
                 </span>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-7" aria-label="Main">
+            <nav class="hidden lg:flex items-center gap-7" aria-label="@s.Pick("Main", "Ephambili")">
                 <a href="/" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Home</a>
                 <a href="/About" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@aboutLabel</a>
                 <a href="/Programmes" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Programmes</a>
@@ -86,7 +86,7 @@
     </div>
 
     <div id="mobile-nav" hidden class="lg:hidden border-t border-stone-100 bg-white">
-        <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="Mobile">
+        <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="@s.Pick("Mobile", "Kwifowuni")">
             <a href="/" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Home</a>
             <a href="/About" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@aboutLabel</a>
             <a href="/Programmes" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Programmes</a>
@@ -116,7 +116,7 @@
                     <span class="text-white font-semibold" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
                 </div>
                 <p class="text-sm leading-relaxed max-w-md">@s.Home.ServiceNote</p>
-                <p class="text-purple-400 text-xs mt-5">Lavender Hill, Cape Town, Western Cape</p>
+                <p class="text-purple-400 text-xs mt-5">@s.Pick("Lavender Hill, Cape Town, Western Cape", "Lavender Hill, eKapa, Ntshona Koloni")</p>
             </div>
 
             <div>
@@ -135,7 +135,7 @@
                     <li>@s.Pick("Office", "Ihhovisi"): <a href="tel:+27210000000" class="hover:text-white">+27 21 000 0000</a></li>
                     <li>@s.Pick("Crisis line", "Umgca wongxamiseko"): <a href="tel:+27210000001" class="text-amber-300 font-semibold hover:text-amber-200">+27 21 000 0001</a></li>
                     <li>@s.Pick("Email", "I-imeyili"): <a href="mailto:info@@philisaabafazi.org.za" class="hover:text-white">info@@philisaabafazi.org.za</a></li>
-                    <li class="pt-2 text-purple-400 text-xs">GBV helpline: 0800 428 428 (24/7)</li>
+                    <li class="pt-2 text-purple-400 text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV"): 0800 428 428 (24/7)</li>
                 </ul>
             </div>
         </div>

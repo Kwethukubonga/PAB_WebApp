@@ -27,13 +27,13 @@
                    class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group border border-stone-100 flex flex-col">
                     <div class="h-52 overflow-hidden bg-stone-200 relative">
                         <img src="https://images.unsplash.com/@(prog.ImageId)?w=500&h=280&fit=crop&auto=format"
-                             alt="@prog.Title"
+                             alt="@prog.TitleFor(s)"
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div class="p-6 flex flex-col flex-1">
-                        <p class="text-[11px] font-bold uppercase tracking-widest mb-2" style="color: @prog.Accent;">@prog.Tagline</p>
-                        <h2 class="font-bold text-stone-900 text-xl mb-3 leading-snug" style="font-family: Lora, serif;">@prog.Title</h2>
-                        <p class="text-stone-500 text-sm leading-relaxed mb-6 flex-1">@prog.Description</p>
+                        <p class="text-[11px] font-bold uppercase tracking-widest mb-2" style="color: @prog.Accent;">@prog.TaglineFor(s)</p>
+                        <h2 class="font-bold text-stone-900 text-xl mb-3 leading-snug" style="font-family: Lora, serif;">@prog.TitleFor(s)</h2>
+                        <p class="text-stone-500 text-sm leading-relaxed mb-6 flex-1">@prog.DescriptionFor(s)</p>
                         <span class="inline-flex items-center gap-2 text-sm font-semibold text-purple-700 group-hover:text-purple-900 transition-colors mt-auto">
                             @s.Pick("Learn More", "Funda Ngakumbi")
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover:translate-x-1 transition-transform" aria-hidden="true">
