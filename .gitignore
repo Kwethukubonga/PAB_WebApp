@@ -364,3 +364,5 @@ FodyWeavers.xsd
 
 # SQLite database - each machine creates its own, never commit it
 *.db
+*.db-shm
+*.db-wal
