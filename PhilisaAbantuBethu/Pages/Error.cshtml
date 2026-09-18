@@ -1,26 +1,38 @@
-﻿@page
+@page
 @model ErrorModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Something Went Wrong";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<section class="min-h-[70vh] bg-[#fffbf5] flex items-center">
+    <div class="max-w-2xl mx-auto px-4 py-16 text-center w-full">
+        <div class="w-20 h-20 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-8" aria-hidden="true">
+            <svg width="36" height="36" fill="none" viewBox="0 0 24 24">
+                <path d="M12 9v4m0 4h.01M10.29 3.86l-8.18 14.18A2 2 0 004 21h16a2 2 0 001.89-2.96L13.71 3.86a2 2 0 00-3.42 0z"
+                      stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+        <p class="text-red-600 text-sm font-semibold uppercase tracking-widest mb-3">Something Went Wrong</p>
+        <h1 class="text-2xl md:text-3xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">
+            We're sorry — an error occurred
+        </h1>
+        <p class="text-stone-500 text-base leading-relaxed mb-8 max-w-md mx-auto">
+            This wasn't your fault. Please try again, and if the problem continues, reach out to us directly so we
+            can help.
+        </p>
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to the <strong>Development</strong> environment displays detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+        @if (Model.ShowRequestId)
+        {
+            <div class="bg-white border border-stone-100 rounded-2xl p-5 shadow-sm mb-8 inline-block">
+                <p class="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-1">Reference for our team</p>
+                <p class="font-mono text-sm text-stone-700">@Model.RequestId</p>
+            </div>
+        }
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">Back to Home</a>
+            <a href="/Contact" class="border border-stone-200 text-stone-700 hover:bg-stone-50 font-semibold px-8 py-3.5 rounded-full transition-colors">Contact Us</a>
+        </div>
+    </div>
+</section>

@@ -1,9 +1,9 @@
-
+/* Philisa Abantu Bethu — site-wide interactive behaviour. */
 (function () {
     'use strict';
 
     /* ---------------------------------------------------------------
-       Mobile navigation 
+       Mobile navigation (header hamburger, Pages/Shared/_Layout.cshtml)
     --------------------------------------------------------------- */
     document.querySelectorAll('[data-nav-toggle]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -16,7 +16,7 @@
     });
 
     /* ---------------------------------------------------------------
-       FAQ 
+       FAQ accordion (Pages/Resources.cshtml) — single panel open at a time
     --------------------------------------------------------------- */
     document.querySelectorAll('[data-faq-toggle]').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -38,17 +38,4 @@
             if (icon) icon.classList.toggle('rotate-180', !isOpen);
         });
     });
-
-    /* ---------------------------------------------------------------
-       Contact form demo 
-    --------------------------------------------------------------- */
-    var contactForm = document.querySelector('[data-contact-form]');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            contactForm.setAttribute('hidden', '');
-            var ok = document.querySelector('[data-contact-success]');
-            if (ok) { ok.removeAttribute('hidden'); ok.scrollIntoView({ block: 'center' }); }
-        });
-    }
 })();
