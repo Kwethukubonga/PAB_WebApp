@@ -71,6 +71,12 @@ h4 {
 
 html { scroll-behavior: smooth }
 
+/* Tailwind's flex/grid/block utilities have the same specificity as the
+   browser's [hidden] default and win the tie — force hidden to always win. */
+[hidden] {
+    display: none !important;
+}
+
 :where(a, button, input, select, textarea, [tabindex]):focus-visible 
 {
 
