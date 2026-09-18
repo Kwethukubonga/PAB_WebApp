@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Localization\" />
     <Folder Include="Services\" />
     <Folder Include="Wizard\" />
