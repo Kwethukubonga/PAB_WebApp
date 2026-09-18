@@ -21,12 +21,12 @@ namespace PhilisaAbantuBethu.Data
         /// Gets or sets the DbSet for SupportRequest entities, allowing CRUD operations 
         /// on the SupportRequests table in the database.
         /// </summary>
-        public DbSet<SupportRequest> SupportRequests { get; set; } = null;
+        public DbSet<SupportRequest> SupportRequests { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the DbSet for ContactInquiry entities, allowing CRUD operations
         /// </summary>
-        public DbSet<ContactInquiry> ContactInquiry { get; set; } = null;
+        public DbSet<ContactInquiry> ContactInquiries { get; set; } = null!;
 
     }
 }

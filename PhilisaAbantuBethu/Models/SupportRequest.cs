@@ -9,7 +9,7 @@
         public string Surname { get; set; } = "";
         public string Phone { get; set; } = "";
         public string Email { get; set; } = "";
-        public string AreaOfSupport { get; set; } = "";
+        public string Area { get; set; } = "";
         public string ContactMethod { get; set; } = "";
         public string SupportType { get; set; } = "";
         public string Situation { get; set; } = "";
