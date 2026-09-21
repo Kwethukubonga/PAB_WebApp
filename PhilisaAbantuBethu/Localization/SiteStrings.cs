@@ -110,7 +110,7 @@ public class SiteStrings
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abantu Bethu — Community Support",
+			Badge = "Philisa Abafazi Bethu — Community Support",
 			HeroHeading = "Do you need support?",
 			HeroSub = "We are here to help.",
 			HeroParagraph = "Philisa Abafazi Bethu supports women, children and families across Cape Town communities. If you need support, this platform gives you a simple and private way to reach out and ask for help.",
@@ -209,7 +209,7 @@ public class SiteStrings
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abantu Bethu — Inkxaso Yoluntu",
+			Badge = "Philisa Abafazi Bethu — Inkxaso Yoluntu",
 			HeroHeading = "Ingaba ufuna uncedo?",
 			HeroSub = "Silapha ukukunceda.",
 			HeroParagraph = "I-Philisa Abafazi Bethu ixhasa abafazi, abantwana nezintsapho kwiindawo ezahlukeneyo zase-Kapa. Ukuba ufuna uncedo, le platfom ikunika indlela elula neyimfihlo yokufikelela usizo.",

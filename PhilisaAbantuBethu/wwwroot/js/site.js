@@ -1,4 +1,4 @@
-/* Philisa Abantu Bethu — site-wide interactive behaviour. */
+/* Philisa Abafazi Bethu — site-wide interactive behaviour. */
 (function () {
     'use strict';
 
