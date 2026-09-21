@@ -1,4 +1,4 @@
-/* Philisa Abantu Bethu — Request Support form: 3-step wizard navigation. */
+/* Philisa Abafazi Bethu — Request Support form: 3-step wizard navigation. */
 (function () {
     'use strict';
 
