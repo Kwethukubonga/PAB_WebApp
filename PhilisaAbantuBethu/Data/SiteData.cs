@@ -38,7 +38,14 @@ public static class SiteData
 
             },
 
-            ImageId = "photo-1665127534458-1ce3aa170652",
+            ImagePath = "/img/programmes/womens-empowerment/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/womens-empowerment/gallery-1.jpg",
+                "/img/programmes/womens-empowerment/gallery-2.jpg",
+                "/img/programmes/womens-empowerment/gallery-3.jpg",
+                "/img/programmes/womens-empowerment/gallery-4.jpg"
+            },
             Accent = "#7C3AED"
 
         },
@@ -73,7 +80,14 @@ public static class SiteData
 
             },
 
-            ImageId = "photo-1632215861513-130b66fe97f4",
+            ImagePath = "/img/programmes/youth-programme/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/youth-programme/gallery-1.jpg",
+                "/img/programmes/youth-programme/gallery-2.jpg",
+                "/img/programmes/youth-programme/gallery-3.jpg",
+                "/img/programmes/youth-programme/gallery-4.jpg"
+            },
             Accent = "#1D4ED8"
 
         },
@@ -108,7 +122,14 @@ public static class SiteData
             
             },
 
-            ImageId = "photo-1567057419565-4349c49d8a04",
+            ImagePath = "/img/programmes/after-school/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/after-school/gallery-1.jpg",
+                "/img/programmes/after-school/gallery-2.jpg",
+                "/img/programmes/after-school/gallery-3.jpg",
+                "/img/programmes/after-school/gallery-4.jpg"
+            },
             Accent = "#059669"
 
         },
@@ -143,7 +164,14 @@ public static class SiteData
 
             },
 
-            ImageId = "photo-1620464225966-8482645f2db1",
+            ImagePath = "/img/programmes/senior-programme/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/senior-programme/gallery-1.jpg",
+                "/img/programmes/senior-programme/gallery-2.jpg",
+                "/img/programmes/senior-programme/gallery-3.jpg",
+                "/img/programmes/senior-programme/gallery-4.jpg"
+            },
             Accent = "#B45309"
 
         },
@@ -178,7 +206,14 @@ public static class SiteData
 
             },
 
-            ImageId = "photo-1694286068611-d0c24cbc2cd5",
+            ImagePath = "/img/programmes/community-feeding/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/community-feeding/gallery-1.jpg",
+                "/img/programmes/community-feeding/gallery-2.jpg",
+                "/img/programmes/community-feeding/gallery-3.jpg",
+                "/img/programmes/community-feeding/gallery-4.jpg"
+            },
             Accent = "#EA580C"
 
         },
@@ -213,7 +248,12 @@ public static class SiteData
 
             },
 
-            ImageId = "photo-1509099927777-1b8a87bc3b21",
+            ImagePath = "/img/programmes/baby-saver/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/baby-saver/gallery-1.jpg",
+                "/img/programmes/baby-saver/gallery-2.jpg"
+            },
             Accent = "#DB2777"
 
         },
@@ -248,7 +288,14 @@ public static class SiteData
 
             },
             
-            ImageId = "photo-1509099863731-ef4bff19e808",
+            ImagePath = "/img/programmes/safe-houses/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/safe-houses/gallery-1.jpg",
+                "/img/programmes/safe-houses/gallery-2.jpg",
+                "/img/programmes/safe-houses/gallery-3.jpg",
+                "/img/programmes/safe-houses/gallery-4.jpg"
+            },
             Accent = "#DC2626"
 
         },
@@ -283,7 +330,11 @@ public static class SiteData
 
             },
             
-            ImageId = "photo-1633443315529-84fe2415585f",
+            ImagePath = "/img/programmes/search-rescue/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/search-rescue/gallery-1.jpg"
+            },
             Accent = "#475569"
 
         },
@@ -318,7 +369,13 @@ public static class SiteData
 
             },
 
-            ImageId = "photo-1610722839611-f7837e1dd39f",
+            ImagePath = "/img/programmes/social-work/hero.jpg",
+            GalleryImages = new()
+            {
+                "/img/programmes/social-work/gallery-1.jpg",
+                "/img/programmes/social-work/gallery-2.jpg",
+                "/img/programmes/social-work/gallery-3.jpg"
+            },
             Accent = "#0D9488"
 
         }

@@ -4,14 +4,6 @@
     var prog = SiteData.FindProgramme(RouteData.Values["id"]?.ToString());
     ViewData["Title"] = prog.TitleFor(s);
 
-    var gallery = new[]
-    {
-        "photo-1509099836639-18ba1795216d",
-        "photo-1509099927777-1b8a87bc3b21",
-        "photo-1509099863731-ef4bff19e808",
-        "photo-1567057419565-4349c49d8a04"
-    };
-
     var successStories = new[]
     {
         new
@@ -31,7 +23,7 @@
 
 <!-- Hero -->
 <section class="relative h-72 md:h-96 overflow-hidden bg-stone-800">
-    <img src="https://images.unsplash.com/@(prog.ImageId)?w=1400&h=500&fit=crop&auto=format"
+    <img src="@prog.ImagePath"
          alt="@prog.TitleFor(s)"
          class="absolute inset-0 w-full h-full object-cover opacity-60" />
     <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent"></div>
@@ -89,10 +81,10 @@
             <div>
                 <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya")</h2>
                 <div class="grid grid-cols-2 gap-4">
-                    @for (var i = 0; i < gallery.Length; i++)
+                    @for (var i = 0; i < prog.GalleryImages.Count; i++)
                     {
                         <div class="rounded-xl overflow-hidden bg-stone-200 @(i == 0 ? "h-52" : "h-40")">
-                            <img src="https://images.unsplash.com/@(gallery[i])?w=400&h=250&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                            <img src="@prog.GalleryImages[i]" alt="" aria-hidden="true" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
                         </div>
                     }
                 </div>
