@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="PhilisaAbantuBethu/PhilisaAbantuBethu.csproj" />
+  <Project Path="PhilisaAbantuBethu.Tests/PhilisaAbantuBethu.Tests.csproj" />
 </Solution>
