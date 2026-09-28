@@ -19,7 +19,7 @@ public static class ProgrammeTranslations
         ["womens-empowerment"] = new(
             "Ukuxhobisa Abafazi",
             "Ukwakha amandla ngaphakathi",
-            "Sixhasa abafazi ngokuphuhlisa izakhono, uncedo lwezomthetho, nokuzimela ngezoqoqosho — kuba abafazi abaxhobisiweyo bakha uluntu olomeleleyo.",
+            "Sixhasa abafazi ngokuphuhlisa izakhono, uncedo lwezomthetho, nokuzimela ngezoqoqosho, kuba abafazi abaxhobisiweyo bakha uluntu olomeleleyo.",
             "Inkqubo yethu yokuxhobisa abafazi ikumbindi wayo yonke into esiyenzayo. Sikholelwa ekubeni xa abafazi bexhobisiwe, uluntu lonke luyaphumelela. Ngoluhlu olubanzi lweenkonzo, sinceda abafazi ukuba babuyisele isidima sabo, bakhe ukuzimela ngezemali, baze babe ziinkokeli koluntu lwabo.",
             new[]
             {
@@ -61,7 +61,7 @@ public static class ProgrammeTranslations
         ["after-school"] = new(
             "Iinkqubo Zangasemva Kwesikolo",
             "Ukufunda ngaphaya kweklasi",
-            "Iindawo zokufunda ezikhuselekileyo, ezilungelelanisiweyo zabantwana emva kwexesha lesikolo — kunye noncedo lwezifundo, imisebenzi yokwandisa, nesidlo sasemva kwemini esishushu.",
+            "Iindawo zokufunda ezikhuselekileyo, ezilungelelanisiweyo zabantwana emva kwexesha lesikolo, kunye noncedo lwezifundo, imisebenzi yokwandisa, nesidlo sasemva kwemini esishushu.",
             "Inkqubo yethu Yangasemva Kwesikolo inika indawo elungelelanisiweyo, ekhuselekileyo, nekhuthaza abantwana beBanga loku-1 ukuya kweli-12. Abafundisi abaqeqeshiweyo nabavolontiya bancedisa abantwana ngomsebenzi wasekhaya, ukufunda, nemathematika, ngelixa banikezela ngemisebenzi yokwandisa ekhuthaza ukuyila.",
             new[]
             {
@@ -82,7 +82,7 @@ public static class ProgrammeTranslations
         ["senior-programme"] = new(
             "Inkqubo Yabadala",
             "Ukuhlonipha abadala bethu",
-            "Sikhathalela amalungu oluntu asele ekhulile ngokunxibelelana noluntu, imisebenzi yempilo, noncedo olusebenzayo — kuba wonke umntu osele ekhulile ufanelwe sisidima.",
+            "Sikhathalela amalungu oluntu asele ekhulile ngokunxibelelana noluntu, imisebenzi yempilo, noncedo olusebenzayo, kuba wonke umntu osele ekhulile ufanelwe sisidima.",
             "Inkqubo yethu Yabadala ihlonipha ubulumko nesidima samalungu oluntu asele ekhulile. Sibonelela ngokuhlala nabo, ngoncedo lwempilo, nangoncedo olusebenzayo ukuqinisekisa ukuba abadala bethu bayaguga benesidima, benxibelelene, bekhathalelwe.",
             new[]
             {
@@ -124,7 +124,7 @@ public static class ProgrammeTranslations
         ["baby-saver"] = new(
             "Umsindisi Wosana",
             "Ubomi bonke bubaluleke",
-            "Sixhasa oomama abancinci nabasengozini ngokukhathalela, izixhobo ezibalulekileyo, noncedo lwentsapho — siqinisekisa ukuba yonke intsana ifumana ukuqala kokulungileyo.",
+            "Sixhasa oomama abancinci nabasengozini ngokukhathalela, izixhobo ezibalulekileyo, noncedo lwentsapho, siqinisekisa ukuba yonke intsana ifumana ukuqala kokulungileyo.",
             "Inkqubo Yomsindisi Wosana ibonelela ngendlela yokuphila koomama abancinci nabasengozini. Sinika indawo ekhuselekileyo koomama abasekwexingwe kwaye siqinisekisa ukuba yonke intsana ifumana izinto ezisisiseko ezifunekayo ukuze ikhule.",
             new[]
             {
@@ -166,7 +166,7 @@ public static class ProgrammeTranslations
         ["search-rescue"] = new(
             "Ukukhangela Nokuhlangula",
             "Siyakufumana. Siyakubuyisela ekhaya.",
-            "Iqela labavolontiya boluntu eliqeqeshiweyo elisabela kumatyala abantu abangekho nakwiimeko eziphuthumayo zoluntu — esebenza namapolisa e-SAPS neenkonzo zentlalontle.",
+            "Iqela labavolontiya boluntu eliqeqeshiweyo elisabela kumatyala abantu abangekho nakwiimeko eziphuthumayo zoluntu, esebenza namapolisa e-SAPS neenkonzo zentlalontle.",
             "Iqela lethu lokuKhangela nokuHlangula liyiyunithi yabavolontiya eqeqeshiweyo elisabela kumatyala abantu abangekho neemeko eziphuthumayo zoluntu. Sisebenza kunye namapolisa neenkonzo zentlalontle ukuqinisekisa ukuba abantu abasengozini bafunyanwa baxhaswe.",
             new[]
             {
@@ -211,7 +211,7 @@ public static class ProgrammeTranslations
         ["womens-empowerment"] = new(
             "Bemagtiging van Vroue",
             "Krag van binne bou",
-            "Ons ondersteun vroue deur vaardigheidsontwikkeling, regsbystand, en ekonomiese onafhanklikheid — want bemagtigde vroue bou sterker gemeenskappe.",
+            "Ons ondersteun vroue deur vaardigheidsontwikkeling, regsbystand, en ekonomiese onafhanklikheid, want bemagtigde vroue bou sterker gemeenskappe.",
             "Ons Bemagtiging van Vroue-program is die hart van alles wat ons doen. Ons glo dat wanneer vroue bemagtig word, hele gemeenskappe floreer. Deur 'n omvattende reeks dienste help ons vroue om hul waardigheid te herwin, finansiële onafhanklikheid op te bou, en leiers in hul gemeenskappe te word.",
             new[]
             {
@@ -253,7 +253,7 @@ public static class ProgrammeTranslations
         ["after-school"] = new(
             "Naskoolse Programme",
             "Leer buite die klaskamer",
-            "Veilige, gestruktureerde leeromgewings vir kinders na skoolure — met opvoedkundige bystand, verrykingsaktiwiteite, en 'n warm middagete.",
+            "Veilige, gestruktureerde leeromgewings vir kinders na skoolure, met opvoedkundige bystand, verrykingsaktiwiteite, en 'n warm middagete.",
             "Ons Naskoolse Program bied 'n gestruktureerde, veilige en stimulerende omgewing vir kinders van graad 1–12. Opgeleide onderrigters en vrywilligers help kinders met huiswerk, lees, en wiskunde, terwyl hulle ook verrykingsaktiwiteite aanbied wat kreatiwiteit koester.",
             new[]
             {
@@ -274,7 +274,7 @@ public static class ProgrammeTranslations
         ["senior-programme"] = new(
             "Seniorprogram",
             "Ons eer ons bejaardes",
-            "Ons versorg ouer gemeenskapslede deur sosiale verbintenis, welsynsaktiwiteite, en praktiese ondersteuning — want elke bejaarde verdien waardigheid.",
+            "Ons versorg ouer gemeenskapslede deur sosiale verbintenis, welsynsaktiwiteite, en praktiese ondersteuning, want elke bejaarde verdien waardigheid.",
             "Ons Seniorprogram eer die wysheid en waardigheid van ons ouer gemeenskapslede. Ons bied geselskap, welsynsondersteuning, en praktiese bystand om te verseker dat ons bejaardes met waardigheid, verbintenis, en sorg verouder.",
             new[]
             {
@@ -316,7 +316,7 @@ public static class ProgrammeTranslations
         ["baby-saver"] = new(
             "Baba-redder",
             "Elke lewe is kosbaar",
-            "Ons ondersteun jong en kwesbare moeders met sorg, noodsaaklike hulpbronne, en gesinsondersteuning — om te verseker dat elke baba die beste moontlike begin het.",
+            "Ons ondersteun jong en kwesbare moeders met sorg, noodsaaklike hulpbronne, en gesinsondersteuning, om te verseker dat elke baba die beste moontlike begin het.",
             "Die Baba-redder-program bied 'n lewenslyn vir jong en kwesbare moeders. Ons bied 'n veilige plek vir moeders in krisis en verseker dat elke baba toegang het tot die noodsaaklikhede wat hulle nodig het om te floreer.",
             new[]
             {
@@ -358,7 +358,7 @@ public static class ProgrammeTranslations
         ["search-rescue"] = new(
             "Soek en Redding",
             "Ons vind jou. Ons bring jou huis toe.",
-            "'n Opgeleide gemeenskapsvrywilligereenheid wat reageer op vermistepersoon-sake en gemeenskapsnoodgevalle — in samewerking met SAPD en maatskaplike dienste.",
+            "'n Opgeleide gemeenskapsvrywilligereenheid wat reageer op vermistepersoon-sake en gemeenskapsnoodgevalle, in samewerking met SAPD en maatskaplike dienste.",
             "Ons Soek-en-Redding-span is 'n opgeleide vrywilligereenheid wat reageer op vermistepersoon-sake en gemeenskapsnoodgevalle. Ons werk saam met wetstoepassing en maatskaplike dienste om te verseker dat kwesbare individue gevind en ondersteun word.",
             new[]
             {
@@ -401,7 +401,7 @@ public static class ProgrammeTranslations
             "Manne-kafee",
             "Manne betrek om gender-gebaseerde geweld te beëindig",
             "'n Vennootskap met die NPO Inside Out wat gereelde werkswinkels, lewensvaardigheidsopleiding, en 'n veilige ruimte bied waar mans kan besin oor manlikheid en help om gender-gebaseerde geweld te voorkom.",
-            "Philisa Abafazi Bethu glo dat die voorkoming van gender-gebaseerde geweld nie moontlik is sonder om nou saam met mans te werk nie. Manne-kafee is in 2022 geloods in vennootskap met die NPO Inside Out, wat gereelde Manwees-opleidingswerkswinkels vanaf die PAB-sentrum fasiliteer. Hierdie sessies gaan verder as net gesprek — hulle besin oor patriargale strukture in ons samelewing, bou lewensvaardighede, en skep 'n veilige ruimte waar mans hul gevoelens en perspektiewe kan deel. Die program bedryf ook 'n Nood-veiligehuis vir mans in nood, en word trots befonds deur die World Childhood Foundation.",
+            "Philisa Abafazi Bethu glo dat die voorkoming van gender-gebaseerde geweld nie moontlik is sonder om nou saam met mans te werk nie. Manne-kafee is in 2022 geloods in vennootskap met die NPO Inside Out, wat gereelde Manwees-opleidingswerkswinkels vanaf die PAB-sentrum fasiliteer. Hierdie sessies gaan verder as net gesprek, hulle besin oor patriargale strukture in ons samelewing, bou lewensvaardighede, en skep 'n veilige ruimte waar mans hul gevoelens en perspektiewe kan deel. Die program bedryf ook 'n Nood-veiligehuis vir mans in nood, en word trots befonds deur die World Childhood Foundation.",
             new[]
             {
                 "Betrek mans as vennote in die voorkoming van gender-gebaseerde geweld",

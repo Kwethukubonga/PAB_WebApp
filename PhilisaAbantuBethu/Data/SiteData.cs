@@ -14,7 +14,7 @@ public static class SiteData
             Id = "womens-empowerment",
             Title = "Women's Empowerment",
             Tagline = "Building strength from within",
-            Description = "Supporting women through skills development, legal assistance, and economic independence — because empowered women build stronger communities.",
+            Description = "Supporting women through skills development, legal assistance, and economic independence, because empowered women build stronger communities.",
             Overview = "Our Women's Empowerment programme is at the heart of everything we do. We believe that when women are empowered, entire communities flourish. Through a comprehensive range of services, we help women reclaim their dignity, build financial independence, and become leaders in their communities.",
             
             Objectives = new()
@@ -102,7 +102,7 @@ public static class SiteData
             Id = "after-school",
             Title = "After-school Programmes",
             Tagline = "Learning beyond the classroom",
-            Description = "Safe, structured learning environments for children after school hours — with tutoring, enrichment activities, and a warm afternoon meal.",
+            Description = "Safe, structured learning environments for children after school hours, with tutoring, enrichment activities, and a warm afternoon meal.",
             Overview = "Our After-school Programme provides a structured, safe, and stimulating environment for children from grades 1–12. Trained tutors and volunteers help children with homework, reading, and mathematics while also offering enrichment activities that nurture creativity.",
             
             Objectives = new()
@@ -146,7 +146,7 @@ public static class SiteData
             Id = "senior-programme",
             Title = "Senior Programme",
             Tagline = "Honouring our elders",
-            Description = "Caring for older community members through social connection, wellness activities, and practical support — because every elder deserves dignity.",
+            Description = "Caring for older community members through social connection, wellness activities, and practical support, because every elder deserves dignity.",
             Overview = "Our Senior Programme honours the wisdom and dignity of our older community members. We provide companionship, wellness support, and practical assistance to ensure that our elders age with dignity, connection, and care.",
             
             Objectives = new()
@@ -234,7 +234,7 @@ public static class SiteData
             Id = "baby-saver",
             Title = "Baby Saver",
             Tagline = "Every life is precious",
-            Description = "Supporting young and vulnerable mothers with care, essential resources, and family support — ensuring every baby has the best possible start.",
+            Description = "Supporting young and vulnerable mothers with care, essential resources, and family support, ensuring every baby has the best possible start.",
             Overview = "The Baby Saver programme provides a lifeline for young and vulnerable mothers. We offer a safe place for mothers in crisis and ensure that every baby has access to the essentials needed to thrive.",
             
             Objectives = new()
@@ -322,7 +322,7 @@ public static class SiteData
             Id = "search-rescue",
             Title = "Search & Rescue",
             Tagline = "We find you. We bring you home.",
-            Description = "A trained community volunteer unit responding to missing persons cases and community emergencies — working with SAPS and social services.",
+            Description = "A trained community volunteer unit responding to missing persons cases and community emergencies, working with SAPS and social services.",
             Overview = "Our Search & Rescue team is a trained volunteer unit that responds to missing persons cases and community emergencies. We work alongside law enforcement and social services to ensure that vulnerable individuals are found and supported.",
             
             Objectives = new()
@@ -407,7 +407,7 @@ public static class SiteData
             Title = "Men's Café",
             Tagline = "Engaging men to end gender-based violence",
             Description = "A partnership with the NPO Inside Out offering regular workshops, life-skills training, and a safe space for men to reflect on manhood and help prevent gender-based violence.",
-            Overview = "Philisa Abafazi Bethu believes that preventing gender-based violence is not possible without working closely with men. Men's Café was launched in 2022 in partnership with the NPO Inside Out, who facilitate regular Manhood training workshops from the PAB centre. These sessions go beyond conversation — reflecting on patriarchal structures in our society, building life skills, and creating a safe space where men can share their feelings and perspectives. The programme also operates an Emergency Safe House for men in distress, and is proudly funded by the World Childhood Foundation.",
+            Overview = "Philisa Abafazi Bethu believes that preventing gender-based violence is not possible without working closely with men. Men's Café was launched in 2022 in partnership with the NPO Inside Out, who facilitate regular Manhood training workshops from the PAB centre. These sessions go beyond conversation, reflecting on patriarchal structures in our society, building life skills, and creating a safe space where men can share their feelings and perspectives. The programme also operates an Emergency Safe House for men in distress, and is proudly funded by the World Childhood Foundation.",
 
             Objectives = new()
             {

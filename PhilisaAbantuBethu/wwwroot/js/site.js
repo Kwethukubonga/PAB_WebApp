@@ -72,4 +72,34 @@
             if (e.key === 'Escape' && !lightbox.hasAttribute('hidden')) closeLightbox();
         });
     }
+
+    /* ---------------------------------------------------------------
+       Testimonial carousel (Pages/ProgrammeDetail.cshtml)
+    --------------------------------------------------------------- */
+    var testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
+    if (testimonialCarousel) {
+        var slides = Array.prototype.slice.call(testimonialCarousel.querySelectorAll('[data-testimonial-slide]'));
+        var dots = Array.prototype.slice.call(testimonialCarousel.querySelectorAll('[data-testimonial-dot]'));
+        var current = 0;
+
+        var showSlide = function (index) {
+            current = (index + slides.length) % slides.length;
+            slides.forEach(function (slide, i) {
+                if (i === current) { slide.removeAttribute('hidden'); slide.classList.remove('hidden'); }
+                else { slide.setAttribute('hidden', ''); slide.classList.add('hidden'); }
+            });
+            dots.forEach(function (dot, i) {
+                dot.classList.toggle('bg-purple-600', i === current);
+                dot.classList.toggle('bg-purple-200', i !== current);
+            });
+        };
+
+        var prevBtn = testimonialCarousel.querySelector('[data-testimonial-prev]');
+        var nextBtn = testimonialCarousel.querySelector('[data-testimonial-next]');
+        if (prevBtn) prevBtn.addEventListener('click', function () { showSlide(current - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function () { showSlide(current + 1); });
+        dots.forEach(function (dot, i) {
+            dot.addEventListener('click', function () { showSlide(i); });
+        });
+    }
 })();

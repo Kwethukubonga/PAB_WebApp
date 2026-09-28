@@ -11,6 +11,12 @@
         ("xh", "isiXhosa"),
         ("af", "Afrikaans")
     };
+    var socialLinks = new[]
+    {
+        ("Instagram", "https://www.instagram.com/philisaabafazibethu/"),
+        ("YouTube", "https://www.youtube.com/@philisaabafazi"),
+        ("Facebook", "https://www.facebook.com/PhilisaAbafazi")
+    };
 }
 <!DOCTYPE html>
 <html lang="@htmlLang">
@@ -18,7 +24,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] · Philisa Abafazi Bethu</title>
-    <meta name="description" content="Philisa Abafazi Bethu — free, confidential community support in Cape Town. Powered by Philisa Abafazi Bethu Women Centre SA." />
+    <meta name="description" content="Philisa Abafazi Bethu: free, confidential community support in Cape Town. Powered by Philisa Abafazi Bethu Women Centre SA." />
 
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="icon" type="image/png" href="~/img/brand/logo.png" />
@@ -81,6 +87,35 @@
                 <a href="/RequestSupport" class="bg-purple-700 hover:bg-purple-800 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
                     @s.Nav.RequestSupport
                 </a>
+                <div class="flex items-center gap-1">
+                    @foreach (var (name, url) in socialLinks)
+                    {
+                        <a href="@url" target="_blank" rel="noopener noreferrer" aria-label="@name"
+                           class="w-8 h-8 flex items-center justify-center rounded-full text-stone-400 hover:text-purple-700 hover:bg-stone-50 transition-colors">
+                            @if (name == "Instagram")
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                </svg>
+                            }
+                            else if (name == "YouTube")
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                                </svg>
+                            }
+                        </a>
+                    }
+                </div>
             </div>
 
             <button type="button" data-nav-toggle
@@ -110,6 +145,35 @@
                 }
             </div>
             <a href="/RequestSupport" class="mt-2 bg-purple-700 text-white text-sm font-semibold px-5 py-3 rounded-full text-center">@s.Nav.RequestSupport</a>
+            <div class="flex items-center justify-center gap-2 mt-3">
+                @foreach (var (name, url) in socialLinks)
+                {
+                    <a href="@url" target="_blank" rel="noopener noreferrer" aria-label="@name"
+                       class="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 text-stone-500 hover:text-purple-700 transition-colors">
+                        @if (name == "Instagram")
+                        {
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        }
+                        else if (name == "YouTube")
+                        {
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                            </svg>
+                        }
+                        else
+                        {
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        }
+                    </a>
+                }
+            </div>
         </nav>
     </div>
 </header>

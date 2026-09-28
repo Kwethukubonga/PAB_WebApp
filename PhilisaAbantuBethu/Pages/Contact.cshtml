@@ -31,9 +31,9 @@
         <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Get in Touch", "Qhagamshelana", "Skakel In")</p>
         <h1 class="text-4xl md:text-5xl font-bold mb-5" style="font-family: Lora, serif;">@s.Pick("Contact Us", "Qhagamshelana Nathi", "Kontak Ons")</h1>
         <p class="text-purple-100 text-lg max-w-xl mx-auto leading-relaxed">
-            @s.Pick("We'd love to hear from you — whether you're seeking support, wanting to volunteer, or looking to partner with us.",
-                    "Sithanda ukuva kuwe — nokuba ufuna inkxaso, ufuna ukuba sisithi ngobuyisi, okanye ufuna ukuditana nathi.",
-                    "Ons hoor graag van jou — of jy nou ondersteuning soek, wil vrywillig werk, of met ons wil vennoot word.")
+            @s.Pick("We'd love to hear from you, whether you're seeking support, wanting to volunteer, or looking to partner with us.",
+                    "Sithanda ukuva kuwe, nokuba ufuna inkxaso, ufuna ukuba sisithi ngobuyisi, okanye ufuna ukuditana nathi.",
+                    "Ons hoor graag van jou, of jy nou ondersteuning soek, wil vrywillig werk, of met ons wil vennoot word.")
         </p>
     </div>
 </section>
@@ -60,18 +60,18 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-name">@s.Pick("Full Name", "Igama Eligcweleyo", "Volle Naam") *</label>
-                            <input id="c-name" name="Name" required type="text" placeholder="Nomsa Dlamini" class="@inputCls" />
+                            <input id="c-name" name="Name" required type="text" class="@inputCls" />
                         </div>
                         <div>
                             <label class="@labelCls" for="c-email">@s.Pick("Email Address", "I-imeyili", "E-posadres")</label>
-                            <input id="c-email" name="Email" type="email" placeholder="nomsa@@email.com" class="@inputCls" />
+                            <input id="c-email" name="Email" type="email" class="@inputCls" />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-phone">@s.Pick("Phone Number", "Inombolo yoMxhentsi", "Foonnommer")</label>
-                            <input id="c-phone" name="Phone" type="tel" placeholder="071 000 0000" class="@inputCls" />
+                            <input id="c-phone" name="Phone" type="tel" class="@inputCls" />
                         </div>
                         <div>
                             <label class="@labelCls" for="c-subject">@s.Pick("Subject", "Isihloko", "Onderwerp") *</label>

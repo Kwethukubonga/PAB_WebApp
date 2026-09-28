@@ -120,7 +120,7 @@ public class SiteStrings
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abafazi Bethu — Community Support",
+			Badge = "Philisa Abafazi Bethu: Community Support",
 			HeroHeading = "Do you need support?",
 			HeroSub = "We are here to help.",
 			HeroParagraph = "Philisa Abafazi Bethu supports women, children and families across Cape Town communities. If you need support, this platform gives you a simple and private way to reach out and ask for help.",
@@ -159,10 +159,10 @@ public class SiteStrings
 			SupportType = "What type of support do you need?",
 			SupportTypePlaceholder = "Select a type of support",
 			Situation = "Please briefly describe your situation",
-			SituationPlaceholder = "Tell us a little about what you are going through and what kind of help you need. There is no right or wrong way to explain — just use your own words.",
+			SituationPlaceholder = "Tell us a little about what you are going through and what kind of help you need. There is no right or wrong way to explain: just use your own words.",
 			Urgent = "Is this urgent?",
-			UrgentYes = "Yes — I need help as soon as possible",
-			UrgentNo = "No — I can wait a few days",
+			UrgentYes = "Yes: I need help as soon as possible",
+			UrgentNo = "No: I can wait a few days",
 			ExtraInfo = "Anything else you would like us to know? (optional)",
 			ExtraInfoPlaceholder = "Any additional details that might help us assist you better.",
 			Declaration = "I confirm that the information I have provided is accurate. I consent to Philisa Abafazi Bethu Women Centre SA using this information to process my request, in accordance with their privacy policy.",
@@ -173,7 +173,7 @@ public class SiteStrings
 		},
 		Confirmation = new ConfirmationStrings
 		{
-			Title = "Thank You — Your Request Has Been Received",
+			Title = "Thank You: Your Request Has Been Received",
 			Sub = "Philisa Abafazi Bethu will contact you using the contact details you provided. You do not need to do anything else right now.",
 			RefLabel = "Reference Number",
 			DateLabel = "Date Submitted",
@@ -218,7 +218,7 @@ public class SiteStrings
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abafazi Bethu — Inkxaso Yoluntu",
+			Badge = "Philisa Abafazi Bethu: Inkxaso Yoluntu",
 			HeroHeading = "Ingaba ufuna uncedo?",
 			HeroSub = "Silapha ukukunceda.",
 			HeroParagraph = "I-Philisa Abafazi Bethu ixhasa abafazi, abantwana nezintsapho kwiindawo ezahlukeneyo zase-Kapa. Ukuba ufuna uncedo, le platfom ikunika indlela elula neyimfihlo yokufikelela usizo.",
@@ -257,10 +257,10 @@ public class SiteStrings
 			SupportType = "Uhlobo luncedo ofuna lona?",
 			SupportTypePlaceholder = "Khetha uhlobo loncedo",
 			Situation = "Nceda uchaze ngamafutshane imeko yakho",
-			SituationPlaceholder = "Sixelele kancinci ngento oyidlayo nokuhlobo kwoncedo ofuna. Akukho ndlela efanelekileyo okanye engafanelekanga — sebenzisa amagama akho.",
+			SituationPlaceholder = "Sixelele kancinci ngento oyidlayo nokuhlobo kwoncedo ofuna. Akukho ndlela efanelekileyo okanye engafanelekanga: sebenzisa amagama akho.",
 			Urgent = "Ngxama na le?",
-			UrgentYes = "Ewe — ndifuna uncedo ngokukhawuleza",
-			UrgentNo = "Hayi — ndinokumela iintsuku ezimbalwa",
+			UrgentYes = "Ewe: ndifuna uncedo ngokukhawuleza",
+			UrgentNo = "Hayi: ndinokumela iintsuku ezimbalwa",
 			ExtraInfo = "Kukhona enye into ofuna ukusixelela yona? (ayifunekanga)",
 			ExtraInfoPlaceholder = "Nayiphi na iinkcukacha ezithe chatha enokusinceda ukukunceda ngcono.",
 			Declaration = "Ndiqinisekisa ukuba ulwazi endilunike lona luyinyaniso. Ndiyavuma ukuba i-Philisa Abafazi Bethu Women Centre SA isebenzise olu lwazi ukuze iqhube isicelo sam, ngokuvumelana nenqubela yabo yobumfihlo.",
@@ -271,7 +271,7 @@ public class SiteStrings
 		},
 		Confirmation = new ConfirmationStrings
 		{
-			Title = "Enkosi — Isicelo Sakho Sifunyenwe",
+			Title = "Enkosi: Isicelo Sakho Sifunyenwe",
 			Sub = "I-Philisa Abafazi Bethu iza kuqhagamshelana nawe iisebenzisa iinkcukacha zoqhagamshelwano ozinike. Akufuneki ukwenza nantoni na ngoku.",
 			RefLabel = "Inombolo yeSalathiso",
 			DateLabel = "Umhla Wokuthumela",
@@ -316,7 +316,7 @@ public class SiteStrings
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abafazi Bethu — Gemeenskapsondersteuning",
+			Badge = "Philisa Abafazi Bethu: Gemeenskapsondersteuning",
 			HeroHeading = "Het jy ondersteuning nodig?",
 			HeroSub = "Ons is hier om te help.",
 			HeroParagraph = "Philisa Abafazi Bethu ondersteun vroue, kinders en gesinne regoor Kaapstad se gemeenskappe. As jy ondersteuning nodig het, bied hierdie platform jou 'n eenvoudige en private manier om uit te reik en hulp te vra.",
@@ -355,10 +355,10 @@ public class SiteStrings
 			SupportType = "Watter tipe ondersteuning het jy nodig?",
 			SupportTypePlaceholder = "Kies 'n tipe ondersteuning",
 			Situation = "Beskryf asseblief kortliks jou situasie",
-			SituationPlaceholder = "Vertel ons 'n bietjie oor wat jy tans deurmaak en watter soort hulp jy nodig het. Daar is nie 'n regte of verkeerde manier om dit te verduidelik nie — gebruik gerus jou eie woorde.",
+			SituationPlaceholder = "Vertel ons 'n bietjie oor wat jy tans deurmaak en watter soort hulp jy nodig het. Daar is nie 'n regte of verkeerde manier om dit te verduidelik nie: gebruik gerus jou eie woorde.",
 			Urgent = "Is dit dringend?",
-			UrgentYes = "Ja — ek het so gou moontlik hulp nodig",
-			UrgentNo = "Nee — ek kan 'n paar dae wag",
+			UrgentYes = "Ja: ek het so gou moontlik hulp nodig",
+			UrgentNo = "Nee: ek kan 'n paar dae wag",
 			ExtraInfo = "Enigiets anders wat jy vir ons wil laat weet? (opsioneel)",
 			ExtraInfoPlaceholder = "Enige bykomende besonderhede wat ons kan help om jou beter by te staan.",
 			Declaration = "Ek bevestig dat die inligting wat ek verskaf het akkuraat is. Ek gee toestemming dat Philisa Abafazi Bethu Women Centre SA hierdie inligting gebruik om my versoek te verwerk, in ooreenstemming met hul privaatheidsbeleid.",
@@ -369,7 +369,7 @@ public class SiteStrings
 		},
 		Confirmation = new ConfirmationStrings
 		{
-			Title = "Dankie — Jou Versoek Is Ontvang",
+			Title = "Dankie: Jou Versoek Is Ontvang",
 			Sub = "Philisa Abafazi Bethu sal jou kontak deur die kontakbesonderhede wat jy verskaf het te gebruik. Jy hoef op die oomblik niks anders te doen nie.",
 			RefLabel = "Verwysingsnommer",
 			DateLabel = "Datum Ingedien",
