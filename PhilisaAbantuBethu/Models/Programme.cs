@@ -9,6 +9,8 @@ public class Programme
     public string Description { get; set; } = "";
     public string Overview { get; set; } = "";
     public string ImagePath { get; set; } = "";
+    public int HeroFocalX { get; set; } = 50;
+    public int HeroFocalY { get; set; } = 50;
     public string Accent { get; set; } = "#6B21A8";
     public List<string> Objectives { get; set; } = new();
     public List<string> Activities { get; set; } = new();

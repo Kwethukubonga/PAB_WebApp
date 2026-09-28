@@ -39,6 +39,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/womens-empowerment/hero.jpg",
+            HeroFocalX = 42,
+            HeroFocalY = 22,
             GalleryImages = new()
             {
                 "/img/programmes/womens-empowerment/gallery-1.jpg",
@@ -81,6 +83,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/youth-programme/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 30,
             GalleryImages = new()
             {
                 "/img/programmes/youth-programme/gallery-1.jpg",
@@ -123,6 +127,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/after-school/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 42,
             GalleryImages = new()
             {
                 "/img/programmes/after-school/gallery-1.jpg",
@@ -165,6 +171,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/senior-programme/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 42,
             GalleryImages = new()
             {
                 "/img/programmes/senior-programme/gallery-1.jpg",
@@ -207,6 +215,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/community-feeding/hero.jpg",
+            HeroFocalX = 68,
+            HeroFocalY = 32,
             GalleryImages = new()
             {
                 "/img/programmes/community-feeding/gallery-1.jpg",
@@ -249,6 +259,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/baby-saver/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 45,
             GalleryImages = new()
             {
                 "/img/programmes/baby-saver/gallery-1.jpg",
@@ -289,6 +301,8 @@ public static class SiteData
             },
             
             ImagePath = "/img/programmes/safe-houses/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 55,
             GalleryImages = new()
             {
                 "/img/programmes/safe-houses/gallery-1.jpg",
@@ -331,6 +345,8 @@ public static class SiteData
             },
             
             ImagePath = "/img/programmes/search-rescue/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 32,
             GalleryImages = new()
             {
                 "/img/programmes/search-rescue/gallery-1.jpg"
@@ -370,6 +386,8 @@ public static class SiteData
             },
 
             ImagePath = "/img/programmes/social-work/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 45,
             GalleryImages = new()
             {
                 "/img/programmes/social-work/gallery-1.jpg",
