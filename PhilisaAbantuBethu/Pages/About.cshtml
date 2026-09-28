@@ -46,10 +46,10 @@
 
     var historyImages = new[]
     {
-        "/img/programmes/after-school/gallery-1.jpg",
-        "/img/programmes/community-feeding/gallery-1.jpg",
-        "/img/programmes/senior-programme/gallery-1.jpg",
-        "/img/programmes/safe-houses/gallery-1.jpg"
+        "/img/about/history-1.jpg",
+        "/img/about/history-2.jpg",
+        "/img/about/history-3.jpg",
+        "/img/about/history-4.jpg"
     };
 }
 
@@ -94,11 +94,10 @@
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-                @for (var i = 0; i < historyImages.Length; i++)
+                @foreach (var img in historyImages)
                 {
-                    var height = (i == 0 || i == 3) ? "h-48" : "h-44";
-                    <div class="rounded-xl overflow-hidden bg-stone-200 @height">
-                        <img src="@historyImages[i]" alt="" aria-hidden="true" class="w-full h-full object-cover" />
+                    <div class="rounded-xl overflow-hidden bg-stone-200 aspect-[4/3]">
+                        <img src="@img" alt="" aria-hidden="true" class="w-full h-full object-cover" />
                     </div>
                 }
             </div>
