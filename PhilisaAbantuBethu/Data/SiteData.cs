@@ -396,6 +396,49 @@ public static class SiteData
             },
             Accent = "#0D9488"
 
+        },
+
+        new Programme
+        {
+
+            Id = "mens-cafe",
+            Title = "Men's Café",
+            Tagline = "Engaging men to end gender-based violence",
+            Description = "A partnership with the NPO Inside Out offering regular workshops, life-skills training, and a safe space for men to reflect on manhood and help prevent gender-based violence.",
+            Overview = "Philisa Abafazi Bethu believes that preventing gender-based violence is not possible without working closely with men. Men's Café was launched in 2022 in partnership with the NPO Inside Out, who facilitate regular Manhood training workshops from the PAB centre. These sessions go beyond conversation — reflecting on patriarchal structures in our society, building life skills, and creating a safe space where men can share their feelings and perspectives. The programme also operates an Emergency Safe House for men in distress, and is proudly funded by the World Childhood Foundation.",
+
+            Objectives = new()
+            {
+
+                "Engage men as partners in preventing gender-based violence",
+                "Challenge harmful patriarchal norms through guided reflection",
+                "Build life skills and emotional literacy among men",
+                "Provide emergency shelter for men in crisis"
+
+            },
+
+            Activities = new()
+            {
+
+                "Regular Manhood training workshops facilitated by Inside Out",
+                "Group discussions on masculinity and patriarchal structures",
+                "Life skills training sessions",
+                "Safe space circles for men to share feelings and perspectives",
+                "Emergency Safe House accommodation for men in distress"
+
+            },
+
+            ImagePath = "/img/programmes/mens-cafe/hero.jpg",
+            HeroFocalX = 50,
+            HeroFocalY = 32,
+            GalleryImages = new()
+            {
+                "/img/programmes/mens-cafe/gallery-1.jpg",
+                "/img/programmes/mens-cafe/gallery-2.jpg",
+                "/img/programmes/mens-cafe/gallery-3.jpg"
+            },
+            Accent = "#0E7490"
+
         }
 
     };

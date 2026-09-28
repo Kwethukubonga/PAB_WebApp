@@ -21,25 +21,42 @@
 
     var team = new[]
     {
-        ("Nomsa Dlamini",  s.Pick("Executive Director",            "Umlawuli Oyintloko"),                "photo-1610722839611-f7837e1dd39f"),
-        ("Fatima Arendse", s.Pick("Head of Social Work",           "Intloko Yezentlalontle"),            "photo-1509099863731-ef4bff19e808"),
-        ("Zanele Khumalo", s.Pick("Women's Programme Manager",     "Umphathi Wenkqubo Yabafazi"),        "photo-1634538607545-58da50ad2f81"),
-        ("Thandi Ncube",   s.Pick("Youth & Community Coordinator", "Umququzelelanisi Wolutsha Noluntu"), "photo-1623299678251-f7dfe3ce5f1b")
+        ("Lucinda Evans",          "Founder & Director",       "/img/team/lucinda-evans.jpg"),
+        ("Janine Poggenpoel",      "Financial Manager",        "/img/team/janine-poggenpoel.jpg"),
+        ("Esmeralda Greeff",       "Administrator",            "/img/team/esmeralda-greeff.jpg"),
+        ("Zimvo Katsala",          "Social Worker",             "/img/team/zimvo-katsala.jpg"),
+        ("Gavin Peters",           "Security, Gardener",       "/img/team/gavin-peters.jpg"),
+        ("Bright Kamtolo",         "Gardener",                  "/img/team/bright-kamtolo.jpg"),
+        ("Gail Van Rensburg",      "Driver",                    "/img/team/gail-van-rensburg.jpg"),
+        ("Nthombizokwanda Sihulu", "Social Auxiliary Worker",  "/img/team/nthombizokwanda-sihulu.jpg"),
+        ("Francina Esbach",        "House Mother",              "/img/team/francina-esbach.jpg"),
+        ("Stacey Samuels",         "House Mother",              "/img/team/stacey-samuels.jpg"),
+        ("Lindsay Adams",          "House Mother",              "/img/team/lindsay-adams.jpg"),
+        ("Olivia Maart",           "House Mother",              "/img/team/olivia-maart.jpg"),
+        ("Sylvia Kruger",          "House Mother",              "/img/team/sylvia-kruger.jpg"),
+        ("Nthombikayise Ndwandwa", "House Mother",              "/img/team/nthombikayise-ndwandwa.jpg"),
+        ("Brandon Samuels",        "Youth Facilitator",        "/img/team/brandon-samuels.jpg"),
+        ("Yvonne Botha",           "House Mother",              "/img/team/yvonne-botha.jpg"),
+        ("Rihanna Galant",         "House Mother",              "/img/team/rihanna-galant.jpg"),
+        ("Alinafe Kamtolo",        "Cleaner",                    "/img/team/alinafe-kamtolo.jpg"),
+        ("Melissa Rudolph",        "Psychologist",              "/img/team/melissa-rudolph.jpg"),
+        ("Roelien Pimentel",       "Cook",                       "/img/team/roelien-pimentel.jpg"),
+        ("Lena Rayepen",           "Sewing Facilitator",        "/img/team/lena-rayepen.jpg")
     };
 
     var historyImages = new[]
     {
-        "photo-1509099836639-18ba1795216d",
-        "photo-1620464225966-8482645f2db1",
-        "photo-1509099927777-1b8a87bc3b21",
-        "photo-1632215861513-130b66fe97f4"
+        "/img/programmes/after-school/gallery-1.jpg",
+        "/img/programmes/community-feeding/gallery-1.jpg",
+        "/img/programmes/senior-programme/gallery-1.jpg",
+        "/img/programmes/safe-houses/gallery-1.jpg"
     };
 }
 
 <!-- Page hero -->
 <section class="relative py-24 bg-purple-900 overflow-hidden">
     <div class="absolute inset-0 opacity-20">
-        <img src="https://images.unsplash.com/photo-1633443315529-84fe2415585f?w=1400&h=500&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover" />
+        <img src="/img/programmes/senior-programme/hero.jpg" alt="" aria-hidden="true" class="w-full h-full object-cover" />
     </div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
         <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Our Story", "Ibali Lethu")</p>
@@ -81,7 +98,7 @@
                 {
                     var height = (i == 0 || i == 3) ? "h-48" : "h-44";
                     <div class="rounded-xl overflow-hidden bg-stone-200 @height">
-                        <img src="https://images.unsplash.com/@(historyImages[i])?w=300&h=250&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover" />
+                        <img src="@historyImages[i]" alt="" aria-hidden="true" class="w-full h-full object-cover" />
                     </div>
                 }
             </div>
@@ -147,14 +164,14 @@
             <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">@s.Pick("Meet the Team", "Yazi Iqela")</h2>
             <p class="text-stone-500 mt-3">@s.Pick("The dedicated people who make our work possible every day.", "Abantu abazinikeleyo abenza umsebenzi wethu ube nokwenzeka mihla yonke.")</p>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             @foreach (var (name, role, image) in team)
             {
                 <div class="text-center group">
                     <div class="w-full aspect-square rounded-2xl overflow-hidden bg-stone-200 mb-4 shadow-sm group-hover:shadow-md transition-shadow">
-                        <img src="https://images.unsplash.com/@(image)?w=300&h=300&fit=crop&auto=format"
+                        <img src="@image"
                              alt="@name"
-                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <h3 class="font-bold text-stone-900" style="font-family: Lora, serif;">@name</h3>
                     <p class="text-stone-500 text-sm mt-1">@role</p>
