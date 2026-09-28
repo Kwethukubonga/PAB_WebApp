@@ -34,11 +34,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Remember the language chosen with ?lang=en / ?lang=xh
+// Remember the language chosen with ?lang=en / ?lang=xh / ?lang=af
 app.Use(async (context, next) =>
 {
     var requested = context.Request.Query["lang"].ToString();
-    if (requested is "en" or "xh" && context.Request.Cookies[LangExtensions.CookieName] != requested)
+    if (requested is "en" or "xh" or "af" && context.Request.Cookies[LangExtensions.CookieName] != requested)
     {
         context.Response.Cookies.Append(LangExtensions.CookieName, requested, new CookieOptions
         {

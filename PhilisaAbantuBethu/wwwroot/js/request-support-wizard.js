@@ -75,7 +75,7 @@
             } else if (field) {
                 value = field.value;
             }
-            cell.textContent = value ? value : '—';
+            cell.textContent = value ? value : '-';
         });
     }
 

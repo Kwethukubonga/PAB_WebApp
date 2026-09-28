@@ -7,7 +7,6 @@ public class NavStrings
 	public string Resources { get; init; } = "";
 	public string Contact { get; init; } = "";
 	public string RequestSupport { get; init; } = "";
-	public string LangToggle { get; init; } = "";
 }
 
 public class HomeStrings
@@ -89,12 +88,24 @@ public class SiteStrings
 	public string[] SupportTypes { get; init; } = Array.Empty<string>();
 
 	public bool IsEnglish => Lang == "en";
+	public bool IsXhosa => Lang == "xh";
+	public bool IsAfrikaans => Lang == "af";
 
-	/// <summary>Picks between the English and isiXhosa value, the way the
+	/// <summary>Picks between the English, isiXhosa, and Afrikaans value, the way the
 	/// `lang === 'en' ? a : b` ternaries did in the .tsx files.</summary>
-	public string Pick(string en, string xh) => IsEnglish ? en : xh;
+	public string Pick(string en, string xh, string af) => Lang switch
+	{
+		"xh" => xh,
+		"af" => af,
+		_ => en
+	};
 
-	public static SiteStrings For(string lang) => lang == "xh" ? Xh : En;
+	public static SiteStrings For(string lang) => lang switch
+	{
+		"xh" => Xh,
+		"af" => Af,
+		_ => En
+	};
 
 	public static readonly SiteStrings En = new()
 	{
@@ -105,12 +116,11 @@ public class SiteStrings
 			Programmes = "Our Programmes",
 			Resources = "Resources",
 			Contact = "Contact",
-			RequestSupport = "Request Support",
-			LangToggle = "isiXhosa"
+			RequestSupport = "Request Support"
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abafazi Bethu — Community Support",
+			Badge = "Philisa Abafazi Bethu: Community Support",
 			HeroHeading = "Do you need support?",
 			HeroSub = "We are here to help.",
 			HeroParagraph = "Philisa Abafazi Bethu supports women, children and families across Cape Town communities. If you need support, this platform gives you a simple and private way to reach out and ask for help.",
@@ -149,10 +159,10 @@ public class SiteStrings
 			SupportType = "What type of support do you need?",
 			SupportTypePlaceholder = "Select a type of support",
 			Situation = "Please briefly describe your situation",
-			SituationPlaceholder = "Tell us a little about what you are going through and what kind of help you need. There is no right or wrong way to explain — just use your own words.",
+			SituationPlaceholder = "Tell us a little about what you are going through and what kind of help you need. There is no right or wrong way to explain: just use your own words.",
 			Urgent = "Is this urgent?",
-			UrgentYes = "Yes — I need help as soon as possible",
-			UrgentNo = "No — I can wait a few days",
+			UrgentYes = "Yes: I need help as soon as possible",
+			UrgentNo = "No: I can wait a few days",
 			ExtraInfo = "Anything else you would like us to know? (optional)",
 			ExtraInfoPlaceholder = "Any additional details that might help us assist you better.",
 			Declaration = "I confirm that the information I have provided is accurate. I consent to Philisa Abafazi Bethu Women Centre SA using this information to process my request, in accordance with their privacy policy.",
@@ -163,7 +173,7 @@ public class SiteStrings
 		},
 		Confirmation = new ConfirmationStrings
 		{
-			Title = "Thank You — Your Request Has Been Received",
+			Title = "Thank You: Your Request Has Been Received",
 			Sub = "Philisa Abafazi Bethu will contact you using the contact details you provided. You do not need to do anything else right now.",
 			RefLabel = "Reference Number",
 			DateLabel = "Date Submitted",
@@ -204,12 +214,11 @@ public class SiteStrings
 			Programmes = "Iinkqubo Zethu",
 			Resources = "Izibonelelo",
 			Contact = "Qhagamshelana",
-			RequestSupport = "Cela Uncedo",
-			LangToggle = "English"
+			RequestSupport = "Cela Uncedo"
 		},
 		Home = new HomeStrings
 		{
-			Badge = "Philisa Abafazi Bethu — Inkxaso Yoluntu",
+			Badge = "Philisa Abafazi Bethu: Inkxaso Yoluntu",
 			HeroHeading = "Ingaba ufuna uncedo?",
 			HeroSub = "Silapha ukukunceda.",
 			HeroParagraph = "I-Philisa Abafazi Bethu ixhasa abafazi, abantwana nezintsapho kwiindawo ezahlukeneyo zase-Kapa. Ukuba ufuna uncedo, le platfom ikunika indlela elula neyimfihlo yokufikelela usizo.",
@@ -248,10 +257,10 @@ public class SiteStrings
 			SupportType = "Uhlobo luncedo ofuna lona?",
 			SupportTypePlaceholder = "Khetha uhlobo loncedo",
 			Situation = "Nceda uchaze ngamafutshane imeko yakho",
-			SituationPlaceholder = "Sixelele kancinci ngento oyidlayo nokuhlobo kwoncedo ofuna. Akukho ndlela efanelekileyo okanye engafanelekanga — sebenzisa amagama akho.",
+			SituationPlaceholder = "Sixelele kancinci ngento oyidlayo nokuhlobo kwoncedo ofuna. Akukho ndlela efanelekileyo okanye engafanelekanga: sebenzisa amagama akho.",
 			Urgent = "Ngxama na le?",
-			UrgentYes = "Ewe — ndifuna uncedo ngokukhawuleza",
-			UrgentNo = "Hayi — ndinokumela iintsuku ezimbalwa",
+			UrgentYes = "Ewe: ndifuna uncedo ngokukhawuleza",
+			UrgentNo = "Hayi: ndinokumela iintsuku ezimbalwa",
 			ExtraInfo = "Kukhona enye into ofuna ukusixelela yona? (ayifunekanga)",
 			ExtraInfoPlaceholder = "Nayiphi na iinkcukacha ezithe chatha enokusinceda ukukunceda ngcono.",
 			Declaration = "Ndiqinisekisa ukuba ulwazi endilunike lona luyinyaniso. Ndiyavuma ukuba i-Philisa Abafazi Bethu Women Centre SA isebenzise olu lwazi ukuze iqhube isicelo sam, ngokuvumelana nenqubela yabo yobumfihlo.",
@@ -262,7 +271,7 @@ public class SiteStrings
 		},
 		Confirmation = new ConfirmationStrings
 		{
-			Title = "Enkosi — Isicelo Sakho Sifunyenwe",
+			Title = "Enkosi: Isicelo Sakho Sifunyenwe",
 			Sub = "I-Philisa Abafazi Bethu iza kuqhagamshelana nawe iisebenzisa iinkcukacha zoqhagamshelwano ozinike. Akufuneki ukwenza nantoni na ngoku.",
 			RefLabel = "Inombolo yeSalathiso",
 			DateLabel = "Umhla Wokuthumela",
@@ -291,6 +300,104 @@ public class SiteStrings
 			"Uphando Nokuhlangulwa",
 			"Iinkonzo Zomsebenzi Womphakathi",
 			"Uncedo Ngokubanzi / Andiqinisekanga"
+		}
+	};
+
+	public static readonly SiteStrings Af = new()
+	{
+		Lang = "af",
+		Nav = new NavStrings
+		{
+			Home = "Tuis",
+			Programmes = "Ons Programme",
+			Resources = "Hulpbronne",
+			Contact = "Kontak",
+			RequestSupport = "Versoek Ondersteuning"
+		},
+		Home = new HomeStrings
+		{
+			Badge = "Philisa Abafazi Bethu: Gemeenskapsondersteuning",
+			HeroHeading = "Het jy ondersteuning nodig?",
+			HeroSub = "Ons is hier om te help.",
+			HeroParagraph = "Philisa Abafazi Bethu ondersteun vroue, kinders en gesinne regoor Kaapstad se gemeenskappe. As jy ondersteuning nodig het, bied hierdie platform jou 'n eenvoudige en private manier om uit te reik en hulp te vra.",
+			RequestSupport = "Versoek Ondersteuning",
+			ExplorePrograms = "Verken Programme",
+			ProgrammesSectionTitle = "Ons Programme",
+			ProgrammesSectionSub = "Ons bied 'n reeks gratis programme vir gemeenskapslede wat ondersteuning nodig het.",
+			ViewAll = "Bekyk Alle Programme",
+			ResourcesTitle = "Hulpbronne & Inligting",
+			ResourcesSub = "Noodkontakte, gemeenskapsdienste, en nuttige inligting vir jou en jou gesin.",
+			ViewResources = "Bekyk Hulpbronne",
+			ContactTitle = "Onseker waar om te begin?",
+			ContactSub = "Skakel of e-pos ons en ons sal jou help om die regte ondersteuning te vind.",
+			ContactUs = "Kontak Ons",
+			ServiceNote = "Philisa bedien hoofsaaklik Lavender Hill, Steenberg en die omliggende Cape Flats-gemeenskappe in Kaapstad."
+		},
+		Form = new FormStrings
+		{
+			Title = "Versoek Ondersteuning",
+			Subtitle = "Jy hoef nie 'n rekening te skep nie. Vul eenvoudig die vorm in en ons sal met jou in verbinding tree.",
+			ServiceArea = "Philisa bedien hoofsaaklik Lavender Hill, Steenberg en die omliggende Cape Flats-gemeenskappe. As jy buite hierdie areas is, kan jy steeds 'n versoek indien en die span sal jou waar moontlik adviseer.",
+			Step1Label = "Oor Jou",
+			Step2Label = "Ondersteuning Benodig",
+			Step3Label = "Bevestig & Dien In",
+			FirstName = "Voornaam",
+			Surname = "Van",
+			Phone = "Foonnommer",
+			Email = "E-posadres (opsioneel)",
+			Area = "Jou Area / Voorstad",
+			AreaPlaceholder = "bv. Lavender Hill, Steenberg, Mitchells Plain…",
+			ContactMethod = "Hoe verkies jy dat ons jou kontak?",
+			ContactPhone = "Telefoonoproep",
+			ContactWhatsApp = "WhatsApp",
+			ContactEmail = "E-pos",
+			ContactVisit = "Persoonlike besoek",
+			SupportType = "Watter tipe ondersteuning het jy nodig?",
+			SupportTypePlaceholder = "Kies 'n tipe ondersteuning",
+			Situation = "Beskryf asseblief kortliks jou situasie",
+			SituationPlaceholder = "Vertel ons 'n bietjie oor wat jy tans deurmaak en watter soort hulp jy nodig het. Daar is nie 'n regte of verkeerde manier om dit te verduidelik nie: gebruik gerus jou eie woorde.",
+			Urgent = "Is dit dringend?",
+			UrgentYes = "Ja: ek het so gou moontlik hulp nodig",
+			UrgentNo = "Nee: ek kan 'n paar dae wag",
+			ExtraInfo = "Enigiets anders wat jy vir ons wil laat weet? (opsioneel)",
+			ExtraInfoPlaceholder = "Enige bykomende besonderhede wat ons kan help om jou beter by te staan.",
+			Declaration = "Ek bevestig dat die inligting wat ek verskaf het akkuraat is. Ek gee toestemming dat Philisa Abafazi Bethu Women Centre SA hierdie inligting gebruik om my versoek te verwerk, in ooreenstemming met hul privaatheidsbeleid.",
+			SubmitRequest = "Dien Versoek In",
+			Back = "Terug",
+			Next = "Gaan Voort",
+			Required = "Verpligtend"
+		},
+		Confirmation = new ConfirmationStrings
+		{
+			Title = "Dankie: Jou Versoek Is Ontvang",
+			Sub = "Philisa Abafazi Bethu sal jou kontak deur die kontakbesonderhede wat jy verskaf het te gebruik. Jy hoef op die oomblik niks anders te doen nie.",
+			RefLabel = "Verwysingsnommer",
+			DateLabel = "Datum Ingedien",
+			StatusLabel = "Status",
+			Status = "Ontvang",
+			WhatNext = "Wat gebeur volgende?",
+			Steps = new[]
+			{
+				"Jou versoek is deur die Philisa Abafazi Bethu-span ontvang.",
+				"'n Spanlid sal jou versoek hersien en met jou in verbinding tree deur jou verkose kontakmetode.",
+				"As jou versoek dringend is, sal die span prioriteit gee om so gou moontlik met jou in verbinding te tree.",
+				"Hou asseblief jou verwysingsnommer byderhand indien jy moet opvolg."
+			},
+			BackHome = "Terug na Tuisblad",
+			AnotherRequest = "Dien Nog 'n Versoek In"
+		},
+		SupportTypes = new[]
+		{
+			"Voedselbystand",
+			"Bemagtiging van Vroue",
+			"Jeugondersteuning",
+			"Naskoolse Program",
+			"Sorg vir Bejaardes",
+			"Baba-redder-program",
+			"Nood-skuiling",
+			"Soek en Redding",
+			"Maatskaplike Werk Dienste",
+			"Algemene Hulp / Onseker"
 		}
 	};
 }

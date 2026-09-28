@@ -1,12 +1,22 @@
 @{
     var s = Context.Strings();
     var lang = Context.CurrentLang();
-    var otherLang = lang == "en" ? "xh" : "en";
-    var htmlLang = lang == "xh" ? "xh-ZA" : "en-ZA";
-    var openMenuLabel = s.Pick("Open menu", "Vula imenyu");
-    var skipLabel = s.Pick("Skip to content", "Tsibela kumxholo");
-    var aboutLabel = s.Pick("About Us", "Ngathi");
-    var toggleUrl = Context.LangToggleUrl();
+    var htmlLang = lang switch { "xh" => "xh-ZA", "af" => "af-ZA", _ => "en-ZA" };
+    var openMenuLabel = s.Pick("Open menu", "Vula imenyu", "Maak kieslys oop");
+    var skipLabel = s.Pick("Skip to content", "Tsibela kumxholo", "Spring na inhoud");
+    var aboutLabel = s.Pick("About Us", "Ngathi", "Oor Ons");
+    var langOptions = new[]
+    {
+        ("en", "English"),
+        ("xh", "isiXhosa"),
+        ("af", "Afrikaans")
+    };
+    var socialLinks = new[]
+    {
+        ("Instagram", "https://www.instagram.com/philisaabafazibethu/"),
+        ("YouTube", "https://www.youtube.com/@philisaabafazi"),
+        ("Facebook", "https://www.facebook.com/PhilisaAbafazi")
+    };
 }
 <!DOCTYPE html>
 <html lang="@htmlLang">
@@ -14,7 +24,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] · Philisa Abafazi Bethu</title>
-    <meta name="description" content="Philisa Abafazi Bethu — free, confidential community support in Cape Town. Powered by Philisa Abafazi Bethu Women Centre SA." />
+    <meta name="description" content="Philisa Abafazi Bethu: free, confidential community support in Cape Town. Powered by Philisa Abafazi Bethu Women Centre SA." />
+
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="icon" type="image/png" href="~/img/brand/logo.png" />
+    <link rel="apple-touch-icon" href="~/img/brand/logo.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,19 +59,14 @@
         <div class="flex items-center justify-between h-[68px]">
 
             <a href="/" class="flex items-center gap-2.5">
-                <span class="w-9 h-9 rounded-full bg-purple-800 flex items-center justify-center flex-shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12 2C8.5 2 5.5 4.5 5.5 8c0 2.5 1.5 4.7 3.5 5.7V15h6v-1.3c2-1 3.5-3.2 3.5-5.7C18.5 4.5 15.5 2 12 2z" fill="white" opacity="0.9"/>
-                        <path d="M9 15v2c0 1.7 1.3 3 3 3s3-1.3 3-3v-2H9z" fill="white" opacity="0.7"/>
-                    </svg>
-                </span>
+                <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" class="w-9 h-9 rounded-full flex-shrink-0" />
                 <span class="leading-tight">
                     <span class="block text-stone-900 font-semibold text-sm" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
                     <span class="block text-stone-400 text-xs">Women Centre SA</span>
                 </span>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-7" aria-label="@s.Pick("Main", "Ephambili")">
+            <nav class="hidden lg:flex items-center gap-7" aria-label="@s.Pick("Main", "Ephambili", "Hoof")">
                 <a href="/" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Home</a>
                 <a href="/About" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@aboutLabel</a>
                 <a href="/Programmes" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Programmes</a>
@@ -66,13 +75,47 @@
             </nav>
 
             <div class="hidden lg:flex items-center gap-4">
-                <a href="@toggleUrl" lang="@otherLang"
-                   class="text-sm font-medium text-stone-500 hover:text-purple-700 transition-colors border border-stone-200 rounded-full px-3 py-1.5">
-                    @s.Nav.LangToggle
-                </a>
+                <div class="flex items-center border border-stone-200 rounded-full p-0.5 text-sm font-medium">
+                    @foreach (var (code, label) in langOptions)
+                    {
+                        <a href="@Context.LangUrl(code)" lang="@code"
+                           class="@(lang == code ? "bg-purple-700 text-white" : "text-stone-500 hover:text-purple-700") px-3 py-1 rounded-full transition-colors">
+                            @label
+                        </a>
+                    }
+                </div>
                 <a href="/RequestSupport" class="bg-purple-700 hover:bg-purple-800 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
                     @s.Nav.RequestSupport
                 </a>
+                <div class="flex items-center gap-1">
+                    @foreach (var (name, url) in socialLinks)
+                    {
+                        <a href="@url" target="_blank" rel="noopener noreferrer" aria-label="@name"
+                           class="w-8 h-8 flex items-center justify-center rounded-full text-stone-400 hover:text-purple-700 hover:bg-stone-50 transition-colors">
+                            @if (name == "Instagram")
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                                </svg>
+                            }
+                            else if (name == "YouTube")
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                                    <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                                </svg>
+                            }
+                            else
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                                </svg>
+                            }
+                        </a>
+                    }
+                </div>
             </div>
 
             <button type="button" data-nav-toggle
@@ -86,14 +129,51 @@
     </div>
 
     <div id="mobile-nav" hidden class="lg:hidden border-t border-stone-100 bg-white">
-        <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="@s.Pick("Mobile", "Kwifowuni")">
+        <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="@s.Pick("Mobile", "Kwifowuni", "Mobiel")">
             <a href="/" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Home</a>
             <a href="/About" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@aboutLabel</a>
             <a href="/Programmes" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Programmes</a>
             <a href="/Resources" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Resources</a>
             <a href="/Contact" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Contact</a>
-            <a href="@toggleUrl" lang="@otherLang" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-500 hover:bg-stone-50">@s.Nav.LangToggle</a>
+            <div class="flex items-center gap-2 px-3 py-2.5">
+                @foreach (var (code, label) in langOptions)
+                {
+                    <a href="@Context.LangUrl(code)" lang="@code"
+                       class="@(lang == code ? "bg-purple-700 text-white" : "bg-stone-100 text-stone-500") text-xs font-medium px-3 py-1.5 rounded-full transition-colors">
+                        @label
+                    </a>
+                }
+            </div>
             <a href="/RequestSupport" class="mt-2 bg-purple-700 text-white text-sm font-semibold px-5 py-3 rounded-full text-center">@s.Nav.RequestSupport</a>
+            <div class="flex items-center justify-center gap-2 mt-3">
+                @foreach (var (name, url) in socialLinks)
+                {
+                    <a href="@url" target="_blank" rel="noopener noreferrer" aria-label="@name"
+                       class="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 text-stone-500 hover:text-purple-700 transition-colors">
+                        @if (name == "Instagram")
+                        {
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        }
+                        else if (name == "YouTube")
+                        {
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+                            </svg>
+                        }
+                        else
+                        {
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        }
+                    </a>
+                }
+            </div>
         </nav>
     </div>
 </header>
@@ -107,20 +187,15 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2.5 mb-4">
-                    <span class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M12 2C8.5 2 5.5 4.5 5.5 8c0 2.5 1.5 4.7 3.5 5.7V15h6v-1.3c2-1 3.5-3.2 3.5-5.7C18.5 4.5 15.5 2 12 2z" fill="white" opacity="0.9"/>
-                            <path d="M9 15v2c0 1.7 1.3 3 3 3s3-1.3 3-3v-2H9z" fill="white" opacity="0.7"/>
-                        </svg>
-                    </span>
+                    <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" class="w-9 h-9 rounded-full bg-white/15" />
                     <span class="text-white font-semibold" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
                 </div>
                 <p class="text-sm leading-relaxed max-w-md">@s.Home.ServiceNote</p>
-                <p class="text-purple-400 text-xs mt-5">@s.Pick("Lavender Hill, Cape Town, Western Cape", "Lavender Hill, eKapa, Ntshona Koloni")</p>
+                <p class="text-purple-400 text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s.Pick("Western Cape", "Ntshona Koloni", "Wes-Kaap")</p>
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Explore", "Jonga")</h2>
+                <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Explore", "Jonga", "Verken")</h2>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="/About" class="hover:text-white transition-colors">@aboutLabel</a></li>
                     <li><a href="/Programmes" class="hover:text-white transition-colors">@s.Nav.Programmes</a></li>
@@ -130,12 +205,12 @@
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Get help now", "Fumana uncedo ngoku")</h2>
+                <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Get help now", "Fumana uncedo ngoku", "Kry nou hulp")</h2>
                 <ul class="space-y-2.5 text-sm">
-                    <li>@s.Pick("Office", "Ihhovisi"): <a href="tel:+27210000000" class="hover:text-white">+27 21 000 0000</a></li>
-                    <li>@s.Pick("Crisis line", "Umgca wongxamiseko"): <a href="tel:+27210000001" class="text-amber-300 font-semibold hover:text-amber-200">+27 21 000 0001</a></li>
-                    <li>@s.Pick("Email", "I-imeyili"): <a href="mailto:info@@philisaabafazi.org.za" class="hover:text-white">info@@philisaabafazi.org.za</a></li>
-                    <li class="pt-2 text-purple-400 text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV"): 0800 428 428 (24/7)</li>
+                    <li>@s.Pick("Office", "Ihhovisi", "Kantoor"): <a href="tel:+27215650668" class="hover:text-white">+27 (0)21 565 0668</a></li>
+                    <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"): <a href="tel:+27817469889" class="text-amber-300 font-semibold hover:text-amber-200">+27 (0)81 746 9889</a></li>
+                    <li>@s.Pick("Email", "I-imeyili", "E-pos"): <a href="mailto:admin@@philisaabafazi.org" class="hover:text-white">admin@@philisaabafazi.org</a></li>
+                    <li class="pt-2 text-purple-400 text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV", "Hulplyn vir gender-gebaseerde geweld"): 0800 428 428 (24/7)</li>
                 </ul>
             </div>
         </div>

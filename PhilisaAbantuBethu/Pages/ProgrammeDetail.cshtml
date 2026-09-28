@@ -4,35 +4,58 @@
     var prog = SiteData.FindProgramme(RouteData.Values["id"]?.ToString());
     ViewData["Title"] = prog.TitleFor(s);
 
-    var gallery = new[]
-    {
-        "photo-1509099836639-18ba1795216d",
-        "photo-1509099927777-1b8a87bc3b21",
-        "photo-1509099863731-ef4bff19e808",
-        "photo-1567057419565-4349c49d8a04"
-    };
-
-    var successStories = new[]
+    var testimonials = new[]
     {
         new
         {
-            Name = "Amahle, 34",
-            Quote = "This programme changed my life. I came in with nothing and left with a skill, a certificate, and the confidence to start my own business.",
-            QuoteXh = "Le nkqubo yatshintsha ubomi bam. Ndafika ndingenalutshintsho kwaye ndaphuma nendlela, isatifiketi, kunye nolutho lokwakha ishishini lam."
+            Name = "Michelle Mahina Schlachter",
+            Country = "Switzerland",
+            Image = "/img/testimonials/michelle.jpg",
+            Quote = "I am a 24-year-old girl from Switzerland who had the pleasure to stay in Cape Town with PAB for five months as part of my studies in social work. When searching for an organization, PAB caught my eye very quickly and I certainly do not regret having decided to get involved in PAB's projects and learn from the people of the lavender hill community. I gained a lot of experience in the field of social work mostly by working at the safe house. The various activities with the children and seniors were also special for me. Whether it was surfing, spending a week together at camp, learning to play the marimba or talking about our own strengths – I enjoyed every moment and was mesmerized by the energy, faith, and love of the people of the community as well as the whole PAB-family. From day one they made me feel at home and I am happy to say that I found a second home in Cape Town."
         },
         new
         {
-            Name = "Thembeka, 28",
-            Quote = "I didn't know where to turn. Philisa Abafazi Bethu didn't just help me — they believed in me when I couldn't believe in myself.",
-            QuoteXh = "Bendingazi apho ndiya khona. I-Philisa Abafazi Bethu ayandinceda nje kuphela — bankholwa ngam xa bendingakholwa ngam ndim."
+            Name = "Carley Anderson",
+            Country = "USA",
+            Image = "/img/testimonials/carley.jpg",
+            Quote = "Little did I know that my decision to work with Philisa Abafazi Bethu would lead me to serve alongside and learn from some of the most considerate and inspirational people that I have ever met. I am so grateful to have had the opportunity to work in so many different areas of the organisation, from tutoring the children in the after-school programme, to harvesting in the garden, writing marketing materials, painting murals, and much more. It is a remarkable feeling to walk into a new space and instantly feel welcomed and appreciated, and Lucinda and the whole PAB team invited us in with open arms. I had read about the organisation's extensive programmes and efforts of activism in the community but did not fully understand the lengths to which they are willing to go to make every woman and child in the community feel that they are loved, they are valued, and they are protected. I could not be more thankful to have contributed in even the smallest capacity to PAB's passion fueled endeavours towards empowerment, education, and equality during my time as a PAB intern in South Africa."
+        },
+        new
+        {
+            Name = "Thea Gay",
+            Country = "USA",
+            Image = "/img/testimonials/thea.jpg",
+            Quote = "Hello, my name is Thea, and I am 21 years old from South Florida. As a senior Sociology student from the University of Florida, I was able to come to South Africa through my University's study abroad program. As part of my program focused on power, policy, protest, and NPOs in South Africa I was placed with Philisa Abafazi Bethu and I am so grateful I was. Being able to intern at PAB for a month gave me the chance to look within myself and think about ways that I can best serve others in an impactful + positive way. Being able to utilize my creative side, my logical reasoning side, and my critical thinking side helped immerse me into the everyday work of grassroots organizing and community activism. Lastly, being able to learn from Lucinda has been phenomenal. She reminds me of just how important this work is and the necessity to focus on the community's needs instead of just my own."
+        },
+        new
+        {
+            Name = "Sarah Louis",
+            Country = "USA",
+            Image = "/img/testimonials/sarah.jpg",
+            Quote = "My name is Sarah Louis and I am a Spring 2022 graduate of the University of Florida. Personally, I have always had a passion for empowering young girls of color, and I chose to intern at PAB because their mission aligned with my personal values. Having the privilege to learn about policy, power, and protest through the lens of working from an NPO has been a phenomenal experience. As a PAB intern, I learned a great deal about the Greater Lavender Hill community. Through working on marketing projects, a grant application, tutoring in the after-school program, gardening, etc, PAB, and more importantly Lucinda, has taught me how to heal a community in many different ways. Although my internship experience was short, I truly feel a part of the PAB family forever. I will forever miss walking through the rainbow colored compound, and I will miss hearing the children in the after-school program playing the marimba during their music therapy sessions. I am thankful to Lucinda and the PAB family for helping me to further develop my professional skills through this amazing service-learning opportunity."
+        },
+        new
+        {
+            Name = "Anna Jensen",
+            Country = "Denmark",
+            Image = "/img/testimonials/anna.jpg",
+            Quote = "When I first came to PAB in 2009, Lucinda was running her programs from the garage of her family home, while working part time on the side. Over the next 3 years I spend more time in Lavender Hill than at my actual home. I helped protect women against domestic abuse, I held the hands of rape victims, I handed out food to people who were victims of fires and I even helped deliver a baby in front of Lucinda's house. And I loved every second of it. The dedication, empowerment and belief Lucinda shows the community is truly inspirational! Working with PAB is the one decision I've ever made, which has singlehandedly impacted my own life profoundly. Ever since I worked with the women and children in that garage, I've been back to visit and work for Lucinda at least once a year. Lucinda and her family are my family, and the people of Lavender Hill are my people. I feel at home in Lavender Hill, and I feel at home surrounded by Lucinda, her family and the staff at PAB. I can nothing but recommend and encourage everyone who believes in equal rights, activism and justice to engage with PAB. But be aware – it might profoundly impact your life!"
+        },
+        new
+        {
+            Name = "Ira Mach",
+            Country = "Germany",
+            Image = "/img/testimonials/ira.jpg",
+            Quote = "Hi, my name is Ira. I am 19 years old and I'm from Germany. Before I came to South Africa, I graduated from High School and did not know where my future would lead me. So I decided to go and volunteer at Philisa Abafazi Bethu. Luckily enough, I got the chance to become part of the PAB – Family for two months. Thanks to Lucinda, I stayed with the most caring host family where I felt like at home from the very first day until the end of my stay. I especially liked working with the children in the After School Programme and the whole PAB – Family really touched my heart."
         }
     };
 }
 
 <!-- Hero -->
 <section class="relative h-72 md:h-96 overflow-hidden bg-stone-800">
-    <img src="https://images.unsplash.com/@(prog.ImageId)?w=1400&h=500&fit=crop&auto=format"
+    <img src="@prog.ImagePath"
          alt="@prog.TitleFor(s)"
+         style="object-position: @(prog.HeroFocalX)% @(prog.HeroFocalY)%;"
          class="absolute inset-0 w-full h-full object-cover opacity-60" />
     <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent"></div>
     <div class="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
@@ -52,12 +75,12 @@
         <div class="lg:col-span-2 space-y-12">
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Overview", "Isishwankathelo")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Overview", "Isishwankathelo", "Oorsig")</h2>
                 <p class="text-stone-600 leading-relaxed">@prog.OverviewFor(s)</p>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Objectives", "Iinjongo")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Objectives", "Iinjongo", "Doelwitte")</h2>
                 <ul class="space-y-3">
                     @foreach (var obj in prog.ObjectivesFor(s))
                     {
@@ -74,7 +97,7 @@
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Activities", "Imisebenzi")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Activities", "Imisebenzi", "Aktiwiteite")</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     @foreach (var act in prog.ActivitiesFor(s))
                     {
@@ -87,47 +110,104 @@
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya")</h2>
-                <div class="grid grid-cols-2 gap-4">
-                    @for (var i = 0; i < gallery.Length; i++)
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya", "Galery")</h2>
+                <div class="columns-2 gap-4">
+                    @foreach (var img in prog.GalleryImages)
                     {
-                        <div class="rounded-xl overflow-hidden bg-stone-200 @(i == 0 ? "h-52" : "h-40")">
-                            <img src="https://images.unsplash.com/@(gallery[i])?w=400&h=250&fit=crop&auto=format" alt="" aria-hidden="true" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                        </div>
+                        <button type="button" data-gallery-trigger data-full-src="@img"
+                                class="block w-full mb-4 rounded-xl overflow-hidden bg-stone-200 cursor-zoom-in break-inside-avoid">
+                            <img src="@img" alt="" aria-hidden="true" class="w-full h-auto block hover:scale-105 transition-transform duration-500" />
+                        </button>
                     }
                 </div>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Success Stories", "Amabali Empumelelo")</h2>
-                <div class="space-y-5">
-                    @foreach (var story in successStories)
+                <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Testimonials", "Testimonials", "Getuienisse")</h2>
+                <div class="relative bg-purple-50 border-l-4 border-purple-600 rounded-r-xl p-6 sm:p-8" data-testimonial-carousel>
+                    @for (var i = 0; i < testimonials.Length; i++)
                     {
-                        <blockquote class="bg-purple-50 border-l-4 border-purple-600 rounded-r-xl p-6">
-                            <p class="text-stone-700 italic leading-relaxed mb-3">&ldquo;@s.Pick(story.Quote, story.QuoteXh)&rdquo;</p>
-                            <cite class="text-purple-700 font-semibold text-sm not-italic">— @story.Name</cite>
-                        </blockquote>
+                        var t = testimonials[i];
+                        <div data-testimonial-slide class="@(i == 0 ? "" : "hidden")">
+                            <div class="flex flex-col sm:flex-row gap-5 items-start">
+                                <img src="@t.Image" alt="@t.Name" class="w-20 h-20 rounded-full object-cover flex-shrink-0" />
+                                <div>
+                                    <p class="text-purple-600 text-3xl leading-none mb-1" aria-hidden="true">&ldquo;</p>
+                                    <p class="text-stone-700 italic leading-relaxed mb-4">@t.Quote</p>
+                                    <cite class="text-purple-700 font-semibold text-sm not-italic">@t.Name | @t.Country</cite>
+                                </div>
+                            </div>
+                        </div>
                     }
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-purple-100">
+                        <button type="button" data-testimonial-prev aria-label="@s.Pick("Previous", "Okwangaphambili", "Vorige")"
+                                class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-700 hover:bg-purple-100 transition-colors flex-shrink-0">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="flex items-center gap-1.5" data-testimonial-dots>
+                            @for (var i = 0; i < testimonials.Length; i++)
+                            {
+                                <span data-testimonial-dot class="w-1.5 h-1.5 rounded-full @(i == 0 ? "bg-purple-600" : "bg-purple-200")"></span>
+                            }
+                        </div>
+                        <button type="button" data-testimonial-next aria-label="@s.Pick("Next", "Okulandelayo", "Volgende")"
+                                class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-700 hover:bg-purple-100 transition-colors flex-shrink-0">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Sidebar -->
-        <div>
+        <div class="space-y-6">
+            @if (!string.IsNullOrEmpty(prog.EmergencyPhone) || !string.IsNullOrEmpty(prog.EmergencyAddress))
+            {
+                <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+                    <h2 class="font-bold text-red-900 mb-3 flex items-center gap-2" style="font-family: Lora, serif;">
+                        <span aria-hidden="true">🚨</span>
+                        @s.Pick("Emergency Contact", "Uqhagamshelwano Lwongxamiseko", "Noodkontak")
+                    </h2>
+                    @if (!string.IsNullOrEmpty(prog.EmergencyAddress))
+                    {
+                        <p class="text-red-800 text-sm leading-relaxed mb-2">@prog.EmergencyAddress</p>
+                    }
+                    @if (!string.IsNullOrEmpty(prog.EmergencyPhone))
+                    {
+                        var telHref = "tel:" + new string(prog.EmergencyPhone.Where(c => char.IsDigit(c) || c == '+').ToArray());
+                        <a href="@telHref" class="inline-block text-red-900 font-bold text-lg hover:underline">@prog.EmergencyPhone</a>
+                    }
+                </div>
+            }
             <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100 sticky top-24">
-                <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?")</h2>
+                <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?", "Benodig Jy Hierdie Ondersteuning?")</h2>
                 <p class="text-stone-500 text-sm leading-relaxed mb-5">
                     @s.Pick("Get in touch and our team will be in touch to guide you.",
-                            "Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.")
+                            "Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.",
+                            "Kontak ons en ons span sal met jou skakel om jou te lei.")
                 </p>
                 <div class="space-y-3">
                     <a href="/Contact" class="block text-center w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 rounded-xl transition-colors text-sm">@s.Home.ContactUs</a>
                     <a href="/Programmes" class="block text-center w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-3 rounded-xl transition-colors text-sm">@s.Nav.Programmes</a>
                 </div>
                 <p class="mt-5 pt-5 border-t border-stone-200 text-xs text-stone-400">
-                    @s.Pick("Free for qualifying community members.", "Mahhala kumalungu oluntu afanelekileyo.")
+                    @s.Pick("Free for qualifying community members.", "Mahhala kumalungu oluntu afanelekileyo.", "Gratis vir kwalifiserende gemeenskapslede.")
                 </p>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Gallery lightbox -->
+<div data-gallery-lightbox hidden class="fixed inset-0 z-50 bg-stone-900/90 flex items-center justify-center p-4 sm:p-8">
+    <button type="button" data-gallery-close class="absolute top-4 right-4 text-white/80 hover:text-white p-2" aria-label="@s.Pick("Close", "Vala", "Maak toe")">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
+        </svg>
+    </button>
+    <img data-gallery-lightbox-image src="" alt="" class="max-w-full max-h-full rounded-lg object-contain" />
 </div>

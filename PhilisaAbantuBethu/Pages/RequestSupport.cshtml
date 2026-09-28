@@ -10,9 +10,9 @@
 
     var stepLabels = new[] { f.Step1Label, f.Step2Label, f.Step3Label };
 
-    var progressLabel = s.Pick("Form progress", "Inkqubela yefomu");
-    var yesLabel = s.Pick("Yes", "Ewe");
-    var noLabel = s.Pick("No", "Hayi");
+    var progressLabel = s.Pick("Form progress", "Inkqubela yefomu", "Vorm vordering");
+    var yesLabel = s.Pick("Yes", "Ewe", "Ja");
+    var noLabel = s.Pick("No", "Hayi", "Nee");
 
     var contactMethods = new[]
     {
@@ -25,7 +25,7 @@
 
 <section class="py-14 bg-purple-900 text-white">
     <div class="max-w-3xl mx-auto px-4 text-center">
-        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Get Help", "Fumana Uncedo")</p>
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Get Help", "Fumana Uncedo", "Kry Hulp")</p>
         <h1 class="text-3xl md:text-4xl font-bold mb-3" style="font-family: Lora, serif;">@f.Title</h1>
         <p class="text-purple-100 text-base max-w-xl mx-auto leading-relaxed">@f.Subtitle</p>
     </div>
@@ -65,20 +65,20 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="firstName">@f.FirstName *</label>
-                            <input id="firstName" name="FirstName" data-required type="text" placeholder="Nomsa" class="@inputCls" />
+                            <input id="firstName" name="FirstName" data-required type="text" class="@inputCls" />
                         </div>
                         <div>
                             <label class="@labelCls" for="surname">@f.Surname *</label>
-                            <input id="surname" name="Surname" data-required type="text" placeholder="Dlamini" class="@inputCls" />
+                            <input id="surname" name="Surname" data-required type="text" class="@inputCls" />
                         </div>
                     </div>
                     <div>
                         <label class="@labelCls" for="phone">@f.Phone *</label>
-                        <input id="phone" name="Phone" data-required type="tel" placeholder="071 000 0000" class="@inputCls" />
+                        <input id="phone" name="Phone" data-required type="tel" class="@inputCls" />
                     </div>
                     <div>
                         <label class="@labelCls" for="email">@f.Email</label>
-                        <input id="email" name="Email" type="email" placeholder="nomsa@@email.com" class="@inputCls" />
+                        <input id="email" name="Email" type="email" class="@inputCls" />
                     </div>
                     <div>
                         <label class="@labelCls" for="area">@f.Area *</label>
@@ -137,9 +137,10 @@
                     </fieldset>
 
                     <p class="text-xs text-stone-500 leading-relaxed bg-stone-50 border border-stone-100 rounded-xl px-4 py-3">
-                        @s.Pick("If you are in immediate danger, call 10111 or our 24-hour crisis line on",
-                                "Ukuba usengozini ngoku, fowunela u-10111 okanye umgca wethu wongxamiseko wee-24 iiyure ku-")
-                        <a href="tel:+27210000001" class="text-purple-700 font-semibold">+27 21 000 0001</a>
+                        @s.Pick("If you are in immediate danger, call 10111 or our after-hours crisis line on",
+                                "Ukuba usengozini ngoku, fowunela u-10111 okanye umgca wethu wongxamiseko ku-",
+                                "As jy in onmiddellike gevaar is, skakel 10111 of ons krisislyn na-ure by")
+                        <a href="tel:+27817469889" class="text-purple-700 font-semibold">+27 (0)81 746 9889</a>
                     </p>
                 </div>
             </div>
@@ -156,27 +157,27 @@
                     </div>
 
                     <div class="bg-stone-50 border border-stone-100 rounded-xl p-5">
-                        <h3 class="text-sm font-semibold text-stone-700 mb-3">@s.Pick("Request Summary", "Isishwankathelo Sesicelo")</h3>
+                        <h3 class="text-sm font-semibold text-stone-700 mb-3">@s.Pick("Request Summary", "Isishwankathelo Sesicelo", "Versoekopsomming")</h3>
                         <dl class="space-y-2 text-sm">
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Name", "Igama"):</dt>
-                                <dd class="text-stone-800 font-medium" data-summary-for="FullName">—</dd>
+                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Name", "Igama", "Naam"):</dt>
+                                <dd class="text-stone-800 font-medium" data-summary-for="FullName">-</dd>
                             </div>
                             <div class="flex gap-3">
                                 <dt class="text-stone-400 w-28 flex-shrink-0">@f.Phone:</dt>
-                                <dd class="text-stone-800 font-medium" data-summary-for="Phone">—</dd>
+                                <dd class="text-stone-800 font-medium" data-summary-for="Phone">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Area", "Indawo"):</dt>
-                                <dd class="text-stone-800 font-medium" data-summary-for="Area">—</dd>
+                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Area", "Indawo", "Area"):</dt>
+                                <dd class="text-stone-800 font-medium" data-summary-for="Area">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Support type", "Uhlobo"):</dt>
-                                <dd class="text-stone-800 font-medium" data-summary-for="SupportType">—</dd>
+                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Support type", "Uhlobo", "Tipe ondersteuning"):</dt>
+                                <dd class="text-stone-800 font-medium" data-summary-for="SupportType">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Urgent", "Ngxama"):</dt>
-                                <dd class="text-stone-800 font-medium" data-summary-for="Urgent">—</dd>
+                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Urgent", "Ngxama", "Dringend"):</dt>
+                                <dd class="text-stone-800 font-medium" data-summary-for="Urgent">-</dd>
                             </div>
                         </dl>
                     </div>
