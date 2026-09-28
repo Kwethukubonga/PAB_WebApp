@@ -109,7 +109,25 @@
         </div>
 
         <!-- Sidebar -->
-        <div>
+        <div class="space-y-6">
+            @if (!string.IsNullOrEmpty(prog.EmergencyPhone) || !string.IsNullOrEmpty(prog.EmergencyAddress))
+            {
+                <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+                    <h2 class="font-bold text-red-900 mb-3 flex items-center gap-2" style="font-family: Lora, serif;">
+                        <span aria-hidden="true">🚨</span>
+                        @s.Pick("Emergency Contact", "Uqhagamshelwano Lwongxamiseko", "Noodkontak")
+                    </h2>
+                    @if (!string.IsNullOrEmpty(prog.EmergencyAddress))
+                    {
+                        <p class="text-red-800 text-sm leading-relaxed mb-2">@prog.EmergencyAddress</p>
+                    }
+                    @if (!string.IsNullOrEmpty(prog.EmergencyPhone))
+                    {
+                        var telHref = "tel:" + new string(prog.EmergencyPhone.Where(c => char.IsDigit(c) || c == '+').ToArray());
+                        <a href="@telHref" class="inline-block text-red-900 font-bold text-lg hover:underline">@prog.EmergencyPhone</a>
+                    }
+                </div>
+            }
             <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100 sticky top-24">
                 <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?", "Benodig Jy Hierdie Ondersteuning?")</h2>
                 <p class="text-stone-500 text-sm leading-relaxed mb-5">

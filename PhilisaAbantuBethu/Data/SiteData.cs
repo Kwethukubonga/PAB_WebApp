@@ -266,7 +266,9 @@ public static class SiteData
                 "/img/programmes/baby-saver/gallery-1.jpg",
                 "/img/programmes/baby-saver/gallery-2.jpg"
             },
-            Accent = "#DB2777"
+            Accent = "#DB2777",
+            EmergencyAddress = "55-57 Strauss Road, Steenberg, 7965",
+            EmergencyPhone = "+27 (0)81 746 9889"
 
         },
 

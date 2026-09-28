@@ -20,6 +20,10 @@
     <title>@ViewData["Title"] · Philisa Abafazi Bethu</title>
     <meta name="description" content="Philisa Abafazi Bethu — free, confidential community support in Cape Town. Powered by Philisa Abafazi Bethu Women Centre SA." />
 
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="icon" type="image/png" href="~/img/brand/logo.png" />
+    <link rel="apple-touch-icon" href="~/img/brand/logo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@@0,400;0,600;0,700;1,400&family=Inter:wght@@400;500;600;700&display=swap" rel="stylesheet" />
@@ -49,12 +53,7 @@
         <div class="flex items-center justify-between h-[68px]">
 
             <a href="/" class="flex items-center gap-2.5">
-                <span class="w-9 h-9 rounded-full bg-purple-800 flex items-center justify-center flex-shrink-0">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12 2C8.5 2 5.5 4.5 5.5 8c0 2.5 1.5 4.7 3.5 5.7V15h6v-1.3c2-1 3.5-3.2 3.5-5.7C18.5 4.5 15.5 2 12 2z" fill="white" opacity="0.9"/>
-                        <path d="M9 15v2c0 1.7 1.3 3 3 3s3-1.3 3-3v-2H9z" fill="white" opacity="0.7"/>
-                    </svg>
-                </span>
+                <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" class="w-9 h-9 rounded-full flex-shrink-0" />
                 <span class="leading-tight">
                     <span class="block text-stone-900 font-semibold text-sm" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
                     <span class="block text-stone-400 text-xs">Women Centre SA</span>
@@ -124,16 +123,11 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2.5 mb-4">
-                    <span class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <path d="M12 2C8.5 2 5.5 4.5 5.5 8c0 2.5 1.5 4.7 3.5 5.7V15h6v-1.3c2-1 3.5-3.2 3.5-5.7C18.5 4.5 15.5 2 12 2z" fill="white" opacity="0.9"/>
-                            <path d="M9 15v2c0 1.7 1.3 3 3 3s3-1.3 3-3v-2H9z" fill="white" opacity="0.7"/>
-                        </svg>
-                    </span>
+                    <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" class="w-9 h-9 rounded-full bg-white/15" />
                     <span class="text-white font-semibold" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
                 </div>
                 <p class="text-sm leading-relaxed max-w-md">@s.Home.ServiceNote</p>
-                <p class="text-purple-400 text-xs mt-5">@s.Pick("Lavender Hill, Cape Town, Western Cape", "Lavender Hill, eKapa, Ntshona Koloni", "Lavender Hill, Kaapstad, Wes-Kaap")</p>
+                <p class="text-purple-400 text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s.Pick("Western Cape", "Ntshona Koloni", "Wes-Kaap")</p>
             </div>
 
             <div>
@@ -149,9 +143,9 @@
             <div>
                 <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Get help now", "Fumana uncedo ngoku", "Kry nou hulp")</h2>
                 <ul class="space-y-2.5 text-sm">
-                    <li>@s.Pick("Office", "Ihhovisi", "Kantoor"): <a href="tel:+27210000000" class="hover:text-white">+27 21 000 0000</a></li>
-                    <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"): <a href="tel:+27210000001" class="text-amber-300 font-semibold hover:text-amber-200">+27 21 000 0001</a></li>
-                    <li>@s.Pick("Email", "I-imeyili", "E-pos"): <a href="mailto:info@@philisaabafazi.org.za" class="hover:text-white">info@@philisaabafazi.org.za</a></li>
+                    <li>@s.Pick("Office", "Ihhovisi", "Kantoor"): <a href="tel:+27215650668" class="hover:text-white">+27 (0)21 565 0668</a></li>
+                    <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"): <a href="tel:+27817469889" class="text-amber-300 font-semibold hover:text-amber-200">+27 (0)81 746 9889</a></li>
+                    <li>@s.Pick("Email", "I-imeyili", "E-pos"): <a href="mailto:admin@@philisaabafazi.org" class="hover:text-white">admin@@philisaabafazi.org</a></li>
                     <li class="pt-2 text-purple-400 text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV", "Hulplyn vir gender-gebaseerde geweld"): 0800 428 428 (24/7)</li>
                 </ul>
             </div>

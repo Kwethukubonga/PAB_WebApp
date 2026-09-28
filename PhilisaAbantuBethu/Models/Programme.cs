@@ -16,4 +16,8 @@ public class Programme
     public List<string> Activities { get; set; } = new();
     public List<string> GalleryImages { get; set; } = new();
 
+    // Optional programme-specific emergency contact (e.g. the Baby Saver safe box location).
+    public string? EmergencyAddress { get; set; }
+    public string? EmergencyPhone { get; set; }
+
 }
