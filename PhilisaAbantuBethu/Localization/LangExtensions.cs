@@ -4,6 +4,7 @@ public static class LangExtensions
 {
     public const string CookieName = "pab_lang";
     private const string ItemKey = "pab_lang";
+    private static readonly string[] SupportedLangs = { "en", "xh", "af" };
 
     // Gets the current language for the request, based on query string, cookie, or defaulting to "en".
 
@@ -12,11 +13,11 @@ public static class LangExtensions
         if (ctx.Items.TryGetValue(ItemKey, out var cached) && cached is string s) return s;
 
         var lang = ctx.Request.Query["lang"].ToString();
-        if (lang != "en" && lang != "xh")
+        if (!SupportedLangs.Contains(lang))
         {
             lang = ctx.Request.Cookies[CookieName] ?? "en";
         }
-        if (lang != "en" && lang != "xh") lang = "en";
+        if (!SupportedLangs.Contains(lang)) lang = "en";
 
         ctx.Items[ItemKey] = lang;
         return lang;
@@ -24,12 +25,11 @@ public static class LangExtensions
 
     public static SiteStrings Strings(this HttpContext ctx) => SiteStrings.For(ctx.CurrentLang());
 
-    // Generates a URL that toggles the language between "en" and "xh"
+    // Generates a URL that switches to the given language, preserving the rest of the query string.
 
-    public static string LangToggleUrl(this HttpContext ctx)
+    public static string LangUrl(this HttpContext ctx, string targetLang)
     {
-        var other = ctx.CurrentLang() == "en" ? "xh" : "en";
-        var query = QueryHelpers.Replace(ctx.Request.QueryString.Value, "lang", other);
+        var query = QueryHelpers.Replace(ctx.Request.QueryString.Value, "lang", targetLang);
         return ctx.Request.Path + query;
     }
 

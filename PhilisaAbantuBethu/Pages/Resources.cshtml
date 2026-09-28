@@ -9,6 +9,7 @@
         {
             Category = "Community Services",
             CategoryXh = "Iinkonzo Zoluntu",
+            CategoryAf = "Gemeenskapsdienste",
             Icon = "🏘️",
             Color = "#6B21A8",
             Items = new[]
@@ -24,12 +25,20 @@
                 "Iinkonzo Zentlalontle zeDolophu yaseKapa — 021 400 4685",
                 "ISebe loPhuhliso lweNtlalo — 0800 220 250",
                 "Abasebenzi boPhuhliso lweNdawo (CDW) — Qhagamshelana nekhonselarha wendawo yakho"
+            },
+            ItemsAf = new[]
+            {
+                "SASSA-toelaagkantore — 0800 601 011",
+                "Stad Kaapstad Maatskaplike Dienste — 021 400 4685",
+                "Departement van Maatskaplike Ontwikkeling — 0800 220 250",
+                "Gemeenskapsontwikkelingswerkers (CDW) — Kontak jou wardraadslid"
             }
         },
         new
         {
             Category = "Emergency Contacts",
             CategoryXh = "Amanombolo Ongxamiseko",
+            CategoryAf = "Noodkontakte",
             Icon = "🚨",
             Color = "#DC2626",
             Items = new[]
@@ -47,12 +56,21 @@
                 "Icandelo loncedo loNdlwane ngokoBunini — 0800 428 428 (24/7)",
                 "Childline eMzantsi Afrika — 116 (mahhala, 24/7)",
                 "Umgca wokufa ngobomi — 0800 567 567"
+            },
+            ItemsAf = new[]
+            {
+                "SAPD Noodgeval — 10111",
+                "Ambulans / Brand — 107 (vaste lyn) of 021 535 1100",
+                "Hulplyn vir Gender-gebaseerde Geweld — 0800 428 428 (24/7)",
+                "Childline Suid-Afrika — 116 (gratis, 24/7)",
+                "Selfmoord-krisislyn — 0800 567 567"
             }
         },
         new
         {
             Category = "Women's Rights",
             CategoryXh = "Amalungelo Abafazi",
+            CategoryAf = "Vroueregte",
             Icon = "⚖️",
             Color = "#7C3AED",
             Items = new[]
@@ -70,12 +88,21 @@
                 "Ulwaphulo lwesondo eKapa — 021 447 9762",
                 "Iziko lwabaFazi Zemthetho — 021 421 5505",
                 "I-TEARS Foundation — *134*7355# (i-SMS mahhala)"
+            },
+            ItemsAf = new[]
+            {
+                "Regshulp Suid-Afrika — 0800 110 110",
+                "Kommissie vir Geslagsgelykheid — 0800 007 709",
+                "Verkragtingskrisis Kaapstad — 021 447 9762",
+                "Vroue Regsentrum — 021 421 5505",
+                "TEARS-stigting — *134*7355# (gratis SMS)"
             }
         },
         new
         {
             Category = "Parenting Resources",
             CategoryXh = "Izibonelelo Zabazali",
+            CategoryAf = "Ouerskaphulpbronne",
             Icon = "👶",
             Color = "#DB2777",
             Items = new[]
@@ -91,12 +118,20 @@
                 "Umanyano Wokunyiswa eMzantsi Afrika — 021 671 3907",
                 "Ubhaliso lwePhuhliso lwaBasana Abancinane (ECD) — Iihhovisi ze-DSD",
                 "Inkundla Yabantwana — 021 469 0800"
+            },
+            ItemsAf = new[]
+            {
+                "Ouer-adieslyn — 0800 567 567",
+                "Suid-Afrikaanse Borsvoedingsvereniging — 021 671 3907",
+                "Vroeë Kinderontwikkeling (ECD) Registrasie — DSD-kantore",
+                "Kinderhof — 021 469 0800"
             }
         },
         new
         {
             Category = "Mental Health",
             CategoryXh = "Impilo Yengqondo",
+            CategoryAf = "Geestesgesondheid",
             Icon = "🧠",
             Color = "#0D9488",
             Items = new[]
@@ -114,6 +149,14 @@
                 "Iqela laMafa neNkathalo eMzantsi Afrika — 0800 456 789",
                 "I-Narcotics Anonymous — 083 900 6962",
                 "I-Alcoholics Anonymous — 0861 435 722"
+            },
+            ItemsAf = new[]
+            {
+                "SADAG Geestesgesondheidslyn — 011 234 4837",
+                "Lifeline Suid-Afrika — 0861 322 322",
+                "Suid-Afrikaanse Depressie- en Angsgroep — 0800 456 789",
+                "Narcotics Anonymous — 083 900 6962",
+                "Alcoholics Anonymous — 0861 435 722"
             }
         }
     };
@@ -136,16 +179,26 @@
         ("Ngaba ndifanele ukuhlala eLavender Hill okanye eeSteenberg ukuze ndifumane uncedo?", "Hayi. Nangona i-Philisa ixhasa ngokukodwa indawo ye-Cape Flats, unokwanela ukuthumela isicelo ngaphandle kwezo ndawo kwaye iqela liza kunika ingcebiso apho kunokwenzeka.")
     };
 
-    var faqs = s.IsEnglish ? faqsEn : faqsXh;
+    var faqsAf = new[]
+    {
+        ("Hoe doen ek aansoek om 'n SASSA-toelaag?", "Besoek jou naaste SASSA-kantoor of praat met ons maatskaplike werk-span wat jou met die aansoekproses kan help."),
+        ("Kan mans ondersteuning van Philisa kry?", "Ons dienste is oop vir alle gemeenskapslede wat hulp nodig het, ongeag geslag."),
+        ("Word my versoek privaat gehou?", "Ja — alle indienings word met streng vertroulikheid hanteer. Jou inligting word slegs binne die Philisa-span gedeel met die doel om jou by te staan."),
+        ("Hoe lank neem dit om terugvoer te kry?", "Die span reageer gewoonlik binne 2–5 besigheidsdae. Dringende versoeke word geprioritiseer."),
+        ("Moet ek in Lavender Hill of Steenberg woon om hulp te kry?", "Nee. Alhoewel Philisa hoofsaaklik die Cape Flats-area bedien, kan jy steeds 'n versoek van buite hierdie areas indien en die span sal jou waar moontlik adviseer.")
+    };
+
+    var faqs = s.Lang switch { "xh" => faqsXh, "af" => faqsAf, _ => faqsEn };
 }
 
 <section class="py-20 bg-purple-900 text-white text-center">
     <div class="max-w-3xl mx-auto px-4">
-        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Helpful Information", "Ulwazi Olwexesha")</p>
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Helpful Information", "Ulwazi Olwexesha", "Nuttige Inligting")</p>
         <h1 class="text-4xl md:text-5xl font-bold mb-5" style="font-family: Lora, serif;">@s.Nav.Resources</h1>
         <p class="text-purple-100 text-lg max-w-xl mx-auto leading-relaxed">
             @s.Pick("Essential contacts, services, and information to support you and your family.",
-                    "Amanxibelelanisi abalulekileyo, iinkonzo, kunye nolwazi ukukuxhasa wena nosapho lwakho.")
+                    "Amanxibelelanisi abalulekileyo, iinkonzo, kunye nolwazi ukukuxhasa wena nosapho lwakho.",
+                    "Noodsaaklike kontakte, dienste, en inligting om jou en jou gesin te ondersteun.")
         </p>
     </div>
 </section>
@@ -159,10 +212,10 @@
                 <div class="bg-white rounded-2xl p-7 border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
                     <div class="flex items-center gap-3 mb-5">
                         <span class="text-2xl" aria-hidden="true">@res.Icon</span>
-                        <h2 class="font-bold text-stone-900 text-lg" style="font-family: Lora, serif;">@s.Pick(res.Category, res.CategoryXh)</h2>
+                        <h2 class="font-bold text-stone-900 text-lg" style="font-family: Lora, serif;">@s.Pick(res.Category, res.CategoryXh, res.CategoryAf)</h2>
                     </div>
                     <ul class="space-y-3">
-                        @foreach (var item in (s.IsEnglish ? res.Items : res.ItemsXh))
+                        @foreach (var item in (s.Lang switch { "xh" => res.ItemsXh, "af" => res.ItemsAf, _ => res.Items }))
                         {
                             <li class="text-sm text-stone-600 flex items-start gap-2 leading-relaxed">
                                 <span class="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background-color: @res.Color;" aria-hidden="true"></span>
@@ -179,7 +232,7 @@
             <div class="px-7 py-6 border-b border-stone-100 flex items-center gap-3">
                 <span class="text-2xl" aria-hidden="true">❓</span>
                 <h2 class="font-bold text-stone-900 text-xl" style="font-family: Lora, serif;">
-                    @s.Pick("Frequently Asked Questions", "Imibuzo Ebuzwa Rhoqo")
+                    @s.Pick("Frequently Asked Questions", "Imibuzo Ebuzwa Rhoqo", "Gereelde Vrae")
                 </h2>
             </div>
             <div>
@@ -208,10 +261,11 @@
 
 <section class="py-16 bg-amber-50 border-t border-amber-100 text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-stone-900 mb-3" style="font-family: Lora, serif;">@s.Pick("Need More Help?", "Ufuna Uncedo Oluninzi?")</h2>
+        <h2 class="text-2xl font-bold text-stone-900 mb-3" style="font-family: Lora, serif;">@s.Pick("Need More Help?", "Ufuna Uncedo Oluninzi?", "Benodig Jy Meer Hulp?")</h2>
         <p class="text-stone-600 mb-6 text-sm">
             @s.Pick("Get in touch and our team will be in touch within 2–5 business days.",
-                    "Qhagamshelana nathi kwaye iqela lethu liza kuqhagamshelana nawe phakathi kweentsuku ezi-2–5 zomsebenzi.")
+                    "Qhagamshelana nathi kwaye iqela lethu liza kuqhagamshelana nawe phakathi kweentsuku ezi-2–5 zomsebenzi.",
+                    "Kontak ons en ons span sal binne 2–5 besigheidsdae met jou skakel.")
         </p>
         <a href="/Contact" class="inline-block bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
             @s.Home.ContactUs

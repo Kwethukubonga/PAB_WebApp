@@ -10,13 +10,15 @@
         {
             Name = "Amahle, 34",
             Quote = "This programme changed my life. I came in with nothing and left with a skill, a certificate, and the confidence to start my own business.",
-            QuoteXh = "Le nkqubo yatshintsha ubomi bam. Ndafika ndingenalutshintsho kwaye ndaphuma nendlela, isatifiketi, kunye nolutho lokwakha ishishini lam."
+            QuoteXh = "Le nkqubo yatshintsha ubomi bam. Ndafika ndingenalutshintsho kwaye ndaphuma nendlela, isatifiketi, kunye nolutho lokwakha ishishini lam.",
+            QuoteAf = "Hierdie program het my lewe verander. Ek het met niks ingekom en het weggegaan met 'n vaardigheid, 'n sertifikaat, en die selfvertroue om my eie besigheid te begin."
         },
         new
         {
             Name = "Thembeka, 28",
             Quote = "I didn't know where to turn. Philisa Abafazi Bethu didn't just help me — they believed in me when I couldn't believe in myself.",
-            QuoteXh = "Bendingazi apho ndiya khona. I-Philisa Abafazi Bethu ayandinceda nje kuphela — bankholwa ngam xa bendingakholwa ngam ndim."
+            QuoteXh = "Bendingazi apho ndiya khona. I-Philisa Abafazi Bethu ayandinceda nje kuphela — bankholwa ngam xa bendingakholwa ngam ndim.",
+            QuoteAf = "Ek het nie geweet waarheen om te draai nie. Philisa Abafazi Bethu het my nie net gehelp nie — hulle het in my geglo toe ek nie in myself kon glo nie."
         }
     };
 }
@@ -45,12 +47,12 @@
         <div class="lg:col-span-2 space-y-12">
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Overview", "Isishwankathelo")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Overview", "Isishwankathelo", "Oorsig")</h2>
                 <p class="text-stone-600 leading-relaxed">@prog.OverviewFor(s)</p>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Objectives", "Iinjongo")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Objectives", "Iinjongo", "Doelwitte")</h2>
                 <ul class="space-y-3">
                     @foreach (var obj in prog.ObjectivesFor(s))
                     {
@@ -67,7 +69,7 @@
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Activities", "Imisebenzi")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Activities", "Imisebenzi", "Aktiwiteite")</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     @foreach (var act in prog.ActivitiesFor(s))
                     {
@@ -80,7 +82,7 @@
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya", "Galery")</h2>
                 <div class="columns-2 gap-4">
                     @foreach (var img in prog.GalleryImages)
                     {
@@ -93,12 +95,12 @@
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Success Stories", "Amabali Empumelelo")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Success Stories", "Amabali Empumelelo", "Suksesverhale")</h2>
                 <div class="space-y-5">
                     @foreach (var story in successStories)
                     {
                         <blockquote class="bg-purple-50 border-l-4 border-purple-600 rounded-r-xl p-6">
-                            <p class="text-stone-700 italic leading-relaxed mb-3">&ldquo;@s.Pick(story.Quote, story.QuoteXh)&rdquo;</p>
+                            <p class="text-stone-700 italic leading-relaxed mb-3">&ldquo;@s.Pick(story.Quote, story.QuoteXh, story.QuoteAf)&rdquo;</p>
                             <cite class="text-purple-700 font-semibold text-sm not-italic">— @story.Name</cite>
                         </blockquote>
                     }
@@ -109,17 +111,18 @@
         <!-- Sidebar -->
         <div>
             <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100 sticky top-24">
-                <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?")</h2>
+                <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?", "Benodig Jy Hierdie Ondersteuning?")</h2>
                 <p class="text-stone-500 text-sm leading-relaxed mb-5">
                     @s.Pick("Get in touch and our team will be in touch to guide you.",
-                            "Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.")
+                            "Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.",
+                            "Kontak ons en ons span sal met jou skakel om jou te lei.")
                 </p>
                 <div class="space-y-3">
                     <a href="/Contact" class="block text-center w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 rounded-xl transition-colors text-sm">@s.Home.ContactUs</a>
                     <a href="/Programmes" class="block text-center w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-3 rounded-xl transition-colors text-sm">@s.Nav.Programmes</a>
                 </div>
                 <p class="mt-5 pt-5 border-t border-stone-200 text-xs text-stone-400">
-                    @s.Pick("Free for qualifying community members.", "Mahhala kumalungu oluntu afanelekileyo.")
+                    @s.Pick("Free for qualifying community members.", "Mahhala kumalungu oluntu afanelekileyo.", "Gratis vir kwalifiserende gemeenskapslede.")
                 </p>
             </div>
         </div>
@@ -128,7 +131,7 @@
 
 <!-- Gallery lightbox -->
 <div data-gallery-lightbox hidden class="fixed inset-0 z-50 bg-stone-900/90 flex items-center justify-center p-4 sm:p-8">
-    <button type="button" data-gallery-close class="absolute top-4 right-4 text-white/80 hover:text-white p-2" aria-label="@s.Pick("Close", "Vala")">
+    <button type="button" data-gallery-close class="absolute top-4 right-4 text-white/80 hover:text-white p-2" aria-label="@s.Pick("Close", "Vala", "Maak toe")">
         <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
         </svg>

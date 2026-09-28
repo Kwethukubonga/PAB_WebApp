@@ -1,22 +1,28 @@
 @page
 @{
     var s = HttpContext.Strings();
-    ViewData["Title"] = s.Pick("About us", "Ngathi");
+    ViewData["Title"] = s.Pick("About us", "Ngathi", "Oor ons");
 
     var values = new[]
     {
-        (s.Pick("Ubuntu", "Ubuntu"),           "🤝", s.Pick("We believe in the African philosophy that a person is a person through other persons. Everything we do is grounded in this collective humanity.",
-                                                              "Sikholelwa kwifilosofi yase-Afrika yokuba umntu ngumntu ngabanye abantu. Yonke into esiyenzayo isekwe kobu buntu bokwabelana.")),
-        (s.Pick("Dignity", "Isidima"),         "💜", s.Pick("Every individual we serve is treated with absolute respect and dignity, regardless of their circumstances or background.",
-                                                              "Wonke umntu esimsebenzelayo uphathwa ngentlonipho nesidima ngokupheleleyo, nokuba ziziphi iimeko okanye imvelaphi yakhe.")),
-        (s.Pick("Compassion", "Imfesane"),     "❤️", s.Pick("We lead with empathy. Our team listens deeply before acting, ensuring our responses are tailored to real needs.",
-                                                              "Sikhokela ngemfesane. Iqela lethu limamela ngenyameko phambi kokuba lisebenze, siqinisekisa ukuba iimpendulo zethu zilungiselelwe iimfuno zokwenene.")),
-        (s.Pick("Empowerment", "Ukuxhobisa"),  "✊", s.Pick("We do not merely provide services — we build capacity. We want every person we help to become capable of helping others.",
-                                                              "Asinikezeli ngeenkonzo kuphela — sakha amandla. Sifuna wonke umntu esimncedayo abe nakho ukuncedisa abanye.")),
-        (s.Pick("Integrity", "Ukunyaniseka"),  "⚖️", s.Pick("We are transparent in our operations, accountable to our communities, and honest in everything we do.",
-                                                              "Siyabonakala kwimisebenzi yethu, sinoxanduva koluntu lwethu, kwaye siyinyaniso kuyo yonke into esiyenzayo.")),
-        (s.Pick("Inclusivity", "Ukubandakanya"), "🌍", s.Pick("We welcome all people regardless of gender, religion, language, or background. Our doors are open to everyone in need.",
-                                                              "Samkela bonke abantu nokuba bubulili bunjani, unqulo, ulwimi, okanye imvelaphi. Iingcango zethu zivulekele wonke umntu okwimfuno."))
+        (s.Pick("Ubuntu", "Ubuntu", "Ubuntu"),           "🤝", s.Pick("We believe in the African philosophy that a person is a person through other persons. Everything we do is grounded in this collective humanity.",
+                                                              "Sikholelwa kwifilosofi yase-Afrika yokuba umntu ngumntu ngabanye abantu. Yonke into esiyenzayo isekwe kobu buntu bokwabelana.",
+                                                              "Ons glo in die Afrika-filosofie dat 'n mens 'n mens is deur ander mense. Alles wat ons doen is gegrond in hierdie kollektiewe mensdom.")),
+        (s.Pick("Dignity", "Isidima", "Waardigheid"),         "💜", s.Pick("Every individual we serve is treated with absolute respect and dignity, regardless of their circumstances or background.",
+                                                              "Wonke umntu esimsebenzelayo uphathwa ngentlonipho nesidima ngokupheleleyo, nokuba ziziphi iimeko okanye imvelaphi yakhe.",
+                                                              "Elke individu wat ons bedien, word met absolute respek en waardigheid behandel, ongeag hul omstandighede of agtergrond.")),
+        (s.Pick("Compassion", "Imfesane", "Deernis"),     "❤️", s.Pick("We lead with empathy. Our team listens deeply before acting, ensuring our responses are tailored to real needs.",
+                                                              "Sikhokela ngemfesane. Iqela lethu limamela ngenyameko phambi kokuba lisebenze, siqinisekisa ukuba iimpendulo zethu zilungiselelwe iimfuno zokwenene.",
+                                                              "Ons lei met empatie. Ons span luister deeglik voordat ons optree, om te verseker dat ons response aangepas is by werklike behoeftes.")),
+        (s.Pick("Empowerment", "Ukuxhobisa", "Bemagtiging"),  "✊", s.Pick("We do not merely provide services — we build capacity. We want every person we help to become capable of helping others.",
+                                                              "Asinikezeli ngeenkonzo kuphela — sakha amandla. Sifuna wonke umntu esimncedayo abe nakho ukuncedisa abanye.",
+                                                              "Ons verskaf nie net dienste nie — ons bou kapasiteit. Ons wil hê elke persoon wat ons help moet in staat wees om ander te help.")),
+        (s.Pick("Integrity", "Ukunyaniseka", "Integriteit"),  "⚖️", s.Pick("We are transparent in our operations, accountable to our communities, and honest in everything we do.",
+                                                              "Siyabonakala kwimisebenzi yethu, sinoxanduva koluntu lwethu, kwaye siyinyaniso kuyo yonke into esiyenzayo.",
+                                                              "Ons is deursigtig in ons bedrywighede, aanspreeklik teenoor ons gemeenskappe, en eerlik in alles wat ons doen.")),
+        (s.Pick("Inclusivity", "Ukubandakanya", "Inklusiwiteit"), "🌍", s.Pick("We welcome all people regardless of gender, religion, language, or background. Our doors are open to everyone in need.",
+                                                              "Samkela bonke abantu nokuba bubulili bunjani, unqulo, ulwimi, okanye imvelaphi. Iingcango zethu zivulekele wonke umntu okwimfuno.",
+                                                              "Ons verwelkom alle mense ongeag geslag, geloof, taal, of agtergrond. Ons deure is oop vir enigeen in nood."))
     };
 
     var team = new[]
@@ -59,11 +65,12 @@
         <img src="/img/programmes/senior-programme/hero.jpg" alt="" aria-hidden="true" class="w-full h-full object-cover" />
     </div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Our Story", "Ibali Lethu")</p>
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-5" style="font-family: Lora, serif;">@s.Pick("About Us", "Ngathi")</h1>
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Our Story", "Ibali Lethu", "Ons Verhaal")</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-5" style="font-family: Lora, serif;">@s.Pick("About Us", "Ngathi", "Oor Ons")</h1>
         <p class="text-purple-100 text-lg max-w-2xl mx-auto leading-relaxed">
             @s.Pick("Learn who we are, what drives us, and the values that guide every decision we make.",
-                    "Funda ukuba singoobani, yintoni esiqhubayo, kunye nezithethe ezikhokela sonke isigqibo esisenzayo.")
+                    "Funda ukuba singoobani, yintoni esiqhubayo, kunye nezithethe ezikhokela sonke isigqibo esisenzayo.",
+                    "Leer wie ons is, wat ons dryf, en die waardes wat elke besluit wat ons neem, rig.")
         </p>
     </div>
 </section>
@@ -73,22 +80,25 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div>
-                <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Our History", "Imbali Yethu")</p>
+                <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Our History", "Imbali Yethu", "Ons Geskiedenis")</p>
                 <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-6 leading-snug" style="font-family: Lora, serif;">
-                    @s.Pick("15 Years of Building Community", "Iminyaka eyi-15 Yokwakha Uluntu")
+                    @s.Pick("15 Years of Building Community", "Iminyaka eyi-15 Yokwakha Uluntu", "15 Jaar van Gemeenskapsbou")
                 </h2>
                 <div class="space-y-4 text-stone-600 leading-relaxed">
                     <p>
                         @s.Pick("Philisa Abafazi Bethu — meaning “heal our women” in isiZulu — was founded in 2009 by a group of determined women in Cape Town's northern suburbs who saw their neighbours suffering without support. What began as a small feeding scheme in a church hall has grown into one of the Western Cape's most comprehensive community welfare organisations.",
-                                "Philisa Abafazi Bethu — okuthetha “philisa abafazi bethu” ngesiZulu — yasekwa ngo-2009 liqela labafazi abanoluzuko basezindeni ezisemantla eKapa ababebona abamelwane babo bebandezelekile bengenamxhasi. Into eyaqala njengenkqubo encinci yokondla kwiholo yecawa ikhule yaba yenye yemibutho yentlalontle yoluntu ebanzi kakhulu eNtshona Koloni.")
+                                "Philisa Abafazi Bethu — okuthetha “philisa abafazi bethu” ngesiZulu — yasekwa ngo-2009 liqela labafazi abanoluzuko basezindeni ezisemantla eKapa ababebona abamelwane babo bebandezelekile bengenamxhasi. Into eyaqala njengenkqubo encinci yokondla kwiholo yecawa ikhule yaba yenye yemibutho yentlalontle yoluntu ebanzi kakhulu eNtshona Koloni.",
+                                "Philisa Abafazi Bethu — wat “genees ons vroue” in isiZulu beteken — is in 2009 gestig deur 'n groep vasberade vroue in Kaapstad se noordelike voorstede wat hul bure sonder ondersteuning sien swaarkry het. Wat begin het as 'n klein voedingskema in 'n kerksaal, het gegroei tot een van die Wes-Kaap se mees omvattende gemeenskapswelsynsorganisasies.")
                     </p>
                     <p>
                         @s.Pick("Over the years, we expanded our reach from food security to gender-based violence support, youth development, child welfare, and elder care, growing the network of programmes and partners that makes it easier for community members to access our services.",
-                                "Ekuhambeni kwexesha, siwandisile ukufikelela kwethu ukusuka kukhuseleko lokutya ukuya kuxhaso lobundlobongela obusekelwe kubulili, uphuhliso lolutsha, intlalontle yabantwana, nokhathalelo lwabadala, sikhulisa inethiwekhi yeenkqubo nabalingane ekwenza kube lula kumalungu oluntu ukufikelela kwiinkonzo zethu.")
+                                "Ekuhambeni kwexesha, siwandisile ukufikelela kwethu ukusuka kukhuseleko lokutya ukuya kuxhaso lobundlobongela obusekelwe kubulili, uphuhliso lolutsha, intlalontle yabantwana, nokhathalelo lwabadala, sikhulisa inethiwekhi yeenkqubo nabalingane ekwenza kube lula kumalungu oluntu ukufikelela kwiinkonzo zethu.",
+                                "Deur die jare het ons ons bereik uitgebrei van voedselsekerheid na ondersteuning vir gender-gebaseerde geweld, jeugontwikkeling, kinderwelsyn, en sorg vir bejaardes, en die netwerk van programme en vennote uitgebou wat dit makliker maak vir gemeenskapslede om toegang tot ons dienste te verkry.")
                     </p>
                     <p>
                         @s.Pick("Today, we serve over 14,200 families annually across 12 communities, powered by a committed team of staff and more than 320 volunteers.",
-                                "Namhlanje, sisebenzela iintsapho ezingaphezu kwe-14,200 ngonyaka kwiindawo ezili-12, ngeqela elizinikeleyo labasebenzi nabavolontiya abangaphezu kwama-320.")
+                                "Namhlanje, sisebenzela iintsapho ezingaphezu kwe-14,200 ngonyaka kwiindawo ezili-12, ngeqela elizinikeleyo labasebenzi nabavolontiya abangaphezu kwama-320.",
+                                "Vandag bedien ons jaarliks meer as 14 200 gesinne regoor 12 gemeenskappe, aangedryf deur 'n toegewyde span personeel en meer as 320 vrywilligers.")
                     </p>
                 </div>
             </div>
@@ -110,25 +120,29 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-purple-900 text-white rounded-2xl p-10">
-                <p class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-4">@s.Pick("Our Mission", "Injongo Yethu")</p>
+                <p class="text-purple-300 text-xs font-semibold uppercase tracking-widest mb-4">@s.Pick("Our Mission", "Injongo Yethu", "Ons Missie")</p>
                 <h2 class="text-2xl font-bold mb-4 leading-snug" style="font-family: Lora, serif;">
                     @s.Pick("To walk alongside communities in their most vulnerable moments.",
-                            "Ukuhamba kunye noluntu ngamaxesha alo asengozini kakhulu.")
+                            "Ukuhamba kunye noluntu ngamaxesha alo asengozini kakhulu.",
+                            "Om saam met gemeenskappe te loop in hul mees kwesbare oomblikke.")
                 </h2>
                 <p class="text-purple-100 leading-relaxed">
                     @s.Pick("We are committed to providing accessible, dignified, and holistic support services that address the root causes of poverty, inequality, and social exclusion — empowering individuals and families to build sustainable, fulfilling lives.",
-                            "Sizinikele ekubonelelweni ngeenkonzo zoncedo ezifikelelekayo, ezinesidima, nezibanzi ezijongana neengcambu zobuhlwempu, ukungalingani, nokungabandakanywa kwezentlalo — sinika amandla abantu neentsapho ukuba bakhe ubomi obuzinzileyo, obanelisayo.")
+                            "Sizinikele ekubonelelweni ngeenkonzo zoncedo ezifikelelekayo, ezinesidima, nezibanzi ezijongana neengcambu zobuhlwempu, ukungalingani, nokungabandakanywa kwezentlalo — sinika amandla abantu neentsapho ukuba bakhe ubomi obuzinzileyo, obanelisayo.",
+                            "Ons is daartoe verbind om toeganklike, waardige, en holistiese ondersteuningsdienste te bied wat die grondoorsake van armoede, ongelykheid, en maatskaplike uitsluiting aanspreek — en individue en gesinne bemagtig om volhoubare, vervullende lewens te bou.")
                 </p>
             </div>
             <div class="bg-amber-50 border border-amber-200 rounded-2xl p-10">
-                <p class="text-amber-700 text-xs font-semibold uppercase tracking-widest mb-4">@s.Pick("Our Vision", "Umbono Wethu")</p>
+                <p class="text-amber-700 text-xs font-semibold uppercase tracking-widest mb-4">@s.Pick("Our Vision", "Umbono Wethu", "Ons Visie")</p>
                 <h2 class="text-2xl font-bold text-stone-900 mb-4 leading-snug" style="font-family: Lora, serif;">
                     @s.Pick("Communities where every person thrives with dignity and hope.",
-                            "Uluntu apho wonke umntu aphumelela ngesidima nethemba.")
+                            "Uluntu apho wonke umntu aphumelela ngesidima nethemba.",
+                            "Gemeenskappe waar elke persoon met waardigheid en hoop floreer.")
                 </h2>
                 <p class="text-stone-600 leading-relaxed">
                     @s.Pick("We envision a South Africa where no woman is unsafe, no child goes hungry, no elder is forgotten, and no young person is without opportunity — a society where ubuntu is not just a word, but a lived reality.",
-                            "Siyayibona iNingizimu Afrika apho akukho mfazi ungakhuselekanga, akukho mntwana ulambileyo, akukho mdala ulityalwayo, kwaye akukho mntu osemncinci ongenamathuba — uluntu apho ubuntu ungelilo igama nje, kodwa yinyaniso yokwenene.")
+                            "Siyayibona iNingizimu Afrika apho akukho mfazi ungakhuselekanga, akukho mntwana ulambileyo, akukho mdala ulityalwayo, kwaye akukho mntu osemncinci ongenamathuba — uluntu apho ubuntu ungelilo igama nje, kodwa yinyaniso yokwenene.",
+                            "Ons visualiseer 'n Suid-Afrika waar geen vrou onveilig is nie, geen kind honger ly nie, geen bejaarde vergeet word nie, en geen jong persoon sonder geleentheid is nie — 'n samelewing waar ubuntu nie net 'n woord is nie, maar 'n geleefde werklikheid.")
                 </p>
             </div>
         </div>
@@ -139,8 +153,8 @@
 <section class="py-20 bg-[#fffbf5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-14">
-            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Stand For", "Esimela Yona")</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">@s.Pick("Our Core Values", "Izithethe Zethu Eziphambili")</h2>
+            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Stand For", "Esimela Yona", "Waarvoor Ons Staan")</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">@s.Pick("Our Core Values", "Izithethe Zethu Eziphambili", "Ons Kernwaardes")</h2>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach (var (title, icon, desc) in values)
@@ -159,9 +173,9 @@
 <section class="py-20 bg-stone-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-14">
-            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Leadership", "Ubunkokeli")</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">@s.Pick("Meet the Team", "Yazi Iqela")</h2>
-            <p class="text-stone-500 mt-3">@s.Pick("The dedicated people who make our work possible every day.", "Abantu abazinikeleyo abenza umsebenzi wethu ube nokwenzeka mihla yonke.")</p>
+            <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Leadership", "Ubunkokeli", "Leierskap")</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-900" style="font-family: Lora, serif;">@s.Pick("Meet the Team", "Yazi Iqela", "Ontmoet die Span")</h2>
+            <p class="text-stone-500 mt-3">@s.Pick("The dedicated people who make our work possible every day.", "Abantu abazinikeleyo abenza umsebenzi wethu ube nokwenzeka mihla yonke.", "Die toegewyde mense wat ons werk elke dag moontlik maak.")</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
             @foreach (var (name, role, image) in team)
@@ -183,8 +197,8 @@
 <!-- CTA -->
 <section class="py-16 bg-purple-900 text-white text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-4" style="font-family: Lora, serif;">@s.Pick("Ready to Make a Difference?", "Ukulungele Ukwenza Umahluko?")</h2>
-        <p class="text-purple-200 mb-8">@s.Pick("Explore our programmes or reach out to learn how you can support or join our community.", "Hlola iinkqubo zethu okanye qhagamshelana nathi ukuze ufunde indlela onokuxhasa ngayo okanye ujoyine uluntu lwethu.")</p>
+        <h2 class="text-3xl font-bold mb-4" style="font-family: Lora, serif;">@s.Pick("Ready to Make a Difference?", "Ukulungele Ukwenza Umahluko?", "Gereed om 'n Verskil te Maak?")</h2>
+        <p class="text-purple-200 mb-8">@s.Pick("Explore our programmes or reach out to learn how you can support or join our community.", "Hlola iinkqubo zethu okanye qhagamshelana nathi ukuze ufunde indlela onokuxhasa ngayo okanye ujoyine uluntu lwethu.", "Verken ons programme of kontak ons om te leer hoe jy ons gemeenskap kan ondersteun of by ons kan aansluit.")</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/Programmes" class="bg-amber-500 hover:bg-amber-400 text-stone-900 font-semibold px-8 py-3 rounded-full transition-colors">@s.Home.ExplorePrograms</a>
             <a href="/Contact" class="border border-purple-400 text-white hover:bg-purple-800 font-semibold px-8 py-3 rounded-full transition-colors">@s.Home.ContactUs</a>

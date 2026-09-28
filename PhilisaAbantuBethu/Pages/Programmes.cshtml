@@ -9,11 +9,12 @@
         <img src="/img/programmes/after-school/hero.jpg" alt="" aria-hidden="true" class="w-full h-full object-cover" />
     </div>
     <div class="relative z-10 max-w-3xl mx-auto px-4">
-        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Do", "Esikwenzayo")</p>
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Do", "Esikwenzayo", "Wat Ons Doen")</p>
         <h1 class="text-4xl md:text-5xl font-bold mb-5" style="font-family: Lora, serif;">@s.Nav.Programmes</h1>
         <p class="text-purple-100 text-lg leading-relaxed max-w-xl mx-auto">
-            @s.Pick("Nine programmes, one mission — to uplift and empower every person who walks through our doors.",
-                    "Iinkqubo ezisithoba, umsebenzi omnye — ukuphakamisa nokunika amandla wonke umntu ofika emahasini ethu.")
+            @s.Pick("Ten programmes, one mission — to uplift and empower every person who walks through our doors.",
+                    "Iinkqubo ezilishumi, umsebenzi omnye — ukuphakamisa nokunika amandla wonke umntu ofika emahasini ethu.",
+                    "Tien programme, een missie — om elke persoon wat by ons deure inkom, op te hef en te bemagtig.")
         </p>
     </div>
 </section>
@@ -35,7 +36,7 @@
                         <h2 class="font-bold text-stone-900 text-xl mb-3 leading-snug" style="font-family: Lora, serif;">@prog.TitleFor(s)</h2>
                         <p class="text-stone-500 text-sm leading-relaxed mb-6 flex-1">@prog.DescriptionFor(s)</p>
                         <span class="inline-flex items-center gap-2 text-sm font-semibold text-purple-700 group-hover:text-purple-900 transition-colors mt-auto">
-                            @s.Pick("Learn More", "Funda Ngakumbi")
+                            @s.Pick("Learn More", "Funda Ngakumbi", "Leer Meer")
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover:translate-x-1 transition-transform" aria-hidden="true">
                                 <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -49,10 +50,11 @@
 
 <section class="py-16 bg-amber-50 border-t border-amber-100 text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need Support?", "Ufuna Uncedo?")</h2>
+        <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need Support?", "Ufuna Uncedo?", "Benodig Jy Ondersteuning?")</h2>
         <p class="text-stone-600 mb-6 text-sm">
             @s.Pick("Get in touch and our team will help guide you to the right programme.",
-                    "Qhagamshelana nathi kwaye iqela lethu liza kukunceda ukufumana inkqubo efanelekileyo.")
+                    "Qhagamshelana nathi kwaye iqela lethu liza kukunceda ukufumana inkqubo efanelekileyo.",
+                    "Kontak ons en ons span sal jou help om die regte program te vind.")
         </p>
         <a href="/Contact" class="inline-block bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
             @s.Home.ContactUs
