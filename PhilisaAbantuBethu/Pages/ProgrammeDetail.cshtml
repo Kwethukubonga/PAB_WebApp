@@ -25,7 +25,7 @@
 <section class="relative h-72 md:h-96 overflow-hidden bg-stone-800">
     <img src="@prog.ImagePath"
          alt="@prog.TitleFor(s)"
-         class="absolute inset-0 w-full h-full object-cover opacity-60" />
+         class="absolute inset-0 w-full h-full object-cover object-top opacity-60" />
     <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent"></div>
     <div class="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
         <a href="/Programmes" class="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-4 transition-colors">
@@ -83,9 +83,10 @@
                 <div class="grid grid-cols-2 gap-4">
                     @for (var i = 0; i < prog.GalleryImages.Count; i++)
                     {
-                        <div class="rounded-xl overflow-hidden bg-stone-200 @(i == 0 ? "h-52" : "h-40")">
-                            <img src="@prog.GalleryImages[i]" alt="" aria-hidden="true" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-                        </div>
+                        <button type="button" data-gallery-trigger data-full-src="@prog.GalleryImages[i]"
+                                class="rounded-xl overflow-hidden bg-stone-200 @(i == 0 ? "h-52" : "h-40") w-full cursor-zoom-in">
+                            <img src="@prog.GalleryImages[i]" alt="" aria-hidden="true" class="w-full h-full object-contain hover:scale-105 transition-transform duration-500" />
+                        </button>
                     }
                 </div>
             </div>
@@ -122,4 +123,14 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Gallery lightbox -->
+<div data-gallery-lightbox hidden class="fixed inset-0 z-50 bg-stone-900/90 flex items-center justify-center p-4 sm:p-8">
+    <button type="button" data-gallery-close class="absolute top-4 right-4 text-white/80 hover:text-white p-2" aria-label="@s.Pick("Close", "Vala")">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
+        </svg>
+    </button>
+    <img data-gallery-lightbox-image src="" alt="" class="max-w-full max-h-full rounded-lg object-contain" />
 </div>
