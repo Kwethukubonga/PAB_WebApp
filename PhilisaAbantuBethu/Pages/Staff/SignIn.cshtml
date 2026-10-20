@@ -1,0 +1,87 @@
+@page
+@model PhilisaAbantuBethu.Pages.Staff.SignInModel
+@{
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s.Pick("Staff sign-in", "Ukungena kwabasebenzi", "Personeel-aanmelding");
+
+    const string inputCls = "w-full border border-stone-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900";
+    const string labelCls = "block text-sm font-medium text-stone-700 mb-1.5";
+}
+
+<section class="py-12 bg-purple-900 text-white">
+    <div class="max-w-md mx-auto px-4 text-center">
+        <h1 class="text-3xl font-bold mb-2" style="font-family: Lora, serif;">@ViewData["Title"]</h1>
+        <p class="text-purple-100 text-sm leading-relaxed">
+            @s.Pick("For Philisa Abafazi Bethu staff, to see and respond to support requests.",
+                    "Yeyabasebenzi bePhilisa Abafazi Bethu, ukuze babone kwaye baphendule izicelo zenkxaso.",
+                    "Vir Philisa Abafazi Bethu-personeel, om ondersteuningsversoeke te sien en te beantwoord.")
+        </p>
+    </div>
+</section>
+
+<div class="max-w-md mx-auto px-4 sm:px-6 py-12">
+    @if (!Model.Firebase.IsConfigured)
+    {
+        <div class="bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 text-amber-900 text-sm" role="alert">
+            @s.Pick("Staff sign-in isn't set up yet. Ask the team to add the Firebase web API key (Firebase__ApiKey).",
+                    "Ukungena kwabasebenzi akukasetwa. Cela iqela ukuba longeze isitshixo se-API sewebhu se-Firebase (Firebase__ApiKey).",
+                    "Personeel-aanmelding is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).")
+        </div>
+    }
+    else
+    {
+        <div data-staff-signin
+             data-api-key="@Model.Firebase.ApiKey"
+             data-auth-domain="@Model.Firebase.ResolvedAuthDomain"
+             data-project-id="@Model.Firebase.ProjectId"
+             data-session-url="@Url.Page("/Staff/SignIn", "Session", new { returnUrl = Model.ReturnUrl })"
+             data-busy-label="@s.Pick("Signing in…", "Kungenwa…", "Besig om aan te meld…")"
+             data-error-credentials="@s.Pick("That email and password don't match. Please try again.", "Le imeyile kunye negama lokugqithisa azihambelani. Nceda uzame kwakhona.", "Daardie e-pos en wagwoord stem nie ooreen nie. Probeer asseblief weer.")"
+             data-error-too-many="@s.Pick("Too many tries. Please wait a few minutes and try again.", "Uzame kaninzi kakhulu. Nceda ulinde imizuzu embalwa uze uzame kwakhona.", "Te veel pogings. Wag asseblief 'n paar minute en probeer weer.")"
+             data-error-network="@s.Pick("Couldn't connect. Check your internet connection.", "Asikwazanga ukudibanisa. Jonga uqhagamshelo lwakho lwe-intanethi.", "Kon nie koppel nie. Kontroleer jou internetverbinding.")"
+             data-error-generic="@s.Pick("Something went wrong. Please try again.", "Kukho into engahambanga kakuhle. Nceda uzame kwakhona.", "Iets het verkeerd geloop. Probeer asseblief weer.")">
+
+            <p data-signin-error class="bg-red-50 border border-red-200 text-red-800 text-sm font-medium rounded-xl px-4 py-3 mb-6" role="alert" hidden></p>
+
+            <form data-signin-form class="space-y-5">
+                @Html.AntiForgeryToken()
+                <div>
+                    <label class="@labelCls" for="staff-email">@s.Pick("Email address", "Idilesi ye-imeyile", "E-posadres")</label>
+                    <input id="staff-email" name="email" type="email" autocomplete="username" required class="@inputCls" />
+                </div>
+                <div>
+                    <label class="@labelCls" for="staff-password">@s.Pick("Password", "Igama lokugqithisa", "Wagwoord")</label>
+                    <input id="staff-password" name="password" type="password" autocomplete="current-password" required class="@inputCls" />
+                </div>
+                <button type="submit" data-signin-submit
+                        class="w-full min-h-[48px] bg-purple-700 hover:bg-purple-800 disabled:bg-purple-400 disabled:cursor-wait text-white font-semibold px-6 py-3 rounded-full transition-colors">
+                    @s.Pick("Sign in", "Ngena", "Meld aan")
+                </button>
+            </form>
+
+            <div class="flex items-center gap-3 my-6 text-xs text-stone-500" aria-hidden="true">
+                <span class="flex-1 h-px bg-stone-200"></span>
+                @s.Pick("or", "okanye", "of")
+                <span class="flex-1 h-px bg-stone-200"></span>
+            </div>
+
+            <button type="button" data-signin-google
+                    class="w-full min-h-[48px] border border-stone-300 hover:bg-stone-50 disabled:cursor-wait text-stone-800 font-semibold px-6 py-3 rounded-full transition-colors">
+                @s.Pick("Continue with Google", "Qhubeka ngeGoogle", "Gaan voort met Google")
+            </button>
+
+            <p class="mt-6 text-xs text-stone-600 leading-relaxed">
+                @s.Pick("Only Philisa Volunteers admin accounts can sign in here. Forgot your password? Reset it from the Philisa Volunteers app's sign-in screen.",
+                        "Ziiakhawunti zolawulo ze-Philisa Volunteers kuphela ezinokungena apha. Ulilibele igama lokugqithisa? Lisete kwakhona kwiscreen sokungena se-app ye-Philisa Volunteers.",
+                        "Slegs Philisa Volunteers-admin-rekeninge kan hier aanmeld. Wagwoord vergeet? Stel dit terug op die Philisa Volunteers-toepassing se aanmeldskerm.")
+            </p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @if (Model.Firebase.IsConfigured)
+    {
+        <script type="module" src="~/js/staff-sign-in.js" asp-append-version="true"></script>
+    }
+}

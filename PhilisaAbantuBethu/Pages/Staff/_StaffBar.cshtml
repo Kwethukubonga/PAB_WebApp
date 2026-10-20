@@ -1,0 +1,16 @@
+@using PhilisaAbantuBethu.Staff
+@{
+    var s = Context.Strings();
+}
+@* Who is signed in, and the way out, at the top of every staff page. *@
+<div class="bg-stone-900 text-stone-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-3 text-sm">
+        <a asp-page="/Staff/Requests/Index" class="font-semibold text-white hover:underline">@s.Pick("Staff", "Abasebenzi", "Personeel")</a>
+        <span class="text-stone-300">@s.Pick("Signed in as", "Ungene njenge", "Aangemeld as") @StaffAuth.DisplayName(User)</span>
+        <form method="post" asp-page="/Staff/SignIn" asp-page-handler="SignOut" class="ml-auto">
+            <button type="submit" class="min-h-[44px] px-4 rounded-full border border-stone-500 hover:bg-stone-800 font-semibold">
+                @s.Pick("Sign out", "Phuma", "Meld af")
+            </button>
+        </form>
+    </div>
+</div>

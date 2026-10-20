@@ -1,0 +1,59 @@
+@page
+@model PhilisaAbantuBethu.Pages.Staff.Requests.IndexModel
+@using PhilisaAbantuBethu.Models
+@using PhilisaAbantuBethu.Staff
+@{
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s.Pick("Support requests", "Izicelo zenkxaso", "Ondersteuningsversoeke");
+    var now = DateTime.UtcNow;
+}
+
+<partial name="_StaffBar" />
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <h1 class="text-3xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@ViewData["Title"]</h1>
+
+    <nav class="flex flex-wrap gap-2 mb-8" aria-label="@s.Pick("Request status", "Imeko yesicelo", "Versoekstatus")">
+        @foreach (var status in SupportRequestStatus.All)
+        {
+            var selected = Model.Status == status;
+            <a asp-page="./Index" asp-route-status="@status" aria-current="@(selected ? "page" : null)"
+               class="inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full text-sm font-semibold border transition-colors @(selected ? "bg-purple-700 border-purple-700 text-white" : "bg-white border-stone-300 text-stone-700 hover:border-purple-700")">
+                @StaffText.StatusLabel(s, status)
+                <span class="rounded-full px-2 py-0.5 text-xs @(selected ? "bg-white/20" : "bg-stone-100")">@Model.Counts.GetValueOrDefault(status)</span>
+            </a>
+        }
+    </nav>
+
+    @if (Model.Requests.Count == 0)
+    {
+        <div class="bg-stone-50 border border-stone-200 rounded-2xl px-6 py-10 text-center">
+            <p class="text-stone-700 font-medium">
+                @s.Pick("Nothing here right now.", "Akukho nto apha okwangoku.", "Niks hier op die oomblik nie.")
+            </p>
+        </div>
+    }
+    else
+    {
+        <ul class="space-y-3">
+            @foreach (var request in Model.Requests)
+            {
+                <li>
+                    <a asp-page="./Details" asp-route-id="@request.Id"
+                       class="block bg-white border @(request.IsUrgent ? "border-red-300" : "border-stone-200") rounded-2xl px-5 py-4 hover:border-purple-700 transition-colors">
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <span class="font-mono text-sm font-semibold text-stone-900">@request.Reference</span>
+                            @if (request.IsUrgent)
+                            {
+                                <span class="text-xs font-bold uppercase text-red-800 bg-red-100 rounded-full px-2.5 py-0.5">@s.Pick("Urgent", "Ingxamisekile", "Dringend")</span>
+                            }
+                            <span class="ml-auto text-xs text-stone-600" title="@StaffText.LocalTime(request.SubmittedAt)">@StaffText.Ago(s, request.SubmittedAt, now)</span>
+                        </div>
+                        <p class="mt-1.5 text-stone-900 font-semibold">@request.SupportType</p>
+                        <p class="text-sm text-stone-600">@request.Area · @StaffText.ContactMethodLabel(s, request.ContactMethod)</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</div>
