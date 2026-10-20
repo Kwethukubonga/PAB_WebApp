@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
 using PhilisaAbantuBethu.Data;
 using PhilisaAbantuBethu.Pages;
+using PhilisaAbantuBethu.Services;
 
 namespace PhilisaAbantuBethu.Tests;
 
@@ -16,21 +18,22 @@ public class RequestSupportModelTests
         return new AppDbContext(options);
     }
 
-    private static RequestSupportModel CreateModel(AppDbContext db) => new(db)
-    {
-        PageContext = PageModelTestHelpers.CreatePageContext(),
-        FirstName = "Nomsa",
-        Surname = "Dlamini",
-        Phone = "0710000000",
-        Email = "nomsa@example.com",
-        Area = "Lavender Hill",
-        ContactMethod = "phone",
-        SupportType = "Food Assistance",
-        Situation = "Need help with groceries this month.",
-        Urgent = "no",
-        Extra = "",
-        Declaration = true
-    };
+    private static RequestSupportModel CreateModel(AppDbContext db) =>
+        new(new SupportRequestService(db, new ReferenceGenerator(), NullLogger<SupportRequestService>.Instance))
+        {
+            PageContext = PageModelTestHelpers.CreatePageContext(),
+            FirstName = "Nomsa",
+            Surname = "Dlamini",
+            Phone = "071 123 4567",
+            Email = "nomsa@example.com",
+            Area = "Lavender Hill",
+            ContactMethod = "phone",
+            SupportType = "Food Assistance",
+            Situation = "Need help with groceries this month.",
+            Urgent = "no",
+            Extra = "",
+            Declaration = true
+        };
 
     [Fact]
     public async Task OnPostAsync_SavesSupportRequest_WhenValid()
@@ -45,6 +48,7 @@ public class RequestSupportModelTests
         Assert.Equal("Dlamini", saved.Surname);
         Assert.Equal("Lavender Hill", saved.Area);
         Assert.True(saved.Declaration);
+        Assert.Equal("new", saved.Status);
     }
 
     [Fact]
@@ -59,7 +63,7 @@ public class RequestSupportModelTests
         Assert.Equal("/Confirmation", redirect.PageName);
         var reference = Assert.IsType<string>(
             redirect.RouteValues!["reference"]);
-        Assert.StartsWith("PAB", reference);
+        Assert.Matches("^PAB-[2-9A-Z]{6}$", reference);
     }
 
     [Fact]
@@ -73,5 +77,39 @@ public class RequestSupportModelTests
 
         Assert.IsType<PageResult>(result);
         Assert.Empty(db.SupportRequests);
+    }
+
+    [Fact]
+    public async Task OnPostAsync_ShowsFieldErrors_AndSavesNothing_WhenTheServerChecksFail()
+    {
+        using var db = CreateInMemoryDb();
+        var model = CreateModel(db);
+        model.FirstName = "";
+        model.Phone = "0888888888";
+        model.Declaration = false;
+
+        var result = await model.OnPostAsync();
+
+        Assert.IsType<PageResult>(result);
+        Assert.Empty(db.SupportRequests);
+        Assert.NotNull(model.ErrorFor("FirstName"));
+        Assert.NotNull(model.ErrorFor("Phone"));
+        Assert.NotNull(model.ErrorFor("Declaration"));
+        Assert.Null(model.ErrorFor("Area"));
+        Assert.NotNull(model.FormError);
+    }
+
+    [Fact]
+    public async Task OnPostAsync_SavesNothing_WhenTheBotTrapIsFilledIn()
+    {
+        using var db = CreateInMemoryDb();
+        var model = CreateModel(db);
+        model.Website = "http://spam.example";
+
+        var result = await model.OnPostAsync();
+
+        Assert.IsType<PageResult>(result);
+        Assert.Empty(db.SupportRequests);
+        Assert.NotNull(model.FormError);
     }
 }
