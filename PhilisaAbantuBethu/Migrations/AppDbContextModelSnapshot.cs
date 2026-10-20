@@ -15,7 +15,7 @@ namespace PhilisaAbantuBethu.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.13");
 
             modelBuilder.Entity("PhilisaAbantuBethu.Models.ContactInquiry", b =>
                 {
@@ -47,6 +47,8 @@ namespace PhilisaAbantuBethu.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SubmittedAt");
 
                     b.ToTable("ContactInquiries");
                 });
@@ -80,6 +82,9 @@ namespace PhilisaAbantuBethu.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("HandledBy")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -90,6 +95,15 @@ namespace PhilisaAbantuBethu.Migrations
 
                     b.Property<string>("Situation")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue("new");
+
+                    b.Property<DateTime?>("StatusUpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SubmittedAt")
@@ -108,6 +122,13 @@ namespace PhilisaAbantuBethu.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Reference")
+                        .IsUnique();
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("SubmittedAt");
 
                     b.ToTable("SupportRequests");
                 });

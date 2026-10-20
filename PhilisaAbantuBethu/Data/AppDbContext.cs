@@ -28,5 +28,21 @@ namespace PhilisaAbantuBethu.Data
         /// </summary>
         public DbSet<ContactInquiry> ContactInquiries { get; set; } = null!;
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<SupportRequest>(request =>
+            {
+                // Two people must never be given the same reference number.
+                request.HasIndex(r => r.Reference).IsUnique();
+                request.HasIndex(r => r.SubmittedAt);
+                request.HasIndex(r => r.Status);
+                request.Property(r => r.Status).HasDefaultValue(SupportRequestStatus.New);
+                request.Ignore(r => r.IsUrgent);
+            });
+
+            modelBuilder.Entity<ContactInquiry>()
+                .HasIndex(c => c.SubmittedAt);
+        }
+
     }
 }
