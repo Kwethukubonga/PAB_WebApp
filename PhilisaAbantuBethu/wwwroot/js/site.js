@@ -69,7 +69,11 @@
         });
 
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && !lightbox.hasAttribute('hidden')) closeLightbox();
+            if (e.key === 'Escape' && !lightbox.hasAttribute('hidden')) {
+                // Marked as used, so closing a photo never counts towards a quick exit.
+                e.preventDefault();
+                closeLightbox();
+            }
         });
     }
 
@@ -100,6 +104,57 @@
         if (nextBtn) nextBtn.addEventListener('click', function () { showSlide(current + 1); });
         dots.forEach(function (dot, i) {
             dot.addEventListener('click', function () { showSlide(i); });
+        });
+    }
+
+    /* ---------------------------------------------------------------
+       Busy state for simple forms (Pages/Contact.cshtml): one message
+       per press, and the button shows that it is sending.
+    --------------------------------------------------------------- */
+    document.querySelectorAll('[data-busy-form]').forEach(function (form) {
+        var button = form.querySelector('button[type="submit"]');
+        if (!button) return;
+        var label = button.innerHTML;
+
+        form.addEventListener('submit', function (e) {
+            if (button.disabled) { e.preventDefault(); return; }
+            button.disabled = true;
+            button.setAttribute('aria-busy', 'true');
+            button.textContent = button.dataset.busyLabel || 'Sending…';
+        });
+
+        // Coming back with the browser's Back button can restore the locked button.
+        window.addEventListener('pageshow', function () {
+            button.disabled = false;
+            button.removeAttribute('aria-busy');
+            button.innerHTML = label;
+        });
+    });
+
+    /* ---------------------------------------------------------------
+       Quick exit (Pages/Shared/_Layout.cshtml). Someone may need to leave
+       this site at once if the person hurting them walks in. The button,
+       or Esc twice, swaps the page for a neutral one; replace() means the
+       Back button doesn't return here.
+    --------------------------------------------------------------- */
+    var quickExit = document.querySelector('[data-quick-exit]');
+    if (quickExit) {
+        var leave = function () {
+            window.location.replace(quickExit.getAttribute('href'));
+        };
+
+        quickExit.addEventListener('click', function (e) {
+            e.preventDefault();
+            leave();
+        });
+
+        // Twice, so an Esc meant for a dropdown doesn't throw away a half-written request.
+        var lastEscape = 0;
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape' || e.defaultPrevented) return;
+            var now = Date.now();
+            if (now - lastEscape < 1000) { leave(); return; }
+            lastEscape = now;
         });
     }
 })();

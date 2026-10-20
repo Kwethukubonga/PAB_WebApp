@@ -5,6 +5,13 @@
     var openMenuLabel = s.Pick("Open menu", "Vula imenyu", "Maak kieslys oop");
     var skipLabel = s.Pick("Skip to content", "Tsibela kumxholo", "Spring na inhoud");
     var aboutLabel = s.Pick("About Us", "Ngathi", "Oor Ons");
+    // Staff pages don't need it, and their own sign-out should be the way out there.
+    var showQuickExit = ViewData["HideQuickExit"] as bool? != true;
+    var quickExitLabel = s.Pick("Leave this site", "Phuma kule sayithi", "Verlaat hierdie webwerf");
+    var quickExitHint = s.Pick(
+        "Leaves straight away for a weather page. You can also press Esc twice.",
+        "Ihamba ngoko nangoko iye kwiphepha lemozulu. Ungacofa kwakhona u-Esc kabini.",
+        "Gaan dadelik na 'n weerblad. Jy kan ook Esc twee keer druk.");
     var langOptions = new[]
     {
         ("en", "English"),
@@ -25,6 +32,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] · Philisa Abafazi Bethu</title>
     <meta name="description" content="Philisa Abafazi Bethu: free, confidential community support in Cape Town. Powered by Philisa Abafazi Bethu Women Centre SA." />
+    @if (ViewData["NoIndex"] as bool? == true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
 
     <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
     <link rel="icon" type="image/png" href="~/img/brand/logo.png" />
@@ -182,8 +193,21 @@
     @RenderBody()
 </main>
 
+@if (showQuickExit)
+{
+    <a href="https://www.google.com/search?q=weather+cape+town" data-quick-exit rel="noreferrer"
+       title="@quickExitHint"
+       class="fixed bottom-4 right-4 z-[60] inline-flex items-center gap-2 min-h-[44px] bg-stone-900 hover:bg-black text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/>
+        </svg>
+        @quickExitLabel
+        <span class="sr-only">. @quickExitHint</span>
+    </a>
+}
+
 <footer class="bg-purple-950 text-purple-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-24">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2.5 mb-4">
@@ -216,7 +240,7 @@
         </div>
 
         <div class="mt-12 pt-6 border-t border-purple-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-purple-400">
-            <p>&copy; @DateTime.Now.Year Philisa Abafazi Bethu Women Centre SA. NPO 123-456.</p>
+            <p>&copy; @DateTime.Now.Year Philisa Abafazi Bethu Women Centre SA.</p>
         </div>
     </div>
 </footer>
