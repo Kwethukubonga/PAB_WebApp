@@ -146,3 +146,17 @@ label:has(input[type="radio"]:checked)
     color: #6B21A8;
 
 }
+/*
+    Spam trap: moved off screen rather than hidden, because some bots skip fields
+    with display:none. People never see or tab to it.
+*/
+.hp-field
+{
+
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+
+}

@@ -5,14 +5,37 @@
     var f = s.Form;
     ViewData["Title"] = f.Title;
 
-    const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-400 transition-colors";
+    const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-500 transition-colors";
+    const string inputErrorCls = "w-full border-2 border-red-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-500 transition-colors";
     const string labelCls = "block text-sm font-medium text-stone-700 mb-1.5";
+    const string errorTextCls = "mt-1.5 text-sm font-medium text-red-700";
+    const string choiceCls = "flex items-center gap-3 border border-stone-200 text-stone-700 hover:border-stone-300 has-[:checked]:border-purple-700 has-[:checked]:bg-purple-50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-purple-500 rounded-xl px-4 cursor-pointer transition-all text-sm";
+
+    string? Err(string field) => Model.ErrorFor(field);
+    string Cls(string field) => Err(field) is null ? inputCls : inputErrorCls;
+    string? Invalid(string field) => Err(field) is null ? null : "true";
+    string? Described(string field, string id) => Err(field) is null ? null : id + "-error";
+
+    // After a failed submit, open the first step that has a problem in it.
+    var stepFields = new[]
+    {
+        new[] { "FirstName", "Surname", "Phone", "Email", "Area", "ContactMethod" },
+        new[] { "SupportType", "Situation", "Urgent" },
+        new[] { "Extra", "Declaration" }
+    };
+    var startStep = 1;
+    for (var i = 0; i < stepFields.Length; i++)
+    {
+        if (stepFields[i].Any(field => Err(field) != null)) { startStep = i + 1; break; }
+    }
 
     var stepLabels = new[] { f.Step1Label, f.Step2Label, f.Step3Label };
 
     var progressLabel = s.Pick("Form progress", "Inkqubela yefomu", "Vorm vordering");
     var yesLabel = s.Pick("Yes", "Ewe", "Ja");
     var noLabel = s.Pick("No", "Hayi", "Nee");
+    var sendingLabel = s.Pick("Sending…", "Iyathunyelwa…", "Word gestuur…");
+    var stepOfLabel = s.Pick("Step {0} of {1}", "Inyathelo {0} kwa-{1}", "Stap {0} van {1}");
 
     var contactMethods = new[]
     {
@@ -44,7 +67,7 @@
         {
             <li class="flex items-center gap-2 flex-1 last:flex-none">
                 <span data-step-marker class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all bg-stone-200 text-stone-500">@(i + 1)</span>
-                <span data-step-label class="text-xs font-medium hidden sm:block flex-shrink-0 text-stone-400">@stepLabels[i]</span>
+                <span data-step-label class="text-xs font-medium hidden sm:block flex-shrink-0 text-stone-500">@stepLabels[i]</span>
                 @if (i < stepLabels.Length - 1)
                 {
                     <span data-step-bar class="flex-1 h-0.5 bg-stone-200"></span>
@@ -53,90 +76,156 @@
         }
     </ol>
 
+    @if (Model.FormError is not null)
+    {
+        <div class="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-6" role="alert">
+            <p class="text-red-800 text-sm font-semibold">@Model.FormError</p>
+        </div>
+    }
+
     <form method="post" data-step-form
+          data-start-step="@startStep"
           data-yes-label="@yesLabel"
-          data-no-label="@noLabel">
+          data-no-label="@noLabel"
+          data-step-of-label="@stepOfLabel">
+
+        <!-- Announces the current step to screen readers when it changes. -->
+        <p data-step-status class="sr-only" aria-live="polite"></p>
+
+        <!-- Only bots fill this in. People never see it. -->
+        <div class="hp-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="Website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
         <div class="bg-white rounded-2xl border border-stone-100 shadow-sm p-8">
 
             <!-- Step 1 — About you -->
             <div data-step="1">
-                <h2 class="text-xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@f.Step1Label</h2>
+                <h2 tabindex="-1" data-step-heading class="text-xl font-bold text-stone-900 mb-6 focus:outline-none" style="font-family: Lora, serif;">@f.Step1Label</h2>
                 <div class="space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="firstName">@f.FirstName *</label>
-                            <input id="firstName" name="FirstName" data-required type="text" class="@inputCls" />
+                            <input id="firstName" name="FirstName" value="@Model.FirstName" data-required required aria-required="true"
+                                   type="text" autocomplete="given-name" maxlength="60" class="@Cls("FirstName")"
+                                   aria-invalid="@Invalid("FirstName")" aria-describedby="@Described("FirstName", "firstName")" />
+                            @if (Err("FirstName") is string firstNameError)
+                            {
+                                <p id="firstName-error" class="@errorTextCls">@firstNameError</p>
+                            }
                         </div>
                         <div>
                             <label class="@labelCls" for="surname">@f.Surname *</label>
-                            <input id="surname" name="Surname" data-required type="text" class="@inputCls" />
+                            <input id="surname" name="Surname" value="@Model.Surname" data-required required aria-required="true"
+                                   type="text" autocomplete="family-name" maxlength="60" class="@Cls("Surname")"
+                                   aria-invalid="@Invalid("Surname")" aria-describedby="@Described("Surname", "surname")" />
+                            @if (Err("Surname") is string surnameError)
+                            {
+                                <p id="surname-error" class="@errorTextCls">@surnameError</p>
+                            }
                         </div>
                     </div>
                     <div>
                         <label class="@labelCls" for="phone">@f.Phone *</label>
-                        <input id="phone" name="Phone" data-required type="tel" class="@inputCls" />
+                        <input id="phone" name="Phone" value="@Model.Phone" data-required required aria-required="true"
+                               type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="082 123 4567" class="@Cls("Phone")"
+                               aria-invalid="@Invalid("Phone")" aria-describedby="@Described("Phone", "phone")" />
+                        @if (Err("Phone") is string phoneError)
+                        {
+                            <p id="phone-error" class="@errorTextCls">@phoneError</p>
+                        }
                     </div>
                     <div>
                         <label class="@labelCls" for="email">@f.Email</label>
-                        <input id="email" name="Email" type="email" class="@inputCls" />
+                        <input id="email" name="Email" value="@Model.Email" type="email" autocomplete="email" maxlength="254" class="@Cls("Email")"
+                               aria-invalid="@Invalid("Email")" aria-describedby="@Described("Email", "email")" />
+                        @if (Err("Email") is string emailError)
+                        {
+                            <p id="email-error" class="@errorTextCls">@emailError</p>
+                        }
                     </div>
                     <div>
                         <label class="@labelCls" for="area">@f.Area *</label>
-                        <input id="area" name="Area" data-required type="text" placeholder="@f.AreaPlaceholder" class="@inputCls" />
+                        <input id="area" name="Area" value="@Model.Area" data-required required aria-required="true"
+                               type="text" autocomplete="address-level2" maxlength="100" placeholder="@f.AreaPlaceholder" class="@Cls("Area")"
+                               aria-invalid="@Invalid("Area")" aria-describedby="@Described("Area", "area")" />
+                        @if (Err("Area") is string areaError)
+                        {
+                            <p id="area-error" class="@errorTextCls">@areaError</p>
+                        }
                     </div>
 
-                    <fieldset>
+                    <fieldset aria-describedby="@Described("ContactMethod", "contactMethod")">
                         <legend class="@labelCls">@f.ContactMethod</legend>
                         <div class="grid grid-cols-2 gap-3 mt-2">
                             @foreach (var (value, label) in contactMethods)
                             {
-                                <label class="flex items-center gap-3 border border-stone-200 text-stone-700 hover:border-stone-300 rounded-xl px-4 py-3 cursor-pointer transition-all text-sm">
-                                    <input type="radio" name="ContactMethod" value="@value" checked="@(value == "phone" ? "checked" : null)" class="accent-purple-700 flex-shrink-0" />
+                                <label class="@choiceCls py-3">
+                                    <input type="radio" name="ContactMethod" value="@value" checked="@(Model.ContactMethod == value)" class="accent-purple-700 flex-shrink-0" />
                                     @label
                                 </label>
                             }
                         </div>
+                        @if (Err("ContactMethod") is string contactMethodError)
+                        {
+                            <p id="contactMethod-error" class="@errorTextCls">@contactMethodError</p>
+                        }
                     </fieldset>
                 </div>
             </div>
 
             <!-- Step 2 — Support needed -->
             <div data-step="2">
-                <h2 class="text-xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@f.Step2Label</h2>
+                <h2 tabindex="-1" data-step-heading class="text-xl font-bold text-stone-900 mb-6 focus:outline-none" style="font-family: Lora, serif;">@f.Step2Label</h2>
                 <div class="space-y-5">
                     <div>
                         <label class="@labelCls" for="supportType">@f.SupportType *</label>
-                        <select id="supportType" name="SupportType" data-required class="@inputCls">
+                        <select id="supportType" name="SupportType" data-required required aria-required="true" class="@Cls("SupportType")"
+                                aria-invalid="@Invalid("SupportType")" aria-describedby="@Described("SupportType", "supportType")">
                             <option value="">@f.SupportTypePlaceholder</option>
                             @foreach (var type in s.SupportTypes)
                             {
-                                <option value="@type">@type</option>
+                                <option value="@type" selected="@(Model.SupportType == type)">@type</option>
                             }
                         </select>
+                        @if (Err("SupportType") is string supportTypeError)
+                        {
+                            <p id="supportType-error" class="@errorTextCls">@supportTypeError</p>
+                        }
                     </div>
 
                     <div>
                         <label class="@labelCls" for="situation">@f.Situation *</label>
-                        <textarea id="situation" name="Situation" data-required rows="7"
+                        <textarea id="situation" name="Situation" data-required required aria-required="true" rows="7" maxlength="3000"
                                   placeholder="@f.SituationPlaceholder"
-                                  class="@inputCls resize-none"></textarea>
+                                  class="@Cls("Situation") resize-none"
+                                  aria-invalid="@Invalid("Situation")" aria-describedby="@Described("Situation", "situation")">@Model.Situation</textarea>
+                        @if (Err("Situation") is string situationError)
+                        {
+                            <p id="situation-error" class="@errorTextCls">@situationError</p>
+                        }
                     </div>
 
-                    <fieldset>
+                    <fieldset aria-describedby="@Described("Urgent", "urgent")">
                         <legend class="@labelCls">@f.Urgent</legend>
                         <div class="space-y-2.5 mt-2">
-                            <label class="flex items-center gap-3 border border-stone-200 text-stone-700 hover:border-stone-300 rounded-xl px-4 py-3.5 cursor-pointer transition-all text-sm">
-                                <input type="radio" name="Urgent" value="yes" class="accent-purple-700 flex-shrink-0" />
+                            <label class="@choiceCls py-3.5">
+                                <input type="radio" name="Urgent" value="yes" checked="@(Model.Urgent == "yes")" class="accent-purple-700 flex-shrink-0" />
                                 @f.UrgentYes
                             </label>
-                            <label class="flex items-center gap-3 border border-stone-200 text-stone-700 hover:border-stone-300 rounded-xl px-4 py-3.5 cursor-pointer transition-all text-sm">
-                                <input type="radio" name="Urgent" value="no" checked class="accent-purple-700 flex-shrink-0" />
+                            <label class="@choiceCls py-3.5">
+                                <input type="radio" name="Urgent" value="no" checked="@(Model.Urgent != "yes")" class="accent-purple-700 flex-shrink-0" />
                                 @f.UrgentNo
                             </label>
                         </div>
+                        @if (Err("Urgent") is string urgentError)
+                        {
+                            <p id="urgent-error" class="@errorTextCls">@urgentError</p>
+                        }
                     </fieldset>
 
-                    <p class="text-xs text-stone-500 leading-relaxed bg-stone-50 border border-stone-100 rounded-xl px-4 py-3">
+                    <p class="text-xs text-stone-600 leading-relaxed bg-stone-50 border border-stone-100 rounded-xl px-4 py-3">
                         @s.Pick("If you are in immediate danger, call 10111 or our after-hours crisis line on",
                                 "Ukuba usengozini ngoku, fowunela u-10111 okanye umgca wethu wongxamiseko ku-",
                                 "As jy in onmiddellike gevaar is, skakel 10111 of ons krisislyn na-ure by")
@@ -147,45 +236,58 @@
 
             <!-- Step 3 — Confirm and submit -->
             <div data-step="3">
-                <h2 class="text-xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@f.Step3Label</h2>
+                <h2 tabindex="-1" data-step-heading class="text-xl font-bold text-stone-900 mb-6 focus:outline-none" style="font-family: Lora, serif;">@f.Step3Label</h2>
                 <div class="space-y-6">
                     <div>
                         <label class="@labelCls" for="extra">@f.ExtraInfo</label>
-                        <textarea id="extra" name="Extra" rows="4"
+                        <textarea id="extra" name="Extra" rows="4" maxlength="2000"
                                   placeholder="@f.ExtraInfoPlaceholder"
-                                  class="@inputCls resize-none"></textarea>
+                                  class="@Cls("Extra") resize-none"
+                                  aria-invalid="@Invalid("Extra")" aria-describedby="@Described("Extra", "extra")">@Model.Extra</textarea>
+                        @if (Err("Extra") is string extraError)
+                        {
+                            <p id="extra-error" class="@errorTextCls">@extraError</p>
+                        }
                     </div>
 
                     <div class="bg-stone-50 border border-stone-100 rounded-xl p-5">
                         <h3 class="text-sm font-semibold text-stone-700 mb-3">@s.Pick("Request Summary", "Isishwankathelo Sesicelo", "Versoekopsomming")</h3>
                         <dl class="space-y-2 text-sm">
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Name", "Igama", "Naam"):</dt>
+                                <dt class="text-stone-600 w-28 flex-shrink-0">@s.Pick("Name", "Igama", "Naam"):</dt>
                                 <dd class="text-stone-800 font-medium" data-summary-for="FullName">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@f.Phone:</dt>
+                                <dt class="text-stone-600 w-28 flex-shrink-0">@f.Phone:</dt>
                                 <dd class="text-stone-800 font-medium" data-summary-for="Phone">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Area", "Indawo", "Area"):</dt>
+                                <dt class="text-stone-600 w-28 flex-shrink-0">@s.Pick("Area", "Indawo", "Area"):</dt>
                                 <dd class="text-stone-800 font-medium" data-summary-for="Area">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Support type", "Uhlobo", "Tipe ondersteuning"):</dt>
+                                <dt class="text-stone-600 w-28 flex-shrink-0">@s.Pick("Support type", "Uhlobo", "Tipe ondersteuning"):</dt>
                                 <dd class="text-stone-800 font-medium" data-summary-for="SupportType">-</dd>
                             </div>
                             <div class="flex gap-3">
-                                <dt class="text-stone-400 w-28 flex-shrink-0">@s.Pick("Urgent", "Ngxama", "Dringend"):</dt>
+                                <dt class="text-stone-600 w-28 flex-shrink-0">@s.Pick("Urgent", "Ngxama", "Dringend"):</dt>
                                 <dd class="text-stone-800 font-medium" data-summary-for="Urgent">-</dd>
                             </div>
                         </dl>
                     </div>
 
-                    <div class="flex items-start gap-3">
-                        <input id="declaration" name="Declaration" value="true" data-required type="checkbox"
-                               class="mt-1 w-4 h-4 rounded accent-purple-700 flex-shrink-0" />
-                        <label for="declaration" class="text-sm text-stone-600 leading-relaxed cursor-pointer">@f.Declaration *</label>
+                    <div>
+                        <div class="flex items-start gap-3">
+                            <input id="declaration" name="Declaration" value="true" data-required required aria-required="true" type="checkbox"
+                                   checked="@Model.Declaration"
+                                   aria-invalid="@Invalid("Declaration")" aria-describedby="@Described("Declaration", "declaration")"
+                                   class="mt-1 w-4 h-4 rounded accent-purple-700 flex-shrink-0" />
+                            <label for="declaration" class="text-sm text-stone-600 leading-relaxed cursor-pointer">@f.Declaration *</label>
+                        </div>
+                        @if (Err("Declaration") is string declarationError)
+                        {
+                            <p id="declaration-error" class="@errorTextCls">@declarationError</p>
+                        }
                     </div>
                 </div>
             </div>
@@ -207,7 +309,8 @@
                 </svg>
             </button>
 
-            <button type="submit" data-step-submit class="bg-purple-700 hover:bg-purple-800 text-white font-bold px-8 py-3 rounded-full transition-colors text-sm">
+            <button type="submit" data-step-submit data-busy-label="@sendingLabel"
+                    class="bg-purple-700 hover:bg-purple-800 disabled:bg-purple-400 disabled:cursor-wait text-white font-bold px-8 py-3 rounded-full transition-colors text-sm inline-flex items-center gap-2">
                 @f.SubmitRequest
             </button>
         </div>

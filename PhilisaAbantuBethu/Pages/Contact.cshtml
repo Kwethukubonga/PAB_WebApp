@@ -5,15 +5,18 @@
     ViewData["Title"] = s.Nav.Contact;
     var sent = bool.TryParse(HttpContext.Request.Query["sent"], out var sentFlag) && sentFlag;
 
-    const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-400";
+    const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-500";
+    const string inputErrorCls = "w-full border-2 border-red-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-500";
     const string labelCls = "block text-sm font-medium text-stone-700 mb-1.5";
+    const string errorTextCls = "mt-1.5 text-sm font-medium text-red-700";
 
-    var subjects = s.Lang switch
-    {
-        "xh" => new[] { "Umbuzo Jikelele", "Ukuba Sisithi Ngobuyisi", "Iminikelo Nemibambano", "Abezindaba", "Enye into" },
-        "af" => new[] { "Algemene Navraag", "Vrywilligerwerk", "Skenkings & Vennootskappe", "Media", "Ander" },
-        _ => new[] { "General Enquiry", "Volunteering", "Donations & Partnerships", "Media", "Other" }
-    };
+    string? Err(string field) => Model.ErrorFor(field);
+    string Cls(string field) => Err(field) is null ? inputCls : inputErrorCls;
+    string? Invalid(string field) => Err(field) is null ? null : "true";
+    string? Described(string field, string id) => Err(field) is null ? null : id + "-error";
+
+    var subjects = PhilisaAbantuBethu.Forms.ContactValidator.SubjectsFor(s.Lang);
+    var sendingLabel = s.Pick("Sending…", "Iyathunyelwa…", "Word gestuur…");
 
     var messagePlaceholder = s.Pick("Write your message here...", "Bhala umyalezo wakho apha...", "Skryf jou boodskap hier...");
 
@@ -56,43 +59,81 @@
                     </p>
                 </div>
 
-                <form method="post" data-contact-form hidden="@sent" class="space-y-5">
+                @if (Model.FormError is not null)
+                {
+                    <div class="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-6" role="alert">
+                        <p class="text-red-800 text-sm font-semibold">@Model.FormError</p>
+                    </div>
+                }
+
+                <form method="post" data-contact-form data-busy-form hidden="@sent" class="space-y-5">
+                    <!-- Only bots fill this in. People never see it. -->
+                    <div class="hp-field" aria-hidden="true">
+                        <label for="c-website">Website</label>
+                        <input id="c-website" name="Website" type="text" tabindex="-1" autocomplete="off" />
+                    </div>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-name">@s.Pick("Full Name", "Igama Eligcweleyo", "Volle Naam") *</label>
-                            <input id="c-name" name="Name" required type="text" class="@inputCls" />
+                            <input id="c-name" name="Name" value="@Model.Name" required aria-required="true" type="text" autocomplete="name" maxlength="100"
+                                   class="@Cls("Name")" aria-invalid="@Invalid("Name")" aria-describedby="@Described("Name", "c-name")" />
+                            @if (Err("Name") is string nameError)
+                            {
+                                <p id="c-name-error" class="@errorTextCls">@nameError</p>
+                            }
                         </div>
                         <div>
                             <label class="@labelCls" for="c-email">@s.Pick("Email Address", "I-imeyili", "E-posadres")</label>
-                            <input id="c-email" name="Email" type="email" class="@inputCls" />
+                            <input id="c-email" name="Email" value="@Model.Email" type="email" autocomplete="email" maxlength="254"
+                                   class="@Cls("Email")" aria-invalid="@Invalid("Email")" aria-describedby="@Described("Email", "c-email")" />
+                            @if (Err("Email") is string emailError)
+                            {
+                                <p id="c-email-error" class="@errorTextCls">@emailError</p>
+                            }
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                            <label class="@labelCls" for="c-phone">@s.Pick("Phone Number", "Inombolo yoMxhentsi", "Foonnommer")</label>
-                            <input id="c-phone" name="Phone" type="tel" class="@inputCls" />
+                            <label class="@labelCls" for="c-phone">@s.Pick("Phone Number", "Inombolo yefowuni", "Foonnommer")</label>
+                            <input id="c-phone" name="Phone" value="@Model.Phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="082 123 4567"
+                                   class="@Cls("Phone")" aria-invalid="@Invalid("Phone")" aria-describedby="@Described("Phone", "c-phone")" />
+                            @if (Err("Phone") is string phoneError)
+                            {
+                                <p id="c-phone-error" class="@errorTextCls">@phoneError</p>
+                            }
                         </div>
                         <div>
                             <label class="@labelCls" for="c-subject">@s.Pick("Subject", "Isihloko", "Onderwerp") *</label>
-                            <select id="c-subject" name="Subject" required class="@inputCls">
+                            <select id="c-subject" name="Subject" required aria-required="true"
+                                    class="@Cls("Subject")" aria-invalid="@Invalid("Subject")" aria-describedby="@Described("Subject", "c-subject")">
                                 <option value="">@s.Pick("Select a subject", "Khetha isihloko", "Kies 'n onderwerp")</option>
                                 @foreach (var subject in subjects)
                                 {
-                                    <option value="@subject">@subject</option>
+                                    <option value="@subject" selected="@(Model.Subject == subject)">@subject</option>
                                 }
                             </select>
+                            @if (Err("Subject") is string subjectError)
+                            {
+                                <p id="c-subject-error" class="@errorTextCls">@subjectError</p>
+                            }
                         </div>
                     </div>
 
                     <div>
                         <label class="@labelCls" for="c-message">@s.Pick("Message", "Umyalezo", "Boodskap") *</label>
-                        <textarea id="c-message" name="Message" required rows="6"
+                        <textarea id="c-message" name="Message" required aria-required="true" rows="6" maxlength="3000"
                                   placeholder="@messagePlaceholder"
-                                  class="@inputCls resize-none"></textarea>
+                                  class="@Cls("Message") resize-none" aria-invalid="@Invalid("Message")" aria-describedby="@Described("Message", "c-message")">@Model.Message</textarea>
+                        @if (Err("Message") is string messageError)
+                        {
+                            <p id="c-message-error" class="@errorTextCls">@messageError</p>
+                        }
                     </div>
 
-                    <button type="submit" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
+                    <button type="submit" data-busy-label="@sendingLabel"
+                            class="bg-purple-700 hover:bg-purple-800 disabled:bg-purple-400 disabled:cursor-wait text-white font-semibold px-8 py-3.5 rounded-full transition-colors inline-flex items-center gap-2">
                         @s.Pick("Send Message", "Thumela Umyalezo", "Stuur Boodskap")
                     </button>
                 </form>
@@ -110,7 +151,7 @@
                                 <div>
                                     <dt class="font-semibold text-stone-800 text-sm">@label</dt>
                                     <dd class="text-stone-700 text-sm">@value</dd>
-                                    <dd class="text-stone-400 text-xs">@sub</dd>
+                                    <dd class="text-stone-500 text-xs">@sub</dd>
                                 </div>
                             </div>
                         }
