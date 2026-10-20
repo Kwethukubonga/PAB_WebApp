@@ -1,4 +1,4 @@
-name: .NET Tests
+name: CI/CD
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Build and test
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +27,58 @@ jobs:
         run: dotnet build PhilisaAbantuBethu.slnx --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test PhilisaAbantuBethu.Tests --no-build --configuration Release --verbosity normal
+        run: >
+          dotnet test PhilisaAbantuBethu.Tests --no-build --configuration Release --verbosity normal
+          --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
+
+      - name: Keep the test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/
+
+      # The same image Railway builds, so a broken Dockerfile is caught before it reaches main.
+      - name: Build the Docker image
+        run: docker build --tag philisa-web:ci .
+
+  deploy:
+    name: Deploy to Railway
+    # Only after the tests pass, and only for main.
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: railway-production
+      cancel-in-progress: false
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      RAILWAY_SERVICE: ${{ secrets.RAILWAY_SERVICE }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://philisa-abafazi-bethu.up.railway.app' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Until the secrets are added the job says what's missing instead of failing the run.
+      - name: Check the Railway secrets are set
+        id: secrets
+        run: |
+          if [ -z "$RAILWAY_TOKEN" ] || [ -z "$RAILWAY_SERVICE" ]; then
+            echo "Deploy skipped: add RAILWAY_TOKEN and RAILWAY_SERVICE under Settings > Secrets and variables > Actions." >> "$GITHUB_STEP_SUMMARY"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install the Railway CLI
+        if: steps.secrets.outputs.ready == 'true'
+        run: npm install --global @railway/cli
+
+      - name: Deploy
+        if: steps.secrets.outputs.ready == 'true'
+        run: railway up --ci --service "$RAILWAY_SERVICE"
+
+      - name: Check the live site is healthy
+        if: steps.secrets.outputs.ready == 'true'
+        run: curl --fail --silent --show-error --retry 10 --retry-delay 15 --retry-all-errors "$SITE_URL/health"

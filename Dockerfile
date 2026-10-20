@@ -10,8 +10,10 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # The SQLite file lives in /data so a Railway Volume mounted there survives redeploys.
-RUN mkdir -p /data
+# The keys that sign staff sessions and form tokens are kept there too.
+RUN mkdir -p /data/keys
 ENV ConnectionStrings__DefaultConnection="Data Source=/data/philisa.db"
+ENV DataProtection__KeysPath="/data/keys"
 
 # Railway assigns the port at runtime through $PORT; listen on all interfaces.
 CMD ["sh", "-c", "ASPNETCORE_URLS=http://0.0.0.0:${PORT:-8080} dotnet PhilisaAbantuBethu.dll"]
