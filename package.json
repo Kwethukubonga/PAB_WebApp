@@ -1,0 +1,16 @@
+{
+  "name": "philisa-abafazi-bethu-web",
+  "private": true,
+  "description": "Build steps for the Help Centre's stylesheet and design tokens.",
+  "scripts": {
+    "tokens": "node tools/tokens/build.js",
+    "css": "tailwindcss -i ./Styles/app.css -o ./PhilisaAbantuBethu/wwwroot/css/app.css --minify",
+    "css:watch": "tailwindcss -i ./Styles/app.css -o ./PhilisaAbantuBethu/wwwroot/css/app.css --watch",
+    "images": "node tools/images/optimise.js",
+    "build": "npm run tokens && npm run css"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5",
+    "tailwindcss": "3.4.17"
+  }
+}

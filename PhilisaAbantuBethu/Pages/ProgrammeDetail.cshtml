@@ -52,12 +52,19 @@
 }
 
 <!-- Hero -->
-<section class="relative h-72 md:h-96 overflow-hidden bg-stone-800">
-    <img src="@prog.ImagePath"
-         alt="@prog.TitleFor(s)"
-         style="object-position: @(prog.HeroFocalX)% @(prog.HeroFocalY)%;"
-         class="absolute inset-0 w-full h-full object-cover opacity-60" />
-    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent"></div>
+<section class="relative h-72 md:h-96 overflow-hidden bg-ink-900">
+    @{
+        // Each programme hero is cropped to its own focal point, so the faces stay in frame.
+        var heroPhoto = new SitePhoto(
+            Src: prog.ImagePath,
+            Alt: prog.TitleFor(s),
+            Class: "absolute inset-0 w-full h-full object-cover opacity-60",
+            Sizes: "100vw",
+            Eager: true,
+            Style: $"object-position: {prog.HeroFocalX}% {prog.HeroFocalY}%;");
+    }
+    <partial name="_Image" model="heroPhoto" />
+    <div class="absolute inset-0 bg-gradient-to-t from-ink-900/80 to-transparent"></div>
     <div class="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
         <a href="/Programmes" class="inline-flex items-center gap-2 text-white/70 hover:text-white text-sm mb-4 transition-colors">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -66,7 +73,7 @@
             @s.Nav.Programmes
         </a>
         <p class="text-xs font-bold uppercase tracking-widest mb-2" style="color: @prog.Accent;">@prog.TaglineFor(s)</p>
-        <h1 class="text-3xl md:text-5xl font-bold text-white" style="font-family: Lora, serif;">@prog.TitleFor(s)</h1>
+        <h1 class="text-3xl md:text-5xl font-bold text-white font-serif">@prog.TitleFor(s)</h1>
     </div>
 </section>
 
@@ -75,12 +82,12 @@
         <div class="lg:col-span-2 space-y-12">
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Overview", "Isishwankathelo", "Oorsig")</h2>
-                <p class="text-stone-600 leading-relaxed">@prog.OverviewFor(s)</p>
+                <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s.Pick("Overview", "Isishwankathelo", "Oorsig")</h2>
+                <p class="text-ink-600 leading-relaxed">@prog.OverviewFor(s)</p>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Objectives", "Iinjongo", "Doelwitte")</h2>
+                <h2 class="text-2xl font-bold text-ink-900 mb-5 font-serif">@s.Pick("Objectives", "Iinjongo", "Doelwitte")</h2>
                 <ul class="space-y-3">
                     @foreach (var obj in prog.ObjectivesFor(s))
                     {
@@ -90,58 +97,58 @@
                                     <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </span>
-                            <span class="text-stone-600 leading-relaxed">@obj</span>
+                            <span class="text-ink-600 leading-relaxed">@obj</span>
                         </li>
                     }
                 </ul>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Activities", "Imisebenzi", "Aktiwiteite")</h2>
+                <h2 class="text-2xl font-bold text-ink-900 mb-5 font-serif">@s.Pick("Activities", "Imisebenzi", "Aktiwiteite")</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     @foreach (var act in prog.ActivitiesFor(s))
                     {
-                        <div class="flex items-start gap-3 bg-stone-50 rounded-xl px-4 py-3.5 border border-stone-100">
-                            <span class="text-purple-500 mt-0.5 flex-shrink-0" aria-hidden="true">&#9670;</span>
-                            <span class="text-stone-600 text-sm leading-relaxed">@act</span>
+                        <div class="flex items-start gap-3 bg-ink-50 rounded-xl px-4 py-3.5 border border-ink-100">
+                            <span class="text-brand-500 mt-0.5 flex-shrink-0" aria-hidden="true">&#9670;</span>
+                            <span class="text-ink-600 text-sm leading-relaxed">@act</span>
                         </div>
                     }
                 </div>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">@s.Pick("Gallery", "Igaleriya", "Galery")</h2>
+                <h2 class="text-2xl font-bold text-ink-900 mb-5 font-serif">@s.Pick("Gallery", "Igaleriya", "Galery")</h2>
                 <div class="columns-2 gap-4">
                     @foreach (var img in prog.GalleryImages)
                     {
                         <button type="button" data-gallery-trigger data-full-src="@img"
-                                class="block w-full mb-4 rounded-xl overflow-hidden bg-stone-200 cursor-zoom-in break-inside-avoid">
-                            <img src="@img" alt="" aria-hidden="true" class="w-full h-auto block hover:scale-105 transition-transform duration-500" />
+                                class="block w-full mb-4 rounded-xl overflow-hidden bg-ink-200 cursor-zoom-in break-inside-avoid">
+                            <partial name="_Image" model='new SitePhoto( Src: img, Class: "w-full h-auto block hover:scale-105 transition-transform duration-500", Sizes: "(min-width: 768px) 33vw, 50vw", Decorative: true)' />
                         </button>
                     }
                 </div>
             </div>
 
             <div>
-                <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Testimonials", "Testimonials", "Getuienisse")</h2>
-                <div class="relative bg-purple-50 border-l-4 border-purple-600 rounded-r-xl p-6 sm:p-8" data-testimonial-carousel>
+                <h2 class="text-2xl font-bold text-ink-900 mb-6 font-serif">@s.Pick("Testimonials", "Testimonials", "Getuienisse")</h2>
+                <div class="relative bg-brand-50 border-l-4 border-brand-700 rounded-r-xl p-6 sm:p-8" data-testimonial-carousel>
                     @for (var i = 0; i < testimonials.Length; i++)
                     {
                         var t = testimonials[i];
                         <div data-testimonial-slide class="@(i == 0 ? "" : "hidden")">
                             <div class="flex flex-col sm:flex-row gap-5 items-start">
-                                <img src="@t.Image" alt="@t.Name" class="w-20 h-20 rounded-full object-cover flex-shrink-0" />
+                                <partial name="_Image" model='new SitePhoto( Src: t.Image, Alt: t.Name, Class: "w-20 h-20 rounded-full object-cover flex-shrink-0", Sizes: "80px")' />
                                 <div>
-                                    <p class="text-purple-600 text-3xl leading-none mb-1" aria-hidden="true">&ldquo;</p>
-                                    <p class="text-stone-700 italic leading-relaxed mb-4">@t.Quote</p>
-                                    <cite class="text-purple-700 font-semibold text-sm not-italic">@t.Name | @t.Country</cite>
+                                    <p class="text-brand-700 text-3xl leading-none mb-1" aria-hidden="true">&ldquo;</p>
+                                    <p class="text-ink-700 italic leading-relaxed mb-4">@t.Quote</p>
+                                    <cite class="text-brand-700 font-semibold text-sm not-italic">@t.Name | @t.Country</cite>
                                 </div>
                             </div>
                         </div>
                     }
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-purple-100">
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-brand-100">
                         <button type="button" data-testimonial-prev aria-label="@s.Pick("Previous", "Okwangaphambili", "Vorige")"
-                                class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-700 hover:bg-purple-100 transition-colors flex-shrink-0">
+                                class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-brand-700 hover:bg-brand-100 transition-colors flex-shrink-0">
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -149,11 +156,11 @@
                         <div class="flex items-center gap-1.5" data-testimonial-dots>
                             @for (var i = 0; i < testimonials.Length; i++)
                             {
-                                <span data-testimonial-dot class="w-1.5 h-1.5 rounded-full @(i == 0 ? "bg-purple-600" : "bg-purple-200")"></span>
+                                <span data-testimonial-dot class="w-1.5 h-1.5 rounded-full @(i == 0 ? "bg-brand-700" : "bg-brand-100")"></span>
                             }
                         </div>
                         <button type="button" data-testimonial-next aria-label="@s.Pick("Next", "Okulandelayo", "Volgende")"
-                                class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-purple-700 hover:bg-purple-100 transition-colors flex-shrink-0">
+                                class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-brand-700 hover:bg-brand-100 transition-colors flex-shrink-0">
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -168,8 +175,8 @@
             @if (!string.IsNullOrEmpty(prog.EmergencyPhone) || !string.IsNullOrEmpty(prog.EmergencyAddress))
             {
                 <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
-                    <h2 class="font-bold text-red-900 mb-3 flex items-center gap-2" style="font-family: Lora, serif;">
-                        <span aria-hidden="true">🚨</span>
+                    <h2 class="font-bold text-red-900 mb-3 flex items-center gap-2 font-serif">
+                        <span class="flex-shrink-0"><partial name="_Icon" model="@("emergency_home")" /></span>
                         @s.Pick("Emergency Contact", "Uqhagamshelwano Lwongxamiseko", "Noodkontak")
                     </h2>
                     @if (!string.IsNullOrEmpty(prog.EmergencyAddress))
@@ -183,18 +190,18 @@
                     }
                 </div>
             }
-            <div class="bg-stone-50 rounded-2xl p-6 border border-stone-100 sticky top-24">
-                <h2 class="font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?", "Benodig Jy Hierdie Ondersteuning?")</h2>
-                <p class="text-stone-500 text-sm leading-relaxed mb-5">
+            <div class="bg-ink-50 rounded-2xl p-6 border border-ink-100 sticky top-24">
+                <h2 class="font-bold text-ink-900 mb-4 font-serif">@s.Pick("Need This Support?", "Ufuna Le Nkxaso?", "Benodig Jy Hierdie Ondersteuning?")</h2>
+                <p class="text-ink-500 text-sm leading-relaxed mb-5">
                     @s.Pick("Get in touch and our team will be in touch to guide you.",
                             "Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.",
                             "Kontak ons en ons span sal met jou skakel om jou te lei.")
                 </p>
                 <div class="space-y-3">
-                    <a href="/Contact" class="block text-center w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 rounded-xl transition-colors text-sm">@s.Home.ContactUs</a>
-                    <a href="/Programmes" class="block text-center w-full bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-3 rounded-xl transition-colors text-sm">@s.Nav.Programmes</a>
+                    <a href="/Contact" class="block text-center w-full bg-brand-700 hover:bg-brand-800 text-white font-semibold py-3 rounded-xl transition-colors text-sm">@s.Home.ContactUs</a>
+                    <a href="/Programmes" class="block text-center w-full bg-ink-100 hover:bg-ink-200 text-ink-700 font-semibold py-3 rounded-xl transition-colors text-sm">@s.Nav.Programmes</a>
                 </div>
-                <p class="mt-5 pt-5 border-t border-stone-200 text-xs text-stone-400">
+                <p class="mt-5 pt-5 border-t border-ink-200 text-xs text-ink-500">
                     @s.Pick("Free for qualifying community members.", "Mahhala kumalungu oluntu afanelekileyo.", "Gratis vir kwalifiserende gemeenskapslede.")
                 </p>
             </div>
@@ -203,7 +210,7 @@
 </div>
 
 <!-- Gallery lightbox -->
-<div data-gallery-lightbox hidden class="fixed inset-0 z-50 bg-stone-900/90 flex items-center justify-center p-4 sm:p-8">
+<div data-gallery-lightbox hidden class="fixed inset-0 z-50 bg-ink-900/90 flex items-center justify-center p-4 sm:p-8">
     <button type="button" data-gallery-close class="absolute top-4 right-4 text-white/80 hover:text-white p-2" aria-label="@s.Pick("Close", "Vala", "Maak toe")">
         <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/>
