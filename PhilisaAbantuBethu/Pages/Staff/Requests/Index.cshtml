@@ -1,0 +1,78 @@
+@page
+@model PhilisaAbantuBethu.Pages.Staff.Requests.IndexModel
+@using PhilisaAbantuBethu.Models
+@using PhilisaAbantuBethu.Staff
+@{
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s.Pick("Support requests", "Izicelo zenkxaso", "Ondersteuningsversoeke");
+    var now = DateTime.UtcNow;
+}
+
+<partial name="_StaffBar" />
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <h1 class="text-3xl font-bold text-ink-900 mb-6 font-serif">@ViewData["Title"]</h1>
+
+    <nav class="flex flex-wrap gap-2 mb-4" aria-label="@s.Pick("Request status", "Imeko yesicelo", "Versoekstatus")">
+        @foreach (var status in SupportRequestStatus.All)
+        {
+            var selected = Model.Status == status;
+            <a asp-page="./Index" asp-route-status="@status" asp-route-sort="@Model.Sort" aria-current="@(selected ? "page" : null)"
+               class="inline-flex items-center gap-2 min-h-target px-4 rounded-full text-sm font-semibold border transition-colors @(selected ? "bg-brand-700 border-brand-700 text-white" : "bg-white border-ink-300 text-ink-700 hover:border-brand-700")">
+                @StaffText.StatusLabel(s, status)
+                <span class="rounded-full px-2 py-0.5 text-xs @(selected ? "bg-white/20" : "bg-ink-100")">@Model.Counts.GetValueOrDefault(status)</span>
+            </a>
+        }
+    </nav>
+
+    @* Longest wait first by default, which is the order to work a queue in; the other way round
+       answers "what has just come in". Urgent stays on top either way (W12). *@
+    <div class="flex items-center gap-2 mb-8 text-sm">
+        <span class="text-ink-600">@s.Pick("Show", "Bonisa", "Wys")</span>
+        @foreach (var (sort, label) in new[]
+        {
+            (IndexModel.OldestFirst, s.Pick("Longest waiting first", "Elinde ixesha elide kuqala", "Langste wag eerste")),
+            (IndexModel.NewestFirst, s.Pick("Newest first", "Ezitsha kuqala", "Nuutste eerste"))
+        })
+        {
+            var on = Model.Sort == sort;
+            <a asp-page="./Index" asp-route-status="@Model.Status" asp-route-sort="@sort"
+               aria-current="@(on ? "true" : null)"
+               class="inline-flex items-center min-h-target px-3 rounded-full font-medium transition-colors @(on ? "bg-ink-100 text-ink-900" : "text-ink-600 hover:text-brand-700")">
+                @label
+            </a>
+        }
+    </div>
+
+    @if (Model.Requests.Count == 0)
+    {
+        <div class="bg-ink-50 border border-ink-200 rounded-2xl px-6 py-10 text-center">
+            <p class="text-ink-700 font-medium">
+                @s.Pick("Nothing here right now.", "Akukho nto apha okwangoku.", "Niks hier op die oomblik nie.")
+            </p>
+        </div>
+    }
+    else
+    {
+        <ul class="space-y-3">
+            @foreach (var request in Model.Requests)
+            {
+                <li>
+                    <a asp-page="./Details" asp-route-id="@request.Id"
+                       class="block bg-white border @(request.IsUrgent ? "border-status-urgent/40" : "border-ink-200") rounded-2xl px-5 py-4 hover:border-brand-700 transition-colors">
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <span class="font-mono text-sm font-semibold text-ink-900">@request.Reference</span>
+                            @if (request.IsUrgent)
+                            {
+                                <span class="pill-urgent">@s.Pick("Urgent", "Ingxamisekile", "Dringend")</span>
+                            }
+                            <span class="ml-auto text-xs text-ink-600" title="@StaffText.LocalTime(request.SubmittedAt)">@StaffText.Ago(s, request.SubmittedAt, now)</span>
+                        </div>
+                        <p class="mt-1.5 text-ink-900 font-semibold">@request.SupportType</p>
+                        <p class="text-sm text-ink-600">@request.Area · @StaffText.ContactMethodLabel(s, request.ContactMethod)</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</div>
