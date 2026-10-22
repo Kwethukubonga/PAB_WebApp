@@ -41,68 +41,69 @@
     <link rel="icon" type="image/png" href="~/img/brand/logo.png" />
     <link rel="apple-touch-icon" href="~/img/brand/logo.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@@0,400;0,600;0,700;1,400&family=Inter:wght@@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="manifest" href="~/site.webmanifest" />
+    <meta name="theme-color" content="#3B0764" />
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        serif: ['Lora', 'Georgia', 'serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="stylesheet" href="~/css/site.css" />
+    @* Served from this site rather than Google: faster on expensive data, and the pages someone
+       reads here are the fact that they are looking for help (H3, POPIA). Plain paths, not ~/:
+       the stylesheet asks for these by the same name, and a fingerprinted preload would be a
+       second URL for the same file, so each font came down twice. *@
+    <link rel="preload" href="/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    @* One built stylesheet with only the classes the pages use, in place of the Tailwind CDN,
+       which compiled the whole framework in the visitor's browser on every page load (H1). *@
+    <link rel="stylesheet" href="~/css/app.css" asp-append-version="true" />
     @await RenderSectionAsync("Head", required: false)
 </head>
-<body class="font-sans antialiased text-stone-900 bg-white">
+<body class="font-sans antialiased text-ink-900 bg-white">
 
 <a class="skip-link" href="#content">@skipLabel</a>
 
-<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-stone-100">
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-ink-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-[68px]">
 
             <a href="/" class="flex items-center gap-2.5">
-                <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" class="w-9 h-9 rounded-full flex-shrink-0" />
+                <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" width="36" height="36" class="w-9 h-9 rounded-full flex-shrink-0" />
                 <span class="leading-tight">
-                    <span class="block text-stone-900 font-semibold text-sm" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
-                    <span class="block text-stone-400 text-xs">Women Centre SA</span>
+                    <span class="block text-ink-900 font-semibold text-sm font-serif">Philisa Abafazi Bethu</span>
+                    @* Was stone-400, which measured 2.5:1 on white. ink-500 is 4.8:1 (F1). *@
+                    <span class="block text-ink-500 text-xs">Women Centre SA</span>
                 </span>
             </a>
 
             <nav class="hidden lg:flex items-center gap-7" aria-label="@s.Pick("Main", "Ephambili", "Hoof")">
-                <a href="/" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Home</a>
-                <a href="/About" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@aboutLabel</a>
-                <a href="/Programmes" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Programmes</a>
-                <a href="/Resources" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Resources</a>
-                <a href="/Contact" class="text-sm font-medium text-stone-600 hover:text-purple-700 transition-colors">@s.Nav.Contact</a>
+                <a href="/" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@s.Nav.Home</a>
+                <a href="/About" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@aboutLabel</a>
+                <a href="/Programmes" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@s.Nav.Programmes</a>
+                <a href="/Resources" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@s.Nav.Resources</a>
+                <a href="/Contact" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@s.Nav.Contact</a>
             </nav>
 
             <div class="hidden lg:flex items-center gap-4">
-                <div class="flex items-center border border-stone-200 rounded-full p-0.5 text-sm font-medium">
+                @* Switching language is how an isiXhosa or Afrikaans speaker reads the site at
+                   all, so these are full-size targets rather than the 28px they were (F5). *@
+                <div class="flex items-center border border-ink-200 rounded-full p-0.5 text-sm font-medium" role="group"
+                     aria-label="@s.Pick("Language", "Ulwimi", "Taal")">
                     @foreach (var (code, label) in langOptions)
                     {
                         <a href="@Context.LangUrl(code)" lang="@code"
-                           class="@(lang == code ? "bg-purple-700 text-white" : "text-stone-500 hover:text-purple-700") px-3 py-1 rounded-full transition-colors">
+                           aria-current="@(lang == code ? "true" : null)"
+                           class="@(lang == code ? "bg-brand-700 text-white" : "text-ink-600 hover:text-brand-700") inline-flex items-center min-h-target px-3.5 rounded-full transition-colors">
                             @label
                         </a>
                     }
                 </div>
-                <a href="/RequestSupport" class="bg-purple-700 hover:bg-purple-800 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+                <a href="/RequestSupport" class="btn-primary text-sm">
                     @s.Nav.RequestSupport
                 </a>
                 <div class="flex items-center gap-1">
                     @foreach (var (name, url) in socialLinks)
                     {
+                        @* 32px before, which is under the 44px minimum (F5). *@
                         <a href="@url" target="_blank" rel="noopener noreferrer" aria-label="@name"
-                           class="w-8 h-8 flex items-center justify-center rounded-full text-stone-400 hover:text-purple-700 hover:bg-stone-50 transition-colors">
+                           class="w-11 h-11 flex items-center justify-center rounded-full text-ink-500 hover:text-brand-700 hover:bg-ink-50 transition-colors">
                             @if (name == "Instagram")
                             {
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -130,7 +131,7 @@
             </div>
 
             <button type="button" data-nav-toggle
-                    class="lg:hidden w-10 h-10 -mr-2 flex items-center justify-center text-stone-700 rounded-lg hover:bg-stone-100 transition-colors"
+                    class="lg:hidden w-11 h-11 -mr-2 flex items-center justify-center text-ink-700 rounded-lg hover:bg-ink-100 transition-colors"
                     aria-controls="mobile-nav" aria-expanded="false" aria-label="@openMenuLabel">
                 <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/>
@@ -139,28 +140,29 @@
         </div>
     </div>
 
-    <div id="mobile-nav" hidden class="lg:hidden border-t border-stone-100 bg-white">
+    <div id="mobile-nav" hidden class="lg:hidden border-t border-ink-100 bg-white">
         <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="@s.Pick("Mobile", "Kwifowuni", "Mobiel")">
-            <a href="/" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Home</a>
-            <a href="/About" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@aboutLabel</a>
-            <a href="/Programmes" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Programmes</a>
-            <a href="/Resources" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Resources</a>
-            <a href="/Contact" class="px-3 py-2.5 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50">@s.Nav.Contact</a>
+            <a href="/" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@s.Nav.Home</a>
+            <a href="/About" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@aboutLabel</a>
+            <a href="/Programmes" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@s.Nav.Programmes</a>
+            <a href="/Resources" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@s.Nav.Resources</a>
+            <a href="/Contact" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@s.Nav.Contact</a>
             <div class="flex items-center gap-2 px-3 py-2.5">
                 @foreach (var (code, label) in langOptions)
                 {
                     <a href="@Context.LangUrl(code)" lang="@code"
-                       class="@(lang == code ? "bg-purple-700 text-white" : "bg-stone-100 text-stone-500") text-xs font-medium px-3 py-1.5 rounded-full transition-colors">
+                       aria-current="@(lang == code ? "true" : null)"
+                       class="@(lang == code ? "bg-brand-700 text-white" : "bg-ink-100 text-ink-700") inline-flex items-center min-h-target text-xs font-medium px-4 rounded-full transition-colors">
                         @label
                     </a>
                 }
             </div>
-            <a href="/RequestSupport" class="mt-2 bg-purple-700 text-white text-sm font-semibold px-5 py-3 rounded-full text-center">@s.Nav.RequestSupport</a>
+            <a href="/RequestSupport" class="btn-primary mt-2 w-full text-sm">@s.Nav.RequestSupport</a>
             <div class="flex items-center justify-center gap-2 mt-3">
                 @foreach (var (name, url) in socialLinks)
                 {
                     <a href="@url" target="_blank" rel="noopener noreferrer" aria-label="@name"
-                       class="w-9 h-9 flex items-center justify-center rounded-full bg-stone-100 text-stone-500 hover:text-purple-700 transition-colors">
+                       class="w-11 h-11 flex items-center justify-center rounded-full bg-ink-100 text-ink-700 hover:text-brand-700 transition-colors">
                         @if (name == "Instagram")
                         {
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -197,7 +199,7 @@
 {
     <a href="https://www.google.com/search?q=weather+cape+town" data-quick-exit rel="noreferrer"
        title="@quickExitHint"
-       class="fixed bottom-4 right-4 z-[60] inline-flex items-center gap-2 min-h-[44px] bg-stone-900 hover:bg-black text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
+       class="fixed bottom-4 right-4 z-[60] inline-flex items-center gap-2 min-h-[44px] bg-ink-900 hover:bg-black text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/>
         </svg>
@@ -206,20 +208,20 @@
     </a>
 }
 
-<footer class="bg-purple-950 text-purple-200">
+<footer class="bg-brand-900 text-brand-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-24">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div class="md:col-span-2">
                 <div class="flex items-center gap-2.5 mb-4">
-                    <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" class="w-9 h-9 rounded-full bg-white/15" />
-                    <span class="text-white font-semibold" style="font-family: Lora, serif;">Philisa Abafazi Bethu</span>
+                    <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" width="36" height="36" loading="lazy" decoding="async" class="w-9 h-9 rounded-full bg-white/15" />
+                    <span class="text-white font-semibold font-serif">Philisa Abafazi Bethu</span>
                 </div>
                 <p class="text-sm leading-relaxed max-w-md">@s.Home.ServiceNote</p>
-                <p class="text-purple-400 text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s.Pick("Western Cape", "Ntshona Koloni", "Wes-Kaap")</p>
+                <p class="text-on-brand-muted text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s.Pick("Western Cape", "Ntshona Koloni", "Wes-Kaap")</p>
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Explore", "Jonga", "Verken")</h2>
+                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s.Pick("Explore", "Jonga", "Verken")</h2>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="/About" class="hover:text-white transition-colors">@aboutLabel</a></li>
                     <li><a href="/Programmes" class="hover:text-white transition-colors">@s.Nav.Programmes</a></li>
@@ -229,17 +231,17 @@
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4" style="font-family: Lora, serif;">@s.Pick("Get help now", "Fumana uncedo ngoku", "Kry nou hulp")</h2>
+                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s.Pick("Get help now", "Fumana uncedo ngoku", "Kry nou hulp")</h2>
                 <ul class="space-y-2.5 text-sm">
                     <li>@s.Pick("Office", "Ihhovisi", "Kantoor"): <a href="tel:+27215650668" class="hover:text-white">+27 (0)21 565 0668</a></li>
                     <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"): <a href="tel:+27817469889" class="text-amber-300 font-semibold hover:text-amber-200">+27 (0)81 746 9889</a></li>
                     <li>@s.Pick("Email", "I-imeyili", "E-pos"): <a href="mailto:admin@@philisaabafazi.org" class="hover:text-white">admin@@philisaabafazi.org</a></li>
-                    <li class="pt-2 text-purple-400 text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV", "Hulplyn vir gender-gebaseerde geweld"): 0800 428 428 (24/7)</li>
+                    <li class="pt-2 text-on-brand-muted text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV", "Hulplyn vir gender-gebaseerde geweld"): 0800 428 428 (24/7)</li>
                 </ul>
             </div>
         </div>
 
-        <div class="mt-12 pt-6 border-t border-purple-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-purple-400">
+        <div class="mt-12 pt-6 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-brand-muted">
             <p>&copy; @DateTime.Now.Year Philisa Abafazi Bethu Women Centre SA.</p>
         </div>
     </div>

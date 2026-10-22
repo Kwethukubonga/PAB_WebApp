@@ -46,4 +46,15 @@ public static class StaffText
         var d = (int)span.TotalDays;
         return s.Pick(d == 1 ? "1 day ago" : $"{d} days ago", $"iintsuku ezingu-{d} ezidlulileyo", d == 1 ? "1 dag gelede" : $"{d} dae gelede");
     }
+
+    /// <summary>
+    /// The pill class for a status. One colour per status, from the shared tokens, so a request
+    /// looks the same in the list, on its own page and in the Android app (W12, E1).
+    /// </summary>
+    public static string StatusPill(string status) => status switch
+    {
+        SupportRequestStatus.New => "pill-new",
+        SupportRequestStatus.InProgress => "pill-working",
+        _ => "pill-closed"
+    };
 }

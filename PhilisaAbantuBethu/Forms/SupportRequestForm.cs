@@ -31,6 +31,9 @@ public static class SupportRequestValidator
     public const int SituationMax = 3000;
     public const int ExtraMax = 2000;
 
+    /// <summary>What staff may write against a request on the staff pages.</summary>
+    public const int StaffNotesMax = 2000;
+
     public static readonly string[] ContactMethods = { "phone", "whatsapp", "email", "visit" };
     public static readonly string[] UrgentValues = { "yes", "no" };
 

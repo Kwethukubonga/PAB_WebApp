@@ -6,6 +6,10 @@ using PhilisaAbantuBethu.Services;
 
 namespace PhilisaAbantuBethu.Pages;
 
+// The form's longest field is capped at 3000 characters, so the whole post fits comfortably in
+// 64KB. Kestrel's default 30MB would otherwise let someone force a 30MB allocation per post, and
+// with the rate limit only 5 posts a window, that is a cheap way to lean on the server's memory.
+[RequestSizeLimit(64 * 1024)]
 public class RequestSupportModel : PageModel
 {
 
@@ -73,7 +77,9 @@ public class RequestSupportModel : PageModel
 
         var reference = await _requests.SubmitAsync(input, HttpContext.RequestAborted);
 
-        return RedirectToPage("/Confirmation", new { reference });
+        // "by" lets the confirmation page say back how PAB will reach them (G6). It is the
+        // choice they just made, not anything identifying.
+        return RedirectToPage("/Confirmation", new { reference, by = ContactMethod });
 
     }
 

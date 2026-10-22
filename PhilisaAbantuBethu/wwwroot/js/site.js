@@ -93,8 +93,8 @@
                 else { slide.setAttribute('hidden', ''); slide.classList.add('hidden'); }
             });
             dots.forEach(function (dot, i) {
-                dot.classList.toggle('bg-purple-600', i === current);
-                dot.classList.toggle('bg-purple-200', i !== current);
+                dot.classList.toggle('bg-brand-700', i === current);
+                dot.classList.toggle('bg-brand-100', i !== current);
             });
         };
 
@@ -157,4 +157,91 @@
             lastEscape = now;
         });
     }
+})();
+
+/* ---------------------------------------------------------------
+   Keeping the emergency numbers reachable with no data (W11).
+
+   The worker is deliberately narrow about what it keeps (see sw.js):
+   public phone numbers, and nothing anybody typed. Because a saved
+   page is a page somebody else with the phone could open, the
+   Resources FAQ carries a button to clear it again, which is wired
+   up here.
+--------------------------------------------------------------- */
+(function () {
+    'use strict';
+
+    if (!('serviceWorker' in navigator)) return;
+
+    var forgetButton = document.querySelector('[data-forget-site]');
+    var forgetDone = document.querySelector('[data-forget-done]');
+    var offlineReady = document.querySelector('[data-offline-ready]');
+
+    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        if (offlineReady) offlineReady.removeAttribute('hidden');
+        if (forgetButton) forgetButton.removeAttribute('hidden');
+
+        if (forgetButton) {
+            forgetButton.addEventListener('click', function () {
+                var worker = registration.active;
+                if (worker) worker.postMessage('forget');
+                // Clear it from this page too, in case the worker has already gone.
+                if (window.caches) {
+                    caches.keys().then(function (names) {
+                        names.forEach(function (name) { caches.delete(name); });
+                    });
+                }
+                forgetButton.setAttribute('hidden', '');
+                if (forgetDone) forgetDone.removeAttribute('hidden');
+            });
+        }
+    }).catch(function () {
+        // No offline copy. Everything still works with data, so there is nothing to say.
+    });
+})();
+
+/* ---------------------------------------------------------------
+   Copying the reference number off the confirmation page (G6).
+
+   Six characters read off a screen and written down is easy to get
+   wrong, and the phone may need to go away quickly. Falls back to
+   selecting the text where the clipboard is not allowed.
+--------------------------------------------------------------- */
+(function () {
+    'use strict';
+
+    var button = document.querySelector('[data-copy-reference]');
+    if (!button) return;
+
+    var label = button.querySelector('[data-copy-label]');
+    var original = label ? label.textContent : '';
+
+    function done() {
+        if (!label) return;
+        label.textContent = button.dataset.copiedLabel || 'Copied';
+        window.setTimeout(function () { label.textContent = original; }, 2500);
+    }
+
+    button.addEventListener('click', function () {
+        var reference = button.dataset.reference || '';
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(reference).then(done, fallback);
+        } else {
+            fallback();
+        }
+
+        function fallback() {
+            // An off-screen field is the only way to copy without the clipboard API.
+            var field = document.createElement('textarea');
+            field.value = reference;
+            field.setAttribute('readonly', '');
+            field.style.position = 'absolute';
+            field.style.left = '-9999px';
+            document.body.appendChild(field);
+            field.select();
+            try { document.execCommand('copy'); done(); } catch (e) { /* Nothing more to try. */ }
+            document.body.removeChild(field);
+        }
+    });
 })();

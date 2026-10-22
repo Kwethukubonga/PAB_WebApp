@@ -6,11 +6,9 @@
 }
 
 <!-- Hero -->
-<section class="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-stone-900">
-    <img src="/img/home/hero.jpg"
-         alt="" aria-hidden="true"
-         class="absolute inset-0 w-full h-full object-cover opacity-40" />
-    <div class="absolute inset-0 bg-gradient-to-b from-purple-950/70 via-stone-900/60 to-stone-900/80"></div>
+<section class="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-ink-900">
+    <partial name="_Image" model='new SitePhoto( Src: "/img/home/hero.jpg", Class: "absolute inset-0 w-full h-full object-cover opacity-40", Sizes: "100vw", Eager: true, Decorative: true)' />
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-900/70 via-ink-900/60 to-ink-900/80"></div>
 
     <div class="relative z-10 text-center px-4 max-w-3xl mx-auto py-20">
         <p class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white/90 text-xs font-medium px-4 py-1.5 rounded-full mb-8 border border-white/20">
@@ -18,10 +16,10 @@
             @s.Home.Badge
         </p>
 
-        <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-tight mb-4" style="font-family: Lora, serif;">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-tight mb-4 font-serif">
             @s.Home.HeroHeading
         </h1>
-        <p class="text-2xl md:text-3xl font-medium text-amber-300 mb-8" style="font-family: Lora, serif;">
+        <p class="text-2xl md:text-3xl font-medium text-amber-300 mb-8 font-serif">
             @s.Home.HeroSub
         </p>
         <p class="text-white/80 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
@@ -30,7 +28,7 @@
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="/RequestSupport"
-               class="bg-purple-700 hover:bg-purple-600 text-white font-bold px-10 py-4 rounded-full text-lg transition-all shadow-xl hover:shadow-purple-900/50 hover:-translate-y-0.5 w-full sm:w-auto text-center">
+               class="bg-brand-700 hover:bg-brand-800 text-white font-bold px-10 py-4 rounded-full text-lg transition-all shadow-xl hover:shadow-brand-900/50 hover:-translate-y-0.5 w-full sm:w-auto text-center">
                 @s.Home.RequestSupport
             </a>
             <a href="/Programmes"
@@ -39,7 +37,8 @@
             </a>
         </div>
 
-        <p class="text-white/40 text-sm mt-8">@s.Home.ServiceNote</p>
+        @* White at 40% measured 3.6:1 on the hero. The shared muted token is white at 85% (F1). *@
+        <p class="text-on-brand-muted text-sm mt-8">@s.Home.ServiceNote</p>
     </div>
 
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 animate-bounce" aria-hidden="true">
@@ -50,29 +49,27 @@
 </section>
 
 <!-- Programmes preview -->
-<section class="py-20 bg-stone-50">
+<section class="py-20 bg-ink-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <p class="text-amber-700 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Do", "Esikwenzayo", "Wat Ons Doen")</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-3" style="font-family: Lora, serif;">
+            <h2 class="text-3xl md:text-4xl font-bold text-ink-900 mb-3 font-serif">
                 @s.Home.ProgrammesSectionTitle
             </h2>
-            <p class="text-stone-500 max-w-xl mx-auto">@s.Home.ProgrammesSectionSub</p>
+            <p class="text-ink-500 max-w-xl mx-auto">@s.Home.ProgrammesSectionSub</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
             @foreach (var prog in featured)
             {
                 <a href="/Programmes/@prog.Id"
-                   class="block bg-white rounded-2xl overflow-hidden border border-stone-100 shadow-sm hover:shadow-md transition-all group">
-                    <div class="h-40 overflow-hidden bg-stone-200">
-                        <img src="@prog.ImagePath"
-                             alt="@prog.TitleFor(s)"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                   class="block bg-white rounded-2xl overflow-hidden border border-ink-100 shadow-sm hover:shadow-md transition-all group">
+                    <div class="h-40 overflow-hidden bg-ink-200">
+                        <partial name="_Image" model='new SitePhoto( Src: prog.ImagePath, Alt: prog.TitleFor(s), Class: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-500", Sizes: "(min-width: 1024px) 33vw, 100vw")' />
                     </div>
                     <div class="p-5">
-                        <h3 class="font-bold text-stone-900 text-base mb-1 leading-snug" style="font-family: Lora, serif;">@prog.TitleFor(s)</h3>
-                        <p class="text-stone-500 text-sm leading-relaxed line-clamp-2">@prog.DescriptionFor(s)</p>
+                        <h3 class="font-bold text-ink-900 text-base mb-1 leading-snug font-serif">@prog.TitleFor(s)</h3>
+                        <p class="text-ink-500 text-sm leading-relaxed line-clamp-2">@prog.DescriptionFor(s)</p>
                     </div>
                 </a>
             }
@@ -80,7 +77,7 @@
 
         <div class="text-center">
             <a href="/Programmes"
-               class="inline-block border-2 border-purple-700 text-purple-700 hover:bg-purple-700 hover:text-white font-semibold px-8 py-3 rounded-full transition-all text-sm">
+               class="inline-block border-2 border-brand-700 text-brand-700 hover:bg-brand-700 hover:text-white font-semibold px-8 py-3 rounded-full transition-all text-sm">
                 @s.Home.ViewAll
             </a>
         </div>
@@ -88,15 +85,15 @@
 </section>
 
 <!-- Resources + Contact strip -->
-<section class="py-16 bg-[#fffbf5] border-t border-stone-100">
+<section class="py-16 bg-cream border-t border-ink-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <div class="bg-white rounded-2xl border border-stone-100 shadow-sm p-8 flex flex-col">
-                <p class="text-2xl mb-4" aria-hidden="true">📋</p>
-                <h3 class="text-xl font-bold text-stone-900 mb-2" style="font-family: Lora, serif;">@s.Home.ResourcesTitle</h3>
-                <p class="text-stone-500 text-sm leading-relaxed mb-6 flex-1">@s.Home.ResourcesSub</p>
-                <a href="/Resources" class="inline-flex items-center gap-2 text-purple-700 font-semibold hover:text-purple-900 transition-colors group/btn text-sm">
+            <div class="bg-white rounded-2xl border border-ink-100 shadow-sm p-8 flex flex-col">
+                <p class="text-brand-700 mb-4"><partial name="_Icon" model="@("clipboard")" /></p>
+                <h3 class="text-xl font-bold text-ink-900 mb-2 font-serif">@s.Home.ResourcesTitle</h3>
+                <p class="text-ink-500 text-sm leading-relaxed mb-6 flex-1">@s.Home.ResourcesSub</p>
+                <a href="/Resources" class="inline-flex items-center gap-2 text-brand-700 font-semibold hover:text-brand-900 transition-colors group/btn text-sm">
                     @s.Home.ViewResources
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover/btn:translate-x-1 transition-transform" aria-hidden="true">
                         <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -104,10 +101,10 @@
                 </a>
             </div>
 
-            <div class="bg-purple-900 rounded-2xl p-8 flex flex-col text-white">
-                <p class="text-2xl mb-4" aria-hidden="true">💬</p>
-                <h3 class="text-xl font-bold mb-2" style="font-family: Lora, serif;">@s.Home.ContactTitle</h3>
-                <p class="text-purple-200 text-sm leading-relaxed mb-6 flex-1">@s.Home.ContactSub</p>
+            <div class="bg-brand-900 rounded-2xl p-8 flex flex-col text-white">
+                <p class="text-brand-700 mb-4"><partial name="_Icon" model="@("chat")" /></p>
+                <h3 class="text-xl font-bold mb-2 font-serif">@s.Home.ContactTitle</h3>
+                <p class="text-on-brand-muted text-sm leading-relaxed mb-6 flex-1">@s.Home.ContactSub</p>
                 <a href="/Contact" class="inline-flex items-center gap-2 text-amber-300 font-semibold hover:text-amber-200 transition-colors group/btn text-sm">
                     @s.Home.ContactUs
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover/btn:translate-x-1 transition-transform" aria-hidden="true">
@@ -122,19 +119,19 @@
 <!-- Closing call to action -->
 <section class="py-20 bg-amber-50 border-t border-amber-100 text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-stone-900 mb-5" style="font-family: Lora, serif;">
+        <h2 class="text-3xl md:text-4xl font-bold text-ink-900 mb-5 font-serif">
             @s.Home.HeroHeading
         </h2>
-        <p class="text-stone-600 text-lg mb-8 leading-relaxed max-w-md mx-auto">
+        <p class="text-ink-600 text-lg mb-8 leading-relaxed max-w-md mx-auto">
             @s.Pick("Reach out to us: no account needed, no judgment. Just tell us how we can help.",
                     "Sondelana nathi: akukho akhawunti efunekayo, akukho sigwebo. Sixelele nje ukuba sinokunceda njani.",
                     "Kontak ons: geen rekening nodig nie, geen oordeel nie. Vertel ons net hoe ons kan help.")
         </p>
         <a href="/RequestSupport"
-           class="inline-block bg-purple-700 hover:bg-purple-800 text-white font-bold px-12 py-4 rounded-full text-lg transition-all shadow-lg hover:shadow-purple-900/30 hover:-translate-y-0.5">
+           class="inline-block bg-brand-700 hover:bg-brand-800 text-white font-bold px-12 py-4 rounded-full text-lg transition-all shadow-lg hover:shadow-brand-900/30 hover:-translate-y-0.5">
             @s.Home.RequestSupport
         </a>
-        <p class="text-stone-400 text-sm mt-4">
+        <p class="text-ink-500 text-sm mt-4">
             @s.Pick("Free and confidential.", "Mahhala kwaye yimfihlo.", "Gratis en vertroulik.")
         </p>
     </div>

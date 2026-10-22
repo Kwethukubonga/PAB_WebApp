@@ -1,0 +1,63 @@
+@page "/offline"
+@using PhilisaAbantuBethu.Data
+@{
+    var s = HttpContext.Strings();
+    var lang = HttpContext.CurrentLang();
+    ViewData["Title"] = s.Pick("No connection", "Akukho unxibelelwano", "Geen verbinding");
+    ViewData["NoIndex"] = true;
+}
+
+@*
+    Shown when the phone has no data and the page asked for was never saved (W11). It carries the
+    emergency numbers itself, so this page is useful rather than just an apology.
+*@
+<section class="py-20 bg-cream">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+
+        <h1 class="text-3xl font-bold text-ink-900 font-serif">
+            @s.Pick("You are offline", "Awukho kwi-intanethi", "Jy is vanlyn")
+        </h1>
+        <p class="mt-3 text-ink-600 leading-relaxed">
+            @s.Pick("This page needs data to load. The numbers below work from this phone without it.",
+                    "Eli phepha lifuna idatha ukuze livuleke. La manani angezantsi asebenza kule fowuni ngaphandle kwayo.",
+                    "Hierdie bladsy het data nodig om te laai. Die nommers hieronder werk sonder data op hierdie foon.")
+        </p>
+
+        <div class="card mt-8 p-7">
+            <div class="flex items-center gap-3 mb-5">
+                <span class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 bg-status-urgentSurface text-status-urgent">
+                    <partial name="_Icon" model="@("emergency_home")" />
+                </span>
+                <h2 class="font-bold text-ink-900 text-lg font-serif">@ResourceData.Emergency.Name.For(lang)</h2>
+            </div>
+            <ul class="space-y-3">
+                @foreach (var item in ResourceData.Emergency.Items)
+                {
+                    <li class="text-ink-900 flex items-start gap-2 leading-relaxed">
+                        <span class="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0 bg-status-urgent" aria-hidden="true"></span>
+                        <span>@item.For(lang)</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="card mt-6 p-7">
+            <h2 class="font-bold text-ink-900 text-lg font-serif">@s.Pick("Philisa Abafazi Bethu", "Philisa Abafazi Bethu", "Philisa Abafazi Bethu")</h2>
+            <ul class="mt-4 space-y-3 text-ink-900">
+                <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"):
+                    <a href="tel:+27817469889" class="font-semibold text-brand-700 hover:underline">+27 (0)81 746 9889</a></li>
+                <li>@s.Pick("Office", "Ihhovisi", "Kantoor"):
+                    <a href="tel:+27215650668" class="font-semibold text-brand-700 hover:underline">+27 (0)21 565 0668</a></li>
+                <li class="text-sm text-ink-600">55 Strauss Road, Steenberg, 7965</li>
+            </ul>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+            <button type="button" onclick="location.reload()" class="btn-primary">
+                @s.Pick("Try again", "Zama kwakhona", "Probeer weer")
+            </button>
+            <a href="/Resources" class="btn-secondary">@s.Nav.Resources</a>
+        </div>
+
+    </div>
+</section>

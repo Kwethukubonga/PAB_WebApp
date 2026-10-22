@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PhilisaAbantuBethu.Forms;
 using PhilisaAbantuBethu.Localization;
 using PhilisaAbantuBethu.Models;
 using PhilisaAbantuBethu.Services;
@@ -36,12 +37,27 @@ public class DetailsModel : StaffPageModel
         return Page();
     }
 
+    /// <summary>What staff have done about it, kept with the request so the next person sees it.</summary>
+    [BindProperty]
+    public string? StaffNotes { get; set; }
+
     public async Task<IActionResult> OnPostStatusAsync(string status)
     {
-        var changed = await _requests.SetStatusAsync(Id, status, StaffAuth.DisplayName(User), HttpContext.RequestAborted);
-        if (!changed) return NotFound();
-
         var s = HttpContext.Strings();
+
+        if (StaffNotes?.Length > SupportRequestValidator.StaffNotesMax)
+        {
+            StatusMessage = s.Pick(
+                $"Please keep the notes under {SupportRequestValidator.StaffNotesMax} characters.",
+                $"Nceda ugcine amanqaku ngaphantsi koonobumba abayi-{SupportRequestValidator.StaffNotesMax}.",
+                $"Hou die notas asseblief onder {SupportRequestValidator.StaffNotesMax} karakters.");
+            return RedirectToPage(new { id = Id });
+        }
+
+        var changed = await _requests.SetStatusAsync(
+            Id, status, StaffAuth.DisplayName(User), StaffNotes ?? "", HttpContext.RequestAborted);
+        if (changed is null) return NotFound();
+
         StatusMessage = s.Pick("Status updated to", "Imeko itshintshelwe ku-", "Status opgedateer na") + " " + StaffText.StatusLabel(s, status) + ".";
         return RedirectToPage(new { id = Id });
     }

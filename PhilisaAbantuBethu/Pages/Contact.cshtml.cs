@@ -6,6 +6,9 @@ using PhilisaAbantuBethu.Services;
 
 namespace PhilisaAbantuBethu.Pages
 {
+    // The longest field here is the 3000-character message, so 64KB is ample. See the note on
+    // RequestSupportModel for why the 30MB Kestrel default is worth narrowing on a public form.
+    [RequestSizeLimit(64 * 1024)]
     public class ContactModel : PageModel
     {
 

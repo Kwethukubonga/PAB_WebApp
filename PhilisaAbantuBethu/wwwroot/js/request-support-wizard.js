@@ -35,26 +35,32 @@
             var n = i + 1;
             m.className = 'flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ' +
                 (current > n ? 'bg-green-600 text-white'
-                    : current === n ? 'bg-purple-700 text-white ring-4 ring-purple-100'
-                        : 'bg-stone-200 text-stone-600');
+                    : current === n ? 'bg-brand-700 text-white ring-4 ring-brand-100'
+                        : 'bg-ink-200 text-ink-600');
+            // The tick is a picture, so the step number and the word "completed" are read out
+
+            // in its place rather than nothing at all (F3).
+
             m.innerHTML = current > n
                 ? '<svg width="14" height="14" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-                  '<span class="sr-only">' + n + '</span>'
+                  '<span class="sr-only">' + n + ' ' + (stepForm.dataset.completedLabel || 'completed') + '</span>'
                 : String(n);
             if (current === n) { m.setAttribute('aria-current', 'step'); } else { m.removeAttribute('aria-current'); }
         });
 
         labels.forEach(function (l, i) {
-            l.className = 'text-xs font-medium hidden sm:block flex-shrink-0 ' + (current === i + 1 ? 'text-purple-700' : 'text-stone-500');
+            l.className = 'text-xs font-medium hidden sm:block flex-shrink-0 ' + (current === i + 1 ? 'text-brand-700' : 'text-ink-500');
         });
 
         bars.forEach(function (b, i) {
-            b.className = 'flex-1 h-0.5 ' + (current > i + 1 ? 'bg-green-500' : 'bg-stone-200');
+            b.className = 'flex-1 h-0.5 ' + (current > i + 1 ? 'bg-status-success' : 'bg-ink-200');
         });
 
         backBtn.disabled = current === 1;
-        backBtn.className = 'flex items-center gap-2 text-sm font-medium transition-colors ' +
-            (current === 1 ? 'text-stone-300 cursor-not-allowed' : 'text-stone-600 hover:text-stone-900');
+        // On step 1 there is nowhere to go back to. The button is hidden rather than shown
+        // greyed out, which was unreadable text that still took a tab stop.
+        backBtn.className = 'flex items-center gap-2 min-h-target text-sm font-medium transition-colors ' +
+            (current === 1 ? 'invisible' : 'text-ink-600 hover:text-ink-900');
 
         if (current < total) {
             nextBtn.removeAttribute('hidden');

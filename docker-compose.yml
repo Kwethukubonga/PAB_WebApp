@@ -2,15 +2,47 @@ name: philisa-abantu-bethu
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: philisa-web
     container_name: philisa-web
+    # Bound to 127.0.0.1 so the container is reachable from this machine only, not from anything
+    # else on the network. 8443 is HTTPS; 8080 redirects to it.
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8443:8443"
     environment:
-      PORT: "8080"
+      # Local HTTPS, served by Kestrel with the development certificate docker-setup.ps1 exports.
+      # The password is read from the FLATSHARE-style variable the launcher sets; `:?` makes the
+      # container refuse to start with a clear message if the launcher hasn't run.
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8443"
+      ASPNETCORE_HTTPS_PORT: "8443"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/philisa.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "${PHILISA_CERT_PASSWORD:?Run docker-setup first (double-click docker-setup.bat)}"
+      # No proxy in front here: the container is reached directly, so the forwarded headers must
+      # not be trusted, or the rate limit on the forms can be bypassed by rotating X-Forwarded-For.
+      TrustProxy: "false"
     volumes:
       - philisa-data:/data
+      # The development certificate, read-only. Created and exported by docker-setup.ps1.
+      - type: bind
+        source: "${USERPROFILE}/.aspnet/https/philisa"
+        target: /https
+        read_only: true
+    # Keep one attacked or misbehaving container from taking the host's memory and CPU with it.
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
 
 volumes:
   philisa-data:

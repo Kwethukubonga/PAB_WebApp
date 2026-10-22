@@ -24,6 +24,9 @@
         public DateTime? StatusUpdatedAt { get; set; }
         public string? HandledBy { get; set; }
 
+        // What staff have done about it. Written on the staff detail page, never shown publicly.
+        public string? StaffNotes { get; set; }
+
         public bool IsUrgent => Urgent == "yes";
 
     }

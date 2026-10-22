@@ -24,18 +24,18 @@
     ViewData["Title"] = title;
 }
 
-<div class="min-h-[60vh] bg-[#fffbf5] flex items-center">
+<div class="min-h-[60vh] bg-cream flex items-center">
     <div class="max-w-xl mx-auto px-4 py-16 text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-stone-900 mb-4" style="font-family: Lora, serif;">@title</h1>
-        <p class="text-stone-700 leading-relaxed mb-8">@body</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-ink-900 mb-4 font-serif">@title</h1>
+        <p class="text-ink-700 leading-relaxed mb-8">@body</p>
 
-        <div class="bg-white border border-stone-200 rounded-2xl p-6 text-left space-y-2 text-sm">
-            <p><span class="font-semibold text-stone-900">@s.Pick("Office", "Ihhovisi", "Kantoor"):</span> <a href="tel:+27215650668" class="text-purple-700 font-semibold">+27 (0)21 565 0668</a></p>
-            <p><span class="font-semibold text-stone-900">@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"):</span> <a href="tel:+27817469889" class="text-purple-700 font-semibold">+27 (0)81 746 9889</a></p>
-            <p><span class="font-semibold text-stone-900">@s.Pick("In immediate danger", "Ukuba usengozini ngoku", "In onmiddellike gevaar"):</span> <a href="tel:10111" class="text-purple-700 font-semibold">10111</a></p>
+        <div class="bg-white border border-ink-200 rounded-2xl p-6 text-left space-y-2 text-sm">
+            <p><span class="font-semibold text-ink-900">@s.Pick("Office", "Ihhovisi", "Kantoor"):</span> <a href="tel:+27215650668" class="text-brand-700 font-semibold">+27 (0)21 565 0668</a></p>
+            <p><span class="font-semibold text-ink-900">@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"):</span> <a href="tel:+27817469889" class="text-brand-700 font-semibold">+27 (0)81 746 9889</a></p>
+            <p><span class="font-semibold text-ink-900">@s.Pick("In immediate danger", "Ukuba usengozini ngoku", "In onmiddellike gevaar"):</span> <a href="tel:10111" class="text-brand-700 font-semibold">10111</a></p>
         </div>
 
-        <a href="/" class="inline-flex items-center justify-center mt-8 min-h-[44px] bg-purple-700 hover:bg-purple-800 text-white font-semibold px-6 py-3 rounded-full">
+        <a href="/" class="inline-flex items-center justify-center mt-8 min-h-[44px] bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3 rounded-full">
             @s.Pick("Go to the home page", "Yiya kwikhaya", "Gaan na die tuisblad")
         </a>
     </div>

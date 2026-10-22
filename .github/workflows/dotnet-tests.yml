@@ -20,6 +20,27 @@ jobs:
         with:
           dotnet-version: "10.0.x"
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install the build tools
+        run: npm ci
+
+      # The stylesheet and the Tailwind theme are generated from design/tokens.json and then
+      # committed, so running the site needs no Node. This proves the committed copies still
+      # match the tokens: if somebody changes a token and forgets `npm run build`, it fails
+      # here rather than shipping a stylesheet that does not match the design (E1, H1).
+      - name: Check the built stylesheet matches the design tokens
+        run: |
+          npm run build
+          if ! git diff --exit-code -- PhilisaAbantuBethu/wwwroot/css/app.css tailwind.tokens.js; then
+            echo "::error::design/tokens.json changed without running 'npm run build'. Commit the rebuilt files."
+            exit 1
+          fi
+
       - name: Restore dependencies
         run: dotnet restore PhilisaAbantuBethu.slnx
 
@@ -30,8 +51,18 @@ jobs:
         run: >
           dotnet test PhilisaAbantuBethu.Tests --no-build --configuration Release --verbosity normal
           --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
+          --collect:"XPlat Code Coverage"
 
-      - name: Keep the test results
+      # How much of the back end the tests actually reach, on the run's summary page (D3).
+      - name: Summarise the coverage
+        if: always()
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          reportgenerator -reports:"TestResults/**/coverage.cobertura.xml" \
+            -targetdir:TestResults/coverage -reporttypes:"Html;MarkdownSummaryGithub"
+          cat TestResults/coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the test results and the coverage report
         if: always()
         uses: actions/upload-artifact@v4
         with:

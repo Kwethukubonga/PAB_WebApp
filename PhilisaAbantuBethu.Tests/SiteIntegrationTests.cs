@@ -79,7 +79,9 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
         var response = await browser.PostAsync("/RequestSupport", new FormUrlEncodedContent(ValidRequest(token)));
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Matches("^/Confirmation\\?reference=PAB-[2-9A-Z]{6}$", response.Headers.Location!.OriginalString);
+        // "by" carries the contact method just chosen, so the confirmation page can say how PAB
+        // will be in touch (G6). It is one of a fixed list of choices, never anything identifying.
+        Assert.Matches("^/Confirmation\\?reference=PAB-[2-9A-Z]{6}&by=phone$", response.Headers.Location!.OriginalString);
     }
 
     [Fact]

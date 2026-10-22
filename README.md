@@ -70,9 +70,8 @@ The Philisa Abantu Bethu Help Centre is a public website where community members
 | **Accessibility** | Three languages, a "Skip to content" link, labelled form fields and icon buttons, and a page `lang` attribute that matches the chosen language so screen readers pronounce it correctly. |
 | **Responsiveness** | Built mobile-first with Tailwind CSS, with a collapsible menu on small screens and cards and galleries that adapt to the screen width. |
 | **Usability** | The support form is split into three short steps with a progress bar and a summary before submitting. **Request Support** is always in the header. |
-| **Reliability** | Requests are saved before the confirmation page is shown, the production database sits on a persistent volume that survives redeploys, and Railway only switches to a new deploy once `/health` answers. |
-| **Security** | Every submission is checked on the server, the forms are rate-limited and have a spam trap, staff pages need a PAB admin sign-in, and every page sends strict security headers (see section 9). |
-| **Safety** | A **Leave this site** button on every public page (or Esc twice) swaps the page for a weather search, for someone who needs to hide that they were looking for help. |
+| **Reliability** | Requests are saved before the confirmation page is shown, and the production database sits on a persistent volume that survives redeploys. |
+| **Security** | HTTPS, anti-forgery tokens, automatic output encoding and parameterised queries (see section 9). |
 
 ---
 
@@ -91,7 +90,6 @@ The Philisa Abantu Bethu Help Centre is a public website where community members
 | **Confirmation** | Confirms the request and gives a reference number |
 | **Contact** | A general contact form and PAB's contact details |
 | **Privacy Policy** | How personal information is used, in line with POPIA |
-| **Staff area** (`/Staff`) | For PAB staff only: new, in-progress and closed support requests, urgent ones first, and the full request with a way to move it along |
 
 ### 4.2 The Request Support Form
 
@@ -101,9 +99,7 @@ The Philisa Abantu Bethu Help Centre is a public website where community members
 | **2. Support Needed** | Type of support, a description of their situation, and whether it's urgent. A reminder to call **10111** or PAB's crisis line in an emergency. |
 | **3. Confirm and Submit** | Anything else to add (optional), a summary of the request, and a consent declaration that must be ticked |
 
-After submitting, the person sees a **reference number** (for example `PAB-7KQ39M`), the date, the status ("Received") and what happens next.
-
-If something is missing or wrong, the form comes back with what they typed still filled in, a message next to each field that needs attention, and the step with the first problem open. The Submit button locks and shows "Sending…" so a request can't be sent twice.
+After submitting, the person sees a **reference number**, the date, the status ("Received") and what happens next.
 
 **Types of support:** Food Assistance, Women's Empowerment, Youth Support, After-school Programme, Senior Care, Baby Saver Programme, Emergency Shelter, Search & Rescue, Social Work Services, and General Help / Not Sure.
 
@@ -121,10 +117,8 @@ If something is missing or wrong, the form comes back with what they typed still
 | Framework | ASP.NET Core Razor Pages (.NET 10), C# |
 | Database | SQLite, through Entity Framework Core 10 |
 | Styling | Tailwind CSS, with Lora and Inter fonts |
-| Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery, quick exit) |
-| Staff sign-in | Firebase Authentication, the same accounts as the Philisa Volunteers app |
+| Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery) |
 | Hosting | Docker, on Railway |
-| Testing and CI/CD | xUnit, ASP.NET Core integration tests, GitHub Actions |
 | Version control | Git and GitHub |
 
 **Why Razor Pages:** each page keeps its layout and logic together, which suits a content website with a few forms, and pages are rendered on the server, so they load quickly on slow connections.
@@ -146,42 +140,26 @@ If something is missing or wrong, the form comes back with what they typed still
 ┌───────────────────────────▼──────────────────────────────────┐
 │  ASP.NET CORE (Razor Pages)                                  │
 │  Pages/             Page + PageModel for each screen         │
-│  Forms/             Server-side checks for both forms        │
-│  Services/          Saving and reading requests              │
-│  Staff/             Staff sign-in and admin check            │
-│  Security/          Rate limiting and security headers       │
 │  Localization/      English, isiXhosa and Afrikaans text     │
 │  Data/SiteData      Programme content (stored in code)       │
 │  Data/AppDbContext  Entity Framework database access         │
-└──────────────┬────────────────────────────┬──────────────────┘
-               │                            │ staff sign-in only
-┌──────────────▼───────────────┐ ┌──────────▼───────────────────┐
-│  SQLite DATABASE             │ │  FIREBASE (Google)           │
-│  (philisa.db)                │ │  Authentication · Firestore  │
-│  SupportRequests             │ │  users/{uid}.role == admin   │
-│  ContactInquiries            │ │                              │
-└──────────────────────────────┘ └──────────────────────────────┘
+└───────────────────────────┬──────────────────────────────────┘
+                            │
+┌───────────────────────────▼──────────────────────────────────┐
+│  SQLite DATABASE (philisa.db)                                │
+│  SupportRequests · ContactInquiries                          │
+└──────────────────────────────────────────────────────────────┘
 ```
 
 ### 6.1 How a Support Request Is Handled
 
 1. The browser checks the required fields before each step.
-2. On submit, the form is posted to `RequestSupport.cshtml.cs`. More than 5 sends from one connection in 10 minutes gets a "please wait" page with the crisis line instead.
-3. `Forms/SupportRequestForm.cs` checks every field again on the server, including South African phone numbers (the same rules as the Philisa Volunteers app). Anything wrong goes back to the form; nothing is saved.
-4. `Services/SupportRequestService.cs` gives it a reference number such as `PAB-7KQ39M` and saves it to `SupportRequests` with the status **New**. A unique index makes a repeated reference impossible.
+2. On submit, the form is posted to `RequestSupport.cshtml.cs`.
+3. A reference number is created, for example `PAB482`.
+4. The request is saved to the `SupportRequests` table.
 5. The person is sent to the **Confirmation** page with their reference number.
-6. PAB staff see it under **Staff → Support requests**, urgent requests first, and move it to **In progress** and then **Closed**.
 
 The **Contact** form works the same way, saving to `ContactInquiries`.
-
-### 6.2 How Staff Sign In
-
-Staff use the admin account they already have in the Philisa Volunteers app, so there's no second set of passwords.
-
-1. On `/Staff/SignIn` the browser signs in to Firebase (email and password, or Google) and sends the ID token to the server.
-2. The server checks the token's signature and that it was issued for the `pab-volunteers` project (`Staff/FirebaseTokenVerifier.cs`).
-3. It reads that person's own `users` record from Firestore with their token, which the Firestore rules already allow, and only continues if `role` is `admin` (`Staff/StaffDirectory.cs`).
-4. It starts its own 8-hour session cookie (HttpOnly, SameSite Strict). The Firebase sign-in isn't kept in the browser.
 
 ---
 
@@ -222,11 +200,8 @@ erDiagram
         string Urgent
         string Extra
         bool Declaration
-        string Reference UK
+        string Reference
         datetime SubmittedAt
-        string Status
-        datetime StatusUpdatedAt
-        string HandledBy
     }
 
     CONTACT_INQUIRIES {
@@ -247,13 +222,8 @@ erDiagram
 | `ContactMethod` | `phone`, `whatsapp`, `email` or `visit` |
 | `Urgent` | `yes` or `no` |
 | `Declaration` | Must be ticked before a request is submitted |
-| `Reference` | `PAB-` and six characters, e.g. `PAB-7KQ39M`, leaving out look-alikes such as 0/O and 1/I. Unique: the database refuses a repeat. Older requests kept their `PAB` + three digit references. |
-| `SubmittedAt`, `StatusUpdatedAt` | Stored in UTC and shown to staff in South African time |
-| `Status` | `new`, `in-progress` or `closed`, changed by staff only |
-| `HandledBy` | The staff member who last changed the status |
+| `Reference` | Shown to the person on the Confirmation page, e.g. `PAB482` |
 | `Subject` | General Enquiry, Volunteering, Donations & Partnerships, Media, or Other |
-
-Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists quick.
 
 **Programmes** are not stored in the database. They're defined in `Data/SiteData.cs`, because they rarely change and are the same for every visitor.
 
@@ -263,18 +233,12 @@ Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists
 
 | Area | Measure |
 |------|---------|
-| No accounts for the public | No passwords to protect, and people only share what's needed to help them |
-| Server-side checks | Every field is checked again on the server (`Forms/`): required fields, lengths, email and South African phone formats, and only the offered choices for contact method, support type and subject. Nothing is saved until it passes. |
-| Rate limiting | Each connection may send the two forms 5 times in 10 minutes. After that it gets HTTP 429 and a page with the crisis line. Reading pages is never limited. |
-| Spam trap | A hidden field that only bots fill in. When it's filled, nothing is saved. |
-| Staff access | `/Staff` needs a Philisa Volunteers admin account (see 6.2). Staff pages are never cached (`Cache-Control: no-store`) or indexed by search engines, and status changes record who made them. |
-| Security headers | Content Security Policy, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Permissions-Policy`, and `Referrer-Policy: no-referrer`, so the address of a help page is never passed on to the next site someone visits |
+| No accounts | No passwords to protect, and people only share what's needed to help them |
 | HTTPS | All traffic is redirected to HTTPS, with HSTS in production |
 | Cross-site request forgery | Razor Pages add and check an anti-forgery token on every form |
 | Cross-site scripting | Razor encodes anything a user types before displaying it |
 | SQL injection | Entity Framework uses parameterised queries |
-| Quick exit | **Leave this site** (or Esc twice) replaces the page with a weather search, and the Back button doesn't return to it |
-| Logs | Requests are logged by id and reference only, never by name or situation |
+| No public access to requests | No page lists or displays submitted requests |
 | Consent | A consent declaration must be ticked before submitting |
 | Database file | `*.db` files are excluded from Git and the Docker image |
 
@@ -289,8 +253,8 @@ The **Privacy Policy** page explains what is collected and why, that it's never 
 **Step 1: Clone the repository**
 
 ```bash
-git clone https://github.com/Kwethukubonga/PAB_WebApp.git
-cd PAB_WebApp
+git clone https://github.com/Kwethukubonga/philisa-abantu-bethu.git
+cd philisa-abantu-bethu
 ```
 
 **Step 2: Run it**
@@ -310,46 +274,22 @@ Go to `http://localhost:5277`.
 
 **With Docker:** run `docker compose up --build`, then open `http://localhost:8080`. Submissions are kept in the `philisa-data` volume.
 
-**Staff sign-in:** register a **Web app** in the Firebase console for the `pab-volunteers` project (Project settings → Your apps → Add app → Web), then give the site its API key:
-- **Locally:** put it in `"Firebase": { "ApiKey": "…" }` in `appsettings.Development.json`.
-- **On Railway:** set the variable `Firebase__ApiKey`.
-
-Firebase web API keys aren't secret; every web page that uses Firebase sends one. For Google sign-in, also add the site's domain under Firebase → Authentication → Settings → Authorised domains.
-
-**Run the tests:**
-
-```bash
-dotnet test PhilisaAbantuBethu.slnx
-```
-
-The integration tests start the real site against a throwaway database, with stand-ins for Google, so they run offline.
-
-**Database changes:** the EF Core tool is listed in `dotnet-tools.json`. Run `dotnet tool restore` once, then `dotnet ef migrations add <Name> --project PhilisaAbantuBethu`.
-
 ---
 
 ## 11. Project Structure
 
 ```
-PAB_WebApp/
+philisa-abantu-bethu/
 ├── PhilisaAbantuBethu/
 │   ├── Data/            # AppDbContext and programme content (SiteData)
-│   ├── Forms/           # Server-side checks for the support and contact forms
 │   ├── Localization/    # Language switching and text in all three languages
 │   ├── Migrations/      # Database migrations
 │   ├── Models/          # SupportRequest, ContactInquiry, Programme
-│   ├── Pages/           # Every page, the shared layout, and Staff/ for PAB staff
-│   ├── Security/        # Rate limiting and security headers
-│   ├── Services/        # Saving and reading requests, reference numbers, phone numbers
-│   ├── Staff/           # Firebase sign-in check and the admin role lookup
+│   ├── Pages/           # Every page, plus the shared layout
 │   ├── wwwroot/         # CSS, JavaScript and PAB's photos
-│   └── Program.cs       # App start-up: services, security, language cookie
-├── PhilisaAbantuBethu.Tests/   # Unit and integration tests
-├── .github/workflows/   # CI/CD: build, test, Docker build, deploy
+│   └── Program.cs       # App start-up and language cookie
 ├── Dockerfile
-├── docker-compose.yml
-├── railway.json         # Railway build, health check and restart settings
-└── dotnet-tools.json    # The EF Core migrations tool
+└── docker-compose.yml
 ```
 
 ---
@@ -365,26 +305,8 @@ The website is hosted on **Railway**, built from the project's `Dockerfile`.
 | Build | A two-stage image: the .NET 10 SDK publishes the app, then it runs on the smaller ASP.NET runtime |
 | Port | Railway supplies it through the `PORT` variable (default `8080`) |
 | Database | Stored at `/data/philisa.db`, on a Railway volume so it survives redeploys |
-| Session keys | Stored at `/data/keys`, so a redeploy doesn't sign staff out or break a form someone has open |
-| Health check | `railway.json` points Railway at `/health`, which answers 200 only when the database responds. A deploy that fails it never receives visitors. |
-| Settings | `Firebase__ApiKey` for staff sign-in. Optional: `RateLimiting__FormPostsPerWindow` and `RateLimiting__WindowMinutes`. |
 
-### 12.2 CI/CD
-
-`.github/workflows/dotnet-tests.yml` runs on every push and pull request:
-
-| Job | What It Does |
-|-----|--------------|
-| **Build and test** | Restores, builds and runs every unit and integration test, keeps the results as a download, and builds the Docker image Railway will use |
-| **Deploy to Railway** | Only on `main`, and only after the job above passes: deploys with the Railway CLI, then checks the live `/health` |
-
-To turn the deploy on, add two repository secrets under **Settings → Secrets and variables → Actions**:
-- `RAILWAY_TOKEN`: a Railway project token.
-- `RAILWAY_SERVICE`: the service's name or id.
-
-Then switch off Railway's own automatic deploys from GitHub, so every release goes through the tests first. Until the secrets exist, the deploy job reports that it was skipped instead of failing.
-
-### 12.3 Branching
+### 12.2 Branching
 
 ```
  feature/* ─► Pull Request ─► Review ─► develop ─► Pull Request ─► main
@@ -414,20 +336,16 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 | English, isiXhosa and Afrikaans | ✔ Complete |
 | PAB's real photos and programme galleries | ✔ Complete |
 | Saving submissions, Docker and Railway hosting | ✔ Complete |
-| Server-side checks, rate limiting and spam trap on both forms | ✔ Complete |
-| Unique reference numbers | ✔ Complete |
-| Staff area to see and move requests along | ✔ Complete |
-| Security headers, health check and quick exit | ✔ Complete |
-| Automated tests (94) and CI/CD | ✔ Complete (deploy needs the Railway secrets) |
 | Notifying PAB staff of new requests | ☐ Planned |
 
 ### 14.2 Future Improvements
 
-- **New-request alerts:** an email to PAB's intake address, or a notification on PAB admins' phones through the Philisa Volunteers app.
-- **Shared API:** REST endpoints for support requests and programmes, so the Android app and the website share one back end.
-- **Managed database:** move from the SQLite file to a hosted Postgres database with automatic backups.
-- **Encrypting sensitive fields:** keep the situation description encrypted at rest, and delete closed requests after an agreed time.
+- **Email notifications:** send each new request to PAB's intake address, as planned in the design document.
+- **Staff view:** a login-protected page where PAB staff can see and manage requests.
+- **Server-side validation:** check every submission on the server, not just in the browser.
+- **Form abuse protection:** rate limiting and bot protection on the public forms.
 - **Tailwind build step:** compile Tailwind into a small CSS file instead of loading it from a CDN, to reduce data use.
+- **Automated tests and CI:** like the Philisa Volunteers app.
 
 ---
 

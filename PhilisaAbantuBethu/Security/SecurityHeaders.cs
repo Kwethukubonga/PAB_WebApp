@@ -18,16 +18,24 @@ public class SecurityHeadersMiddleware
         _next = next;
         var authDomain = firebase.Value.ResolvedAuthDomain;
 
-        // Tailwind and Google Fonts are loaded from CDNs today, and the staff sign-in uses Firebase's
-        // own scripts and Google's sign-in window. Inline styles are needed by the Tailwind CDN.
+        // The stylesheet and both fonts are served from this site now, so the Tailwind CDN and
+        // Google Fonts are no longer allowed at all (H1, H3). 'unsafe-inline' has gone from
+        // script-src with them: every script here is a file of ours. It stays on style-src only
+        // because a few elements carry a style attribute for a programme's own colour.
+        //
+        // What is still allowed from elsewhere is the staff sign-in: Firebase's own scripts and
+        // Google's sign-in window.
         _contentSecurityPolicy = string.Join("; ",
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.gstatic.com https://apis.google.com",
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-            "font-src 'self' https://fonts.gstatic.com",
+            "script-src 'self' https://www.gstatic.com https://apis.google.com",
+            "style-src 'self' 'unsafe-inline'",
+            "font-src 'self'",
             "img-src 'self' data: https:",
             "connect-src 'self' https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com",
             $"frame-src https://{authDomain} https://accounts.google.com",
+            // The offline copy of the emergency numbers is kept by a worker from this site (W11).
+            "worker-src 'self'",
+            "manifest-src 'self'",
             "form-action 'self'",
             "frame-ancestors 'none'",
             "base-uri 'self'",
