@@ -1,16 +1,20 @@
-# PAB Help Centre (web)
+# PAB Help Centre (web): project guide
+
+> This file and `handover/` live **only on the `changes_final_POE` branch**. They never go into `develop` or `main`, and the branch is deleted before the final submission. Claude Code does not load this file by itself, so start a session with: *"Read changes_POE.md on the changes_final_POE branch (`git show origin/changes_final_POE:changes_POE.md`)."*
 
 The public website for Philisa Abafazi Bethu (PAB), a gender-based violence and community support NPO in Lavender Hill, Cape Town. People who may be in danger use it to request support without an account; PAB staff use `/Staff/Requests` to act on those requests. Team KANTU, varsity group project (Task 3 follows Task 2, which got 176/270).
 
-Sister repo: the Android volunteer app, `Kwethukubonga/PAB_Volunteers`. Clone both side by side (`PAB_WebApp` and `PAB_Volunteers` in the same folder): the design tokens tool and the plan assume it.
+Sister repo: the Android volunteer app, `Kwethukubonga/PAB_Volunteers`. Clone both side by side (`PAB_WebApp` and `PAB_Volunteers` in the same folder): the design tokens tool assumes it.
 
-**Team:** this website is owned by Unathi, Nuha and Ash. The Android app is owned by Tlhogi and Kwethu, who built most of what's on `develop` here (Kwethu: API, services, design tokens, CSS, images, Docker; Tlhogi: forms, rate limiting, security headers, staff area, CI deploy) and can explain it. Shared items (B3, W10, J2, J5, E2) are split per the handover's section 4.
+**Team:** this website is owned by Unathi, Nuha and Ash. The Android app is owned by Tlhogi and Kwethu, who built most of what's on `develop` here (Kwethu: API, services, design tokens, CSS, images, Docker; Tlhogi: forms, rate limiting, security headers, staff area, CI deploy) and can explain it. Shared items (B3, W10, J2, J5, E2) are split per `handover/HANDOVER.md` section 4.
 
 ## Where to start
 
-1. Read `../PAB_Volunteers/handover/HANDOVER.md`: what's done, what's left, in order, with owners.
-2. The full checklist is `../PAB_Volunteers/handover/IMPROVEMENT_PLAN.md` (items A1–K18, W1–W12; each says how to do it and how to know it's finished). Tick items there when they're done.
+1. `handover/HANDOVER.md` (on this branch): what's done, what's left, in order, with owners. The web team's jobs are section 2.
+2. `handover/IMPROVEMENT_PLAN.md` (on this branch): the full checklist (items A1–K18, W1–W12; each says how to do it and how to know it's finished).
 3. `README.md` section 2 maps every requirement (PAB-FR01–15) to its page, code and test. Keep it true when you change behaviour.
+
+Read the notes without leaving your work branch: `git show origin/changes_final_POE:handover/HANDOVER.md`. The same `handover/` folder is on the Android repo's `changes_final_POE` branch; keep the two copies identical.
 
 ## Stack
 
@@ -39,8 +43,8 @@ node tools/tokens/build.js --android ../PAB_Volunteers   # writes Android's colo
 
 ## Rules for this project
 
-- **Final submission:** the handover notes in `PAB_Volunteers/handover/` are for the team only and must be deleted before the final submission (`HANDOVER.md` section 5), along with the line in this file that points to them. Whenever someone mentions the final submission, the deadline, merging to `main` for submission, or a release, remind them of that checklist before doing anything else.
-
+- **Keep the notes out of the app's history:** branch your work from `develop`, never from `changes_final_POE`, and never merge `changes_final_POE` into anything. Ticking items or adding your name is a commit on `changes_final_POE` only.
+- **Final submission:** delete the `changes_final_POE` branch in both repos before the final submission (`handover/HANDOVER.md` section 5). Whenever someone mentions the final submission, the deadline, merging to `main` for submission, or a release, remind them of that checklist before doing anything else.
 - **No AI attribution anywhere**: no `Co-Authored-By: Claude`/Copilot trailers, no "Generated with" lines, in commits, PRs, code or comments. The README's AI Usage Declaration section is the one place AI use is described.
 - **Merge PRs with "Create a merge commit"**, never squash: squashing rewrote a teammate's commits under one name once already, and the marker grades individual contribution.
 - Work on `feature/<name>/<topic>` branches, PR into `develop`; `develop` → `main` is a deliberate release (it deploys).
