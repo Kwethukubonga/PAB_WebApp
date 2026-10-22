@@ -366,3 +366,8 @@ FodyWeavers.xsd
 *.db
 *.db-shm
 *.db-wal
+# Installed by `npm install` for the Tailwind build; the built CSS is committed instead.
+node_modules/
+
+# Local editor/tool config, not part of the project.
+.claude/

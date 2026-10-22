@@ -1,0 +1,20 @@
+{
+  "name": "Philisa Abafazi Bethu Help Centre",
+  "short_name": "Philisa Help",
+  "description": "Free, confidential community support in Cape Town. Emergency numbers work with no data.",
+  "start_url": "/Resources",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF5",
+  "theme_color": "#3B0764",
+  "lang": "en-ZA",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/img/brand/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
