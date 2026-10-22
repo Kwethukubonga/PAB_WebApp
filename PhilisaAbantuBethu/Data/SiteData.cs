@@ -136,7 +136,7 @@ public static class SiteData
                 "/img/programmes/after-school/gallery-3.jpg",
                 "/img/programmes/after-school/gallery-4.jpg"
             },
-            Accent = "#047857"
+            Accent = "#059669"
 
         },
 
@@ -224,7 +224,7 @@ public static class SiteData
                 "/img/programmes/community-feeding/gallery-3.jpg",
                 "/img/programmes/community-feeding/gallery-4.jpg"
             },
-            Accent = "#C2410C"
+            Accent = "#EA580C"
 
         },
 
@@ -396,7 +396,7 @@ public static class SiteData
                 "/img/programmes/social-work/gallery-2.jpg",
                 "/img/programmes/social-work/gallery-3.jpg"
             },
-            Accent = "#0F766E"
+            Accent = "#0D9488"
 
         },
 

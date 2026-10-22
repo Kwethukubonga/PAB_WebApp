@@ -5,35 +5,32 @@
     ViewData["Title"] = s.Nav.Contact;
     var sent = bool.TryParse(HttpContext.Request.Query["sent"], out var sentFlag) && sentFlag;
 
-    const string inputCls = "w-full border border-ink-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white text-ink-900 placeholder-ink-500";
-    const string inputErrorCls = "w-full border-2 border-red-600 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white text-ink-900 placeholder-ink-500";
-    const string labelCls = "block text-sm font-medium text-ink-700 mb-1.5";
-    const string errorTextCls = "mt-1.5 text-sm font-medium text-red-700";
+    const string inputCls = "w-full border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-stone-900 placeholder-stone-400";
+    const string labelCls = "block text-sm font-medium text-stone-700 mb-1.5";
 
-    string? Err(string field) => Model.ErrorFor(field);
-    string Cls(string field) => Err(field) is null ? inputCls : inputErrorCls;
-    string? Invalid(string field) => Err(field) is null ? null : "true";
-    string? Described(string field, string id) => Err(field) is null ? null : id + "-error";
-
-    var subjects = PhilisaAbantuBethu.Forms.ContactValidator.SubjectsFor(s.Lang);
-    var sendingLabel = s.Pick("Sending…", "Iyathunyelwa…", "Word gestuur…");
+    var subjects = s.Lang switch
+    {
+        "xh" => new[] { "Umbuzo Jikelele", "Ukuba Sisithi Ngobuyisi", "Iminikelo Nemibambano", "Abezindaba", "Enye into" },
+        "af" => new[] { "Algemene Navraag", "Vrywilligerwerk", "Skenkings & Vennootskappe", "Media", "Ander" },
+        _ => new[] { "General Enquiry", "Volunteering", "Donations & Partnerships", "Media", "Other" }
+    };
 
     var messagePlaceholder = s.Pick("Write your message here...", "Bhala umyalezo wakho apha...", "Skryf jou boodskap hier...");
 
     var details = new[]
     {
-        ("phone", s.Pick("Phone", "Umnxeba", "Telefoon"),            "+27 (0)21 565 0668",            s.Pick("Mon–Fri, 8am–5pm", "Mvulo–Lwesihlanu, 8am–5pm", "Ma–Vr, 8:00–17:00")),
-        ("mail", s.Pick("Email", "I-imeyili", "E-pos"),          "admin@philisaabafazi.org", s.Pick("Response within 24–48 hours", "Impendulo phakathi kwe-24–48 yeyure", "Reaksie binne 24–48 uur")),
-        ("place", s.Pick("Address", "Idilesi", "Adres"),          "55 Strauss Road, Steenberg", s.Pick("7965, Western Cape, South Africa", "7965, Ntshona Koloni, eMzantsi Afrika", "7965, Wes-Kaap, Suid-Afrika")),
-        ("emergency_home", s.Pick("Crisis Line", "Umgca Wongxamiseko", "Krisislyn"), "+27 (0)81 746 9889",      s.Pick("Available after hours", "Iyafumaneka emva kwexesha lomsebenzi", "Beskikbaar na-ure"))
+        ("📞", s.Pick("Phone", "Umnxeba", "Telefoon"),            "+27 (0)21 565 0668",            s.Pick("Mon–Fri, 8am–5pm", "Mvulo–Lwesihlanu, 8am–5pm", "Ma–Vr, 8:00–17:00")),
+        ("✉️", s.Pick("Email", "I-imeyili", "E-pos"),          "admin@philisaabafazi.org", s.Pick("Response within 24–48 hours", "Impendulo phakathi kwe-24–48 yeyure", "Reaksie binne 24–48 uur")),
+        ("📍", s.Pick("Address", "Idilesi", "Adres"),          "55 Strauss Road, Steenberg", s.Pick("7965, Western Cape, South Africa", "7965, Ntshona Koloni, eMzantsi Afrika", "7965, Wes-Kaap, Suid-Afrika")),
+        ("🚨", s.Pick("Crisis Line", "Umgca Wongxamiseko", "Krisislyn"), "+27 (0)81 746 9889",      s.Pick("Available after hours", "Iyafumaneka emva kwexesha lomsebenzi", "Beskikbaar na-ure"))
     };
 }
 
-<section class="py-20 bg-brand-900 text-white text-center">
+<section class="py-20 bg-purple-900 text-white text-center">
     <div class="max-w-3xl mx-auto px-4">
-        <p class="text-on-brand-muted text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Get in Touch", "Qhagamshelana", "Skakel In")</p>
-        <h1 class="text-4xl md:text-5xl font-bold mb-5 font-serif">@s.Pick("Contact Us", "Qhagamshelana Nathi", "Kontak Ons")</h1>
-        <p class="text-on-brand-muted text-lg max-w-xl mx-auto leading-relaxed">
+        <p class="text-purple-300 text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("Get in Touch", "Qhagamshelana", "Skakel In")</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-5" style="font-family: Lora, serif;">@s.Pick("Contact Us", "Qhagamshelana Nathi", "Kontak Ons")</h1>
+        <p class="text-purple-100 text-lg max-w-xl mx-auto leading-relaxed">
             @s.Pick("We'd love to hear from you, whether you're seeking support, wanting to volunteer, or looking to partner with us.",
                     "Sithanda ukuva kuwe, nokuba ufuna inkxaso, ufuna ukuba sisithi ngobuyisi, okanye ufuna ukuditana nathi.",
                     "Ons hoor graag van jou, of jy nou ondersteuning soek, wil vrywillig werk, of met ons wil vennoot word.")
@@ -41,17 +38,17 @@
     </div>
 </section>
 
-<section class="py-20 bg-cream">
+<section class="py-20 bg-[#fffbf5]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-14">
 
             <!-- Message form -->
             <div class="lg:col-span-3">
-                <h2 class="text-2xl font-bold text-ink-900 mb-7 font-serif">@s.Pick("Send Us a Message", "Sithumelele Umyalezo", "Stuur Vir Ons 'n Boodskap")</h2>
+                <h2 class="text-2xl font-bold text-stone-900 mb-7" style="font-family: Lora, serif;">@s.Pick("Send Us a Message", "Sithumelele Umyalezo", "Stuur Vir Ons 'n Boodskap")</h2>
 
                 <div data-contact-success hidden="@(!sent)" class="bg-green-50 border border-green-200 rounded-2xl p-10 text-center">
-                    <p class="mx-auto mb-4 w-14 h-14 rounded-full bg-status-successSurface text-status-success flex items-center justify-center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7" /></svg></p>
-                    <h3 class="font-bold text-green-800 text-xl mb-2 font-serif">@s.Pick("Message Sent!", "Umyalezo Uthunyelwe!", "Boodskap Gestuur!")</h3>
+                    <p class="text-5xl mb-4" aria-hidden="true">✓</p>
+                    <h3 class="font-bold text-green-800 text-xl mb-2" style="font-family: Lora, serif;">@s.Pick("Message Sent!", "Umyalezo Uthunyelwe!", "Boodskap Gestuur!")</h3>
                     <p class="text-green-700 text-sm">
                         @s.Pick("Thank you for reaching out. Our team will respond within 1–2 business days.",
                                 "Enkosi ngokunxibelelana nathi. Iqela lethu liza kuphendula phakathi kweentsuku ezi-1–2 zomsebenzi.",
@@ -59,81 +56,43 @@
                     </p>
                 </div>
 
-                @if (Model.FormError is not null)
-                {
-                    <div class="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-6" role="alert">
-                        <p class="text-red-800 text-sm font-semibold">@Model.FormError</p>
-                    </div>
-                }
-
-                <form method="post" data-contact-form data-busy-form hidden="@sent" class="space-y-5">
-                    <!-- Only bots fill this in. People never see it. -->
-                    <div class="hp-field" aria-hidden="true">
-                        <label for="c-website">Website</label>
-                        <input id="c-website" name="Website" type="text" tabindex="-1" autocomplete="off" />
-                    </div>
-
+                <form method="post" data-contact-form hidden="@sent" class="space-y-5">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-name">@s.Pick("Full Name", "Igama Eligcweleyo", "Volle Naam") *</label>
-                            <input id="c-name" name="Name" value="@Model.Name" required aria-required="true" type="text" autocomplete="name" maxlength="100"
-                                   class="@Cls("Name")" aria-invalid="@Invalid("Name")" aria-describedby="@Described("Name", "c-name")" />
-                            @if (Err("Name") is string nameError)
-                            {
-                                <p id="c-name-error" class="@errorTextCls">@nameError</p>
-                            }
+                            <input id="c-name" name="Name" required type="text" class="@inputCls" />
                         </div>
                         <div>
                             <label class="@labelCls" for="c-email">@s.Pick("Email Address", "I-imeyili", "E-posadres")</label>
-                            <input id="c-email" name="Email" value="@Model.Email" type="email" autocomplete="email" maxlength="254"
-                                   class="@Cls("Email")" aria-invalid="@Invalid("Email")" aria-describedby="@Described("Email", "c-email")" />
-                            @if (Err("Email") is string emailError)
-                            {
-                                <p id="c-email-error" class="@errorTextCls">@emailError</p>
-                            }
+                            <input id="c-email" name="Email" type="email" class="@inputCls" />
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
-                            <label class="@labelCls" for="c-phone">@s.Pick("Phone Number", "Inombolo yefowuni", "Foonnommer")</label>
-                            <input id="c-phone" name="Phone" value="@Model.Phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="082 123 4567"
-                                   class="@Cls("Phone")" aria-invalid="@Invalid("Phone")" aria-describedby="@Described("Phone", "c-phone")" />
-                            @if (Err("Phone") is string phoneError)
-                            {
-                                <p id="c-phone-error" class="@errorTextCls">@phoneError</p>
-                            }
+                            <label class="@labelCls" for="c-phone">@s.Pick("Phone Number", "Inombolo yoMxhentsi", "Foonnommer")</label>
+                            <input id="c-phone" name="Phone" type="tel" class="@inputCls" />
                         </div>
                         <div>
                             <label class="@labelCls" for="c-subject">@s.Pick("Subject", "Isihloko", "Onderwerp") *</label>
-                            <select id="c-subject" name="Subject" required aria-required="true"
-                                    class="@Cls("Subject")" aria-invalid="@Invalid("Subject")" aria-describedby="@Described("Subject", "c-subject")">
+                            <select id="c-subject" name="Subject" required class="@inputCls">
                                 <option value="">@s.Pick("Select a subject", "Khetha isihloko", "Kies 'n onderwerp")</option>
                                 @foreach (var subject in subjects)
                                 {
-                                    <option value="@subject" selected="@(Model.Subject == subject)">@subject</option>
+                                    <option value="@subject">@subject</option>
                                 }
                             </select>
-                            @if (Err("Subject") is string subjectError)
-                            {
-                                <p id="c-subject-error" class="@errorTextCls">@subjectError</p>
-                            }
                         </div>
                     </div>
 
                     <div>
                         <label class="@labelCls" for="c-message">@s.Pick("Message", "Umyalezo", "Boodskap") *</label>
-                        <textarea id="c-message" name="Message" required aria-required="true" rows="6" maxlength="3000"
+                        <textarea id="c-message" name="Message" required rows="6"
                                   placeholder="@messagePlaceholder"
-                                  class="@Cls("Message") resize-none" aria-invalid="@Invalid("Message")" aria-describedby="@Described("Message", "c-message")">@Model.Message</textarea>
-                        @if (Err("Message") is string messageError)
-                        {
-                            <p id="c-message-error" class="@errorTextCls">@messageError</p>
-                        }
+                                  class="@inputCls resize-none"></textarea>
                     </div>
 
-                    <button type="submit" data-busy-label="@sendingLabel"
-                            class="bg-brand-700 hover:bg-brand-800 disabled:bg-brand-500 disabled:cursor-wait text-white font-semibold px-8 py-3.5 rounded-full transition-colors inline-flex items-center gap-2">
+                    <button type="submit" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
                         @s.Pick("Send Message", "Thumela Umyalezo", "Stuur Boodskap")
                     </button>
                 </form>
@@ -142,16 +101,16 @@
             <!-- Details -->
             <div class="lg:col-span-2 space-y-8">
                 <div>
-                    <h2 class="text-2xl font-bold text-ink-900 mb-6 font-serif">@s.Pick("Our Details", "Iinkcukacha Zethu", "Ons Besonderhede")</h2>
+                    <h2 class="text-2xl font-bold text-stone-900 mb-6" style="font-family: Lora, serif;">@s.Pick("Our Details", "Iinkcukacha Zethu", "Ons Besonderhede")</h2>
                     <dl class="space-y-5">
                         @foreach (var (icon, label, value, sub) in details)
                         {
                             <div class="flex items-start gap-4">
-                                <span class="text-brand-700 flex-shrink-0 mt-0.5"><partial name="_Icon" model="@icon" /></span>
+                                <span class="text-xl flex-shrink-0 mt-0.5" aria-hidden="true">@icon</span>
                                 <div>
-                                    <dt class="font-semibold text-ink-900 text-sm">@label</dt>
-                                    <dd class="text-ink-700 text-sm">@value</dd>
-                                    <dd class="text-ink-500 text-xs">@sub</dd>
+                                    <dt class="font-semibold text-stone-800 text-sm">@label</dt>
+                                    <dd class="text-stone-700 text-sm">@value</dd>
+                                    <dd class="text-stone-400 text-xs">@sub</dd>
                                 </div>
                             </div>
                         }

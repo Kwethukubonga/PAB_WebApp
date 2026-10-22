@@ -15,30 +15,9 @@
         "af" => $"Hou asseblief jou verwysingsnommer {reference} byderhand indien jy moet opvolg.",
         _ => $"Please save your reference number {reference} in case you need to follow up with us."
     };
-
-    // How the person asked to be reached, so the page can say it back to them rather than
-    // leaving them watching the wrong thing (G6). The form posts this through.
-    var method = Request.Query["by"].ToString();
-    var methodLabel = method switch
-    {
-        "phone" => s.Pick("by phone", "ngomnxeba", "per telefoon"),
-        "whatsapp" => s.Pick("on WhatsApp", "nge-WhatsApp", "op WhatsApp"),
-        "email" => s.Pick("by email", "nge-imeyile", "per e-pos"),
-        "visit" => s.Pick("when you visit the centre", "xa utyelela iziko", "wanneer jy die sentrum besoek"),
-        _ => s.Pick("using the details you gave", "ngeenkcukacha ozinikileyo", "met die besonderhede wat jy gegee het")
-    };
-
-    // The timing PAB works to, and the same figure the Resources FAQ gives.
-    var replyNote = s.Pick(
-        $"The team usually replies within 2 to 5 working days, {methodLabel}. Urgent requests are dealt with first.",
-        $"Iqela lidla ngokuphendula phakathi kweentsuku ezi-2 ukuya kwezi-5 zomsebenzi, {methodLabel}. Izicelo ezingxamisekileyo ziqala kuqala.",
-        $"Die span antwoord gewoonlik binne 2 tot 5 werksdae, {methodLabel}. Dringende versoeke kry eerste aandag.");
-
-    var copyLabel = s.Pick("Copy reference", "Khuphela isalathiso", "Kopieer verwysing");
-    var copiedLabel = s.Pick("Copied", "Kukhutshelwe", "Gekopieer");
 }
 
-<div class="min-h-[80vh] bg-cream flex items-center">
+<div class="min-h-[80vh] bg-[#fffbf5] flex items-center">
     <div class="max-w-2xl mx-auto px-4 py-16 text-center w-full">
 
         <div class="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-8">
@@ -48,86 +27,50 @@
             </svg>
         </div>
 
-        @* The "SUCCESSFULLY SUBMITTED" eyebrow is gone: the tick and the heading both say it (E4). *@
-        <h1 class="text-2xl md:text-3xl font-bold text-ink-900 mb-4 leading-snug font-serif">@c.Title</h1>
-        <p class="text-ink-600 text-base leading-relaxed mb-6 max-w-md mx-auto">@c.Sub</p>
-
-        @* When to expect an answer, and how it will come: somebody waiting should not have to
-           guess either, and it is the first thing they would otherwise write in to ask (G6). *@
-        <p class="text-ink-900 text-base leading-relaxed mb-10 max-w-md mx-auto">@replyNote</p>
+        <p class="text-green-600 text-sm font-semibold uppercase tracking-widest mb-3">
+            @s.Pick("Successfully Submitted", "Ithunyiwe Ngempumelelo", "Suksesvol Ingedien")
+        </p>
+        <h1 class="text-2xl md:text-3xl font-bold text-stone-900 mb-4 leading-snug" style="font-family: Lora, serif;">@c.Title</h1>
+        <p class="text-stone-500 text-base leading-relaxed mb-10 max-w-md mx-auto">@c.Sub</p>
 
         <!-- Reference card -->
-        <div class="bg-white border border-ink-100 rounded-2xl p-7 shadow-sm mb-8">
+        <div class="bg-white border border-stone-100 rounded-2xl p-7 shadow-sm mb-8">
             <dl class="grid grid-cols-3 gap-5 text-center">
                 <div>
-                    <dt class="text-xs font-semibold text-ink-500 uppercase tracking-widest mb-2">@c.RefLabel</dt>
-                    <dd class="font-bold text-ink-900 text-xl font-mono tracking-wide">@reference</dd>
+                    <dt class="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-2">@c.RefLabel</dt>
+                    <dd class="font-bold text-stone-900 text-xl font-mono tracking-wide">@reference</dd>
                 </div>
                 <div>
-                    <dt class="text-xs font-semibold text-ink-500 uppercase tracking-widest mb-2">@c.DateLabel</dt>
-                    <dd class="font-semibold text-ink-900 text-sm">@today</dd>
+                    <dt class="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-2">@c.DateLabel</dt>
+                    <dd class="font-semibold text-stone-800 text-sm">@today</dd>
                 </div>
                 <div>
-                    <dt class="text-xs font-semibold text-ink-500 uppercase tracking-widest mb-2">@c.StatusLabel</dt>
+                    <dt class="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-2">@c.StatusLabel</dt>
                     <dd><span class="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">@c.Status</span></dd>
                 </div>
             </dl>
-            <div class="mt-6 pt-5 border-t border-ink-100">
-                @* Copying beats writing a six-character code down off a screen, especially on a
-                   phone someone may need to put away quickly (G6). *@
-                <button type="button" data-copy-reference data-reference="@reference"
-                        data-copied-label="@copiedLabel" class="btn-secondary text-sm">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="9" y="9" width="12" height="12" rx="2" />
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                    </svg>
-                    <span data-copy-label>@copyLabel</span>
-                </button>
-                <p class="mt-4 text-xs text-ink-600 text-center leading-relaxed">
-                    @keepRefNote
-                </p>
-            </div>
+            <p class="mt-6 pt-5 border-t border-stone-100 text-xs text-stone-400 text-center leading-relaxed">
+                @keepRefNote
+            </p>
         </div>
 
         <!-- What happens next -->
-        <div class="bg-brand-50 border border-brand-100 rounded-2xl p-6 text-left mb-8">
-            <h2 class="font-bold text-brand-900 mb-4 font-serif">@c.WhatNext</h2>
+        <div class="bg-purple-50 border border-purple-100 rounded-2xl p-6 text-left mb-8">
+            <h2 class="font-bold text-purple-900 mb-4" style="font-family: Lora, serif;">@c.WhatNext</h2>
             <ol class="space-y-3">
                 @for (var i = 0; i < c.Steps.Length; i++)
                 {
-                    <li class="flex items-start gap-3 text-sm text-brand-800">
-                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center text-xs font-bold text-brand-900 mt-0.5" aria-hidden="true">@(i + 1)</span>
+                    <li class="flex items-start gap-3 text-sm text-purple-800">
+                        <span class="flex-shrink-0 w-5 h-5 rounded-full bg-purple-200 flex items-center justify-center text-xs font-bold text-purple-900 mt-0.5" aria-hidden="true">@(i + 1)</span>
                         <span>@c.Steps[i]</span>
                     </li>
                 }
             </ol>
         </div>
 
-        @* Somebody can be in danger between sending this and PAB reaching them, so the page
-           that says "we have your request" also says what to do if tonight is the problem (G6). *@
-        <div class="bg-status-urgentSurface border border-status-urgent/30 rounded-2xl p-6 text-left mb-8">
-            <h2 class="font-bold text-ink-900 mb-2 font-serif">
-                @s.Pick("If you are in danger now", "Ukuba usengozini ngoku", "As jy nou in gevaar is")
-            </h2>
-            <p class="text-sm text-ink-900 leading-relaxed">
-                @s.Pick("Do not wait for us to call. Phone the police on 10111, or the Philisa crisis line, which is answered after hours.",
-                        "Musa ukulinda side sikufowunele. Fowunela amapolisa ku-10111, okanye umgca wongxamiseko wePhilisa, ophendulwayo emva kwexesha lomsebenzi.",
-                        "Moenie wag dat ons bel nie. Skakel die polisie by 10111, of die Philisa-krisislyn, wat na-ure beantwoord word.")
-            </p>
-            <ul class="mt-4 space-y-2 text-sm font-semibold">
-                <li><a href="tel:10111" class="text-status-urgent hover:underline">10111</a>
-                    <span class="font-normal text-ink-700">· @s.Pick("Police", "Amapolisa", "Polisie")</span></li>
-                <li><a href="tel:+27817469889" class="text-status-urgent hover:underline">+27 (0)81 746 9889</a>
-                    <span class="font-normal text-ink-700">· @s.Pick("Philisa crisis line", "Umgca wongxamiseko wePhilisa", "Philisa-krisislyn")</span></li>
-                <li><a href="tel:0800428428" class="text-status-urgent hover:underline">0800 428 428</a>
-                    <span class="font-normal text-ink-700">· @s.Pick("GBV helpline, 24/7", "Umgca woncedo we-GBV, 24/7", "GGG-hulplyn, 24/7")</span></li>
-            </ul>
-        </div>
-
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/" class="btn-primary">@c.BackHome</a>
-            <a href="/RequestSupport" class="btn-secondary">@c.AnotherRequest</a>
+            <a href="/" class="bg-purple-700 hover:bg-purple-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">@c.BackHome</a>
+            <a href="/RequestSupport" class="border border-stone-200 text-stone-700 hover:bg-stone-50 font-semibold px-8 py-3.5 rounded-full transition-colors">@c.AnotherRequest</a>
         </div>
     </div>
 </div>

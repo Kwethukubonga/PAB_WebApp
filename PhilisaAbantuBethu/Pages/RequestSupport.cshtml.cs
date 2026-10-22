@@ -1,24 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PhilisaAbantuBethu.Forms;
-using PhilisaAbantuBethu.Localization;
-using PhilisaAbantuBethu.Services;
+using PhilisaAbantuBethu.Data;
+using PhilisaAbantuBethu.Models;
 
 namespace PhilisaAbantuBethu.Pages;
 
-// The form's longest field is capped at 3000 characters, so the whole post fits comfortably in
-// 64KB. Kestrel's default 30MB would otherwise let someone force a 30MB allocation per post, and
-// with the rate limit only 5 posts a window, that is a cheap way to lean on the server's memory.
-[RequestSizeLimit(64 * 1024)]
 public class RequestSupportModel : PageModel
 {
 
-    private readonly ISupportRequestService _requests;
+    private readonly AppDbContext _db;
 
-    public RequestSupportModel(ISupportRequestService requests)
+    public RequestSupportModel(AppDbContext db)
     {
 
-        _requests = requests;
+        _db = db;
 
     }
 
@@ -27,66 +22,47 @@ public class RequestSupportModel : PageModel
     [BindProperty] public string? Phone { get; set; }
     [BindProperty] public string? Email { get; set; }
     [BindProperty] public string? Area { get; set; }
-    [BindProperty] public string? ContactMethod { get; set; } = "phone";
+    [BindProperty] public string? ContactMethod { get; set; }
     [BindProperty] public string? SupportType { get; set; }
     [BindProperty] public string? Situation { get; set; }
-    [BindProperty] public string? Urgent { get; set; } = "no";
+    [BindProperty] public string? Urgent { get; set; }
     [BindProperty] public string? Extra { get; set; }
     [BindProperty] public bool Declaration { get; set; }
-
-    // Hidden from people, so only bots fill it in.
-    [BindProperty] public string? Website { get; set; }
-
-    /// <summary>A message for the whole form, shown above the fields.</summary>
-    public string? FormError { get; private set; }
 
     public void OnGet() { }
 
     public async Task<IActionResult> OnPostAsync()
     {
 
-        var s = HttpContext.Strings();
-
-        if (!string.IsNullOrEmpty(Website))
-        {
-            // Nothing is saved. A real person who somehow filled it in still gets a way to reach PAB.
-            FormError = s.Pick(
-                "We couldn't send your request. Please try again, or call us on +27 (0)21 565 0668.",
-                "Asikwazanga ukuthumela isicelo sakho. Nceda uzame kwakhona, okanye usifowunele ku-+27 (0)21 565 0668.",
-                "Ons kon nie jou versoek stuur nie. Probeer asseblief weer, of skakel ons by +27 (0)21 565 0668.");
+        if (!ModelState.IsValid) 
             return Page();
-        }
 
-        var input = new SupportRequestInput(
-            FirstName, Surname, Phone, Email, Area, ContactMethod,
-            SupportType, Situation, Urgent, Extra, Declaration);
+        var reference = "PAB" + Random.Shared.Next(100, 1000);
 
-        foreach (var (field, message) in SupportRequestValidator.Validate(input, s))
+        var request = new SupportRequest
         {
-            ModelState.AddModelError(field, message);
-        }
 
-        if (!ModelState.IsValid)
-        {
-            FormError = s.Pick(
-                "Please check the highlighted fields.",
-                "Nceda ujonge iindawo eziphawulweyo.",
-                "Kontroleer asseblief die gemerkte velde.");
-            return Page();
-        }
+            FirstName = FirstName ?? "",
+            Surname = Surname ?? "",
+            Phone = Phone ?? "",
+            Email = Email ?? "",
+            Area = Area ?? "",
+            ContactMethod = ContactMethod ?? "",
+            SupportType = SupportType ?? "",
+            Situation = Situation ?? "",
+            Urgent = Urgent ?? "",
+            Extra = Extra ?? "",
+            Declaration = Declaration,
+            Reference = reference,
+            SubmittedAt = DateTime.Now
 
-        var reference = await _requests.SubmitAsync(input, HttpContext.RequestAborted);
+        };
 
-        // "by" lets the confirmation page say back how PAB will reach them (G6). It is the
-        // choice they just made, not anything identifying.
-        return RedirectToPage("/Confirmation", new { reference, by = ContactMethod });
+        _db.SupportRequests.Add(request);
+        await _db.SaveChangesAsync();
+
+        return RedirectToPage("/Confirmation", new { reference = request.Reference });
 
     }
-
-    /// <summary>The message for one field, or null when it has none.</summary>
-    public string? ErrorFor(string field) =>
-        ModelState.TryGetValue(field, out var entry) && entry.Errors.Count > 0
-            ? entry.Errors[0].ErrorMessage
-            : null;
 
 }

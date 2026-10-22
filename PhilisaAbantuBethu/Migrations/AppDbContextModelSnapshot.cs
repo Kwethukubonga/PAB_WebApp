@@ -15,7 +15,7 @@ namespace PhilisaAbantuBethu.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.13");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
 
             modelBuilder.Entity("PhilisaAbantuBethu.Models.ContactInquiry", b =>
                 {
@@ -25,35 +25,28 @@ namespace PhilisaAbantuBethu.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(254)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
                         .IsRequired()
-                        .HasMaxLength(3000)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Subject")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubmittedAt");
 
                     b.ToTable("ContactInquiries");
                 });
@@ -66,12 +59,10 @@ namespace PhilisaAbantuBethu.Migrations
 
                     b.Property<string>("Area")
                         .IsRequired()
-                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ContactMethod")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Declaration")
@@ -79,7 +70,6 @@ namespace PhilisaAbantuBethu.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasMaxLength(254)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Extra")
@@ -88,39 +78,18 @@ namespace PhilisaAbantuBethu.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("HandledBy")
-                        .HasMaxLength(254)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Reference")
                         .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Situation")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("StaffNotes")
-                        .HasMaxLength(2000)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(60)
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue("new");
-
-                    b.Property<DateTime?>("StatusUpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SubmittedAt")
@@ -128,27 +97,17 @@ namespace PhilisaAbantuBethu.Migrations
 
                     b.Property<string>("SupportType")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Urgent")
                         .IsRequired()
-                        .HasMaxLength(60)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Reference")
-                        .IsUnique();
-
-                    b.HasIndex("Status");
-
-                    b.HasIndex("SubmittedAt");
 
                     b.ToTable("SupportRequests");
                 });
