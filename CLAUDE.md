@@ -4,6 +4,8 @@ The public website for Philisa Abafazi Bethu (PAB), a gender-based violence and 
 
 Sister repo: the Android volunteer app, `Kwethukubonga/PAB_Volunteers`. Clone both side by side (`PAB_WebApp` and `PAB_Volunteers` in the same folder): the design tokens tool and the plan assume it.
 
+**Team:** this website is owned by Unathi, Nuha and Ash. The Android app is owned by Tlhogi and Kwethu, who built most of what's on `develop` here (Kwethu: API, services, design tokens, CSS, images, Docker; Tlhogi: forms, rate limiting, security headers, staff area, CI deploy) and can explain it. Shared items (B3, W10, J2, J5, E2) are split per the handover's section 4.
+
 ## Where to start
 
 1. Read `../PAB_Volunteers/handover/HANDOVER.md`: what's done, what's left, in order, with owners.
@@ -36,6 +38,8 @@ node tools/tokens/build.js --android ../PAB_Volunteers   # writes Android's colo
 - `Localization/` English, isiXhosa, Afrikaans via `s.Pick(en, xh, af)`. Every user-facing string needs all three.
 
 ## Rules for this project
+
+- **Final submission:** the handover notes in `PAB_Volunteers/handover/` are for the team only and must be deleted before the final submission (`HANDOVER.md` section 5), along with the line in this file that points to them. Whenever someone mentions the final submission, the deadline, merging to `main` for submission, or a release, remind them of that checklist before doing anything else.
 
 - **No AI attribution anywhere**: no `Co-Authored-By: Claude`/Copilot trailers, no "Generated with" lines, in commits, PRs, code or comments. The README's AI Usage Declaration section is the one place AI use is described.
 - **Merge PRs with "Create a merge commit"**, never squash: squashing rewrote a teammate's commits under one name once already, and the marker grades individual contribution.
