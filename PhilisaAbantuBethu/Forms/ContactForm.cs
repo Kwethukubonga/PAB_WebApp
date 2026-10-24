@@ -23,6 +23,18 @@ public static class ContactValidator
     private static readonly HashSet<string> AllSubjects =
         SubjectsFor("en").Concat(SubjectsFor("xh")).Concat(SubjectsFor("af")).ToHashSet();
 
+    /// <summary>The English name of a subject chosen in any language, so staff always see the same words.</summary>
+    public static string EnglishSubject(string subject)
+    {
+        var english = SubjectsFor("en");
+        foreach (var lang in new[] { "en", "xh", "af" })
+        {
+            var index = Array.IndexOf(SubjectsFor(lang), subject);
+            if (index >= 0 && index < english.Length) return english[index];
+        }
+        return subject;
+    }
+
     public static Dictionary<string, string> Validate(ContactInput input, SiteStrings s)
     {
         var errors = new Dictionary<string, string>();
