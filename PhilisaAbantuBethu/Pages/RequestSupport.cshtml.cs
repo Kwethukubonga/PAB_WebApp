@@ -50,10 +50,7 @@ public class RequestSupportModel : PageModel
         if (!string.IsNullOrEmpty(Website))
         {
             // Nothing is saved. A real person who somehow filled it in still gets a way to reach PAB.
-            FormError = s.Pick(
-                "We couldn't send your request. Please try again, or call us on +27 (0)21 565 0668.",
-                "Asikwazanga ukuthumela isicelo sakho. Nceda uzame kwakhona, okanye usifowunele ku-+27 (0)21 565 0668.",
-                "Ons kon nie jou versoek stuur nie. Probeer asseblief weer, of skakel ons by +27 (0)21 565 0668.");
+            FormError = s["RequestSupport.CouldntSendRequestPlease"];
             return Page();
         }
 
@@ -68,10 +65,7 @@ public class RequestSupportModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            FormError = s.Pick(
-                "Please check the highlighted fields.",
-                "Nceda ujonge iindawo eziphawulweyo.",
-                "Kontroleer asseblief die gemerkte velde.");
+            FormError = s["RequestSupport.PleaseCheckHighlightedFields"];
             return Page();
         }
 

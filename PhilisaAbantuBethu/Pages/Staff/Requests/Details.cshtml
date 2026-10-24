@@ -16,7 +16,7 @@
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        @s.Pick("All requests", "Zonke izicelo", "Alle versoeke")
+        @s["Staff.Details.AllRequests"]
     </a>
 
     @if (Model.StatusMessage is not null)
@@ -28,7 +28,7 @@
         <h1 class="font-mono text-2xl font-bold text-ink-900">@r.Reference</h1>
         @if (r.IsUrgent)
         {
-            <span class="pill-urgent">@s.Pick("Urgent", "Ingxamisekile", "Dringend")</span>
+            <span class="pill-urgent">@s["Staff.Index.Urgent"]</span>
         }
         <span class="@StaffText.StatusPill(r.Status)">@StaffText.StatusLabel(s, r.Status)</span>
     </div>
@@ -36,61 +36,82 @@
         @StaffText.LocalTime(r.SubmittedAt) · @StaffText.Ago(s, r.SubmittedAt, now)
         @if (r.HandledBy is not null && r.StatusUpdatedAt is DateTime updated)
         {
-            <span class="block">@s.Pick("Last updated by", "Ihlaziywe ngu-", "Laas opgedateer deur") @r.HandledBy · @StaffText.LocalTime(updated)</span>
+            <span class="block">@s["Staff.Details.LastUpdated"] @r.HandledBy · @StaffText.LocalTime(updated)</span>
         }
     </p>
 
     <section class="mt-8 bg-white border border-ink-200 rounded-2xl p-6">
         <h2 class="text-lg font-bold text-ink-900 mb-4 font-serif">@s.Form.Step1Label</h2>
         <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
-            <div><dt class="text-ink-600">@s.Pick("Name", "Igama", "Naam")</dt><dd class="font-semibold text-ink-900">@r.FirstName @r.Surname</dd></div>
+            <div><dt class="text-ink-600">@s["RequestSupport.Name"]</dt><dd class="font-semibold text-ink-900">@r.FirstName @r.Surname</dd></div>
             <div><dt class="text-ink-600">@s.Form.Phone</dt><dd class="font-semibold"><a href="tel:@r.Phone.Replace(" ", "")" class="text-brand-700 hover:underline">@r.Phone</a></dd></div>
-            <div><dt class="text-ink-600">@s.Pick("Email", "I-imeyile", "E-pos")</dt><dd class="font-semibold text-ink-900">@(string.IsNullOrEmpty(r.Email) ? "-" : r.Email)</dd></div>
-            <div><dt class="text-ink-600">@s.Pick("Area", "Indawo", "Area")</dt><dd class="font-semibold text-ink-900">@r.Area</dd></div>
-            <div><dt class="text-ink-600">@s.Pick("Contact by", "Qhagamshelana nge", "Kontak per")</dt><dd class="font-semibold text-ink-900">@StaffText.ContactMethodLabel(s, r.ContactMethod)</dd></div>
+            <div><dt class="text-ink-600">@s["Staff.Details.Email"]</dt><dd class="font-semibold text-ink-900">@(string.IsNullOrEmpty(r.Email) ? "-" : r.Email)</dd></div>
+            <div><dt class="text-ink-600">@s["RequestSupport.Area"]</dt><dd class="font-semibold text-ink-900">@r.Area</dd></div>
+            <div><dt class="text-ink-600">@s["Staff.Details.ContactBy"]</dt><dd class="font-semibold text-ink-900">@StaffText.ContactMethodLabel(s, r.ContactMethod)</dd></div>
         </dl>
     </section>
 
     <section class="mt-6 bg-white border border-ink-200 rounded-2xl p-6">
         <h2 class="text-lg font-bold text-ink-900 mb-4 font-serif">@s.Form.Step2Label</h2>
-        <p class="text-sm text-ink-600">@s.Pick("Support type", "Uhlobo lwenkxaso", "Tipe ondersteuning")</p>
+        <p class="text-sm text-ink-600">@s["Staff.Details.SupportType"]</p>
         <p class="font-semibold text-ink-900">@r.SupportType</p>
-        <p class="mt-4 text-sm text-ink-600">@s.Pick("Their situation", "Imeko yabo", "Hul situasie")</p>
+        <p class="mt-4 text-sm text-ink-600">@s["Staff.Details.TheirSituation"]</p>
         <p class="mt-1 text-ink-900 whitespace-pre-line leading-relaxed">@r.Situation</p>
         @if (!string.IsNullOrWhiteSpace(r.Extra))
         {
-            <p class="mt-4 text-sm text-ink-600">@s.Pick("Anything else", "Nayiphi enye into", "Enigiets anders")</p>
+            <p class="mt-4 text-sm text-ink-600">@s["Staff.Details.AnythingElse"]</p>
             <p class="mt-1 text-ink-900 whitespace-pre-line leading-relaxed">@r.Extra</p>
         }
     </section>
 
-    <section class="mt-6 bg-white border border-ink-200 rounded-2xl p-6">
-        <h2 class="text-lg font-bold text-ink-900 mb-4 font-serif">@s.Pick("Move this request", "Hambisa esi sicelo", "Skuif hierdie versoek")</h2>
+    @* The margin keeps the heading clear of the sticky site header when the page jumps here. *@
+    <section id="move" class="mt-6 bg-white border border-ink-200 rounded-2xl p-6" style="scroll-margin-top: 6rem">
+        <h2 class="text-lg font-bold text-ink-900 mb-4 font-serif">@s["Staff.Details.MoveRequest"]</h2>
 
-        @* One form, so a note is saved together with the status it was written about. *@
-        <form method="post" asp-page-handler="Status" asp-route-id="@r.Id">
+        @* One form, so a note is saved together with the status it was written about. The fragment
+           brings staff back to this section when the page asks them to confirm a close. *@
+        <form method="post" asp-page-handler="Status" asp-route-id="@r.Id" asp-fragment="move">
             <label for="staff-notes" class="block text-sm font-semibold text-ink-900">
-                @s.Pick("What has been done", "Okwenziweyo", "Wat gedoen is")
+                @s["Staff.Details.WhatHasBeenDone"]
             </label>
             <p id="staff-notes-hint" class="mt-1 text-sm text-ink-600">
-                @s.Pick("For the team, not for the person who asked. Kept with the request.",
-                        "Yeqela, ingenjeyo mntu ocelileyo. Igcinwa nesicelo.",
-                        "Vir die span, nie vir die persoon wat gevra het nie. Word by die versoek gehou.")
+                @s["Staff.Details.TeamNotPersonWho"]
             </p>
             <textarea id="staff-notes" name="StaffNotes" rows="3"
                       maxlength="@PhilisaAbantuBethu.Forms.SupportRequestValidator.StaffNotesMax"
                       aria-describedby="staff-notes-hint"
-                      class="mt-2 w-full rounded-xl border border-ink-300 px-4 py-3 text-ink-900 focus:border-brand-700 focus:ring-2 focus:ring-brand-100">@r.StaffNotes</textarea>
+                      class="mt-2 w-full rounded-xl border border-ink-300 px-4 py-3 text-ink-900 focus:border-brand-700 focus:ring-2 focus:ring-brand-100">@(Model.ConfirmingClose ? Model.StaffNotes : r.StaffNotes)</textarea>
 
-            <div class="mt-4 flex flex-wrap gap-3">
-                @foreach (var status in SupportRequestStatus.All.Where(st => st != r.Status))
-                {
-                    <button type="submit" name="status" value="@status"
-                            class="min-h-[44px] px-5 rounded-full text-sm font-semibold @(status == SupportRequestStatus.Closed ? "border border-ink-500 text-ink-900 hover:bg-ink-50" : "bg-brand-700 hover:bg-brand-800 text-white")">
-                        @s.Pick("Mark as", "Phawula njenge", "Merk as") @StaffText.StatusLabel(s, status).ToLowerInvariant()
-                    </button>
-                }
-            </div>
+            @if (Model.ConfirmingClose)
+            {
+                <div class="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4" role="alert">
+                    <p class="font-semibold text-amber-900">@s.Format("Staff.Details.ConfirmCloseQuestion", r.Reference)</p>
+                    <p class="mt-1 text-sm text-amber-800">@s["Staff.Details.ConfirmCloseExplain"]</p>
+                    <input type="hidden" name="confirm" value="true" />
+                    <div class="mt-4 flex flex-wrap gap-3">
+                        <button type="submit" name="status" value="@SupportRequestStatus.Closed"
+                                class="min-h-[44px] px-5 rounded-full text-sm font-semibold bg-brand-700 hover:bg-brand-800 text-white">
+                            @s["Staff.Details.ConfirmCloseYes"]
+                        </button>
+                        <a asp-page="./Details" asp-route-id="@r.Id"
+                           class="inline-flex items-center min-h-[44px] px-5 rounded-full text-sm font-semibold border border-ink-500 text-ink-900 hover:bg-ink-50">
+                            @s["Staff.Details.ConfirmCloseCancel"]
+                        </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="mt-4 flex flex-wrap gap-3">
+                    @foreach (var status in SupportRequestStatus.All.Where(st => st != r.Status))
+                    {
+                        <button type="submit" name="status" value="@status"
+                                class="min-h-[44px] px-5 rounded-full text-sm font-semibold @(status == SupportRequestStatus.Closed ? "border border-ink-500 text-ink-900 hover:bg-ink-50" : "bg-brand-700 hover:bg-brand-800 text-white")">
+                            @s["Staff.Details.MarkAs"] @StaffText.StatusLabel(s, status).ToLowerInvariant()
+                        </button>
+                    }
+                </div>
+            }
         </form>
     </section>
 </div>

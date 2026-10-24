@@ -2,16 +2,13 @@
     var s = Context.Strings();
     var lang = Context.CurrentLang();
     var htmlLang = lang switch { "xh" => "xh-ZA", "af" => "af-ZA", _ => "en-ZA" };
-    var openMenuLabel = s.Pick("Open menu", "Vula imenyu", "Maak kieslys oop");
-    var skipLabel = s.Pick("Skip to content", "Tsibela kumxholo", "Spring na inhoud");
-    var aboutLabel = s.Pick("About Us", "Ngathi", "Oor Ons");
+    var openMenuLabel = s["Layout.OpenMenu"];
+    var skipLabel = s["Layout.SkipContent"];
+    var aboutLabel = s["Layout.AboutUs"];
     // Staff pages don't need it, and their own sign-out should be the way out there.
     var showQuickExit = ViewData["HideQuickExit"] as bool? != true;
-    var quickExitLabel = s.Pick("Leave this site", "Phuma kule sayithi", "Verlaat hierdie webwerf");
-    var quickExitHint = s.Pick(
-        "Leaves straight away for a weather page. You can also press Esc twice.",
-        "Ihamba ngoko nangoko iye kwiphepha lemozulu. Ungacofa kwakhona u-Esc kabini.",
-        "Gaan dadelik na 'n weerblad. Jy kan ook Esc twee keer druk.");
+    var quickExitLabel = s["Layout.LeaveSite"];
+    var quickExitHint = s["Layout.LeavesStraightAwayWeather"];
     var langOptions = new[]
     {
         ("en", "English"),
@@ -73,7 +70,7 @@
                 </span>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-7" aria-label="@s.Pick("Main", "Ephambili", "Hoof")">
+            <nav class="hidden lg:flex items-center gap-7" aria-label="@s["Layout.Main"]">
                 <a href="/" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@s.Nav.Home</a>
                 <a href="/About" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@aboutLabel</a>
                 <a href="/Programmes" class="text-sm font-medium text-ink-600 hover:text-brand-700 transition-colors">@s.Nav.Programmes</a>
@@ -85,7 +82,7 @@
                 @* Switching language is how an isiXhosa or Afrikaans speaker reads the site at
                    all, so these are full-size targets rather than the 28px they were (F5). *@
                 <div class="flex items-center border border-ink-200 rounded-full p-0.5 text-sm font-medium" role="group"
-                     aria-label="@s.Pick("Language", "Ulwimi", "Taal")">
+                     aria-label="@s["Layout.Language"]">
                     @foreach (var (code, label) in langOptions)
                     {
                         <a href="@Context.LangUrl(code)" lang="@code"
@@ -141,7 +138,7 @@
     </div>
 
     <div id="mobile-nav" hidden class="lg:hidden border-t border-ink-100 bg-white">
-        <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="@s.Pick("Mobile", "Kwifowuni", "Mobiel")">
+        <nav class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1" aria-label="@s["Layout.Mobile"]">
             <a href="/" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@s.Nav.Home</a>
             <a href="/About" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@aboutLabel</a>
             <a href="/Programmes" class="flex items-center min-h-target px-3 rounded-lg text-sm font-medium text-ink-700 hover:bg-ink-50">@s.Nav.Programmes</a>
@@ -217,11 +214,11 @@
                     <span class="text-white font-semibold font-serif">Philisa Abafazi Bethu</span>
                 </div>
                 <p class="text-sm leading-relaxed max-w-md">@s.Home.ServiceNote</p>
-                <p class="text-on-brand-muted text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s.Pick("Western Cape", "Ntshona Koloni", "Wes-Kaap")</p>
+                <p class="text-on-brand-muted text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s["Layout.WesternCape"]</p>
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s.Pick("Explore", "Jonga", "Verken")</h2>
+                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s["Layout.Explore"]</h2>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="/About" class="hover:text-white transition-colors">@aboutLabel</a></li>
                     <li><a href="/Programmes" class="hover:text-white transition-colors">@s.Nav.Programmes</a></li>
@@ -231,12 +228,12 @@
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s.Pick("Get help now", "Fumana uncedo ngoku", "Kry nou hulp")</h2>
+                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s["Layout.GetHelpNow"]</h2>
                 <ul class="space-y-2.5 text-sm">
-                    <li>@s.Pick("Office", "Ihhovisi", "Kantoor"): <a href="tel:+27215650668" class="hover:text-white">+27 (0)21 565 0668</a></li>
-                    <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"): <a href="tel:+27817469889" class="text-amber-300 font-semibold hover:text-amber-200">+27 (0)81 746 9889</a></li>
-                    <li>@s.Pick("Email", "I-imeyili", "E-pos"): <a href="mailto:admin@@philisaabafazi.org" class="hover:text-white">admin@@philisaabafazi.org</a></li>
-                    <li class="pt-2 text-on-brand-muted text-xs">@s.Pick("GBV helpline", "Umgca woncedo we-GBV", "Hulplyn vir gender-gebaseerde geweld"): 0800 428 428 (24/7)</li>
+                    <li>@s["Offline.Office"]: <a href="tel:+27215650668" class="hover:text-white">+27 (0)21 565 0668</a></li>
+                    <li>@s["Offline.CrisisLine"]: <a href="tel:+27817469889" class="text-amber-300 font-semibold hover:text-amber-200">+27 (0)81 746 9889</a></li>
+                    <li>@s["Layout.Email"]: <a href="mailto:admin@@philisaabafazi.org" class="hover:text-white">admin@@philisaabafazi.org</a></li>
+                    <li class="pt-2 text-on-brand-muted text-xs">@s["Layout.GBVHelpline"]: 0800 428 428 (24/7)</li>
                 </ul>
             </div>
         </div>

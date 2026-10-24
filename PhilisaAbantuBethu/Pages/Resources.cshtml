@@ -11,14 +11,10 @@
     <div class="max-w-3xl mx-auto px-4">
         <h1 class="text-4xl md:text-5xl font-bold mb-5 font-serif">@s.Nav.Resources</h1>
         <p class="text-on-brand-muted text-lg max-w-xl mx-auto leading-relaxed">
-            @s.Pick("Essential contacts, services, and information to support you and your family.",
-                    "Amanxibelelanisi abalulekileyo, iinkonzo, kunye nolwazi ukukuxhasa wena nosapho lwakho.",
-                    "Noodsaaklike kontakte, dienste, en inligting om jou en jou gesin te ondersteun.")
+            @s["Resources.EssentialContactsServicesInformation"]
         </p>
         <p class="mt-5 text-sm text-on-brand-muted" data-offline-ready hidden>
-            @s.Pick("These numbers stay on this page even with no data.",
-                    "La manani ahlala kweli phepha nangaphandle kwedatha.",
-                    "Hierdie nommers bly op hierdie bladsy, selfs sonder data.")
+            @s["Resources.TheseNumbersStayPage"]
         </p>
     </div>
 </section>
@@ -60,7 +56,7 @@
                     <partial name="_Icon" model="@("help")" />
                 </span>
                 <h2 class="font-bold text-ink-900 text-xl font-serif">
-                    @s.Pick("Frequently Asked Questions", "Imibuzo Ebuzwa Rhoqo", "Gereelde Vrae")
+                    @s["Resources.FrequentlyAskedQuestions"]
                 </h2>
             </div>
             <div>
@@ -88,14 +84,10 @@
                             @if (isLast)
                             {
                                 <button type="button" data-forget-site hidden class="btn-secondary mt-4 text-sm">
-                                    @s.Pick("Clear what this site has saved on this phone",
-                                            "Susa oko le sayithi iyigcinileyo kule fowuni",
-                                            "Vee uit wat hierdie werf op hierdie foon gestoor het")
+                                    @s["Resources.ClearWhatSiteHas"]
                                 </button>
                                 <p data-forget-done hidden role="status" class="mt-3 text-sm font-medium text-status-success">
-                                    @s.Pick("Cleared. The emergency numbers will need data again.",
-                                            "Kususwe. Amanani ongxamiseko aza kufuna idatha kwakhona.",
-                                            "Uitgevee. Die noodnommers sal weer data nodig hê.")
+                                    @s["Resources.ClearedEmergencyNumbersWill"]
                                 </p>
                             }
                         </div>
@@ -108,11 +100,9 @@
 
 <section class="py-16 bg-amber-50 border-t border-amber-100 text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-ink-900 mb-3 font-serif">@s.Pick("Need More Help?", "Ufuna Uncedo Oluninzi?", "Benodig Jy Meer Hulp?")</h2>
+        <h2 class="text-2xl font-bold text-ink-900 mb-3 font-serif">@s["Resources.NeedMoreHelp"]</h2>
         <p class="text-ink-600 mb-6 text-sm">
-            @s.Pick("Get in touch and our team will be in touch within 2–5 business days.",
-                    "Qhagamshelana nathi kwaye iqela lethu liza kuqhagamshelana nawe phakathi kweentsuku ezi-2–5 zomsebenzi.",
-                    "Kontak ons en ons span sal binne 2–5 besigheidsdae met jou skakel.")
+            @s["Resources.GetTouchTeamWill"]
         </p>
         <a href="/Contact" class="btn-primary">
             @s.Home.ContactUs

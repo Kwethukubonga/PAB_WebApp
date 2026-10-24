@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Home.WhatWeDo" xml:space="preserve">
+    <value>Wat Ons Doen</value>
+  </data>
+  <data name="Home.ReachOut" xml:space="preserve">
+    <value>Kontak ons: geen rekening nodig nie, geen oordeel nie. Vertel ons net hoe ons kan help.</value>
+  </data>
+  <data name="Home.FreeAndConfidential" xml:space="preserve">
+    <value>Gratis en vertroulik.</value>
+  </data>
+  <data name="About.AboutUs" xml:space="preserve">
+    <value>Oor ons</value>
+  </data>
+  <data name="About.Ubuntu" xml:space="preserve">
+    <value>Ubuntu</value>
+  </data>
+  <data name="About.BelieveAfricanPhilosophyPerson" xml:space="preserve">
+    <value>Ons glo in die Afrika-filosofie dat 'n mens 'n mens is deur ander mense. Alles wat ons doen is gegrond in hierdie kollektiewe mensdom.</value>
+  </data>
+  <data name="About.Dignity" xml:space="preserve">
+    <value>Waardigheid</value>
+  </data>
+  <data name="About.EveryIndividualServeTreated" xml:space="preserve">
+    <value>Elke individu wat ons bedien, word met absolute respek en waardigheid behandel, ongeag hul omstandighede of agtergrond.</value>
+  </data>
+  <data name="About.Compassion" xml:space="preserve">
+    <value>Deernis</value>
+  </data>
+  <data name="About.LeadEmpathyTeamListens" xml:space="preserve">
+    <value>Ons lei met empatie. Ons span luister deeglik voordat ons optree, om te verseker dat ons response aangepas is by werklike behoeftes.</value>
+  </data>
+  <data name="About.Empowerment" xml:space="preserve">
+    <value>Bemagtiging</value>
+  </data>
+  <data name="About.DoNotMerelyProvide" xml:space="preserve">
+    <value>Ons verskaf nie net dienste nie: ons bou kapasiteit. Ons wil hê elke persoon wat ons help moet in staat wees om ander te help.</value>
+  </data>
+  <data name="About.Integrity" xml:space="preserve">
+    <value>Integriteit</value>
+  </data>
+  <data name="About.TransparentOperationsAccountableCommunities" xml:space="preserve">
+    <value>Ons is deursigtig in ons bedrywighede, aanspreeklik teenoor ons gemeenskappe, en eerlik in alles wat ons doen.</value>
+  </data>
+  <data name="About.Inclusivity" xml:space="preserve">
+    <value>Inklusiwiteit</value>
+  </data>
+  <data name="About.WelcomeAllPeopleRegardless" xml:space="preserve">
+    <value>Ons verwelkom alle mense ongeag geslag, geloof, taal, of agtergrond. Ons deure is oop vir enigeen in nood.</value>
+  </data>
+  <data name="About.Story" xml:space="preserve">
+    <value>Ons Verhaal</value>
+  </data>
+  <data name="Layout.AboutUs" xml:space="preserve">
+    <value>Oor Ons</value>
+  </data>
+  <data name="About.LearnWhoWhatDrives" xml:space="preserve">
+    <value>Leer wie ons is, wat ons dryf, en die waardes wat elke besluit wat ons neem, rig.</value>
+  </data>
+  <data name="About.History" xml:space="preserve">
+    <value>Ons Geskiedenis</value>
+  </data>
+  <data name="About.15YearsBuildingCommunity" xml:space="preserve">
+    <value>15 Jaar van Gemeenskapsbou</value>
+  </data>
+  <data name="About.PhilisaAbafaziBethuMeaning" xml:space="preserve">
+    <value>Philisa Abafazi Bethu, wat “genees ons vroue” in isiZulu beteken, is in 2009 gestig deur 'n groep vasberade vroue in Kaapstad se noordelike voorstede wat hul bure sonder ondersteuning sien swaarkry het. Wat begin het as 'n klein voedingskema in 'n kerksaal, het gegroei tot een van die Wes-Kaap se mees omvattende gemeenskapswelsynsorganisasies.</value>
+  </data>
+  <data name="About.OverYearsExpandedReach" xml:space="preserve">
+    <value>Deur die jare het ons ons bereik uitgebrei van voedselsekerheid na ondersteuning vir gender-gebaseerde geweld, jeugontwikkeling, kinderwelsyn, en sorg vir bejaardes, en die netwerk van programme en vennote uitgebou wat dit makliker maak vir gemeenskapslede om toegang tot ons dienste te verkry.</value>
+  </data>
+  <data name="About.TodayServeOver14" xml:space="preserve">
+    <value>Vandag bedien ons jaarliks meer as 14 200 gesinne regoor 12 gemeenskappe, aangedryf deur 'n toegewyde span personeel en meer as 320 vrywilligers.</value>
+  </data>
+  <data name="About.Mission" xml:space="preserve">
+    <value>Ons Missie</value>
+  </data>
+  <data name="About.WalkAlongsideCommunitiesTheir" xml:space="preserve">
+    <value>Om saam met gemeenskappe te loop in hul mees kwesbare oomblikke.</value>
+  </data>
+  <data name="About.CommittedProvidingAccessibleDignified" xml:space="preserve">
+    <value>Ons is daartoe verbind om toeganklike, waardige, en holistiese ondersteuningsdienste te bied wat die grondoorsake van armoede, ongelykheid, en maatskaplike uitsluiting aanspreek, en individue en gesinne bemagtig om volhoubare, vervullende lewens te bou.</value>
+  </data>
+  <data name="About.Vision" xml:space="preserve">
+    <value>Ons Visie</value>
+  </data>
+  <data name="About.CommunitiesWhereEveryPerson" xml:space="preserve">
+    <value>Gemeenskappe waar elke persoon met waardigheid en hoop floreer.</value>
+  </data>
+  <data name="About.EnvisionSouthAfricaWhere" xml:space="preserve">
+    <value>Ons visualiseer 'n Suid-Afrika waar geen vrou onveilig is nie, geen kind honger ly nie, geen bejaarde vergeet word nie, en geen jong persoon sonder geleentheid is nie: 'n samelewing waar ubuntu nie net 'n woord is nie, maar 'n geleefde werklikheid.</value>
+  </data>
+  <data name="About.WhatStand" xml:space="preserve">
+    <value>Waarvoor Ons Staan</value>
+  </data>
+  <data name="About.CoreValues" xml:space="preserve">
+    <value>Ons Kernwaardes</value>
+  </data>
+  <data name="About.Founder" xml:space="preserve">
+    <value>Ons Stigter</value>
+  </data>
+  <data name="About.Journey" xml:space="preserve">
+    <value>Ons Reis</value>
+  </data>
+  <data name="About.LucindaEvansDreamProtecting" xml:space="preserve">
+    <value>Lucinda Evans se droom om mishandelde vroue en kinders te beskerm en te bemagtig het werklikheid geword op die dag toe sy 'n skare sien saamdrom het om 'n man wat sy vrou op straat slaan; almal het gekyk, maar niemand het ingegryp om dit te stop nie.</value>
+  </data>
+  <data name="About.SinceThenLucindaHas" xml:space="preserve">
+    <value>Sedertdien het Lucinda daarna gestreef om die persoon te word op wie haar gemeenskap kan staatmaak vir beskerming en gerusstelling. Gebaseer in Lavender Hill, is sy vasbeslote om te verseker dat die vroue en kinders daar altyd 'n plek het wat hoop bied, selfs in hul moeilikste omstandighede.</value>
+  </data>
+  <data name="About.Leadership" xml:space="preserve">
+    <value>Leierskap</value>
+  </data>
+  <data name="About.MeetTeam" xml:space="preserve">
+    <value>Ontmoet die Span</value>
+  </data>
+  <data name="About.DedicatedPeopleWhoMake" xml:space="preserve">
+    <value>Die toegewyde mense wat ons werk elke dag moontlik maak.</value>
+  </data>
+  <data name="About.ReadyMakeDifference" xml:space="preserve">
+    <value>Gereed om 'n Verskil te Maak?</value>
+  </data>
+  <data name="About.ExploreProgrammesReachOut" xml:space="preserve">
+    <value>Verken ons programme of kontak ons om te leer hoe jy ons gemeenskap kan ondersteun of by ons kan aansluit.</value>
+  </data>
+  <data name="Programmes.TenProgrammesOneMission" xml:space="preserve">
+    <value>Tien programme, een missie: om elke persoon wat by ons deure inkom, op te hef en te bemagtig.</value>
+  </data>
+  <data name="Programmes.LearnMore" xml:space="preserve">
+    <value>Leer Meer</value>
+  </data>
+  <data name="Programmes.NeedSupport" xml:space="preserve">
+    <value>Benodig Jy Ondersteuning?</value>
+  </data>
+  <data name="Programmes.GetTouchTeamWill" xml:space="preserve">
+    <value>Kontak ons en ons span sal jou help om die regte program te vind.</value>
+  </data>
+  <data name="ProgrammeDetail.Overview" xml:space="preserve">
+    <value>Oorsig</value>
+  </data>
+  <data name="ProgrammeDetail.Objectives" xml:space="preserve">
+    <value>Doelwitte</value>
+  </data>
+  <data name="ProgrammeDetail.Activities" xml:space="preserve">
+    <value>Aktiwiteite</value>
+  </data>
+  <data name="ProgrammeDetail.Gallery" xml:space="preserve">
+    <value>Galery</value>
+  </data>
+  <data name="ProgrammeDetail.Testimonials" xml:space="preserve">
+    <value>Getuienisse</value>
+  </data>
+  <data name="ProgrammeDetail.Previous" xml:space="preserve">
+    <value>Vorige</value>
+  </data>
+  <data name="ProgrammeDetail.Next" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="ProgrammeDetail.EmergencyContact" xml:space="preserve">
+    <value>Noodkontak</value>
+  </data>
+  <data name="ProgrammeDetail.NeedSupport" xml:space="preserve">
+    <value>Benodig Jy Hierdie Ondersteuning?</value>
+  </data>
+  <data name="ProgrammeDetail.GetTouchTeamWill" xml:space="preserve">
+    <value>Kontak ons en ons span sal met jou skakel om jou te lei.</value>
+  </data>
+  <data name="ProgrammeDetail.FreeQualifyingCommunityMembers" xml:space="preserve">
+    <value>Gratis vir kwalifiserende gemeenskapslede.</value>
+  </data>
+  <data name="ProgrammeDetail.Close" xml:space="preserve">
+    <value>Maak toe</value>
+  </data>
+  <data name="Resources.EssentialContactsServicesInformation" xml:space="preserve">
+    <value>Noodsaaklike kontakte, dienste, en inligting om jou en jou gesin te ondersteun.</value>
+  </data>
+  <data name="Resources.TheseNumbersStayPage" xml:space="preserve">
+    <value>Hierdie nommers bly op hierdie bladsy, selfs sonder data.</value>
+  </data>
+  <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
+    <value>Gereelde Vrae</value>
+  </data>
+  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
+    <value>Vee uit wat hierdie werf op hierdie foon gestoor het</value>
+  </data>
+  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
+    <value>Uitgevee. Die noodnommers sal weer data nodig hê.</value>
+  </data>
+  <data name="Resources.NeedMoreHelp" xml:space="preserve">
+    <value>Benodig Jy Meer Hulp?</value>
+  </data>
+  <data name="Resources.GetTouchTeamWill" xml:space="preserve">
+    <value>Kontak ons en ons span sal binne 2–5 besigheidsdae met jou skakel.</value>
+  </data>
+  <data name="Offline.NoConnection" xml:space="preserve">
+    <value>Geen verbinding</value>
+  </data>
+  <data name="Offline.Offline" xml:space="preserve">
+    <value>Jy is vanlyn</value>
+  </data>
+  <data name="Offline.PageNeedsDataLoad" xml:space="preserve">
+    <value>Hierdie bladsy het data nodig om te laai. Die nommers hieronder werk sonder data op hierdie foon.</value>
+  </data>
+  <data name="Offline.PhilisaAbafaziBethu" xml:space="preserve">
+    <value>Philisa Abafazi Bethu</value>
+  </data>
+  <data name="Offline.CrisisLine" xml:space="preserve">
+    <value>Krisislyn</value>
+  </data>
+  <data name="Offline.Office" xml:space="preserve">
+    <value>Kantoor</value>
+  </data>
+  <data name="Offline.TryAgain" xml:space="preserve">
+    <value>Probeer weer</value>
+  </data>
+  <data name="Layout.OpenMenu" xml:space="preserve">
+    <value>Maak kieslys oop</value>
+  </data>
+  <data name="Layout.SkipContent" xml:space="preserve">
+    <value>Spring na inhoud</value>
+  </data>
+  <data name="Layout.LeaveSite" xml:space="preserve">
+    <value>Verlaat hierdie webwerf</value>
+  </data>
+  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
+    <value>Gaan dadelik na 'n weerblad. Jy kan ook Esc twee keer druk.</value>
+  </data>
+  <data name="Layout.Main" xml:space="preserve">
+    <value>Hoof</value>
+  </data>
+  <data name="Layout.Language" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="Layout.Mobile" xml:space="preserve">
+    <value>Mobiel</value>
+  </data>
+  <data name="Layout.WesternCape" xml:space="preserve">
+    <value>Wes-Kaap</value>
+  </data>
+  <data name="Layout.Explore" xml:space="preserve">
+    <value>Verken</value>
+  </data>
+  <data name="Layout.GetHelpNow" xml:space="preserve">
+    <value>Kry nou hulp</value>
+  </data>
+  <data name="Layout.Email" xml:space="preserve">
+    <value>E-pos</value>
+  </data>
+  <data name="Layout.GBVHelpline" xml:space="preserve">
+    <value>Hulplyn vir gender-gebaseerde geweld</value>
+  </data>
+  <data name="RequestSupport.FormProgress" xml:space="preserve">
+    <value>Vorm vordering</value>
+  </data>
+  <data name="RequestSupport.Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="RequestSupport.No" xml:space="preserve">
+    <value>Nee</value>
+  </data>
+  <data name="RequestSupport.Sending" xml:space="preserve">
+    <value>Word gestuur…</value>
+  </data>
+  <data name="RequestSupport.StepOf" xml:space="preserve">
+    <value>Stap {0} van {1}</value>
+  </data>
+  <data name="RequestSupport.Completed" xml:space="preserve">
+    <value>voltooi</value>
+  </data>
+  <data name="RequestSupport.IfImmediateDangerCall" xml:space="preserve">
+    <value>As jy in onmiddellike gevaar is, skakel 10111 of ons krisislyn na-ure by</value>
+  </data>
+  <data name="RequestSupport.RequestSummary" xml:space="preserve">
+    <value>Versoekopsomming</value>
+  </data>
+  <data name="RequestSupport.Name" xml:space="preserve">
+    <value>Naam</value>
+  </data>
+  <data name="RequestSupport.Area" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="RequestSupport.SupportType" xml:space="preserve">
+    <value>Tipe ondersteuning</value>
+  </data>
+  <data name="RequestSupport.Urgent" xml:space="preserve">
+    <value>Dringend</value>
+  </data>
+  <data name="RequestSupport.CouldntSendRequestPlease" xml:space="preserve">
+    <value>Ons kon nie jou versoek stuur nie. Probeer asseblief weer, of skakel ons by +27 (0)21 565 0668.</value>
+  </data>
+  <data name="RequestSupport.PleaseCheckHighlightedFields" xml:space="preserve">
+    <value>Kontroleer asseblief die gemerkte velde.</value>
+  </data>
+  <data name="Contact.WriteMessageHere" xml:space="preserve">
+    <value>Skryf jou boodskap hier...</value>
+  </data>
+  <data name="Contact.Phone" xml:space="preserve">
+    <value>Telefoon</value>
+  </data>
+  <data name="Contact.MonFri8am5pm" xml:space="preserve">
+    <value>Ma–Vr, 8:00–17:00</value>
+  </data>
+  <data name="Contact.ResponseWithin2448" xml:space="preserve">
+    <value>Reaksie binne 24–48 uur</value>
+  </data>
+  <data name="Contact.Address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="Contact.7965WesternCapeSouth" xml:space="preserve">
+    <value>7965, Wes-Kaap, Suid-Afrika</value>
+  </data>
+  <data name="Contact.CrisisLine" xml:space="preserve">
+    <value>Krisislyn</value>
+  </data>
+  <data name="Contact.AvailableAfterHours" xml:space="preserve">
+    <value>Beskikbaar na-ure</value>
+  </data>
+  <data name="Contact.GetTouch" xml:space="preserve">
+    <value>Skakel In</value>
+  </data>
+  <data name="Contact.ContactUs" xml:space="preserve">
+    <value>Kontak Ons</value>
+  </data>
+  <data name="Contact.WedLoveHearWhether" xml:space="preserve">
+    <value>Ons hoor graag van jou, of jy nou ondersteuning soek, wil vrywillig werk, of met ons wil vennoot word.</value>
+  </data>
+  <data name="Contact.SendUsMessage" xml:space="preserve">
+    <value>Stuur Vir Ons 'n Boodskap</value>
+  </data>
+  <data name="Contact.MessageSent" xml:space="preserve">
+    <value>Boodskap Gestuur!</value>
+  </data>
+  <data name="Contact.ThankReachingOutTeam" xml:space="preserve">
+    <value>Dankie dat jy uitgereik het. Ons span sal binne 1–2 besigheidsdae reageer.</value>
+  </data>
+  <data name="Contact.FullName" xml:space="preserve">
+    <value>Volle Naam</value>
+  </data>
+  <data name="Contact.EmailAddress" xml:space="preserve">
+    <value>E-posadres</value>
+  </data>
+  <data name="Contact.PhoneNumber" xml:space="preserve">
+    <value>Foonnommer</value>
+  </data>
+  <data name="Contact.Subject" xml:space="preserve">
+    <value>Onderwerp</value>
+  </data>
+  <data name="Contact.SelectSubject" xml:space="preserve">
+    <value>Kies 'n onderwerp</value>
+  </data>
+  <data name="Contact.Message" xml:space="preserve">
+    <value>Boodskap</value>
+  </data>
+  <data name="Contact.SendMessage" xml:space="preserve">
+    <value>Stuur Boodskap</value>
+  </data>
+  <data name="Contact.Details" xml:space="preserve">
+    <value>Ons Besonderhede</value>
+  </data>
+  <data name="Contact.CouldntSendMessagePlease" xml:space="preserve">
+    <value>Ons kon nie jou boodskap stuur nie. Probeer asseblief weer, of e-pos admin@philisaabafazi.org.</value>
+  </data>
+  <data name="Confirmation.Phone" xml:space="preserve">
+    <value>per telefoon</value>
+  </data>
+  <data name="Confirmation.WhatsApp" xml:space="preserve">
+    <value>op WhatsApp</value>
+  </data>
+  <data name="Confirmation.Email" xml:space="preserve">
+    <value>per e-pos</value>
+  </data>
+  <data name="Confirmation.WhenVisitCentre" xml:space="preserve">
+    <value>wanneer jy die sentrum besoek</value>
+  </data>
+  <data name="Confirmation.UsingDetailsGave" xml:space="preserve">
+    <value>met die besonderhede wat jy gegee het</value>
+  </data>
+  <data name="Confirmation.TeamUsuallyRepliesWithin" xml:space="preserve">
+    <value>Die span antwoord gewoonlik binne 2 tot 5 werksdae, {0}. Dringende versoeke kry eerste aandag.</value>
+  </data>
+  <data name="Confirmation.CopyReference" xml:space="preserve">
+    <value>Kopieer verwysing</value>
+  </data>
+  <data name="Confirmation.Copied" xml:space="preserve">
+    <value>Gekopieer</value>
+  </data>
+  <data name="Confirmation.IfDangerNow" xml:space="preserve">
+    <value>As jy nou in gevaar is</value>
+  </data>
+  <data name="Confirmation.DoNotWaitUs" xml:space="preserve">
+    <value>Moenie wag dat ons bel nie. Skakel die polisie by 10111, of die Philisa-krisislyn, wat na-ure beantwoord word.</value>
+  </data>
+  <data name="Confirmation.Police" xml:space="preserve">
+    <value>Polisie</value>
+  </data>
+  <data name="Confirmation.PhilisaCrisisLine" xml:space="preserve">
+    <value>Philisa-krisislyn</value>
+  </data>
+  <data name="Confirmation.GBVHelpline247" xml:space="preserve">
+    <value>GGG-hulplyn, 24/7</value>
+  </data>
+  <data name="StatusCode.PleaseWaitFewMinutes" xml:space="preserve">
+    <value>Wag asseblief 'n paar minute</value>
+  </data>
+  <data name="StatusCode.CantFindPage" xml:space="preserve">
+    <value>Ons kan nie daardie bladsy vind nie</value>
+  </data>
+  <data name="StatusCode.SomethingWentWrong" xml:space="preserve">
+    <value>Iets het verkeerd geloop</value>
+  </data>
+  <data name="StatusCode.SeveralMessagesWereSent" xml:space="preserve">
+    <value>Verskeie boodskappe is in 'n kort tyd van hierdie verbinding gestuur, so hierdie een is nie gestuur nie. Probeer asseblief oor sowat 10 minute weer, of skakel ons. Ons is hier om te help.</value>
+  </data>
+  <data name="StatusCode.PageMayHaveMoved" xml:space="preserve">
+    <value>Die bladsy het dalk geskuif. Jy kan steeds hulp vra of ons kontakbesonderhede hieronder vind.</value>
+  </data>
+  <data name="StatusCode.PleaseTryAgainCall" xml:space="preserve">
+    <value>Probeer asseblief weer, of skakel ons.</value>
+  </data>
+  <data name="StatusCode.ImmediateDanger" xml:space="preserve">
+    <value>In onmiddellike gevaar</value>
+  </data>
+  <data name="StatusCode.GoHomePage" xml:space="preserve">
+    <value>Gaan na die tuisblad</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterFirstName" xml:space="preserve">
+    <value>Vul asseblief jou voornaam in.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterSurname" xml:space="preserve">
+    <value>Vul asseblief jou van in.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterPhoneNumber" xml:space="preserve">
+    <value>Vul asseblief 'n foonnommer in waarop ons jou kan bereik.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsArea" xml:space="preserve">
+    <value>Sê asseblief vir ons in watter area of voorstad jy woon.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseChooseHowShould" xml:space="preserve">
+    <value>Kies asseblief hoe ons jou moet kontak.</value>
+  </data>
+  <data name="SupportRequestForm.AddEmailAddressChoose" xml:space="preserve">
+    <value>Voeg 'n e-posadres by, of kies 'n ander manier om jou te kontak.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseChooseTypeSupport" xml:space="preserve">
+    <value>Kies asseblief die soort ondersteuning wat jy nodig het.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsLittle" xml:space="preserve">
+    <value>Vertel ons asseblief 'n bietjie van jou situasie.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsWhether" xml:space="preserve">
+    <value>Sê asseblief of dit dringend is.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTickBoxConfirm" xml:space="preserve">
+    <value>Merk asseblief die blokkie om te bevestig en toestemming te gee.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseKeepUnderCharacters" xml:space="preserve">
+    <value>Hou dit asseblief onder {0} karakters.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseCheckEmailAddress" xml:space="preserve">
+    <value>Kontroleer asseblief die e-posadres.</value>
+  </data>
+  <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
+    <value>Vul 'n Suid-Afrikaanse selfoonnommer in, soos 082 123 4567, of 'n internasionale nommer wat met + begin.</value>
+  </data>
+  <data name="ContactForm.PleaseEnterName" xml:space="preserve">
+    <value>Vul asseblief jou naam in.</value>
+  </data>
+  <data name="ContactForm.PleaseGiveEmailAddress" xml:space="preserve">
+    <value>Gee asseblief 'n e-posadres of foonnommer sodat ons kan antwoord.</value>
+  </data>
+  <data name="ContactForm.PleaseChooseSubject" xml:space="preserve">
+    <value>Kies asseblief 'n onderwerp.</value>
+  </data>
+  <data name="ContactForm.PleaseWriteMessage" xml:space="preserve">
+    <value>Skryf asseblief jou boodskap.</value>
+  </data>
+  <data name="Staff.SignIn.Title" xml:space="preserve">
+    <value>Personeel-aanmelding</value>
+  </data>
+  <data name="Staff.SignIn.PhilisaAbafaziBethuStaff" xml:space="preserve">
+    <value>Vir Philisa Abafazi Bethu-personeel, om ondersteuningsversoeke te sien en te beantwoord.</value>
+  </data>
+  <data name="Staff.SignIn.StaffSignIsntSet" xml:space="preserve">
+    <value>Personeel-aanmelding is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).</value>
+  </data>
+  <data name="Staff.SignIn.Signing" xml:space="preserve">
+    <value>Besig om aan te meld…</value>
+  </data>
+  <data name="Staff.SignIn.EmailPasswordDontMatch" xml:space="preserve">
+    <value>Daardie e-pos en wagwoord stem nie ooreen nie. Probeer asseblief weer.</value>
+  </data>
+  <data name="Staff.SignIn.TooManyTriesPlease" xml:space="preserve">
+    <value>Te veel pogings. Wag asseblief 'n paar minute en probeer weer.</value>
+  </data>
+  <data name="Staff.SignIn.CouldntConnectCheckInternet" xml:space="preserve">
+    <value>Kon nie koppel nie. Kontroleer jou internetverbinding.</value>
+  </data>
+  <data name="Staff.SignIn.SomethingWentWrongPlease" xml:space="preserve">
+    <value>Iets het verkeerd geloop. Probeer asseblief weer.</value>
+  </data>
+  <data name="Staff.SignIn.EmailAddress" xml:space="preserve">
+    <value>E-posadres</value>
+  </data>
+  <data name="Staff.SignIn.Password" xml:space="preserve">
+    <value>Wagwoord</value>
+  </data>
+  <data name="Staff.SignIn.SignIn" xml:space="preserve">
+    <value>Meld aan</value>
+  </data>
+  <data name="Staff.SignIn.Or" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
+    <value>Gaan voort met Google</value>
+  </data>
+  <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
+    <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanmeld. Wagwoord vergeet? Stel dit terug op die Philisa Volunteers-toepassing se aanmeldskerm.</value>
+  </data>
+  <data name="Staff.SignIn.SignIsntAvailableRight" xml:space="preserve">
+    <value>Aanmelding is nie nou beskikbaar nie. Probeer asseblief oor 'n paar minute weer.</value>
+  </data>
+  <data name="Staff.SignIn.SignDidntWorkPlease" xml:space="preserve">
+    <value>Daardie aanmelding het nie gewerk nie. Probeer asseblief weer.</value>
+  </data>
+  <data name="Staff.SignIn.AccountIsntPABStaff" xml:space="preserve">
+    <value>Hierdie rekening is nie 'n PAB-personeelrekening nie. Gebruik die admin-rekening waarmee jy by die Philisa Volunteers-toepassing aanmeld.</value>
+  </data>
+  <data name="Staff.StaffBar.Staff" xml:space="preserve">
+    <value>Personeel</value>
+  </data>
+  <data name="Staff.StaffBar.SignedInAs" xml:space="preserve">
+    <value>Aangemeld as</value>
+  </data>
+  <data name="Staff.StaffBar.SignOut" xml:space="preserve">
+    <value>Meld af</value>
+  </data>
+  <data name="Staff.Index.SupportRequests" xml:space="preserve">
+    <value>Ondersteuningsversoeke</value>
+  </data>
+  <data name="Staff.Index.RequestStatus" xml:space="preserve">
+    <value>Versoekstatus</value>
+  </data>
+  <data name="Staff.Index.Show" xml:space="preserve">
+    <value>Wys</value>
+  </data>
+  <data name="Staff.Index.LongestWaitingFirst" xml:space="preserve">
+    <value>Langste wag eerste</value>
+  </data>
+  <data name="Staff.Index.NewestFirst" xml:space="preserve">
+    <value>Nuutste eerste</value>
+  </data>
+  <data name="Staff.Index.NothingHereRightNow" xml:space="preserve">
+    <value>Niks hier op die oomblik nie.</value>
+  </data>
+  <data name="Staff.Index.Urgent" xml:space="preserve">
+    <value>Dringend</value>
+  </data>
+  <data name="Staff.Details.AllRequests" xml:space="preserve">
+    <value>Alle versoeke</value>
+  </data>
+  <data name="Staff.Details.LastUpdated" xml:space="preserve">
+    <value>Laas opgedateer deur</value>
+  </data>
+  <data name="Staff.Details.Email" xml:space="preserve">
+    <value>E-pos</value>
+  </data>
+  <data name="Staff.Details.ContactBy" xml:space="preserve">
+    <value>Kontak per</value>
+  </data>
+  <data name="Staff.Details.SupportType" xml:space="preserve">
+    <value>Tipe ondersteuning</value>
+  </data>
+  <data name="Staff.Details.TheirSituation" xml:space="preserve">
+    <value>Hul situasie</value>
+  </data>
+  <data name="Staff.Details.AnythingElse" xml:space="preserve">
+    <value>Enigiets anders</value>
+  </data>
+  <data name="Staff.Details.MoveRequest" xml:space="preserve">
+    <value>Skuif hierdie versoek</value>
+  </data>
+  <data name="Staff.Details.WhatHasBeenDone" xml:space="preserve">
+    <value>Wat gedoen is</value>
+  </data>
+  <data name="Staff.Details.TeamNotPersonWho" xml:space="preserve">
+    <value>Vir die span, nie vir die persoon wat gevra het nie. Word by die versoek gehou.</value>
+  </data>
+  <data name="Staff.Details.MarkAs" xml:space="preserve">
+    <value>Merk as</value>
+  </data>
+  <data name="Staff.Details.PleaseKeepNotesUnder" xml:space="preserve">
+    <value>Hou die notas asseblief onder {0} karakters.</value>
+  </data>
+  <data name="Staff.Details.StatusUpdated" xml:space="preserve">
+    <value>Status opgedateer na</value>
+  </data>
+  <data name="StaffText.InProgress" xml:space="preserve">
+    <value>Aan die gang</value>
+  </data>
+  <data name="StaffText.Closed" xml:space="preserve">
+    <value>Gesluit</value>
+  </data>
+  <data name="StaffText.New" xml:space="preserve">
+    <value>Nuut</value>
+  </data>
+  <data name="StaffText.JustNow" xml:space="preserve">
+    <value>net nou</value>
+  </data>
+  <data name="StaffText.MinAgo" xml:space="preserve">
+    <value>{0} min gelede</value>
+  </data>
+  <data name="StaffText.HourAgo" xml:space="preserve">
+    <value>{0} uur gelede</value>
+  </data>
+  <data name="StaffText.HoursAgo" xml:space="preserve">
+    <value>{0} uur gelede</value>
+  </data>
+  <data name="StaffText.DayAgo" xml:space="preserve">
+    <value>{0} dag gelede</value>
+  </data>
+  <data name="StaffText.DaysAgo" xml:space="preserve">
+    <value>{0} dae gelede</value>
+  </data>
+  <data name="Nav.Home" xml:space="preserve">
+    <value>Tuis</value>
+  </data>
+  <data name="Nav.Programmes" xml:space="preserve">
+    <value>Ons Programme</value>
+  </data>
+  <data name="Nav.Resources" xml:space="preserve">
+    <value>Hulpbronne</value>
+  </data>
+  <data name="Nav.Contact" xml:space="preserve">
+    <value>Kontak</value>
+  </data>
+  <data name="Nav.RequestSupport" xml:space="preserve">
+    <value>Versoek Ondersteuning</value>
+  </data>
+  <data name="Home.Badge" xml:space="preserve">
+    <value>Philisa Abafazi Bethu: Gemeenskapsondersteuning</value>
+  </data>
+  <data name="Home.HeroHeading" xml:space="preserve">
+    <value>Het jy ondersteuning nodig?</value>
+  </data>
+  <data name="Home.HeroSub" xml:space="preserve">
+    <value>Ons is hier om te help.</value>
+  </data>
+  <data name="Home.HeroParagraph" xml:space="preserve">
+    <value>Philisa Abafazi Bethu ondersteun vroue, kinders en gesinne regoor Kaapstad se gemeenskappe. As jy ondersteuning nodig het, bied hierdie platform jou 'n eenvoudige en private manier om uit te reik en hulp te vra.</value>
+  </data>
+  <data name="Home.RequestSupport" xml:space="preserve">
+    <value>Versoek Ondersteuning</value>
+  </data>
+  <data name="Home.ExplorePrograms" xml:space="preserve">
+    <value>Verken Programme</value>
+  </data>
+  <data name="Home.ProgrammesSectionTitle" xml:space="preserve">
+    <value>Ons Programme</value>
+  </data>
+  <data name="Home.ProgrammesSectionSub" xml:space="preserve">
+    <value>Ons bied 'n reeks gratis programme vir gemeenskapslede wat ondersteuning nodig het.</value>
+  </data>
+  <data name="Home.ViewAll" xml:space="preserve">
+    <value>Bekyk Alle Programme</value>
+  </data>
+  <data name="Home.ResourcesTitle" xml:space="preserve">
+    <value>Hulpbronne &amp; Inligting</value>
+  </data>
+  <data name="Home.ResourcesSub" xml:space="preserve">
+    <value>Noodkontakte, gemeenskapsdienste, en nuttige inligting vir jou en jou gesin.</value>
+  </data>
+  <data name="Home.ViewResources" xml:space="preserve">
+    <value>Bekyk Hulpbronne</value>
+  </data>
+  <data name="Home.ContactTitle" xml:space="preserve">
+    <value>Onseker waar om te begin?</value>
+  </data>
+  <data name="Home.ContactSub" xml:space="preserve">
+    <value>Skakel of e-pos ons en ons sal jou help om die regte ondersteuning te vind.</value>
+  </data>
+  <data name="Home.ContactUs" xml:space="preserve">
+    <value>Kontak Ons</value>
+  </data>
+  <data name="Home.ServiceNote" xml:space="preserve">
+    <value>Philisa bedien hoofsaaklik Lavender Hill, Steenberg en die omliggende Cape Flats-gemeenskappe in Kaapstad.</value>
+  </data>
+  <data name="Form.Title" xml:space="preserve">
+    <value>Versoek Ondersteuning</value>
+  </data>
+  <data name="Form.Subtitle" xml:space="preserve">
+    <value>Jy hoef nie 'n rekening te skep nie. Vul eenvoudig die vorm in en ons sal met jou in verbinding tree.</value>
+  </data>
+  <data name="Form.ServiceArea" xml:space="preserve">
+    <value>Philisa bedien hoofsaaklik Lavender Hill, Steenberg en die omliggende Cape Flats-gemeenskappe. As jy buite hierdie areas is, kan jy steeds 'n versoek indien en die span sal jou waar moontlik adviseer.</value>
+  </data>
+  <data name="Form.Step1Label" xml:space="preserve">
+    <value>Oor Jou</value>
+  </data>
+  <data name="Form.Step2Label" xml:space="preserve">
+    <value>Ondersteuning Benodig</value>
+  </data>
+  <data name="Form.Step3Label" xml:space="preserve">
+    <value>Bevestig &amp; Dien In</value>
+  </data>
+  <data name="Form.FirstName" xml:space="preserve">
+    <value>Voornaam</value>
+  </data>
+  <data name="Form.Surname" xml:space="preserve">
+    <value>Van</value>
+  </data>
+  <data name="Form.Phone" xml:space="preserve">
+    <value>Foonnommer</value>
+  </data>
+  <data name="Form.Email" xml:space="preserve">
+    <value>E-posadres (opsioneel)</value>
+  </data>
+  <data name="Form.Area" xml:space="preserve">
+    <value>Jou Area / Voorstad</value>
+  </data>
+  <data name="Form.AreaPlaceholder" xml:space="preserve">
+    <value>bv. Lavender Hill, Steenberg, Mitchells Plain…</value>
+  </data>
+  <data name="Form.ContactMethod" xml:space="preserve">
+    <value>Hoe verkies jy dat ons jou kontak?</value>
+  </data>
+  <data name="Form.ContactPhone" xml:space="preserve">
+    <value>Telefoonoproep</value>
+  </data>
+  <data name="Form.ContactWhatsApp" xml:space="preserve">
+    <value>WhatsApp</value>
+  </data>
+  <data name="Form.ContactEmail" xml:space="preserve">
+    <value>E-pos</value>
+  </data>
+  <data name="Form.ContactVisit" xml:space="preserve">
+    <value>Persoonlike besoek</value>
+  </data>
+  <data name="Form.SupportType" xml:space="preserve">
+    <value>Watter tipe ondersteuning het jy nodig?</value>
+  </data>
+  <data name="Form.SupportTypePlaceholder" xml:space="preserve">
+    <value>Kies 'n tipe ondersteuning</value>
+  </data>
+  <data name="Form.Situation" xml:space="preserve">
+    <value>Beskryf asseblief kortliks jou situasie</value>
+  </data>
+  <data name="Form.SituationPlaceholder" xml:space="preserve">
+    <value>Vertel ons 'n bietjie oor wat jy tans deurmaak en watter soort hulp jy nodig het. Daar is nie 'n regte of verkeerde manier om dit te verduidelik nie: gebruik gerus jou eie woorde.</value>
+  </data>
+  <data name="Form.Urgent" xml:space="preserve">
+    <value>Is dit dringend?</value>
+  </data>
+  <data name="Form.UrgentYes" xml:space="preserve">
+    <value>Ja: ek het so gou moontlik hulp nodig</value>
+  </data>
+  <data name="Form.UrgentNo" xml:space="preserve">
+    <value>Nee: ek kan 'n paar dae wag</value>
+  </data>
+  <data name="Form.ExtraInfo" xml:space="preserve">
+    <value>Enigiets anders wat jy vir ons wil laat weet? (opsioneel)</value>
+  </data>
+  <data name="Form.ExtraInfoPlaceholder" xml:space="preserve">
+    <value>Enige bykomende besonderhede wat ons kan help om jou beter by te staan.</value>
+  </data>
+  <data name="Form.Declaration" xml:space="preserve">
+    <value>Ek bevestig dat die inligting wat ek verskaf het akkuraat is. Ek gee toestemming dat Philisa Abafazi Bethu Women Centre SA hierdie inligting gebruik om my versoek te verwerk, in ooreenstemming met hul privaatheidsbeleid.</value>
+  </data>
+  <data name="Form.SubmitRequest" xml:space="preserve">
+    <value>Dien Versoek In</value>
+  </data>
+  <data name="Form.Back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="Form.Next" xml:space="preserve">
+    <value>Gaan Voort</value>
+  </data>
+  <data name="Form.Required" xml:space="preserve">
+    <value>Verpligtend</value>
+  </data>
+  <data name="Confirmation.Title" xml:space="preserve">
+    <value>Dankie: Jou Versoek Is Ontvang</value>
+  </data>
+  <data name="Confirmation.Sub" xml:space="preserve">
+    <value>Philisa Abafazi Bethu sal jou kontak deur die kontakbesonderhede wat jy verskaf het te gebruik. Jy hoef op die oomblik niks anders te doen nie.</value>
+  </data>
+  <data name="Confirmation.RefLabel" xml:space="preserve">
+    <value>Verwysingsnommer</value>
+  </data>
+  <data name="Confirmation.DateLabel" xml:space="preserve">
+    <value>Datum Ingedien</value>
+  </data>
+  <data name="Confirmation.StatusLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Confirmation.Status" xml:space="preserve">
+    <value>Ontvang</value>
+  </data>
+  <data name="Confirmation.WhatNext" xml:space="preserve">
+    <value>Wat gebeur volgende?</value>
+  </data>
+  <data name="Confirmation.Steps.0" xml:space="preserve">
+    <value>Jou versoek is deur die Philisa Abafazi Bethu-span ontvang.</value>
+  </data>
+  <data name="Confirmation.Steps.1" xml:space="preserve">
+    <value>'n Spanlid sal jou versoek hersien en met jou in verbinding tree deur jou verkose kontakmetode.</value>
+  </data>
+  <data name="Confirmation.Steps.2" xml:space="preserve">
+    <value>As jou versoek dringend is, sal die span prioriteit gee om so gou moontlik met jou in verbinding te tree.</value>
+  </data>
+  <data name="Confirmation.Steps.3" xml:space="preserve">
+    <value>Hou asseblief jou verwysingsnommer byderhand indien jy moet opvolg.</value>
+  </data>
+  <data name="Confirmation.BackHome" xml:space="preserve">
+    <value>Terug na Tuisblad</value>
+  </data>
+  <data name="Confirmation.AnotherRequest" xml:space="preserve">
+    <value>Dien Nog 'n Versoek In</value>
+  </data>
+  <data name="SupportTypes.0" xml:space="preserve">
+    <value>Voedselbystand</value>
+  </data>
+  <data name="SupportTypes.1" xml:space="preserve">
+    <value>Bemagtiging van Vroue</value>
+  </data>
+  <data name="SupportTypes.2" xml:space="preserve">
+    <value>Jeugondersteuning</value>
+  </data>
+  <data name="SupportTypes.3" xml:space="preserve">
+    <value>Naskoolse Program</value>
+  </data>
+  <data name="SupportTypes.4" xml:space="preserve">
+    <value>Sorg vir Bejaardes</value>
+  </data>
+  <data name="SupportTypes.5" xml:space="preserve">
+    <value>Baba-redder-program</value>
+  </data>
+  <data name="SupportTypes.6" xml:space="preserve">
+    <value>Nood-skuiling</value>
+  </data>
+  <data name="SupportTypes.7" xml:space="preserve">
+    <value>Soek en Redding</value>
+  </data>
+  <data name="SupportTypes.8" xml:space="preserve">
+    <value>Maatskaplike Werk Dienste</value>
+  </data>
+  <data name="SupportTypes.9" xml:space="preserve">
+    <value>Algemene Hulp / Onseker</value>
+  </data>
+  <data name="Staff.StaffBar.Messages" xml:space="preserve">
+    <value>Boodskappe</value>
+  </data>
+  <data name="Staff.Messages.Title" xml:space="preserve">
+    <value>Kontakboodskappe</value>
+  </data>
+  <data name="Staff.Messages.Intro" xml:space="preserve">
+    <value>Boodskappe wat deur die Kontakblad gestuur is, nuutste eerste.</value>
+  </data>
+  <data name="Staff.Messages.None" xml:space="preserve">
+    <value>Geen boodskappe op die oomblik nie.</value>
+  </data>
+  <data name="Staff.Messages.AllMessages" xml:space="preserve">
+    <value>Alle boodskappe</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseQuestion" xml:space="preserve">
+    <value>Sluit {0}?</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseExplain" xml:space="preserve">
+    <value>Dit verdwyn van die Nuut- en Aan die gang-lyste. Jy kan dit weer oopmaak onder Gesluit as dit nodig is.</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseYes" xml:space="preserve">
+    <value>Ja, sluit dit</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseCancel" xml:space="preserve">
+    <value>Kanselleer</value>
+  </data>
+</root>

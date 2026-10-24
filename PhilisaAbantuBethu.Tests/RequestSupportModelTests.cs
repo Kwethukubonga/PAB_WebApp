@@ -19,7 +19,7 @@ public class RequestSupportModelTests
     }
 
     private static RequestSupportModel CreateModel(AppDbContext db) =>
-        new(new SupportRequestService(db, new ReferenceGenerator(), NullLogger<SupportRequestService>.Instance))
+        new(new SupportRequestService(db, new ReferenceGenerator(), new NoAlerts(), NullLogger<SupportRequestService>.Instance))
         {
             PageContext = PageModelTestHelpers.CreatePageContext(),
             FirstName = "Nomsa",

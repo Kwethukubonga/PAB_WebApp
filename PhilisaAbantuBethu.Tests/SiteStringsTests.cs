@@ -4,28 +4,41 @@ namespace PhilisaAbantuBethu.Tests;
 
 public class SiteStringsTests
 {
-    [Fact]
-    public void Pick_ReturnsEnglish_WhenLangIsEnglish()
+    [Theory]
+    [InlineData("en", "Home", "Food Assistance")]
+    [InlineData("xh", "Ikhaya", "Inkxaso Yokutya")]
+    [InlineData("af", "Tuis", "Voedselbystand")]
+    public void EachLanguage_IsFilledFromItsOwnFile(string lang, string home, string firstSupportType)
     {
-        var result = SiteStrings.En.Pick("Home", "Ikhaya", "Tuis");
+        var s = SiteStrings.For(lang);
 
-        Assert.Equal("Home", result);
+        Assert.Equal(home, s.Nav.Home);
+        Assert.Equal(firstSupportType, s.SupportTypes[0]);
+    }
+
+    [Theory]
+    [InlineData("en")]
+    [InlineData("xh")]
+    [InlineData("af")]
+    public void NoLabel_IsLeftAsItsKey(string lang)
+    {
+        // A misspelt key comes back as itself (e.g. "Form.Titel"), which would show on the page.
+        var s = SiteStrings.For(lang);
+        var labels = new object[] { s.Nav, s.Home, s.Form, s.Confirmation }
+            .SelectMany(group => group.GetType().GetProperties()
+                .Where(p => p.PropertyType == typeof(string))
+                .Select(p => (Name: $"{group.GetType().Name}.{p.Name}", Value: (string)p.GetValue(group)!)))
+            .Concat(s.Confirmation.Steps.Select((v, i) => (Name: $"Steps.{i}", Value: v)))
+            .Concat(s.SupportTypes.Select((v, i) => (Name: $"SupportTypes.{i}", Value: v)));
+
+        Assert.All(labels, l => Assert.DoesNotMatch(@"^(Nav|Home|Form|Confirmation|SupportTypes)\.", l.Value));
     }
 
     [Fact]
-    public void Pick_ReturnsXhosa_WhenLangIsXhosa()
+    public void Lists_KeepTheirLength()
     {
-        var result = SiteStrings.Xh.Pick("Home", "Ikhaya", "Tuis");
-
-        Assert.Equal("Ikhaya", result);
-    }
-
-    [Fact]
-    public void Pick_ReturnsAfrikaans_WhenLangIsAfrikaans()
-    {
-        var result = SiteStrings.Af.Pick("Home", "Ikhaya", "Tuis");
-
-        Assert.Equal("Tuis", result);
+        Assert.Equal(10, SiteStrings.En.SupportTypes.Length);
+        Assert.Equal(4, SiteStrings.En.Confirmation.Steps.Length);
     }
 
     [Theory]

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using PhilisaAbantuBethu.Data;
+using PhilisaAbantuBethu.Services;
 using PhilisaAbantuBethu.Staff;
 
 namespace PhilisaAbantuBethu.Tests;
@@ -27,12 +28,19 @@ public class SiteFactory : WebApplicationFactory<Program>
     /// <summary>How many entries at the right of X-Forwarded-For belong to the host's own proxies.</summary>
     public int? TrustProxyHops { get; init; }
 
+    /// <summary>Every alert the site would have emailed, instead of sending it.</summary>
+    public RecordingEmailSender Emails { get; } = new();
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
         builder.UseSetting("ConnectionStrings:DefaultConnection", $"Data Source={_dbPath}");
         builder.UseSetting("RateLimiting:FormPostsPerWindow", FormPostsPerWindow.ToString());
         builder.UseSetting("Firebase:ApiKey", "test-api-key");
+        builder.UseSetting("Alerts:ApiKey", "test-email-key");
+        builder.UseSetting("Alerts:From", "alerts@pab.test");
+        builder.UseSetting("Alerts:To", "intake@pab.test");
+        builder.UseSetting("Alerts:SiteUrl", "https://pab.test");
         if (TrustProxy) builder.UseSetting("TrustProxy", "true");
         if (TrustProxyHeader is not null) builder.UseSetting("TrustProxyHeader", TrustProxyHeader);
         if (TrustProxyHops is not null) builder.UseSetting("TrustProxyHops", TrustProxyHops.Value.ToString());
@@ -41,6 +49,7 @@ public class SiteFactory : WebApplicationFactory<Program>
         {
             services.AddSingleton<IFirebaseTokenVerifier, FakeTokenVerifier>();
             services.AddSingleton<IStaffDirectory, FakeStaffDirectory>();
+            services.AddSingleton<IEmailSender>(Emails);
         });
     }
 
@@ -88,4 +97,28 @@ public class SiteFactory : WebApplicationFactory<Program>
         public Task<bool> IsStaffAsync(FirebaseUser user, string idToken, CancellationToken ct = default) =>
             Task.FromResult(user.Uid == "admin-uid");
     }
+}
+
+/// <summary>Keeps the emails the site would have sent, and can be told to fail like a broken email service.</summary>
+public class RecordingEmailSender : IEmailSender
+{
+    private readonly System.Collections.Concurrent.ConcurrentQueue<EmailMessage> _sent = new();
+
+    public bool Fail { get; set; }
+
+    public IReadOnlyList<EmailMessage> Sent => _sent.ToList();
+
+    public Task SendAsync(EmailMessage message, CancellationToken ct = default)
+    {
+        if (Fail) throw new HttpRequestException("The email service answered 500.");
+        _sent.Enqueue(message);
+        return Task.CompletedTask;
+    }
+}
+
+/// <summary>For tests that build the services by hand and don't care about alerts.</summary>
+public class NoAlerts : IStaffAlerts
+{
+    public Task SupportRequestReceivedAsync(PhilisaAbantuBethu.Models.SupportRequest request, CancellationToken ct = default) => Task.CompletedTask;
+    public Task ContactMessageReceivedAsync(PhilisaAbantuBethu.Models.ContactInquiry message, CancellationToken ct = default) => Task.CompletedTask;
 }

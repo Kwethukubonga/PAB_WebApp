@@ -41,24 +41,35 @@ public class DetailsModel : StaffPageModel
     [BindProperty]
     public string? StaffNotes { get; set; }
 
-    public async Task<IActionResult> OnPostStatusAsync(string status)
+    /// <summary>True while the page is asking "are you sure?" before a request is closed (W12).</summary>
+    public bool ConfirmingClose { get; private set; }
+
+    public async Task<IActionResult> OnPostStatusAsync(string status, bool confirm = false)
     {
         var s = HttpContext.Strings();
 
         if (StaffNotes?.Length > SupportRequestValidator.StaffNotesMax)
         {
-            StatusMessage = s.Pick(
-                $"Please keep the notes under {SupportRequestValidator.StaffNotesMax} characters.",
-                $"Nceda ugcine amanqaku ngaphantsi koonobumba abayi-{SupportRequestValidator.StaffNotesMax}.",
-                $"Hou die notas asseblief onder {SupportRequestValidator.StaffNotesMax} karakters.");
+            StatusMessage = s.Format("Staff.Details.PleaseKeepNotesUnder", SupportRequestValidator.StaffNotesMax);
             return RedirectToPage(new { id = Id });
+        }
+
+        // Closing takes a request off the working lists, so ask first. The question is a page of
+        // its own rather than a script pop-up, so it can't be skipped, and the notes typed so far
+        // come back in the box to be saved with the close.
+        if (status == SupportRequestStatus.Closed && !confirm)
+        {
+            SupportRequest = await _requests.FindAsync(Id, HttpContext.RequestAborted);
+            if (SupportRequest is null) return NotFound();
+            ConfirmingClose = true;
+            return Page();
         }
 
         var changed = await _requests.SetStatusAsync(
             Id, status, StaffAuth.DisplayName(User), StaffNotes ?? "", HttpContext.RequestAborted);
         if (changed is null) return NotFound();
 
-        StatusMessage = s.Pick("Status updated to", "Imeko itshintshelwe ku-", "Status opgedateer na") + " " + StaffText.StatusLabel(s, status) + ".";
+        StatusMessage = s["Staff.Details.StatusUpdated"] + " " + StaffText.StatusLabel(s, status) + ".";
         return RedirectToPage(new { id = Id });
     }
 }

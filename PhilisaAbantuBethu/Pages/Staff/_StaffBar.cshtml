@@ -1,15 +1,22 @@
 @using PhilisaAbantuBethu.Staff
 @{
     var s = Context.Strings();
+    var onMessages = (ViewContext.RouteData.Values["page"] as string)?.StartsWith("/Staff/Messages") == true;
 }
-@* Who is signed in, and the way out, at the top of every staff page. *@
+@* Who is signed in, where they can go, and the way out, at the top of every staff page. *@
 <div class="bg-ink-900 text-ink-100">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-3 text-sm">
-        <a asp-page="/Staff/Requests/Index" class="font-semibold text-white hover:underline">@s.Pick("Staff", "Abasebenzi", "Personeel")</a>
-        <span class="text-ink-300">@s.Pick("Signed in as", "Ungene njenge", "Aangemeld as") @StaffAuth.DisplayName(User)</span>
+        <a asp-page="/Staff/Requests/Index" class="font-semibold text-white hover:underline">@s["Staff.StaffBar.Staff"]</a>
+        <nav class="flex items-center gap-1" aria-label="@s["Staff.StaffBar.Staff"]">
+            <a asp-page="/Staff/Requests/Index" aria-current="@(onMessages ? null : "page")"
+               class="inline-flex items-center min-h-[44px] px-3 rounded-full hover:underline @(onMessages ? "text-ink-300" : "text-white font-semibold")">@s["Staff.Index.SupportRequests"]</a>
+            <a asp-page="/Staff/Messages/Index" aria-current="@(onMessages ? "page" : null)"
+               class="inline-flex items-center min-h-[44px] px-3 rounded-full hover:underline @(onMessages ? "text-white font-semibold" : "text-ink-300")">@s["Staff.StaffBar.Messages"]</a>
+        </nav>
+        <span class="text-ink-300">@s["Staff.StaffBar.SignedInAs"] @StaffAuth.DisplayName(User)</span>
         <form method="post" asp-page="/Staff/SignIn" asp-page-handler="SignOut" class="ml-auto">
             <button type="submit" class="min-h-[44px] px-4 rounded-full border border-ink-500 hover:bg-ink-900 font-semibold">
-                @s.Pick("Sign out", "Phuma", "Meld af")
+                @s["Staff.StaffBar.SignOut"]
             </button>
         </form>
     </div>

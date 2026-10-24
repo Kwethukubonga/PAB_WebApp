@@ -1,0 +1,41 @@
+@page
+@model PhilisaAbantuBethu.Pages.Staff.Messages.IndexModel
+@using PhilisaAbantuBethu.Forms
+@using PhilisaAbantuBethu.Staff
+@{
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s["Staff.Messages.Title"];
+    var now = DateTime.UtcNow;
+}
+
+<partial name="_StaffBar" />
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+    <h1 class="text-3xl font-bold text-ink-900 mb-2 font-serif">@ViewData["Title"]</h1>
+    <p class="text-ink-600 mb-8">@s["Staff.Messages.Intro"]</p>
+
+    @if (Model.Messages.Count == 0)
+    {
+        <div class="bg-ink-50 border border-ink-200 rounded-2xl px-6 py-10 text-center">
+            <p class="text-ink-700 font-medium">@s["Staff.Messages.None"]</p>
+        </div>
+    }
+    else
+    {
+        <ul class="space-y-3">
+            @foreach (var message in Model.Messages)
+            {
+                <li>
+                    <a asp-page="./Details" asp-route-id="@message.Id"
+                       class="block bg-white border border-ink-200 rounded-2xl px-5 py-4 hover:border-brand-700 transition-colors">
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                            <span class="text-ink-900 font-semibold">@ContactValidator.EnglishSubject(message.Subject)</span>
+                            <span class="ml-auto text-xs text-ink-600" title="@StaffText.LocalTime(message.SubmittedAt)">@StaffText.Ago(s, message.SubmittedAt, now)</span>
+                        </div>
+                        <p class="text-sm text-ink-600">@message.Name</p>
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</div>

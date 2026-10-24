@@ -11,9 +11,9 @@ public static class StaffText
 
     public static string StatusLabel(SiteStrings s, string status) => status switch
     {
-        SupportRequestStatus.InProgress => s.Pick("In progress", "Iyaqhubeka", "Aan die gang"),
-        SupportRequestStatus.Closed => s.Pick("Closed", "Ivaliwe", "Gesluit"),
-        _ => s.Pick("New", "Entsha", "Nuut")
+        SupportRequestStatus.InProgress => s["StaffText.InProgress"],
+        SupportRequestStatus.Closed => s["StaffText.Closed"],
+        _ => s["StaffText.New"]
     };
 
     public static string ContactMethodLabel(SiteStrings s, string method) => method switch
@@ -32,19 +32,20 @@ public static class StaffText
     public static string Ago(SiteStrings s, DateTime utc, DateTime nowUtc)
     {
         var span = nowUtc - DateTime.SpecifyKind(utc, DateTimeKind.Utc);
-        if (span < TimeSpan.FromMinutes(1)) return s.Pick("just now", "ngoku nje", "net nou");
+        if (span < TimeSpan.FromMinutes(1)) return s["StaffText.JustNow"];
         if (span < TimeSpan.FromHours(1))
         {
             var m = (int)span.TotalMinutes;
-            return s.Pick($"{m} min ago", $"imizuzu engu-{m} edlulileyo", $"{m} min gelede");
+            return s.Format("StaffText.MinAgo", m);
         }
         if (span < TimeSpan.FromDays(1))
         {
             var h = (int)span.TotalHours;
-            return s.Pick(h == 1 ? "1 hour ago" : $"{h} hours ago", $"iiyure ezingu-{h} ezidlulileyo", $"{h} uur gelede");
+            // One and many are separate entries because English and Afrikaans change the word.
+            return s.Format(h == 1 ? "StaffText.HourAgo" : "StaffText.HoursAgo", h);
         }
         var d = (int)span.TotalDays;
-        return s.Pick(d == 1 ? "1 day ago" : $"{d} days ago", $"iintsuku ezingu-{d} ezidlulileyo", d == 1 ? "1 dag gelede" : $"{d} dae gelede");
+        return s.Format(d == 1 ? "StaffText.DayAgo" : "StaffText.DaysAgo", d);
     }
 
     /// <summary>
