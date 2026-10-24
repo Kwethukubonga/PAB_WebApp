@@ -28,7 +28,7 @@ public static class ContactValidator
         var errors = new Dictionary<string, string>();
 
         if (string.IsNullOrWhiteSpace(input.Name))
-            errors["Name"] = s.Pick("Please enter your name.", "Nceda ubhale igama lakho.", "Vul asseblief jou naam in.");
+            errors["Name"] = s["ContactForm.PleaseEnterName"];
         else if (input.Name.Trim().Length > NameMax)
             errors["Name"] = SupportRequestValidator.TooLong(s, NameMax);
 
@@ -43,16 +43,13 @@ public static class ContactValidator
 
         // Either one is enough, but without both the team has no way to reply.
         if (!hasEmail && !hasPhone)
-            errors["Email"] = s.Pick(
-                "Please give an email address or phone number so we can reply.",
-                "Nceda unike idilesi ye-imeyile okanye inombolo yefowuni ukuze sikuphendule.",
-                "Gee asseblief 'n e-posadres of foonnommer sodat ons kan antwoord.");
+            errors["Email"] = s["ContactForm.PleaseGiveEmailAddress"];
 
         if (string.IsNullOrWhiteSpace(input.Subject) || !AllSubjects.Contains(input.Subject))
-            errors["Subject"] = s.Pick("Please choose a subject.", "Nceda ukhethe isihloko.", "Kies asseblief 'n onderwerp.");
+            errors["Subject"] = s["ContactForm.PleaseChooseSubject"];
 
         if (string.IsNullOrWhiteSpace(input.Message))
-            errors["Message"] = s.Pick("Please write your message.", "Nceda ubhale umyalezo wakho.", "Skryf asseblief jou boodskap.");
+            errors["Message"] = s["ContactForm.PleaseWriteMessage"];
         else if (input.Message.Trim().Length > MessageMax)
             errors["Message"] = SupportRequestValidator.TooLong(s, MessageMax);
 

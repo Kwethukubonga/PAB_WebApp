@@ -261,4 +261,229 @@
   <data name="Layout.GBVHelpline" xml:space="preserve">
     <value>GBV helpline</value>
   </data>
+  <data name="RequestSupport.FormProgress" xml:space="preserve">
+    <value>Form progress</value>
+  </data>
+  <data name="RequestSupport.Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="RequestSupport.No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="RequestSupport.Sending" xml:space="preserve">
+    <value>Sending…</value>
+  </data>
+  <data name="RequestSupport.StepOf" xml:space="preserve">
+    <value>Step {0} of {1}</value>
+  </data>
+  <data name="RequestSupport.Completed" xml:space="preserve">
+    <value>completed</value>
+  </data>
+  <data name="RequestSupport.IfImmediateDangerCall" xml:space="preserve">
+    <value>If you are in immediate danger, call 10111 or our after-hours crisis line on</value>
+  </data>
+  <data name="RequestSupport.RequestSummary" xml:space="preserve">
+    <value>Request Summary</value>
+  </data>
+  <data name="RequestSupport.Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="RequestSupport.Area" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="RequestSupport.SupportType" xml:space="preserve">
+    <value>Support type</value>
+  </data>
+  <data name="RequestSupport.Urgent" xml:space="preserve">
+    <value>Urgent</value>
+  </data>
+  <data name="RequestSupport.CouldntSendRequestPlease" xml:space="preserve">
+    <value>We couldn't send your request. Please try again, or call us on +27 (0)21 565 0668.</value>
+  </data>
+  <data name="RequestSupport.PleaseCheckHighlightedFields" xml:space="preserve">
+    <value>Please check the highlighted fields.</value>
+  </data>
+  <data name="Contact.WriteMessageHere" xml:space="preserve">
+    <value>Write your message here...</value>
+  </data>
+  <data name="Contact.Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Contact.MonFri8am5pm" xml:space="preserve">
+    <value>Mon–Fri, 8am–5pm</value>
+  </data>
+  <data name="Contact.ResponseWithin2448" xml:space="preserve">
+    <value>Response within 24–48 hours</value>
+  </data>
+  <data name="Contact.Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Contact.7965WesternCapeSouth" xml:space="preserve">
+    <value>7965, Western Cape, South Africa</value>
+  </data>
+  <data name="Contact.CrisisLine" xml:space="preserve">
+    <value>Crisis Line</value>
+  </data>
+  <data name="Contact.AvailableAfterHours" xml:space="preserve">
+    <value>Available after hours</value>
+  </data>
+  <data name="Contact.GetTouch" xml:space="preserve">
+    <value>Get in Touch</value>
+  </data>
+  <data name="Contact.ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="Contact.WedLoveHearWhether" xml:space="preserve">
+    <value>We'd love to hear from you, whether you're seeking support, wanting to volunteer, or looking to partner with us.</value>
+  </data>
+  <data name="Contact.SendUsMessage" xml:space="preserve">
+    <value>Send Us a Message</value>
+  </data>
+  <data name="Contact.MessageSent" xml:space="preserve">
+    <value>Message Sent!</value>
+  </data>
+  <data name="Contact.ThankReachingOutTeam" xml:space="preserve">
+    <value>Thank you for reaching out. Our team will respond within 1–2 business days.</value>
+  </data>
+  <data name="Contact.FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="Contact.EmailAddress" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="Contact.PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Contact.Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Contact.SelectSubject" xml:space="preserve">
+    <value>Select a subject</value>
+  </data>
+  <data name="Contact.Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Contact.SendMessage" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="Contact.Details" xml:space="preserve">
+    <value>Our Details</value>
+  </data>
+  <data name="Contact.CouldntSendMessagePlease" xml:space="preserve">
+    <value>We couldn't send your message. Please try again, or email admin@philisaabafazi.org.</value>
+  </data>
+  <data name="Confirmation.Phone" xml:space="preserve">
+    <value>by phone</value>
+  </data>
+  <data name="Confirmation.WhatsApp" xml:space="preserve">
+    <value>on WhatsApp</value>
+  </data>
+  <data name="Confirmation.Email" xml:space="preserve">
+    <value>by email</value>
+  </data>
+  <data name="Confirmation.WhenVisitCentre" xml:space="preserve">
+    <value>when you visit the centre</value>
+  </data>
+  <data name="Confirmation.UsingDetailsGave" xml:space="preserve">
+    <value>using the details you gave</value>
+  </data>
+  <data name="Confirmation.TeamUsuallyRepliesWithin" xml:space="preserve">
+    <value>The team usually replies within 2 to 5 working days, {0}. Urgent requests are dealt with first.</value>
+  </data>
+  <data name="Confirmation.CopyReference" xml:space="preserve">
+    <value>Copy reference</value>
+  </data>
+  <data name="Confirmation.Copied" xml:space="preserve">
+    <value>Copied</value>
+  </data>
+  <data name="Confirmation.IfDangerNow" xml:space="preserve">
+    <value>If you are in danger now</value>
+  </data>
+  <data name="Confirmation.DoNotWaitUs" xml:space="preserve">
+    <value>Do not wait for us to call. Phone the police on 10111, or the Philisa crisis line, which is answered after hours.</value>
+  </data>
+  <data name="Confirmation.Police" xml:space="preserve">
+    <value>Police</value>
+  </data>
+  <data name="Confirmation.PhilisaCrisisLine" xml:space="preserve">
+    <value>Philisa crisis line</value>
+  </data>
+  <data name="Confirmation.GBVHelpline247" xml:space="preserve">
+    <value>GBV helpline, 24/7</value>
+  </data>
+  <data name="StatusCode.PleaseWaitFewMinutes" xml:space="preserve">
+    <value>Please wait a few minutes</value>
+  </data>
+  <data name="StatusCode.CantFindPage" xml:space="preserve">
+    <value>We can't find that page</value>
+  </data>
+  <data name="StatusCode.SomethingWentWrong" xml:space="preserve">
+    <value>Something went wrong</value>
+  </data>
+  <data name="StatusCode.SeveralMessagesWereSent" xml:space="preserve">
+    <value>Several messages were sent from this connection in a short time, so this one wasn't sent. Please try again in about 10 minutes, or call us. We're here to help.</value>
+  </data>
+  <data name="StatusCode.PageMayHaveMoved" xml:space="preserve">
+    <value>The page may have moved. You can still ask for help or find our contact details below.</value>
+  </data>
+  <data name="StatusCode.PleaseTryAgainCall" xml:space="preserve">
+    <value>Please try again, or call us.</value>
+  </data>
+  <data name="StatusCode.ImmediateDanger" xml:space="preserve">
+    <value>In immediate danger</value>
+  </data>
+  <data name="StatusCode.GoHomePage" xml:space="preserve">
+    <value>Go to the home page</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterFirstName" xml:space="preserve">
+    <value>Please enter your first name.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterSurname" xml:space="preserve">
+    <value>Please enter your surname.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterPhoneNumber" xml:space="preserve">
+    <value>Please enter a phone number we can reach you on.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsArea" xml:space="preserve">
+    <value>Please tell us your area or suburb.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseChooseHowShould" xml:space="preserve">
+    <value>Please choose how we should contact you.</value>
+  </data>
+  <data name="SupportRequestForm.AddEmailAddressChoose" xml:space="preserve">
+    <value>Add an email address, or choose another way for us to contact you.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseChooseTypeSupport" xml:space="preserve">
+    <value>Please choose the type of support you need.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsLittle" xml:space="preserve">
+    <value>Please tell us a little about your situation.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsWhether" xml:space="preserve">
+    <value>Please tell us whether this is urgent.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTickBoxConfirm" xml:space="preserve">
+    <value>Please tick the box to confirm and give consent.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseKeepUnderCharacters" xml:space="preserve">
+    <value>Please keep this under {0} characters.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseCheckEmailAddress" xml:space="preserve">
+    <value>Please check the email address.</value>
+  </data>
+  <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
+    <value>Enter a South African cellphone number, like 082 123 4567, or an international number starting with +.</value>
+  </data>
+  <data name="ContactForm.PleaseEnterName" xml:space="preserve">
+    <value>Please enter your name.</value>
+  </data>
+  <data name="ContactForm.PleaseGiveEmailAddress" xml:space="preserve">
+    <value>Please give an email address or phone number so we can reply.</value>
+  </data>
+  <data name="ContactForm.PleaseChooseSubject" xml:space="preserve">
+    <value>Please choose a subject.</value>
+  </data>
+  <data name="ContactForm.PleaseWriteMessage" xml:space="preserve">
+    <value>Please write your message.</value>
+  </data>
 </root>

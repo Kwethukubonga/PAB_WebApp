@@ -48,20 +48,17 @@ public static class SupportRequestValidator
         var errors = new Dictionary<string, string>();
 
         if (string.IsNullOrWhiteSpace(input.FirstName))
-            errors["FirstName"] = s.Pick("Please enter your first name.", "Nceda ubhale igama lakho.", "Vul asseblief jou voornaam in.");
+            errors["FirstName"] = s["SupportRequestForm.PleaseEnterFirstName"];
         else if (input.FirstName.Trim().Length > NameMax)
             errors["FirstName"] = TooLong(s, NameMax);
 
         if (string.IsNullOrWhiteSpace(input.Surname))
-            errors["Surname"] = s.Pick("Please enter your surname.", "Nceda ubhale ifani yakho.", "Vul asseblief jou van in.");
+            errors["Surname"] = s["SupportRequestForm.PleaseEnterSurname"];
         else if (input.Surname.Trim().Length > NameMax)
             errors["Surname"] = TooLong(s, NameMax);
 
         if (string.IsNullOrWhiteSpace(input.Phone))
-            errors["Phone"] = s.Pick(
-                "Please enter a phone number we can reach you on.",
-                "Nceda ubhale inombolo yefowuni esinokukufumana kuyo.",
-                "Vul asseblief 'n foonnommer in waarop ons jou kan bereik.");
+            errors["Phone"] = s["SupportRequestForm.PleaseEnterPhoneNumber"];
         else if (!PhoneNumber.IsValid(input.Phone))
             errors["Phone"] = InvalidPhone(s);
 
@@ -69,52 +66,31 @@ public static class SupportRequestValidator
             errors["Email"] = InvalidEmail(s);
 
         if (string.IsNullOrWhiteSpace(input.Area))
-            errors["Area"] = s.Pick(
-                "Please tell us your area or suburb.",
-                "Nceda usixelele indawo ohlala kuyo.",
-                "Sê asseblief vir ons in watter area of voorstad jy woon.");
+            errors["Area"] = s["SupportRequestForm.PleaseTellUsArea"];
         else if (input.Area.Trim().Length > AreaMax)
             errors["Area"] = TooLong(s, AreaMax);
 
         if (!ContactMethods.Contains(input.ContactMethod))
-            errors["ContactMethod"] = s.Pick(
-                "Please choose how we should contact you.",
-                "Nceda ukhethe indlela esinokuqhagamshelana nawe ngayo.",
-                "Kies asseblief hoe ons jou moet kontak.");
+            errors["ContactMethod"] = s["SupportRequestForm.PleaseChooseHowShould"];
         else if (input.ContactMethod == "email" && string.IsNullOrWhiteSpace(input.Email) && !errors.ContainsKey("Email"))
-            errors["Email"] = s.Pick(
-                "Add an email address, or choose another way for us to contact you.",
-                "Yongeza idilesi ye-imeyile, okanye ukhethe enye indlela yokuqhagamshelana nawe.",
-                "Voeg 'n e-posadres by, of kies 'n ander manier om jou te kontak.");
+            errors["Email"] = s["SupportRequestForm.AddEmailAddressChoose"];
 
         if (string.IsNullOrWhiteSpace(input.SupportType) || !SupportTypes.Contains(input.SupportType))
-            errors["SupportType"] = s.Pick(
-                "Please choose the type of support you need.",
-                "Nceda ukhethe uhlobo lwenkxaso oyidingayo.",
-                "Kies asseblief die soort ondersteuning wat jy nodig het.");
+            errors["SupportType"] = s["SupportRequestForm.PleaseChooseTypeSupport"];
 
         if (string.IsNullOrWhiteSpace(input.Situation))
-            errors["Situation"] = s.Pick(
-                "Please tell us a little about your situation.",
-                "Nceda usixelele kancinci ngemeko yakho.",
-                "Vertel ons asseblief 'n bietjie van jou situasie.");
+            errors["Situation"] = s["SupportRequestForm.PleaseTellUsLittle"];
         else if (input.Situation.Trim().Length > SituationMax)
             errors["Situation"] = TooLong(s, SituationMax);
 
         if (!UrgentValues.Contains(input.Urgent))
-            errors["Urgent"] = s.Pick(
-                "Please tell us whether this is urgent.",
-                "Nceda usixelele ukuba oku kungxamisekile na.",
-                "Sê asseblief of dit dringend is.");
+            errors["Urgent"] = s["SupportRequestForm.PleaseTellUsWhether"];
 
         if ((input.Extra?.Trim().Length ?? 0) > ExtraMax)
             errors["Extra"] = TooLong(s, ExtraMax);
 
         if (!input.Declaration)
-            errors["Declaration"] = s.Pick(
-                "Please tick the box to confirm and give consent.",
-                "Nceda uphawule ibhokisi ukuze uqinisekise kwaye unike imvume.",
-                "Merk asseblief die blokkie om te bevestig en toestemming te gee.");
+            errors["Declaration"] = s["SupportRequestForm.PleaseTickBoxConfirm"];
 
         return errors;
     }
@@ -128,18 +104,9 @@ public static class SupportRequestValidator
             && email[(email.LastIndexOf('@') + 1)..].Contains('.');
     }
 
-    internal static string TooLong(SiteStrings s, int max) => s.Pick(
-        $"Please keep this under {max} characters.",
-        $"Nceda ungadluli koonobumba abayi-{max}.",
-        $"Hou dit asseblief onder {max} karakters.");
+    internal static string TooLong(SiteStrings s, int max) => s.Format("SupportRequestForm.PleaseKeepUnderCharacters", max);
 
-    internal static string InvalidEmail(SiteStrings s) => s.Pick(
-        "Please check the email address.",
-        "Nceda ujonge idilesi ye-imeyile.",
-        "Kontroleer asseblief die e-posadres.");
+    internal static string InvalidEmail(SiteStrings s) => s["SupportRequestForm.PleaseCheckEmailAddress"];
 
-    internal static string InvalidPhone(SiteStrings s) => s.Pick(
-        "Enter a South African cellphone number, like 082 123 4567, or an international number starting with +.",
-        "Faka inombolo yeselfowuni yaseMzantsi Afrika, efana no-082 123 4567, okanye inombolo yamanye amazwe eqala ngo-+.",
-        "Vul 'n Suid-Afrikaanse selfoonnommer in, soos 082 123 4567, of 'n internasionale nommer wat met + begin.");
+    internal static string InvalidPhone(SiteStrings s) => s["SupportRequestForm.EnterSouthAfricanCellphone"];
 }

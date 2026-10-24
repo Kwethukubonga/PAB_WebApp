@@ -261,4 +261,229 @@
   <data name="Layout.GBVHelpline" xml:space="preserve">
     <value>Umgca woncedo we-GBV</value>
   </data>
+  <data name="RequestSupport.FormProgress" xml:space="preserve">
+    <value>Inkqubela yefomu</value>
+  </data>
+  <data name="RequestSupport.Yes" xml:space="preserve">
+    <value>Ewe</value>
+  </data>
+  <data name="RequestSupport.No" xml:space="preserve">
+    <value>Hayi</value>
+  </data>
+  <data name="RequestSupport.Sending" xml:space="preserve">
+    <value>Iyathunyelwa…</value>
+  </data>
+  <data name="RequestSupport.StepOf" xml:space="preserve">
+    <value>Inyathelo {0} kwa-{1}</value>
+  </data>
+  <data name="RequestSupport.Completed" xml:space="preserve">
+    <value>igqityiwe</value>
+  </data>
+  <data name="RequestSupport.IfImmediateDangerCall" xml:space="preserve">
+    <value>Ukuba usengozini ngoku, fowunela u-10111 okanye umgca wethu wongxamiseko ku-</value>
+  </data>
+  <data name="RequestSupport.RequestSummary" xml:space="preserve">
+    <value>Isishwankathelo Sesicelo</value>
+  </data>
+  <data name="RequestSupport.Name" xml:space="preserve">
+    <value>Igama</value>
+  </data>
+  <data name="RequestSupport.Area" xml:space="preserve">
+    <value>Indawo</value>
+  </data>
+  <data name="RequestSupport.SupportType" xml:space="preserve">
+    <value>Uhlobo</value>
+  </data>
+  <data name="RequestSupport.Urgent" xml:space="preserve">
+    <value>Ngxama</value>
+  </data>
+  <data name="RequestSupport.CouldntSendRequestPlease" xml:space="preserve">
+    <value>Asikwazanga ukuthumela isicelo sakho. Nceda uzame kwakhona, okanye usifowunele ku-+27 (0)21 565 0668.</value>
+  </data>
+  <data name="RequestSupport.PleaseCheckHighlightedFields" xml:space="preserve">
+    <value>Nceda ujonge iindawo eziphawulweyo.</value>
+  </data>
+  <data name="Contact.WriteMessageHere" xml:space="preserve">
+    <value>Bhala umyalezo wakho apha...</value>
+  </data>
+  <data name="Contact.Phone" xml:space="preserve">
+    <value>Umnxeba</value>
+  </data>
+  <data name="Contact.MonFri8am5pm" xml:space="preserve">
+    <value>Mvulo–Lwesihlanu, 8am–5pm</value>
+  </data>
+  <data name="Contact.ResponseWithin2448" xml:space="preserve">
+    <value>Impendulo phakathi kwe-24–48 yeyure</value>
+  </data>
+  <data name="Contact.Address" xml:space="preserve">
+    <value>Idilesi</value>
+  </data>
+  <data name="Contact.7965WesternCapeSouth" xml:space="preserve">
+    <value>7965, Ntshona Koloni, eMzantsi Afrika</value>
+  </data>
+  <data name="Contact.CrisisLine" xml:space="preserve">
+    <value>Umgca Wongxamiseko</value>
+  </data>
+  <data name="Contact.AvailableAfterHours" xml:space="preserve">
+    <value>Iyafumaneka emva kwexesha lomsebenzi</value>
+  </data>
+  <data name="Contact.GetTouch" xml:space="preserve">
+    <value>Qhagamshelana</value>
+  </data>
+  <data name="Contact.ContactUs" xml:space="preserve">
+    <value>Qhagamshelana Nathi</value>
+  </data>
+  <data name="Contact.WedLoveHearWhether" xml:space="preserve">
+    <value>Sithanda ukuva kuwe, nokuba ufuna inkxaso, ufuna ukuba sisithi ngobuyisi, okanye ufuna ukuditana nathi.</value>
+  </data>
+  <data name="Contact.SendUsMessage" xml:space="preserve">
+    <value>Sithumelele Umyalezo</value>
+  </data>
+  <data name="Contact.MessageSent" xml:space="preserve">
+    <value>Umyalezo Uthunyelwe!</value>
+  </data>
+  <data name="Contact.ThankReachingOutTeam" xml:space="preserve">
+    <value>Enkosi ngokunxibelelana nathi. Iqela lethu liza kuphendula phakathi kweentsuku ezi-1–2 zomsebenzi.</value>
+  </data>
+  <data name="Contact.FullName" xml:space="preserve">
+    <value>Igama Eligcweleyo</value>
+  </data>
+  <data name="Contact.EmailAddress" xml:space="preserve">
+    <value>I-imeyili</value>
+  </data>
+  <data name="Contact.PhoneNumber" xml:space="preserve">
+    <value>Inombolo yefowuni</value>
+  </data>
+  <data name="Contact.Subject" xml:space="preserve">
+    <value>Isihloko</value>
+  </data>
+  <data name="Contact.SelectSubject" xml:space="preserve">
+    <value>Khetha isihloko</value>
+  </data>
+  <data name="Contact.Message" xml:space="preserve">
+    <value>Umyalezo</value>
+  </data>
+  <data name="Contact.SendMessage" xml:space="preserve">
+    <value>Thumela Umyalezo</value>
+  </data>
+  <data name="Contact.Details" xml:space="preserve">
+    <value>Iinkcukacha Zethu</value>
+  </data>
+  <data name="Contact.CouldntSendMessagePlease" xml:space="preserve">
+    <value>Asikwazanga ukuthumela umyalezo wakho. Nceda uzame kwakhona, okanye uthumele i-imeyile ku-admin@philisaabafazi.org.</value>
+  </data>
+  <data name="Confirmation.Phone" xml:space="preserve">
+    <value>ngomnxeba</value>
+  </data>
+  <data name="Confirmation.WhatsApp" xml:space="preserve">
+    <value>nge-WhatsApp</value>
+  </data>
+  <data name="Confirmation.Email" xml:space="preserve">
+    <value>nge-imeyile</value>
+  </data>
+  <data name="Confirmation.WhenVisitCentre" xml:space="preserve">
+    <value>xa utyelela iziko</value>
+  </data>
+  <data name="Confirmation.UsingDetailsGave" xml:space="preserve">
+    <value>ngeenkcukacha ozinikileyo</value>
+  </data>
+  <data name="Confirmation.TeamUsuallyRepliesWithin" xml:space="preserve">
+    <value>Iqela lidla ngokuphendula phakathi kweentsuku ezi-2 ukuya kwezi-5 zomsebenzi, {0}. Izicelo ezingxamisekileyo ziqala kuqala.</value>
+  </data>
+  <data name="Confirmation.CopyReference" xml:space="preserve">
+    <value>Khuphela isalathiso</value>
+  </data>
+  <data name="Confirmation.Copied" xml:space="preserve">
+    <value>Kukhutshelwe</value>
+  </data>
+  <data name="Confirmation.IfDangerNow" xml:space="preserve">
+    <value>Ukuba usengozini ngoku</value>
+  </data>
+  <data name="Confirmation.DoNotWaitUs" xml:space="preserve">
+    <value>Musa ukulinda side sikufowunele. Fowunela amapolisa ku-10111, okanye umgca wongxamiseko wePhilisa, ophendulwayo emva kwexesha lomsebenzi.</value>
+  </data>
+  <data name="Confirmation.Police" xml:space="preserve">
+    <value>Amapolisa</value>
+  </data>
+  <data name="Confirmation.PhilisaCrisisLine" xml:space="preserve">
+    <value>Umgca wongxamiseko wePhilisa</value>
+  </data>
+  <data name="Confirmation.GBVHelpline247" xml:space="preserve">
+    <value>Umgca woncedo we-GBV, 24/7</value>
+  </data>
+  <data name="StatusCode.PleaseWaitFewMinutes" xml:space="preserve">
+    <value>Nceda ulinde imizuzu embalwa</value>
+  </data>
+  <data name="StatusCode.CantFindPage" xml:space="preserve">
+    <value>Asilifumani elo phepha</value>
+  </data>
+  <data name="StatusCode.SomethingWentWrong" xml:space="preserve">
+    <value>Kukho into engahambanga kakuhle</value>
+  </data>
+  <data name="StatusCode.SeveralMessagesWereSent" xml:space="preserve">
+    <value>Imiyalezo emininzi ithunyelwe kolu qhagamshelo ngexesha elifutshane, ngoko lo awuthunyelwanga. Nceda uzame kwakhona emva kwemizuzu eli-10, okanye usifowunele. Silapha ukukunceda.</value>
+  </data>
+  <data name="StatusCode.PageMayHaveMoved" xml:space="preserve">
+    <value>Iphepha lisenokuba lishukunyisiwe. Usenokucela uncedo okanye ufumane iinkcukacha zethu ngezantsi.</value>
+  </data>
+  <data name="StatusCode.PleaseTryAgainCall" xml:space="preserve">
+    <value>Nceda uzame kwakhona, okanye usifowunele.</value>
+  </data>
+  <data name="StatusCode.ImmediateDanger" xml:space="preserve">
+    <value>Ukuba usengozini ngoku</value>
+  </data>
+  <data name="StatusCode.GoHomePage" xml:space="preserve">
+    <value>Yiya kwikhaya</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterFirstName" xml:space="preserve">
+    <value>Nceda ubhale igama lakho.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterSurname" xml:space="preserve">
+    <value>Nceda ubhale ifani yakho.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseEnterPhoneNumber" xml:space="preserve">
+    <value>Nceda ubhale inombolo yefowuni esinokukufumana kuyo.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsArea" xml:space="preserve">
+    <value>Nceda usixelele indawo ohlala kuyo.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseChooseHowShould" xml:space="preserve">
+    <value>Nceda ukhethe indlela esinokuqhagamshelana nawe ngayo.</value>
+  </data>
+  <data name="SupportRequestForm.AddEmailAddressChoose" xml:space="preserve">
+    <value>Yongeza idilesi ye-imeyile, okanye ukhethe enye indlela yokuqhagamshelana nawe.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseChooseTypeSupport" xml:space="preserve">
+    <value>Nceda ukhethe uhlobo lwenkxaso oyidingayo.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsLittle" xml:space="preserve">
+    <value>Nceda usixelele kancinci ngemeko yakho.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTellUsWhether" xml:space="preserve">
+    <value>Nceda usixelele ukuba oku kungxamisekile na.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseTickBoxConfirm" xml:space="preserve">
+    <value>Nceda uphawule ibhokisi ukuze uqinisekise kwaye unike imvume.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseKeepUnderCharacters" xml:space="preserve">
+    <value>Nceda ungadluli koonobumba abayi-{0}.</value>
+  </data>
+  <data name="SupportRequestForm.PleaseCheckEmailAddress" xml:space="preserve">
+    <value>Nceda ujonge idilesi ye-imeyile.</value>
+  </data>
+  <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
+    <value>Faka inombolo yeselfowuni yaseMzantsi Afrika, efana no-082 123 4567, okanye inombolo yamanye amazwe eqala ngo-+.</value>
+  </data>
+  <data name="ContactForm.PleaseEnterName" xml:space="preserve">
+    <value>Nceda ubhale igama lakho.</value>
+  </data>
+  <data name="ContactForm.PleaseGiveEmailAddress" xml:space="preserve">
+    <value>Nceda unike idilesi ye-imeyile okanye inombolo yefowuni ukuze sikuphendule.</value>
+  </data>
+  <data name="ContactForm.PleaseChooseSubject" xml:space="preserve">
+    <value>Nceda ukhethe isihloko.</value>
+  </data>
+  <data name="ContactForm.PleaseWriteMessage" xml:space="preserve">
+    <value>Nceda ubhale umyalezo wakho.</value>
+  </data>
 </root>
