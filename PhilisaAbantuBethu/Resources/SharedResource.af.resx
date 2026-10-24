@@ -873,4 +873,16 @@
   <data name="Staff.Messages.AllMessages" xml:space="preserve">
     <value>Alle boodskappe</value>
   </data>
+  <data name="Staff.Details.ConfirmCloseQuestion" xml:space="preserve">
+    <value>Sluit {0}?</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseExplain" xml:space="preserve">
+    <value>Dit verdwyn van die Nuut- en Aan die gang-lyste. Jy kan dit weer oopmaak onder Gesluit as dit nodig is.</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseYes" xml:space="preserve">
+    <value>Ja, sluit dit</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseCancel" xml:space="preserve">
+    <value>Kanselleer</value>
+  </data>
 </root>

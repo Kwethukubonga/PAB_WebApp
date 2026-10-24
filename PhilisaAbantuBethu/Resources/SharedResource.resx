@@ -873,4 +873,16 @@
   <data name="Staff.Messages.AllMessages" xml:space="preserve">
     <value>All messages</value>
   </data>
+  <data name="Staff.Details.ConfirmCloseQuestion" xml:space="preserve">
+    <value>Close {0}?</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseExplain" xml:space="preserve">
+    <value>It will leave the New and In progress lists. You can open it again from Closed if you need to.</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseYes" xml:space="preserve">
+    <value>Yes, close it</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

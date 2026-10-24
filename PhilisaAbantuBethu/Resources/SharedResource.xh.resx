@@ -873,4 +873,16 @@
   <data name="Staff.Messages.AllMessages" xml:space="preserve">
     <value>Yonke imiyalezo</value>
   </data>
+  <data name="Staff.Details.ConfirmCloseQuestion" xml:space="preserve">
+    <value>Uyasivala isicelo {0}?</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseExplain" xml:space="preserve">
+    <value>Siza kuphuma kuluhlu lwezintsha nezo ziqhubekayo. Ungasivula kwakhona kwezivaliweyo ukuba kuyimfuneko.</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseYes" xml:space="preserve">
+    <value>Ewe, sivale</value>
+  </data>
+  <data name="Staff.Details.ConfirmCloseCancel" xml:space="preserve">
+    <value>Rhoxisa</value>
+  </data>
 </root>
