@@ -18,14 +18,14 @@
 
 .PARAMETER PostgresMajor
     The major version of Postgres to run pg_dump from. It must be at least the database's own version
-    (Neon's console shows it). Default 17.
+    (Neon's console shows it). Default 18, which is what Neon runs at the moment.
 
 .EXAMPLE
-    .\tools\database\Backup-Database.ps1
+    powershell -ExecutionPolicy Bypass -File .\tools\database\Backup-Database.ps1
 #>
 param(
     [string]$OutDir = (Join-Path $HOME 'pab-backups'),
-    [int]$PostgresMajor = 17
+    [int]$PostgresMajor = 18
 )
 
 $ErrorActionPreference = 'Stop'
@@ -68,4 +68,4 @@ $path = Join-Path $OutDir $name
 $entries = (docker run --rm -v "${OutDir}:/backup" "postgres:$PostgresMajor" pg_restore --list "/backup/$name" | Measure-Object -Line).Lines
 Write-Host ''
 Write-Host "Backup written: $path ($([math]::Round((Get-Item $path).Length / 1KB, 1)) KB, $entries items in it)"
-Write-Host 'Next: prove it restores, with  .\tools\database\Test-Restore.ps1'
+Write-Host 'Next: prove it restores, with  powershell -ExecutionPolicy Bypass -File .\tools\database\Test-Restore.ps1'

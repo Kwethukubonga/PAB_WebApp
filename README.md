@@ -498,10 +498,12 @@ If the live address ever changes, set a repository variable called `SITE_URL` to
 
 ### 12.4 Database, encryption keys and backups
 
+Windows refuses to run `.ps1` scripts by default, so each of the three tools below is started as `powershell -ExecutionPolicy Bypass -File <script>`. That allows that one run only and changes nothing on the computer.
+
 **Setting it up (once):**
 
 1. **Neon:** create a project (the free plan needs no card) in AWS Europe Central 1 (Frankfurt), the same region as Render. From **Connect**, copy the **direct** connection string, not the pooled one.
-2. **The certificate:** run `.\tools\data-protection\New-KeyCertificate.ps1`. It writes the certificate and its password to a folder outside the repository. Put the `.pfx` and the password in the team's password manager straight away.
+2. **The certificate:** run `powershell -ExecutionPolicy Bypass -File .\tools\data-protection\New-KeyCertificate.ps1`. It writes the certificate and its password to a folder outside the repository. Put the `.pfx` and the password in the team's password manager straight away.
 3. **Render, Environment:** add `ConnectionStrings__DefaultConnection` (the Neon string), `DataProtection__Certificate` and `DataProtection__CertificatePassword` (the text from the two files the script made), `TrustProxy` = `true`, `TrustProxyHops` = `3` and `Firebase__ApiKey`. In **Settings**, set the Health Check Path to `/alive`.
 
 The site creates its tables the first time it starts. If the connection string or the certificate is missing or wrong, the new version refuses to start and Render keeps serving the old one.
@@ -510,9 +512,9 @@ The site creates its tables the first time it starts. If the connection string o
 
 > **If the certificate is lost,** the saved situation text can never be opened again. New requests keep working, because the site makes a fresh key. Names, phone numbers and emails are not encrypted, so they stay readable. Don't replace the certificate casually, and keep the backup copy safe.
 
-**Backups:** run `.\tools\database\Backup-Database.ps1`. It asks for the direct connection string without showing it, and writes a dated `.dump` file to `pab-backups` in your home folder. The file contains names and phone numbers, so keep it private and out of Git (Git is set to ignore it). Neon also keeps a short history on the free plan, which helps with a mistake made in the last few hours, but it is not a backup.
+**Backups:** run `powershell -ExecutionPolicy Bypass -File .\tools\database\Backup-Database.ps1`. It asks for the direct connection string without showing it, and writes a dated `.dump` file to `pab-backups` in your home folder. The file contains names and phone numbers, so keep it private and out of Git (Git is set to ignore it). Neon also keeps a short history on the free plan, which helps with a mistake made in the last few hours, but it is not a backup.
 
-**Proving a restore:** run `.\tools\database\Test-Restore.ps1`. It restores the newest backup into a temporary database on your computer, prints how many rows came back, then runs the site's own check, `dotnet run -- --check-decryption`, with the certificate to open every saved request. It prints counts only, never anybody's text, and removes the temporary database afterwards. It ends with **RESTORE TEST PASSED** or **RESTORE TEST FAILED**. Do this after the first backup, and again whenever the certificate or the database changes. It needs Docker Desktop and the .NET SDK.
+**Proving a restore:** run `powershell -ExecutionPolicy Bypass -File .\tools\database\Test-Restore.ps1`. It restores the newest backup into a temporary database on your computer, prints how many rows came back, then runs the site's own check, `dotnet run -- --check-decryption`, with the certificate to open every saved request. It prints counts only, never anybody's text, and removes the temporary database afterwards. It ends with **RESTORE TEST PASSED** or **RESTORE TEST FAILED**. Do this after the first backup, and again whenever the certificate or the database changes. It needs Docker Desktop and the .NET SDK.
 
 ---
 

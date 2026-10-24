@@ -19,15 +19,16 @@
     Where New-KeyCertificate.ps1 put the certificate files. Default: pab-secrets in your home folder.
 
 .PARAMETER PostgresMajor
-    The Postgres version to restore into. Default 17.
+    The Postgres version to restore into. It must be at least the version the backup was taken from.
+    Default 18, which is what Neon runs at the moment.
 
 .EXAMPLE
-    .\tools\database\Test-Restore.ps1
+    powershell -ExecutionPolicy Bypass -File .\tools\database\Test-Restore.ps1
 #>
 param(
     [string]$Backup,
     [string]$CertificateDir = (Join-Path $HOME 'pab-secrets'),
-    [int]$PostgresMajor = 17
+    [int]$PostgresMajor = 18
 )
 
 $ErrorActionPreference = 'Stop'

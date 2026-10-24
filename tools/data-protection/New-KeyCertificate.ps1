@@ -22,7 +22,7 @@
     unreadable. Never put these files in Git, in a chat or in an email.
 
 .EXAMPLE
-    .\tools\data-protection\New-KeyCertificate.ps1
+    powershell -ExecutionPolicy Bypass -File .\tools\data-protection\New-KeyCertificate.ps1
 #>
 param(
     [string]$OutDir = (Join-Path $HOME 'pab-secrets')
