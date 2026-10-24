@@ -433,7 +433,7 @@ PAB_WebApp/
 │   │   └── Protection/  # Encrypting the columns that describe what happened to somebody
 │   ├── Forms/           # Server-side checks for the support and contact forms
 │   ├── Localization/    # Language switching and text in all three languages
-│   ├── Migrations/      # Database migrations
+│   ├── Migrations/      # Database migrations for SQLite; Postgres/ holds the set for Postgres
 │   ├── Models/          # SupportRequest, ContactInquiry, Programme
 │   ├── Pages/           # Every page, the shared layout, and Staff/ for PAB staff
 │   ├── Security/        # Rate limiting, security headers, request logging
@@ -446,6 +446,8 @@ PAB_WebApp/
 ├── design/tokens.json   # The one place the colours, type, spacing and radii are written down
 ├── tools/tokens/        # Writes the Tailwind theme and Android's colors.xml from the tokens
 ├── tools/images/        # Writes the WebP copies and records every photo's size
+├── tools/data-protection/  # Makes the certificate that locks the encryption keys
+├── tools/database/      # Backs up the live database and proves a backup restores
 ├── .github/workflows/   # CI/CD: build, test, coverage, Docker build, deploy
 ├── .github/dependabot.yml
 ├── Dockerfile
@@ -465,9 +467,9 @@ The website is hosted on **Render** (free plan), built from the project's `Docke
 |---------|--------|
 | Build | A two-stage image: the .NET 10 SDK publishes the app, then it runs on the smaller ASP.NET runtime |
 | Port | Render supplies it through the `PORT` variable (the image falls back to `8080`) |
-| Database | A SQLite file at `/data/philisa.db` unless `ConnectionStrings__DefaultConnection` points at Postgres. Render's free plan has no persistent disk, so the hosted site is moving to a managed Postgres database on Neon (section 14.2). |
-| Session keys | Kept at `/data/keys`. On Render they have to be kept in the database as well (section 14.2), so a restart doesn't sign staff out, break a form someone has open or make saved requests unreadable. |
-| Health check | Render's **Health Check Path** is `/health`, which answers 200 only when the database responds. A deploy that fails it never receives visitors. |
+| Database | Postgres on Neon (free plan, Frankfurt), chosen by `ConnectionStrings__DefaultConnection`. Without that setting the site uses a SQLite file at `/data/philisa.db`, which is what runs locally. Render's free plan has no disk that survives a restart, so the hosted site can't use the file. The migrations run when the site starts, so a deploy that can't reach the database never goes live. |
+| Encryption keys | In the database (the `DataProtectionKeys` table), locked with a certificate from the host's secret settings (`DataProtection__Certificate` and `DataProtection__CertificatePassword`). A restart loses nothing, and a copy of the database on its own can't be read. Without Postgres they are files at `/data/keys`. See section 12.4. |
+| Health checks | `/alive` answers 200 while the site is running and never touches the database. It is Render's **Health Check Path** and what the uptime monitor asks. `/health` also checks the database, for looking by hand and after a deploy. Neon's free hours only last the month if the database can sleep between visitors, so nothing should ask `/health` every few minutes. |
 | Visitors' addresses | `TrustProxy=true` and `TrustProxyHops=3`. Render lists the visitor third from the right in `X-Forwarded-For`, so that is the entry read. It keeps the form limit per visitor, and an address a visitor makes up lands further left, where it is ignored. If Render ever changes its proxies, test again from two devices on different networks. |
 | Free plan | The service sleeps after 15 minutes without visitors, and the first request after that takes about a minute while it wakes. |
 | Settings | `Firebase__ApiKey` for staff sign-in. `Alerts__ApiKey`, `Alerts__From`, `Alerts__To` and `Alerts__SiteUrl` for new-request emails (section 10). Optional: `RateLimiting__FormPostsPerWindow` and `RateLimiting__WindowMinutes`. |
@@ -493,6 +495,24 @@ If the live address ever changes, set a repository variable called `SITE_URL` to
 ```
 
 `main` is the deployed version, and `develop` is where features are brought together.
+
+### 12.4 Database, encryption keys and backups
+
+**Setting it up (once):**
+
+1. **Neon:** create a project (the free plan needs no card) in AWS Europe Central 1 (Frankfurt), the same region as Render. From **Connect**, copy the **direct** connection string, not the pooled one.
+2. **The certificate:** run `.\tools\data-protection\New-KeyCertificate.ps1`. It writes the certificate and its password to a folder outside the repository. Put the `.pfx` and the password in the team's password manager straight away.
+3. **Render, Environment:** add `ConnectionStrings__DefaultConnection` (the Neon string), `DataProtection__Certificate` and `DataProtection__CertificatePassword` (the text from the two files the script made), `TrustProxy` = `true`, `TrustProxyHops` = `3` and `Firebase__ApiKey`. In **Settings**, set the Health Check Path to `/alive`.
+
+The site creates its tables the first time it starts. If the connection string or the certificate is missing or wrong, the new version refuses to start and Render keeps serving the old one.
+
+**Why a certificate:** the keys that encrypt what people write about their situation have to live somewhere that survives a restart, and that is the database. Keys stored next to the text they open would protect nothing, so they are encrypted with the certificate, whose private half exists only in Render's settings and the password manager. Someone who copies the database but not the certificate gets text they can't open (this is tested).
+
+> **If the certificate is lost,** the saved situation text can never be opened again. New requests keep working, because the site makes a fresh key. Names, phone numbers and emails are not encrypted, so they stay readable. Don't replace the certificate casually, and keep the backup copy safe.
+
+**Backups:** run `.\tools\database\Backup-Database.ps1`. It asks for the direct connection string without showing it, and writes a dated `.dump` file to `pab-backups` in your home folder. The file contains names and phone numbers, so keep it private and out of Git (Git is set to ignore it). Neon also keeps a short history on the free plan, which helps with a mistake made in the last few hours, but it is not a backup.
+
+**Proving a restore:** run `.\tools\database\Test-Restore.ps1`. It restores the newest backup into a temporary database on your computer, prints how many rows came back, then runs the site's own check, `dotnet run -- --check-decryption`, with the certificate to open every saved request. It prints counts only, never anybody's text, and removes the temporary database afterwards. It ends with **RESTORE TEST PASSED** or **RESTORE TEST FAILED**. Do this after the first backup, and again whenever the certificate or the database changes. It needs Docker Desktop and the .NET SDK.
 
 ---
 
@@ -521,7 +541,7 @@ If the live address ever changes, set a repository variable called `SITE_URL` to
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
 | Security headers, health check and quick exit | ✔ Complete |
-| Automated tests (254) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
+| Automated tests (271) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |
 | Constrained schema, staff notes and indexes | ✔ Complete |
@@ -530,13 +550,13 @@ If the live address ever changes, set a repository variable called `SITE_URL` to
 | Tailwind compiled at build time; fonts served from this site | ✔ Complete |
 | Photos as WebP, lazy, at the width they are shown | ✔ Complete |
 | Emergency numbers readable with no data | ✔ Complete |
-| Managed Postgres database | ◑ Code ready, database not yet provisioned |
+| Managed Postgres database, keys in the database, backup and tested restore | ◑ Code, tests and tools ready; the live site switches over when Neon's connection string and the certificate are set on Render |
 | Emailing PAB about new requests and contact messages, with no personal details | ✔ Complete (needs the `Alerts__` variables on the host) |
 | Staff page for reading contact messages | ✔ Complete |
 
 ### 14.2 Future Improvements
 
-- **Managed database:** the site already uses Postgres wherever the connection string points at one, and falls back to SQLite locally (`Data/DatabaseProvider.cs`). What is left is provisioning the database (Neon, on its free plan) and generating a Postgres migration set: the migrations in `Migrations/` were generated for SQLite and its `AUTOINCREMENT` annotation does not carry across. Render's free plan also has no persistent disk, so the data-protection keys that encrypt the situation text must be stored in that database, protected by a certificate kept in a host secret, or a restart would make saved requests unreadable.
+- **Managed database, finishing touches:** the site uses Postgres wherever the connection string points at one, with its own migrations and its encryption keys in the database (section 12.4). What is left is scheduling the backups instead of running them by hand, and checking the database server's certificate: the connection to Neon is encrypted, but `Data/DatabaseProvider.cs` still sets `Trust Server Certificate=true`, so it does not yet prove it is talking to Neon itself.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
 - **Moving the programmes into a content file:** the page text is now in `.resx` files (section 7), but the programmes are still written in `Data/SiteData.cs` and `Localization/ProgrammeTranslations.cs`.
 - **Lighthouse in CI:** a minimum score for performance and accessibility on every pull request.
