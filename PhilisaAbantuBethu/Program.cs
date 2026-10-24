@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using PhilisaAbantuBethu.Api;
 using PhilisaAbantuBethu.Data;
 using PhilisaAbantuBethu.Data.Protection;
@@ -30,17 +31,27 @@ builder.Services.AddRazorPages(options =>
 // SQLite in development, Postgres once a managed database is set (C1). Which one is used depends
 // only on the connection string, so moving across is an environment variable and a redeploy.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? "";
-builder.Services.AddDbContext<AppDbContext>(options =>
+var usePostgres = DatabaseProvider.IsPostgres(connectionString);
+if (usePostgres)
 {
-    if (DatabaseProvider.IsPostgres(connectionString))
-    {
-        options.UseNpgsql(DatabaseProvider.ToNpgsql(connectionString));
-    }
-    else
-    {
-        options.UseSqlite(connectionString);
-    }
-});
+    // Everything asks for AppDbContext; on Postgres it is handed the Postgres version of it,
+    // which has its own migrations and the table the data protection keys live in.
+    builder.Services.AddDbContext<AppDbContext, PostgresAppDbContext>(options => options
+        .UseNpgsql(DatabaseProvider.ToNpgsql(connectionString), npgsql =>
+            // The managed database sleeps when nobody has used it for a few minutes, and the first
+            // connection after that can fail while it wakes. Trying again is all it needs.
+            npgsql.EnableRetryOnFailure(maxRetryCount: 3, maxRetryDelay: TimeSpan.FromSeconds(5), errorCodesToAdd: null))
+        .ReplaceService<IModelCacheKeyFactory, SensitiveModelCacheKeyFactory>());
+
+    // The data protection key store asks for the Postgres context by its own type.
+    builder.Services.AddScoped(services => (PostgresAppDbContext)services.GetRequiredService<AppDbContext>());
+}
+else
+{
+    builder.Services.AddDbContext<AppDbContext>(options => options
+        .UseSqlite(connectionString)
+        .ReplaceService<IModelCacheKeyFactory, SensitiveModelCacheKeyFactory>());
+}
 
 builder.Services.AddScoped<ISupportRequestService, SupportRequestService>();
 builder.Services.AddScoped<IContactService, ContactService>();
@@ -106,14 +117,11 @@ builder.Services.AddProblemDetails();
 // Publishes the API's description at /openapi/v1.json (B1).
 builder.Services.AddOpenApi();
 
-// Sign-in cookies and form tokens are encrypted with these keys. Keeping them on the hosting
-// volume means a redeploy doesn't sign staff out or break a form someone has open.
-var keysPath = builder.Configuration["DataProtection:KeysPath"];
-var dataProtection = builder.Services.AddDataProtection().SetApplicationName("PhilisaAbantuBethu");
-if (!string.IsNullOrWhiteSpace(keysPath))
-{
-    dataProtection.PersistKeysToFileSystem(new DirectoryInfo(keysPath));
-}
+// Sign-in cookies, form tokens and the situation text are protected with these keys. Keeping them
+// somewhere that survives a restart means a redeploy doesn't sign staff out, break a form someone
+// has open or make saved requests unreadable. On Postgres they are in the database, encrypted with
+// a certificate from the host's secret settings; otherwise they are files on the volume.
+builder.Services.AddSiteDataProtection(builder.Configuration, builder.Environment, keysInDatabase: usePostgres);
 
 builder.Services.AddFormRateLimiting(builder.Configuration);
 
@@ -175,6 +183,14 @@ using (var scope = app.Services.CreateScope())
 
 }
 
+// Not a way of running the site: after a backup is restored, this opens every saved request to prove
+// the backup and the certificate still work together, prints counts, and stops.
+if (args.Contains(DecryptionCheck.Argument))
+{
+    Environment.ExitCode = await DecryptionCheck.RunAsync(app.Services, Console.Out);
+    return;
+}
+
 // Configure the HTTP request pipeline.
 // Only when there is a trusted proxy in front of the site. See the ForwardedHeaders note above.
 if (trustProxy)
@@ -230,9 +246,15 @@ app.Use(async (context, next) =>
     await next();
 });
 
-// The host checks this before sending visitors to a new deploy (Render's Health Check Path), and an
-// uptime monitor can watch it. 200 when the database answers, 503 when not.
+// 200 when the database answers, 503 when not. For checking the site by hand and after a deploy.
+// Asking it often keeps the managed database awake, which uses up its free monthly hours.
 app.MapHealthChecks("/health");
+
+// 200 as long as the site itself is running, and never touches the database. This is the address
+// for the host's health check and the uptime monitor, which ask every few minutes: the database can
+// sleep between real visitors. A deploy whose database can't be reached never gets this far,
+// because the migrations at start-up fail first.
+app.MapHealthChecks("/alive", new HealthCheckOptions { Predicate = _ => false });
 
 // One group per resource, each one calling the same services the pages do (B1, B2, W6).
 app.MapSupportRequests();

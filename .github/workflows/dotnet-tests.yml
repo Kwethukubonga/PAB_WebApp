@@ -11,6 +11,22 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
 
+    # A real Postgres, so the Postgres migrations and the encrypted key storage are tested on the
+    # database the site runs on, not only on SQLite. It exists for this run only; the password is
+    # not a secret.
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,6 +64,8 @@ jobs:
         run: dotnet build PhilisaAbantuBethu.slnx --no-restore --configuration Release
 
       - name: Run tests
+        env:
+          PAB_TEST_POSTGRES: Host=localhost;Port=5432;Username=postgres;Password=postgres
         run: >
           dotnet test PhilisaAbantuBethu.Tests --no-build --configuration Release --verbosity normal
           --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
