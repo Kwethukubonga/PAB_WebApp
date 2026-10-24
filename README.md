@@ -41,7 +41,7 @@ The Philisa Abantu Bethu Help Centre is a public website where community members
 
 ### 1.1 Links
 
-- **Live site:** [*Philisa Abafazi Bethu Website*](https://philisa-abafazi-bethu.up.railway.app/)
+- **Live site:** [*Philisa Abafazi Bethu Website*](https://philisa-abafazi-bethu-web.onrender.com/) (on free hosting, which sleeps after 15 minutes without visitors, so the first page after a quiet spell can take about a minute to appear)
 - **Demo video:** [*Unlisted YouTube Link*](https://youtu.be/vqdMx4jWI7Y?si=peVstoh2Mlyq2UHJ)
 
 ---
@@ -83,7 +83,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | **Accessibility** | Three languages, a "Skip to content" link, labelled form fields and icon buttons, and a page `lang` attribute that matches the chosen language so screen readers pronounce it correctly. |
 | **Responsiveness** | Built mobile-first with Tailwind CSS, with a collapsible menu on small screens and cards and galleries that adapt to the screen width. |
 | **Usability** | The support form is split into three short steps with a progress bar and a summary before submitting. **Request Support** is always in the header. |
-| **Reliability** | Requests are saved before the confirmation page is shown, the production database sits on a persistent volume that survives redeploys, and Railway only switches to a new deploy once `/health` answers. |
+| **Reliability** | Requests are saved before the confirmation page is shown, and Render only switches to a new deploy once `/health` answers. |
 | **Security** | Every submission is checked on the server, the forms are rate-limited and have a spam trap, staff pages need a PAB admin sign-in, and every page sends strict security headers (see section 9). |
 | **Safety** | A **Leave this site** button on every public page (or Esc twice) swaps the page for a weather search, for someone who needs to hide that they were looking for help. |
 
@@ -136,7 +136,7 @@ If something is missing or wrong, the form comes back with what they typed still
 | Styling | Tailwind CSS, with Lora and Inter fonts |
 | Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery, quick exit) |
 | Staff sign-in | Firebase Authentication, the same accounts as the Philisa Volunteers app |
-| Hosting | Docker, on Railway |
+| Hosting | Docker, on Render |
 | Testing and CI/CD | xUnit, ASP.NET Core integration tests, GitHub Actions |
 | Version control | Git and GitHub |
 
@@ -358,22 +358,22 @@ Go to `http://localhost:5277`.
 
 > **Note:** No database setup is needed. `philisa.db` is created automatically the first time the app starts. To view submissions during development, open it with a SQLite viewer such as **DB Browser for SQLite**.
 
-**With Docker (Windows):** double-click `docker-setup.bat`. It makes a local development certificate, builds and starts the container, and opens `https://localhost:8443` (plain HTTP is on `http://localhost:8080`). After the first run, `docker compose up --build` is enough. Submissions are kept in the `philisa-data` volume. The container runs as a non-root user, and `TrustProxy` is off locally so the rate limiter uses the real connection address; it is only switched on behind Railway's proxy.
+**With Docker (Windows):** double-click `docker-setup.bat`. It makes a local development certificate, builds and starts the container, and opens `https://localhost:8443` (plain HTTP is on `http://localhost:8080`). After the first run, `docker compose up --build` is enough. Submissions are kept in the `philisa-data` volume. The container runs as a non-root user, and `TrustProxy` is off locally so the rate limiter uses the real connection address; it is only switched on behind the host's proxy (section 12.1).
 
 **Staff sign-in:** register a **Web app** in the Firebase console for the `pab-volunteers` project (Project settings → Your apps → Add app → Web), then give the site its API key:
 - **Locally:** put it in `"Firebase": { "ApiKey": "…" }` in `appsettings.Development.json`.
-- **On Railway:** set the variable `Firebase__ApiKey`.
+- **On Render:** set the variable `Firebase__ApiKey`.
 
 Firebase web API keys aren't secret; every web page that uses Firebase sends one. For Google sign-in, also add the site's domain under Firebase → Authentication → Settings → Authorised domains.
 
-**Email alerts (optional):** with no settings the site simply doesn't send them. Alerts go through [Resend](https://resend.com) (free for this volume), because Railway blocks ordinary email (SMTP) on its cheaper plans.
+**Email alerts (optional):** with no settings the site simply doesn't send them. Alerts go through [Resend](https://resend.com) (free for this volume), because free and cheap hosting plans block ordinary email (SMTP).
 
-| Setting | Railway variable | Example |
+| Setting | Host variable | Example |
 |---------|------------------|---------|
 | Resend API key (**secret**) | `Alerts__ApiKey` | `re_…` |
 | Sender, on a domain verified in Resend | `Alerts__From` | `PAB Help Centre <alerts@yourdomain.org>` |
 | PAB's inbox (commas for more than one) | `Alerts__To` | `intake@yourdomain.org` |
-| The live site, for the link in the email | `Alerts__SiteUrl` | `https://your-site.up.railway.app` |
+| The live site, for the link in the email | `Alerts__SiteUrl` | `https://your-site.onrender.com` |
 | Turn support request alerts off | `Alerts__SupportRequests` | `false` |
 | Turn contact message alerts off | `Alerts__ContactMessages` | `false` |
 
@@ -450,7 +450,6 @@ PAB_WebApp/
 ├── .github/dependabot.yml
 ├── Dockerfile
 ├── docker-compose.yml
-├── railway.json         # Railway build, health check and restart settings
 └── dotnet-tools.json    # The EF Core migrations tool
 ```
 
@@ -460,15 +459,17 @@ PAB_WebApp/
 
 ### 12.1 Deployment
 
-The website is hosted on **Railway**, built from the project's `Dockerfile`.
+The website is hosted on **Render** (free plan), built from the project's `Dockerfile`.
 
 | Setting | Detail |
 |---------|--------|
 | Build | A two-stage image: the .NET 10 SDK publishes the app, then it runs on the smaller ASP.NET runtime |
-| Port | Railway supplies it through the `PORT` variable (default `8080`) |
-| Database | Stored at `/data/philisa.db`, on a Railway volume so it survives redeploys |
-| Session keys | Stored at `/data/keys`, so a redeploy doesn't sign staff out or break a form someone has open |
-| Health check | `railway.json` points Railway at `/health`, which answers 200 only when the database responds. A deploy that fails it never receives visitors. |
+| Port | Render supplies it through the `PORT` variable (the image falls back to `8080`) |
+| Database | A SQLite file at `/data/philisa.db` unless `ConnectionStrings__DefaultConnection` points at Postgres. Render's free plan has no persistent disk, so the hosted site is moving to a managed Postgres database on Neon (section 14.2). |
+| Session keys | Kept at `/data/keys`. On Render they have to be kept in the database as well (section 14.2), so a restart doesn't sign staff out, break a form someone has open or make saved requests unreadable. |
+| Health check | Render's **Health Check Path** is `/health`, which answers 200 only when the database responds. A deploy that fails it never receives visitors. |
+| Visitors' addresses | `TrustProxy=true` and `TrustProxyHops=3`. Render lists the visitor third from the right in `X-Forwarded-For`, so that is the entry read. It keeps the form limit per visitor, and an address a visitor makes up lands further left, where it is ignored. If Render ever changes its proxies, test again from two devices on different networks. |
+| Free plan | The service sleeps after 15 minutes without visitors, and the first request after that takes about a minute while it wakes. |
 | Settings | `Firebase__ApiKey` for staff sign-in. `Alerts__ApiKey`, `Alerts__From`, `Alerts__To` and `Alerts__SiteUrl` for new-request emails (section 10). Optional: `RateLimiting__FormPostsPerWindow` and `RateLimiting__WindowMinutes`. |
 
 ### 12.2 CI/CD
@@ -477,14 +478,13 @@ The website is hosted on **Railway**, built from the project's `Dockerfile`.
 
 | Job | What It Does |
 |-----|--------------|
-| **Build and test** | Restores, builds and runs every unit and integration test, keeps the results as a download, and builds the Docker image Railway will use |
-| **Deploy to Railway** | Only on `main`, and only after the job above passes: deploys with the Railway CLI, then checks the live `/health` |
+| **Build and test** | Restores, builds and runs every unit and integration test, keeps the results as a download, and builds the Docker image Render will use |
+| **Deploy to Render** | Only on `main`, and only after the job above passes: asks Render to deploy that exact commit through its deploy hook, then checks the live `/health` |
 
-To turn the deploy on, add two repository secrets under **Settings → Secrets and variables → Actions**:
-- `RAILWAY_TOKEN`: a Railway project token.
-- `RAILWAY_SERVICE`: the service's name or id.
+To turn the deploy on, add one repository secret under **Settings → Secrets and variables → Actions**:
+- `RENDER_DEPLOY_HOOK`: the service's deploy hook, from Render under **Settings → Deploy Hook**. Treat it like a password: anyone who has it can start a deploy.
 
-Then switch off Railway's own automatic deploys from GitHub, so every release goes through the tests first. Until the secrets exist, the deploy job reports that it was skipped instead of failing.
+If the live address ever changes, set a repository variable called `SITE_URL` to it. The Render service has no automatic deploys from GitHub, so every release goes through the tests first. Until the secret exists, the deploy job reports that it was skipped instead of failing.
 
 ### 12.3 Branching
 
@@ -500,8 +500,9 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 
 | Item | Estimated Cost |
 |------|----------------|
-| Railway hosting | From US$5 a month, depending on usage |
-| SQLite database and SSL certificate | R0, included |
+| Render hosting (free plan) | R0. The site sleeps when nobody has visited for 15 minutes. |
+| Neon Postgres database (free plan) | R0 |
+| SSL certificate | R0, included |
 | `.co.za` domain (optional) | About R99 to register, then about R109 a year |
 
 ---
@@ -515,12 +516,12 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 | All pages, the support form and the contact form | ✔ Complete |
 | English, isiXhosa and Afrikaans | ✔ Complete |
 | PAB's real photos and programme galleries | ✔ Complete |
-| Saving submissions, Docker and Railway hosting | ✔ Complete |
+| Saving submissions, Docker and Render hosting | ✔ Complete |
 | Server-side checks, rate limiting and spam trap on both forms | ✔ Complete |
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
 | Security headers, health check and quick exit | ✔ Complete |
-| Automated tests (185) and CI/CD | ✔ Complete (deploy needs the Railway secrets) |
+| Automated tests (254) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |
 | Constrained schema, staff notes and indexes | ✔ Complete |
@@ -530,12 +531,12 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 | Photos as WebP, lazy, at the width they are shown | ✔ Complete |
 | Emergency numbers readable with no data | ✔ Complete |
 | Managed Postgres database | ◑ Code ready, database not yet provisioned |
-| Emailing PAB about new requests and contact messages, with no personal details | ✔ Complete (needs the `Alerts__` variables on Railway) |
+| Emailing PAB about new requests and contact messages, with no personal details | ✔ Complete (needs the `Alerts__` variables on the host) |
 | Staff page for reading contact messages | ✔ Complete |
 
 ### 14.2 Future Improvements
 
-- **Managed database:** the site already uses Postgres wherever the connection string points at one, and falls back to SQLite locally (`Data/DatabaseProvider.cs`). What is left is provisioning the database and generating a Postgres migration set: the migrations in `Migrations/` were generated for SQLite and its `AUTOINCREMENT` annotation does not carry across.
+- **Managed database:** the site already uses Postgres wherever the connection string points at one, and falls back to SQLite locally (`Data/DatabaseProvider.cs`). What is left is provisioning the database (Neon, on its free plan) and generating a Postgres migration set: the migrations in `Migrations/` were generated for SQLite and its `AUTOINCREMENT` annotation does not carry across. Render's free plan also has no persistent disk, so the data-protection keys that encrypt the situation text must be stored in that database, protected by a certificate kept in a host secret, or a restart would make saved requests unreadable.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
 - **Moving the programmes into a content file:** the page text is now in `.resx` files (section 7), but the programmes are still written in `Data/SiteData.cs` and `Localization/ProgrammeTranslations.cs`.
 - **Lighthouse in CI:** a minimum score for performance and accessibility on every pull request.
