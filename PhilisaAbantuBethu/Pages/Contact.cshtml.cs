@@ -46,10 +46,7 @@ namespace PhilisaAbantuBethu.Pages
 
             if (!string.IsNullOrEmpty(Website))
             {
-                FormError = s.Pick(
-                    "We couldn't send your message. Please try again, or email admin@philisaabafazi.org.",
-                    "Asikwazanga ukuthumela umyalezo wakho. Nceda uzame kwakhona, okanye uthumele i-imeyile ku-admin@philisaabafazi.org.",
-                    "Ons kon nie jou boodskap stuur nie. Probeer asseblief weer, of e-pos admin@philisaabafazi.org.");
+                FormError = s["Contact.CouldntSendMessagePlease"];
                 return Page();
             }
 
@@ -62,10 +59,7 @@ namespace PhilisaAbantuBethu.Pages
 
             if (!ModelState.IsValid)
             {
-                FormError = s.Pick(
-                    "Please check the highlighted fields.",
-                    "Nceda ujonge iindawo eziphawulweyo.",
-                    "Kontroleer asseblief die gemerkte velde.");
+                FormError = s["RequestSupport.PleaseCheckHighlightedFields"];
                 return Page();
             }
 

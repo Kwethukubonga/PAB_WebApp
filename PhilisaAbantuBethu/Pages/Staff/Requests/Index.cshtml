@@ -4,7 +4,7 @@
 @using PhilisaAbantuBethu.Staff
 @{
     var s = HttpContext.Strings();
-    ViewData["Title"] = s.Pick("Support requests", "Izicelo zenkxaso", "Ondersteuningsversoeke");
+    ViewData["Title"] = s["Staff.Index.SupportRequests"];
     var now = DateTime.UtcNow;
 }
 
@@ -13,7 +13,7 @@
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
     <h1 class="text-3xl font-bold text-ink-900 mb-6 font-serif">@ViewData["Title"]</h1>
 
-    <nav class="flex flex-wrap gap-2 mb-4" aria-label="@s.Pick("Request status", "Imeko yesicelo", "Versoekstatus")">
+    <nav class="flex flex-wrap gap-2 mb-4" aria-label="@s["Staff.Index.RequestStatus"]">
         @foreach (var status in SupportRequestStatus.All)
         {
             var selected = Model.Status == status;
@@ -28,11 +28,11 @@
     @* Longest wait first by default, which is the order to work a queue in; the other way round
        answers "what has just come in". Urgent stays on top either way (W12). *@
     <div class="flex items-center gap-2 mb-8 text-sm">
-        <span class="text-ink-600">@s.Pick("Show", "Bonisa", "Wys")</span>
+        <span class="text-ink-600">@s["Staff.Index.Show"]</span>
         @foreach (var (sort, label) in new[]
         {
-            (IndexModel.OldestFirst, s.Pick("Longest waiting first", "Elinde ixesha elide kuqala", "Langste wag eerste")),
-            (IndexModel.NewestFirst, s.Pick("Newest first", "Ezitsha kuqala", "Nuutste eerste"))
+            (IndexModel.OldestFirst, s["Staff.Index.LongestWaitingFirst"]),
+            (IndexModel.NewestFirst, s["Staff.Index.NewestFirst"])
         })
         {
             var on = Model.Sort == sort;
@@ -48,7 +48,7 @@
     {
         <div class="bg-ink-50 border border-ink-200 rounded-2xl px-6 py-10 text-center">
             <p class="text-ink-700 font-medium">
-                @s.Pick("Nothing here right now.", "Akukho nto apha okwangoku.", "Niks hier op die oomblik nie.")
+                @s["Staff.Index.NothingHereRightNow"]
             </p>
         </div>
     }
@@ -64,7 +64,7 @@
                             <span class="font-mono text-sm font-semibold text-ink-900">@request.Reference</span>
                             @if (request.IsUrgent)
                             {
-                                <span class="pill-urgent">@s.Pick("Urgent", "Ingxamisekile", "Dringend")</span>
+                                <span class="pill-urgent">@s["Staff.Index.Urgent"]</span>
                             }
                             <span class="ml-auto text-xs text-ink-600" title="@StaffText.LocalTime(request.SubmittedAt)">@StaffText.Ago(s, request.SubmittedAt, now)</span>
                         </div>

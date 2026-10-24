@@ -9,12 +9,10 @@
         <partial name="_Image" model='new SitePhoto( Src: "/img/programmes/after-school/hero.jpg", Class: "w-full h-full object-cover", Sizes: "100vw", Eager: true, Decorative: true)' />
     </div>
     <div class="relative z-10 max-w-3xl mx-auto px-4">
-        <p class="text-on-brand-muted text-sm font-semibold uppercase tracking-widest mb-3">@s.Pick("What We Do", "Esikwenzayo", "Wat Ons Doen")</p>
+        <p class="text-on-brand-muted text-sm font-semibold uppercase tracking-widest mb-3">@s["Home.WhatWeDo"]</p>
         <h1 class="text-4xl md:text-5xl font-bold mb-5 font-serif">@s.Nav.Programmes</h1>
         <p class="text-on-brand-muted text-lg leading-relaxed max-w-xl mx-auto">
-            @s.Pick("Ten programmes, one mission: to uplift and empower every person who walks through our doors.",
-                    "Iinkqubo ezilishumi, umsebenzi omnye: ukuphakamisa nokunika amandla wonke umntu ofika emahasini ethu.",
-                    "Tien programme, een missie: om elke persoon wat by ons deure inkom, op te hef en te bemagtig.")
+            @s["Programmes.TenProgrammesOneMission"]
         </p>
     </div>
 </section>
@@ -34,7 +32,7 @@
                         <h2 class="font-bold text-ink-900 text-xl mb-3 leading-snug font-serif">@prog.TitleFor(s)</h2>
                         <p class="text-ink-500 text-sm leading-relaxed mb-6 flex-1">@prog.DescriptionFor(s)</p>
                         <span class="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 group-hover:text-brand-900 transition-colors mt-auto">
-                            @s.Pick("Learn More", "Funda Ngakumbi", "Leer Meer")
+                            @s["Programmes.LearnMore"]
                             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" class="group-hover:translate-x-1 transition-transform" aria-hidden="true">
                                 <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -48,11 +46,9 @@
 
 <section class="py-16 bg-amber-50 border-t border-amber-100 text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s.Pick("Need Support?", "Ufuna Uncedo?", "Benodig Jy Ondersteuning?")</h2>
+        <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Programmes.NeedSupport"]</h2>
         <p class="text-ink-600 mb-6 text-sm">
-            @s.Pick("Get in touch and our team will help guide you to the right programme.",
-                    "Qhagamshelana nathi kwaye iqela lethu liza kukunceda ukufumana inkqubo efanelekileyo.",
-                    "Kontak ons en ons span sal jou help om die regte program te vind.")
+            @s["Programmes.GetTouchTeamWill"]
         </p>
         <a href="/Contact" class="inline-block bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">
             @s.Home.ContactUs
