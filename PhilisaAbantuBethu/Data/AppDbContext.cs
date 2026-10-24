@@ -20,6 +20,9 @@ namespace PhilisaAbantuBethu.Data
         
         private readonly ISensitiveText? _sensitive;
 
+        /// <summary>What this context encrypts with. Part of the cached model's key (see SensitiveModelCacheKeyFactory).</summary>
+        internal ISensitiveText? Sensitive => _sensitive;
+
         /// <summary>
         /// Initializes a new instance of the AppDbContext class with the specified options.
         /// Used by the EF design-time tools, which build the model without the app's services.
@@ -33,6 +36,13 @@ namespace PhilisaAbantuBethu.Data
         /// </summary>
         public AppDbContext(DbContextOptions<AppDbContext> options, ISensitiveText sensitive)
             : base(options) => _sensitive = sensitive;
+
+        /// <summary>
+        /// For the context built on another database (<see cref="PostgresAppDbContext"/>), which
+        /// carries its own options type but the same model. A null <paramref name="sensitive"/> is
+        /// the design-time case, where the tools only need the model.
+        /// </summary>
+        protected AppDbContext(DbContextOptions options, ISensitiveText? sensitive) : base(options) => _sensitive = sensitive;
 
         /// <summary>
         /// Gets or sets the DbSet for SupportRequest entities, allowing CRUD operations

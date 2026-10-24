@@ -1,4 +1,7 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using PhilisaAbantuBethu.Models;
 
 namespace PhilisaAbantuBethu.Tests;
@@ -37,6 +40,24 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task Alive_AnswersWithoutAskingTheDatabase()
+    {
+        // The host and the uptime monitor ask this every few minutes, so it must not wake the
+        // managed database. A check that always fails stands in for a database that can't be
+        // reached: /health runs it and reports the failure, /alive never runs it.
+        using var site = new SiteFactory();
+        using var withBrokenCheck = site.WithWebHostBuilder(host => host.ConfigureServices(services =>
+            services.AddHealthChecks().AddCheck("broken", () => HealthCheckResult.Unhealthy("down"))));
+        var client = withBrokenCheck.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
+
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, (await client.GetAsync("/health")).StatusCode);
+
+        var alive = await client.GetAsync("/alive");
+        Assert.Equal(HttpStatusCode.OK, alive.StatusCode);
+        Assert.Equal("Healthy", await alive.Content.ReadAsStringAsync());
     }
 
     [Fact]

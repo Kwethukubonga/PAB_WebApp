@@ -51,6 +51,13 @@ public static class DatabaseProvider
         // Managed Postgres is TLS-only, and its certificate is the provider's own.
         parts.Add("SSL Mode=Require");
         parts.Add("Trust Server Certificate=true");
+
+        // A managed database that sleeps drops connections nobody has used for a few minutes. If
+        // the pool kept one of those it would hand it out dead, so unused connections are closed
+        // after 30 seconds. A small pool is plenty for this site and keeps well inside the
+        // connection limit of a free plan.
+        parts.Add("Connection Idle Lifetime=30");
+        parts.Add("Maximum Pool Size=10");
         return string.Join(';', parts);
     }
 }

@@ -31,10 +31,19 @@ public class SiteFactory : WebApplicationFactory<Program>
     /// <summary>Every alert the site would have emailed, instead of sending it.</summary>
     public RecordingEmailSender Emails { get; } = new();
 
+    /// <summary>A Postgres database to use instead of the throwaway SQLite file.</summary>
+    public string? ConnectionString { get; init; }
+
+    /// <summary>The certificate (a .pfx as base64) and password that lock the keys kept in a Postgres database.</summary>
+    public string? DataProtectionCertificate { get; init; }
+    public string? DataProtectionCertificatePassword { get; init; }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
-        builder.UseSetting("ConnectionStrings:DefaultConnection", $"Data Source={_dbPath}");
+        builder.UseSetting("ConnectionStrings:DefaultConnection", ConnectionString ?? $"Data Source={_dbPath}");
+        if (DataProtectionCertificate is not null) builder.UseSetting("DataProtection:Certificate", DataProtectionCertificate);
+        if (DataProtectionCertificatePassword is not null) builder.UseSetting("DataProtection:CertificatePassword", DataProtectionCertificatePassword);
         builder.UseSetting("RateLimiting:FormPostsPerWindow", FormPostsPerWindow.ToString());
         builder.UseSetting("Firebase:ApiKey", "test-api-key");
         builder.UseSetting("Alerts:ApiKey", "test-email-key");
