@@ -31,4 +31,16 @@ public static class Text
     /// </summary>
     public static string Get(string key, string lang) =>
         Resources.GetString(key, CultureFor(lang)) ?? key;
+
+    /// <summary>
+    /// A numbered list, stored as <c>prefix.0</c>, <c>prefix.1</c> and so on. The English file
+    /// decides how many there are, and the test makes sure the other two have the same.
+    /// </summary>
+    public static string[] List(string prefix, string lang)
+    {
+        var items = new List<string>();
+        for (var i = 0; Resources.GetString($"{prefix}.{i}", CultureInfo.InvariantCulture) is not null; i++)
+            items.Add(Get($"{prefix}.{i}", lang));
+        return items.ToArray();
+    }
 }

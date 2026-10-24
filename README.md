@@ -233,11 +233,14 @@ The website is available in **English**, **isiXhosa** and **Afrikaans**.
 
 - The language switcher adds `?lang=en`, `?lang=xh` or `?lang=af` to the page address.
 - The choice is saved in a `pab_lang` cookie for one year. The default is English.
-- Every piece of text is written in all three languages, and a helper picks the right one:
+- Every piece of text lives in `Resources/`, one file per language: `SharedResource.resx` (English), `SharedResource.xh.resx` (isiXhosa) and `SharedResource.af.resx` (Afrikaans). A translator can check one file instead of reading every page. Pages ask for text by name:
 
 ```csharp
-@s.Pick("Skip to content", "Tsibela kumxholo", "Spring na inhoud")
+@s["Layout.SkipContent"]                                      // "Skip to content"
+@s.Format("SupportRequestForm.PleaseKeepUnderCharacters", 500) // "Please keep this under 500 characters."
 ```
+
+- A test (`SharedResourceTests`) fails if any text is missing from the isiXhosa or Afrikaans file, so a page can't quietly fall back to English.
 
 - The page's `lang` attribute is set to match (`en-ZA`, `xh-ZA` or `af-ZA`).
 
@@ -513,7 +516,7 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 - **New-request alerts:** an email to PAB's intake address, or a notification on PAB admins' phones through the Philisa Volunteers app. This is the last piece of the marker's "a view or notification so PAB staff can act".
 - **Managed database:** the site already uses Postgres wherever the connection string points at one, and falls back to SQLite locally (`Data/DatabaseProvider.cs`). What is left is provisioning the database and generating a Postgres migration set: the migrations in `Migrations/` were generated for SQLite and its `AUTOINCREMENT` annotation does not carry across.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
-- **Moving the page text into resource files:** programme and resource content is now typed data rather than markup, but the page labels are still inline `s.Pick(...)` calls in the views.
+- **Moving the programmes into a content file:** the page text is now in `.resx` files (section 7), but the programmes are still written in `Data/SiteData.cs` and `Localization/ProgrammeTranslations.cs`.
 - **Lighthouse in CI:** a minimum score for performance and accessibility on every pull request.
 
 ---

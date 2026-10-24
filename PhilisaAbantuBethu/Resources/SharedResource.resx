@@ -633,4 +633,229 @@
   <data name="StaffText.DaysAgo" xml:space="preserve">
     <value>{0} days ago</value>
   </data>
+  <data name="Nav.Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Nav.Programmes" xml:space="preserve">
+    <value>Our Programmes</value>
+  </data>
+  <data name="Nav.Resources" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="Nav.Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Nav.RequestSupport" xml:space="preserve">
+    <value>Request Support</value>
+  </data>
+  <data name="Home.Badge" xml:space="preserve">
+    <value>Philisa Abafazi Bethu: Community Support</value>
+  </data>
+  <data name="Home.HeroHeading" xml:space="preserve">
+    <value>Do you need support?</value>
+  </data>
+  <data name="Home.HeroSub" xml:space="preserve">
+    <value>We are here to help.</value>
+  </data>
+  <data name="Home.HeroParagraph" xml:space="preserve">
+    <value>Philisa Abafazi Bethu supports women, children and families across Cape Town communities. If you need support, this platform gives you a simple and private way to reach out and ask for help.</value>
+  </data>
+  <data name="Home.RequestSupport" xml:space="preserve">
+    <value>Request Support</value>
+  </data>
+  <data name="Home.ExplorePrograms" xml:space="preserve">
+    <value>Explore Programmes</value>
+  </data>
+  <data name="Home.ProgrammesSectionTitle" xml:space="preserve">
+    <value>Our Programmes</value>
+  </data>
+  <data name="Home.ProgrammesSectionSub" xml:space="preserve">
+    <value>We offer a range of free programmes for community members who need support.</value>
+  </data>
+  <data name="Home.ViewAll" xml:space="preserve">
+    <value>View All Programmes</value>
+  </data>
+  <data name="Home.ResourcesTitle" xml:space="preserve">
+    <value>Resources &amp; Information</value>
+  </data>
+  <data name="Home.ResourcesSub" xml:space="preserve">
+    <value>Emergency contacts, community services, and helpful information for you and your family.</value>
+  </data>
+  <data name="Home.ViewResources" xml:space="preserve">
+    <value>View Resources</value>
+  </data>
+  <data name="Home.ContactTitle" xml:space="preserve">
+    <value>Not sure where to start?</value>
+  </data>
+  <data name="Home.ContactSub" xml:space="preserve">
+    <value>Call or email us and we will help guide you to the right support.</value>
+  </data>
+  <data name="Home.ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="Home.ServiceNote" xml:space="preserve">
+    <value>Philisa primarily serves Lavender Hill, Steenberg and surrounding Cape Flats communities in Cape Town.</value>
+  </data>
+  <data name="Form.Title" xml:space="preserve">
+    <value>Request Support</value>
+  </data>
+  <data name="Form.Subtitle" xml:space="preserve">
+    <value>You do not need to create an account. Simply fill in the form and we will be in touch.</value>
+  </data>
+  <data name="Form.ServiceArea" xml:space="preserve">
+    <value>Philisa primarily serves Lavender Hill, Steenberg and surrounding Cape Flats communities. If you are outside these areas, you may still submit a request and the team will advise where possible.</value>
+  </data>
+  <data name="Form.Step1Label" xml:space="preserve">
+    <value>About You</value>
+  </data>
+  <data name="Form.Step2Label" xml:space="preserve">
+    <value>Support Needed</value>
+  </data>
+  <data name="Form.Step3Label" xml:space="preserve">
+    <value>Confirm &amp; Submit</value>
+  </data>
+  <data name="Form.FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="Form.Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Form.Phone" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Form.Email" xml:space="preserve">
+    <value>Email Address (optional)</value>
+  </data>
+  <data name="Form.Area" xml:space="preserve">
+    <value>Your Area / Suburb</value>
+  </data>
+  <data name="Form.AreaPlaceholder" xml:space="preserve">
+    <value>e.g. Lavender Hill, Steenberg, Mitchells Plain…</value>
+  </data>
+  <data name="Form.ContactMethod" xml:space="preserve">
+    <value>How would you prefer us to contact you?</value>
+  </data>
+  <data name="Form.ContactPhone" xml:space="preserve">
+    <value>Phone call</value>
+  </data>
+  <data name="Form.ContactWhatsApp" xml:space="preserve">
+    <value>WhatsApp</value>
+  </data>
+  <data name="Form.ContactEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Form.ContactVisit" xml:space="preserve">
+    <value>In-person visit</value>
+  </data>
+  <data name="Form.SupportType" xml:space="preserve">
+    <value>What type of support do you need?</value>
+  </data>
+  <data name="Form.SupportTypePlaceholder" xml:space="preserve">
+    <value>Select a type of support</value>
+  </data>
+  <data name="Form.Situation" xml:space="preserve">
+    <value>Please briefly describe your situation</value>
+  </data>
+  <data name="Form.SituationPlaceholder" xml:space="preserve">
+    <value>Tell us a little about what you are going through and what kind of help you need. There is no right or wrong way to explain: just use your own words.</value>
+  </data>
+  <data name="Form.Urgent" xml:space="preserve">
+    <value>Is this urgent?</value>
+  </data>
+  <data name="Form.UrgentYes" xml:space="preserve">
+    <value>Yes: I need help as soon as possible</value>
+  </data>
+  <data name="Form.UrgentNo" xml:space="preserve">
+    <value>No: I can wait a few days</value>
+  </data>
+  <data name="Form.ExtraInfo" xml:space="preserve">
+    <value>Anything else you would like us to know? (optional)</value>
+  </data>
+  <data name="Form.ExtraInfoPlaceholder" xml:space="preserve">
+    <value>Any additional details that might help us assist you better.</value>
+  </data>
+  <data name="Form.Declaration" xml:space="preserve">
+    <value>I confirm that the information I have provided is accurate. I consent to Philisa Abafazi Bethu Women Centre SA using this information to process my request, in accordance with their privacy policy.</value>
+  </data>
+  <data name="Form.SubmitRequest" xml:space="preserve">
+    <value>Submit Request</value>
+  </data>
+  <data name="Form.Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Form.Next" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Form.Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Confirmation.Title" xml:space="preserve">
+    <value>Thank You: Your Request Has Been Received</value>
+  </data>
+  <data name="Confirmation.Sub" xml:space="preserve">
+    <value>Philisa Abafazi Bethu will contact you using the contact details you provided. You do not need to do anything else right now.</value>
+  </data>
+  <data name="Confirmation.RefLabel" xml:space="preserve">
+    <value>Reference Number</value>
+  </data>
+  <data name="Confirmation.DateLabel" xml:space="preserve">
+    <value>Date Submitted</value>
+  </data>
+  <data name="Confirmation.StatusLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Confirmation.Status" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="Confirmation.WhatNext" xml:space="preserve">
+    <value>What happens next?</value>
+  </data>
+  <data name="Confirmation.Steps.0" xml:space="preserve">
+    <value>Your request has been received by the Philisa Abafazi Bethu team.</value>
+  </data>
+  <data name="Confirmation.Steps.1" xml:space="preserve">
+    <value>A team member will review your request and reach out to you using your preferred contact method.</value>
+  </data>
+  <data name="Confirmation.Steps.2" xml:space="preserve">
+    <value>If your request is urgent, the team will prioritise contacting you as soon as possible.</value>
+  </data>
+  <data name="Confirmation.Steps.3" xml:space="preserve">
+    <value>Please keep your reference number in case you need to follow up.</value>
+  </data>
+  <data name="Confirmation.BackHome" xml:space="preserve">
+    <value>Back to Home</value>
+  </data>
+  <data name="Confirmation.AnotherRequest" xml:space="preserve">
+    <value>Submit Another Request</value>
+  </data>
+  <data name="SupportTypes.0" xml:space="preserve">
+    <value>Food Assistance</value>
+  </data>
+  <data name="SupportTypes.1" xml:space="preserve">
+    <value>Women's Empowerment</value>
+  </data>
+  <data name="SupportTypes.2" xml:space="preserve">
+    <value>Youth Support</value>
+  </data>
+  <data name="SupportTypes.3" xml:space="preserve">
+    <value>After-school Programme</value>
+  </data>
+  <data name="SupportTypes.4" xml:space="preserve">
+    <value>Senior Care</value>
+  </data>
+  <data name="SupportTypes.5" xml:space="preserve">
+    <value>Baby Saver Programme</value>
+  </data>
+  <data name="SupportTypes.6" xml:space="preserve">
+    <value>Emergency Shelter</value>
+  </data>
+  <data name="SupportTypes.7" xml:space="preserve">
+    <value>Search &amp; Rescue</value>
+  </data>
+  <data name="SupportTypes.8" xml:space="preserve">
+    <value>Social Work Services</value>
+  </data>
+  <data name="SupportTypes.9" xml:space="preserve">
+    <value>General Help / Not Sure</value>
+  </data>
 </root>
