@@ -858,6 +858,21 @@
   <data name="SupportTypes.9" xml:space="preserve">
     <value>Algemene Hulp / Onseker</value>
   </data>
+  <data name="Staff.StaffBar.Messages" xml:space="preserve">
+    <value>Boodskappe</value>
+  </data>
+  <data name="Staff.Messages.Title" xml:space="preserve">
+    <value>Kontakboodskappe</value>
+  </data>
+  <data name="Staff.Messages.Intro" xml:space="preserve">
+    <value>Boodskappe wat deur die Kontakblad gestuur is, nuutste eerste.</value>
+  </data>
+  <data name="Staff.Messages.None" xml:space="preserve">
+    <value>Geen boodskappe op die oomblik nie.</value>
+  </data>
+  <data name="Staff.Messages.AllMessages" xml:space="preserve">
+    <value>Alle boodskappe</value>
+  </data>
   <data name="Staff.Details.ConfirmCloseQuestion" xml:space="preserve">
     <value>Sluit {0}?</value>
   </data>

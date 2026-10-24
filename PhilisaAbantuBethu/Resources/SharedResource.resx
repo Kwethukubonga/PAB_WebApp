@@ -858,6 +858,21 @@
   <data name="SupportTypes.9" xml:space="preserve">
     <value>General Help / Not Sure</value>
   </data>
+  <data name="Staff.StaffBar.Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="Staff.Messages.Title" xml:space="preserve">
+    <value>Contact messages</value>
+  </data>
+  <data name="Staff.Messages.Intro" xml:space="preserve">
+    <value>Messages sent through the Contact page, newest first.</value>
+  </data>
+  <data name="Staff.Messages.None" xml:space="preserve">
+    <value>No messages right now.</value>
+  </data>
+  <data name="Staff.Messages.AllMessages" xml:space="preserve">
+    <value>All messages</value>
+  </data>
   <data name="Staff.Details.ConfirmCloseQuestion" xml:space="preserve">
     <value>Close {0}?</value>
   </data>

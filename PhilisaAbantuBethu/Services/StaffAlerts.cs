@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using PhilisaAbantuBethu.Forms;
 using PhilisaAbantuBethu.Localization;
 using PhilisaAbantuBethu.Models;
 using PhilisaAbantuBethu.Staff;
@@ -9,6 +10,9 @@ public interface IStaffAlerts
 {
     /// <summary>Tells PAB a support request has come in. Never throws: a failed email must not lose the request.</summary>
     Task SupportRequestReceivedAsync(SupportRequest request, CancellationToken ct = default);
+
+    /// <summary>Tells PAB a message has come in through the Contact page. Never throws either.</summary>
+    Task ContactMessageReceivedAsync(ContactInquiry message, CancellationToken ct = default);
 }
 
 /// <summary>
@@ -33,12 +37,22 @@ public class StaffAlerts : IStaffAlerts
         _log = log;
     }
 
-    public async Task SupportRequestReceivedAsync(SupportRequest request, CancellationToken ct = default)
+    public Task SupportRequestReceivedAsync(SupportRequest request, CancellationToken ct = default) =>
+        _options.SupportRequests
+            ? SendAsync(ForSupportRequest(request, _options.SiteUrl), $"support request {request.Reference}", ct)
+            : Task.CompletedTask;
+
+    public Task ContactMessageReceivedAsync(ContactInquiry message, CancellationToken ct = default) =>
+        _options.ContactMessages
+            ? SendAsync(ForContactMessage(message, _options.SiteUrl), $"contact message {message.Id}", ct)
+            : Task.CompletedTask;
+
+    /// <param name="about">What the email is about, for the log: an id or reference, never a name.</param>
+    private async Task SendAsync(EmailMessage email, string about, CancellationToken ct)
     {
-        if (!_options.SupportRequests) return;
         if (!_options.IsConfigured)
         {
-            _log.LogDebug("Email alerts aren't set up, so none was sent for {Reference}", request.Reference);
+            _log.LogDebug("Email alerts aren't set up, so none was sent for {About}", about);
             return;
         }
 
@@ -46,14 +60,14 @@ public class StaffAlerts : IStaffAlerts
         {
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(SendTimeout);
-            await _email.SendAsync(ForSupportRequest(request, _options.SiteUrl), timeout.Token);
-            _log.LogInformation("Emailed PAB about support request {Reference}", request.Reference);
+            await _email.SendAsync(email, timeout.Token);
+            _log.LogInformation("Emailed PAB about {About}", about);
         }
         catch (Exception ex)
         {
-            // The request is already saved and on the staff list, so this is worth a warning, not
-            // an error page. The reference is enough to find it; nothing personal goes in the log.
-            _log.LogWarning("Could not email PAB about support request {Reference}: {Problem}", request.Reference, ex.GetType().Name);
+            // It's already saved and on the staff pages, so this is worth a warning, not an error
+            // page. The reference or id is enough to find it; nothing personal goes in the log.
+            _log.LogWarning("Could not email PAB about {About}: {Problem}", about, ex.GetType().Name);
         }
     }
 
@@ -85,6 +99,34 @@ public class StaffAlerts : IStaffAlerts
         });
 
         return new EmailMessage(subject, text);
+    }
+
+    /// <summary>
+    /// The alert for a contact message: which of the fixed subjects it was and when. The sender's
+    /// name, email, phone number and what they wrote stay on the staff Messages page.
+    /// </summary>
+    internal static EmailMessage ForContactMessage(ContactInquiry message, string siteUrl)
+    {
+        var subject = ContactValidator.EnglishSubject(message.Subject);
+
+        var link = string.IsNullOrWhiteSpace(siteUrl)
+            ? "Open Staff → Messages on the website to read it."
+            : $"Read it here: {siteUrl.TrimEnd('/')}/Staff/Messages/Details/{message.Id}";
+
+        var text = string.Join("\n", new[]
+        {
+            "A new message has come in through the Contact page.",
+            "",
+            $"Subject:    {subject}",
+            $"Received:   {StaffText.LocalTime(message.SubmittedAt)}",
+            "",
+            link,
+            "You'll need to sign in with your PAB admin account.",
+            "",
+            "Who sent it and what they wrote are left out of this email on purpose."
+        });
+
+        return new EmailMessage($"New message through the contact form · {subject}", text);
     }
 
     /// <summary>

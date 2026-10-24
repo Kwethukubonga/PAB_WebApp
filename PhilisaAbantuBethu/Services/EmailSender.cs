@@ -26,6 +26,9 @@ public class AlertOptions
     /// <summary>Email PAB about each new support request.</summary>
     public bool SupportRequests { get; set; } = true;
 
+    /// <summary>Email PAB about each new message through the Contact page.</summary>
+    public bool ContactMessages { get; set; } = true;
+
     public bool IsConfigured =>
         !string.IsNullOrWhiteSpace(ApiKey) && !string.IsNullOrWhiteSpace(From) && !string.IsNullOrWhiteSpace(To);
 

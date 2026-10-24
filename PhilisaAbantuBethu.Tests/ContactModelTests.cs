@@ -19,7 +19,7 @@ public class ContactModelTests
     }
 
     private static ContactModel CreateModel(AppDbContext db) =>
-        new(new ContactService(db, NullLogger<ContactService>.Instance))
+        new(new ContactService(db, new NoAlerts(), NullLogger<ContactService>.Instance))
         {
             PageContext = PageModelTestHelpers.CreatePageContext(),
             Name = "Nomsa Dlamini",
