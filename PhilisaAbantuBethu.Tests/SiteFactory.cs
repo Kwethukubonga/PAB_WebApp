@@ -19,6 +19,15 @@ public class SiteFactory : WebApplicationFactory<Program>
 
     public int FormPostsPerWindow { get; init; } = 1000;
 
+    /// <summary>Behaves as the hosted site does, with a proxy in front that reports the visitor's address.</summary>
+    public bool TrustProxy { get; init; }
+
+    /// <summary>The header the proxy puts the visitor's address in; empty means X-Forwarded-For.</summary>
+    public string? TrustProxyHeader { get; init; }
+
+    /// <summary>Where the visitor sits in X-Forwarded-For, counting from the right (1 is the last entry).</summary>
+    public int? TrustProxyHops { get; init; }
+
     /// <summary>Every alert the site would have emailed, instead of sending it.</summary>
     public RecordingEmailSender Emails { get; } = new();
 
@@ -32,6 +41,9 @@ public class SiteFactory : WebApplicationFactory<Program>
         builder.UseSetting("Alerts:From", "alerts@pab.test");
         builder.UseSetting("Alerts:To", "intake@pab.test");
         builder.UseSetting("Alerts:SiteUrl", "https://pab.test");
+        if (TrustProxy) builder.UseSetting("TrustProxy", "true");
+        if (TrustProxyHeader is not null) builder.UseSetting("TrustProxyHeader", TrustProxyHeader);
+        if (TrustProxyHops is not null) builder.UseSetting("TrustProxyHops", TrustProxyHops.Value.ToString());
 
         builder.ConfigureServices(services =>
         {

@@ -69,47 +69,44 @@ jobs:
           name: test-results
           path: TestResults/
 
-      # The same image Railway builds, so a broken Dockerfile is caught before it reaches main.
+      # The same image Render builds, so a broken Dockerfile is caught before it reaches main.
       - name: Build the Docker image
         run: docker build --tag philisa-web:ci .
 
   deploy:
-    name: Deploy to Railway
+    name: Deploy to Render
     # Only after the tests pass, and only for main.
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     concurrency:
-      group: railway-production
+      group: render-production
       cancel-in-progress: false
     env:
-      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      RAILWAY_SERVICE: ${{ secrets.RAILWAY_SERVICE }}
-      SITE_URL: ${{ vars.SITE_URL || 'https://philisa-abafazi-bethu.up.railway.app' }}
+      # The hook is a private web address: anyone who has it can start a deploy, so it is a secret.
+      RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://philisa-abafazi-bethu-web.onrender.com' }}
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # Until the secrets are added the job says what's missing instead of failing the run.
-      - name: Check the Railway secrets are set
+      # Until the secret is added the job says what's missing instead of failing the run.
+      - name: Check the deploy hook is set
         id: secrets
         run: |
-          if [ -z "$RAILWAY_TOKEN" ] || [ -z "$RAILWAY_SERVICE" ]; then
-            echo "Deploy skipped: add RAILWAY_TOKEN and RAILWAY_SERVICE under Settings > Secrets and variables > Actions." >> "$GITHUB_STEP_SUMMARY"
+          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
+            echo "Deploy skipped: add RENDER_DEPLOY_HOOK under Settings > Secrets and variables > Actions." >> "$GITHUB_STEP_SUMMARY"
             echo "ready=false" >> "$GITHUB_OUTPUT"
           else
             echo "ready=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Install the Railway CLI
+      # Asks Render to build and deploy exactly the commit that just passed the tests, rather
+      # than whatever main happens to be when Render gets there.
+      - name: Deploy this commit
         if: steps.secrets.outputs.ready == 'true'
-        run: npm install --global @railway/cli
+        run: curl --fail --silent --show-error --output /dev/null --request POST "${RENDER_DEPLOY_HOOK}&ref=${GITHUB_SHA}"
 
-      - name: Deploy
-        if: steps.secrets.outputs.ready == 'true'
-        run: railway up --ci --service "$RAILWAY_SERVICE"
-
+      # Render builds in the background and only switches visitors to the new version once its own
+      # /health check passes. This confirms the site is answering afterwards.
       - name: Check the live site is healthy
         if: steps.secrets.outputs.ready == 'true'
         run: curl --fail --silent --show-error --retry 10 --retry-delay 15 --retry-all-errors "$SITE_URL/health"
