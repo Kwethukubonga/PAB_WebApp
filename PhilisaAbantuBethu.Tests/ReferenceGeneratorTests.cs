@@ -46,7 +46,7 @@ public class ReferenceGeneratorTests
         db.SupportRequests.Add(new SupportRequest { Reference = "PAB-AAAAAA", SubmittedAt = DateTime.UtcNow });
         await db.SaveChangesAsync();
 
-        var service = new SupportRequestService(db, new ScriptedGenerator("PAB-AAAAAA", "PAB-BBBBBB"), NullLogger<SupportRequestService>.Instance);
+        var service = new SupportRequestService(db, new ScriptedGenerator("PAB-AAAAAA", "PAB-BBBBBB"), new NoAlerts(), NullLogger<SupportRequestService>.Instance);
         var reference = await service.SubmitAsync(new SupportRequestInput(
             "Nomsa", "Dlamini", "071 123 4567", "", "Lavender Hill", "phone",
             "Food Assistance", "Need groceries", "no", "", true));
