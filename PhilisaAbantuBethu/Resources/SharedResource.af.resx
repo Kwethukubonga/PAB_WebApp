@@ -486,4 +486,151 @@
   <data name="ContactForm.PleaseWriteMessage" xml:space="preserve">
     <value>Skryf asseblief jou boodskap.</value>
   </data>
+  <data name="Staff.SignIn.Title" xml:space="preserve">
+    <value>Personeel-aanmelding</value>
+  </data>
+  <data name="Staff.SignIn.PhilisaAbafaziBethuStaff" xml:space="preserve">
+    <value>Vir Philisa Abafazi Bethu-personeel, om ondersteuningsversoeke te sien en te beantwoord.</value>
+  </data>
+  <data name="Staff.SignIn.StaffSignIsntSet" xml:space="preserve">
+    <value>Personeel-aanmelding is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).</value>
+  </data>
+  <data name="Staff.SignIn.Signing" xml:space="preserve">
+    <value>Besig om aan te meld…</value>
+  </data>
+  <data name="Staff.SignIn.EmailPasswordDontMatch" xml:space="preserve">
+    <value>Daardie e-pos en wagwoord stem nie ooreen nie. Probeer asseblief weer.</value>
+  </data>
+  <data name="Staff.SignIn.TooManyTriesPlease" xml:space="preserve">
+    <value>Te veel pogings. Wag asseblief 'n paar minute en probeer weer.</value>
+  </data>
+  <data name="Staff.SignIn.CouldntConnectCheckInternet" xml:space="preserve">
+    <value>Kon nie koppel nie. Kontroleer jou internetverbinding.</value>
+  </data>
+  <data name="Staff.SignIn.SomethingWentWrongPlease" xml:space="preserve">
+    <value>Iets het verkeerd geloop. Probeer asseblief weer.</value>
+  </data>
+  <data name="Staff.SignIn.EmailAddress" xml:space="preserve">
+    <value>E-posadres</value>
+  </data>
+  <data name="Staff.SignIn.Password" xml:space="preserve">
+    <value>Wagwoord</value>
+  </data>
+  <data name="Staff.SignIn.SignIn" xml:space="preserve">
+    <value>Meld aan</value>
+  </data>
+  <data name="Staff.SignIn.Or" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
+    <value>Gaan voort met Google</value>
+  </data>
+  <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
+    <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanmeld. Wagwoord vergeet? Stel dit terug op die Philisa Volunteers-toepassing se aanmeldskerm.</value>
+  </data>
+  <data name="Staff.SignIn.SignIsntAvailableRight" xml:space="preserve">
+    <value>Aanmelding is nie nou beskikbaar nie. Probeer asseblief oor 'n paar minute weer.</value>
+  </data>
+  <data name="Staff.SignIn.SignDidntWorkPlease" xml:space="preserve">
+    <value>Daardie aanmelding het nie gewerk nie. Probeer asseblief weer.</value>
+  </data>
+  <data name="Staff.SignIn.AccountIsntPABStaff" xml:space="preserve">
+    <value>Hierdie rekening is nie 'n PAB-personeelrekening nie. Gebruik die admin-rekening waarmee jy by die Philisa Volunteers-toepassing aanmeld.</value>
+  </data>
+  <data name="Staff.StaffBar.Staff" xml:space="preserve">
+    <value>Personeel</value>
+  </data>
+  <data name="Staff.StaffBar.SignedInAs" xml:space="preserve">
+    <value>Aangemeld as</value>
+  </data>
+  <data name="Staff.StaffBar.SignOut" xml:space="preserve">
+    <value>Meld af</value>
+  </data>
+  <data name="Staff.Index.SupportRequests" xml:space="preserve">
+    <value>Ondersteuningsversoeke</value>
+  </data>
+  <data name="Staff.Index.RequestStatus" xml:space="preserve">
+    <value>Versoekstatus</value>
+  </data>
+  <data name="Staff.Index.Show" xml:space="preserve">
+    <value>Wys</value>
+  </data>
+  <data name="Staff.Index.LongestWaitingFirst" xml:space="preserve">
+    <value>Langste wag eerste</value>
+  </data>
+  <data name="Staff.Index.NewestFirst" xml:space="preserve">
+    <value>Nuutste eerste</value>
+  </data>
+  <data name="Staff.Index.NothingHereRightNow" xml:space="preserve">
+    <value>Niks hier op die oomblik nie.</value>
+  </data>
+  <data name="Staff.Index.Urgent" xml:space="preserve">
+    <value>Dringend</value>
+  </data>
+  <data name="Staff.Details.AllRequests" xml:space="preserve">
+    <value>Alle versoeke</value>
+  </data>
+  <data name="Staff.Details.LastUpdated" xml:space="preserve">
+    <value>Laas opgedateer deur</value>
+  </data>
+  <data name="Staff.Details.Email" xml:space="preserve">
+    <value>E-pos</value>
+  </data>
+  <data name="Staff.Details.ContactBy" xml:space="preserve">
+    <value>Kontak per</value>
+  </data>
+  <data name="Staff.Details.SupportType" xml:space="preserve">
+    <value>Tipe ondersteuning</value>
+  </data>
+  <data name="Staff.Details.TheirSituation" xml:space="preserve">
+    <value>Hul situasie</value>
+  </data>
+  <data name="Staff.Details.AnythingElse" xml:space="preserve">
+    <value>Enigiets anders</value>
+  </data>
+  <data name="Staff.Details.MoveRequest" xml:space="preserve">
+    <value>Skuif hierdie versoek</value>
+  </data>
+  <data name="Staff.Details.WhatHasBeenDone" xml:space="preserve">
+    <value>Wat gedoen is</value>
+  </data>
+  <data name="Staff.Details.TeamNotPersonWho" xml:space="preserve">
+    <value>Vir die span, nie vir die persoon wat gevra het nie. Word by die versoek gehou.</value>
+  </data>
+  <data name="Staff.Details.MarkAs" xml:space="preserve">
+    <value>Merk as</value>
+  </data>
+  <data name="Staff.Details.PleaseKeepNotesUnder" xml:space="preserve">
+    <value>Hou die notas asseblief onder {0} karakters.</value>
+  </data>
+  <data name="Staff.Details.StatusUpdated" xml:space="preserve">
+    <value>Status opgedateer na</value>
+  </data>
+  <data name="StaffText.InProgress" xml:space="preserve">
+    <value>Aan die gang</value>
+  </data>
+  <data name="StaffText.Closed" xml:space="preserve">
+    <value>Gesluit</value>
+  </data>
+  <data name="StaffText.New" xml:space="preserve">
+    <value>Nuut</value>
+  </data>
+  <data name="StaffText.JustNow" xml:space="preserve">
+    <value>net nou</value>
+  </data>
+  <data name="StaffText.MinAgo" xml:space="preserve">
+    <value>{0} min gelede</value>
+  </data>
+  <data name="StaffText.HourAgo" xml:space="preserve">
+    <value>{0} uur gelede</value>
+  </data>
+  <data name="StaffText.HoursAgo" xml:space="preserve">
+    <value>{0} uur gelede</value>
+  </data>
+  <data name="StaffText.DayAgo" xml:space="preserve">
+    <value>{0} dag gelede</value>
+  </data>
+  <data name="StaffText.DaysAgo" xml:space="preserve">
+    <value>{0} dae gelede</value>
+  </data>
 </root>

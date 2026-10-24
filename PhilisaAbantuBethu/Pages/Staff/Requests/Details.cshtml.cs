@@ -47,10 +47,7 @@ public class DetailsModel : StaffPageModel
 
         if (StaffNotes?.Length > SupportRequestValidator.StaffNotesMax)
         {
-            StatusMessage = s.Pick(
-                $"Please keep the notes under {SupportRequestValidator.StaffNotesMax} characters.",
-                $"Nceda ugcine amanqaku ngaphantsi koonobumba abayi-{SupportRequestValidator.StaffNotesMax}.",
-                $"Hou die notas asseblief onder {SupportRequestValidator.StaffNotesMax} karakters.");
+            StatusMessage = s.Format("Staff.Details.PleaseKeepNotesUnder", SupportRequestValidator.StaffNotesMax);
             return RedirectToPage(new { id = Id });
         }
 
@@ -58,7 +55,7 @@ public class DetailsModel : StaffPageModel
             Id, status, StaffAuth.DisplayName(User), StaffNotes ?? "", HttpContext.RequestAborted);
         if (changed is null) return NotFound();
 
-        StatusMessage = s.Pick("Status updated to", "Imeko itshintshelwe ku-", "Status opgedateer na") + " " + StaffText.StatusLabel(s, status) + ".";
+        StatusMessage = s["Staff.Details.StatusUpdated"] + " " + StaffText.StatusLabel(s, status) + ".";
         return RedirectToPage(new { id = Id });
     }
 }

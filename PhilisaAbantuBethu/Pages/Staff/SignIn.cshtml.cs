@@ -56,27 +56,18 @@ public class SignInModel : StaffPageModel
         catch (Exception ex) when (ex is HttpRequestException or InvalidOperationException or TaskCanceledException)
         {
             _log.LogError(ex, "Staff sign-in could not reach Google");
-            return Error(StatusCodes.Status503ServiceUnavailable, s.Pick(
-                "Sign-in isn't available right now. Please try again in a few minutes.",
-                "Ukungena akufumaneki ngoku. Nceda uzame kwakhona kwimizuzu embalwa.",
-                "Aanmelding is nie nou beskikbaar nie. Probeer asseblief oor 'n paar minute weer."));
+            return Error(StatusCodes.Status503ServiceUnavailable, s["Staff.SignIn.SignIsntAvailableRight"]);
         }
 
         if (user is null)
         {
-            return Error(StatusCodes.Status401Unauthorized, s.Pick(
-                "That sign-in didn't work. Please try again.",
-                "Ukungena akuphumelelanga. Nceda uzame kwakhona.",
-                "Daardie aanmelding het nie gewerk nie. Probeer asseblief weer."));
+            return Error(StatusCodes.Status401Unauthorized, s["Staff.SignIn.SignDidntWorkPlease"]);
         }
 
         if (!isStaff)
         {
             _log.LogWarning("Staff sign-in refused for {Uid}: not an admin", user.Uid);
-            return Error(StatusCodes.Status403Forbidden, s.Pick(
-                "This account isn't a PAB staff account. Use the admin account you sign in to the Philisa Volunteers app with.",
-                "Le akhawunti ayiyoakhawunti yabasebenzi be-PAB. Sebenzisa iakhawunti yolawulo ongena ngayo kwi-app ye-Philisa Volunteers.",
-                "Hierdie rekening is nie 'n PAB-personeelrekening nie. Gebruik die admin-rekening waarmee jy by die Philisa Volunteers-toepassing aanmeld."));
+            return Error(StatusCodes.Status403Forbidden, s["Staff.SignIn.AccountIsntPABStaff"]);
         }
 
         await HttpContext.SignInAsync(StaffAuth.Scheme, StaffAuth.PrincipalFor(user), new AuthenticationProperties

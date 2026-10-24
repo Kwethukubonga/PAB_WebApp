@@ -486,4 +486,151 @@
   <data name="ContactForm.PleaseWriteMessage" xml:space="preserve">
     <value>Nceda ubhale umyalezo wakho.</value>
   </data>
+  <data name="Staff.SignIn.Title" xml:space="preserve">
+    <value>Ukungena kwabasebenzi</value>
+  </data>
+  <data name="Staff.SignIn.PhilisaAbafaziBethuStaff" xml:space="preserve">
+    <value>Yeyabasebenzi bePhilisa Abafazi Bethu, ukuze babone kwaye baphendule izicelo zenkxaso.</value>
+  </data>
+  <data name="Staff.SignIn.StaffSignIsntSet" xml:space="preserve">
+    <value>Ukungena kwabasebenzi akukasetwa. Cela iqela ukuba longeze isitshixo se-API sewebhu se-Firebase (Firebase__ApiKey).</value>
+  </data>
+  <data name="Staff.SignIn.Signing" xml:space="preserve">
+    <value>Kungenwa…</value>
+  </data>
+  <data name="Staff.SignIn.EmailPasswordDontMatch" xml:space="preserve">
+    <value>Le imeyile kunye negama lokugqithisa azihambelani. Nceda uzame kwakhona.</value>
+  </data>
+  <data name="Staff.SignIn.TooManyTriesPlease" xml:space="preserve">
+    <value>Uzame kaninzi kakhulu. Nceda ulinde imizuzu embalwa uze uzame kwakhona.</value>
+  </data>
+  <data name="Staff.SignIn.CouldntConnectCheckInternet" xml:space="preserve">
+    <value>Asikwazanga ukudibanisa. Jonga uqhagamshelo lwakho lwe-intanethi.</value>
+  </data>
+  <data name="Staff.SignIn.SomethingWentWrongPlease" xml:space="preserve">
+    <value>Kukho into engahambanga kakuhle. Nceda uzame kwakhona.</value>
+  </data>
+  <data name="Staff.SignIn.EmailAddress" xml:space="preserve">
+    <value>Idilesi ye-imeyile</value>
+  </data>
+  <data name="Staff.SignIn.Password" xml:space="preserve">
+    <value>Igama lokugqithisa</value>
+  </data>
+  <data name="Staff.SignIn.SignIn" xml:space="preserve">
+    <value>Ngena</value>
+  </data>
+  <data name="Staff.SignIn.Or" xml:space="preserve">
+    <value>okanye</value>
+  </data>
+  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
+    <value>Qhubeka ngeGoogle</value>
+  </data>
+  <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
+    <value>Ziiakhawunti zolawulo ze-Philisa Volunteers kuphela ezinokungena apha. Ulilibele igama lokugqithisa? Lisete kwakhona kwiscreen sokungena se-app ye-Philisa Volunteers.</value>
+  </data>
+  <data name="Staff.SignIn.SignIsntAvailableRight" xml:space="preserve">
+    <value>Ukungena akufumaneki ngoku. Nceda uzame kwakhona kwimizuzu embalwa.</value>
+  </data>
+  <data name="Staff.SignIn.SignDidntWorkPlease" xml:space="preserve">
+    <value>Ukungena akuphumelelanga. Nceda uzame kwakhona.</value>
+  </data>
+  <data name="Staff.SignIn.AccountIsntPABStaff" xml:space="preserve">
+    <value>Le akhawunti ayiyoakhawunti yabasebenzi be-PAB. Sebenzisa iakhawunti yolawulo ongena ngayo kwi-app ye-Philisa Volunteers.</value>
+  </data>
+  <data name="Staff.StaffBar.Staff" xml:space="preserve">
+    <value>Abasebenzi</value>
+  </data>
+  <data name="Staff.StaffBar.SignedInAs" xml:space="preserve">
+    <value>Ungene njenge</value>
+  </data>
+  <data name="Staff.StaffBar.SignOut" xml:space="preserve">
+    <value>Phuma</value>
+  </data>
+  <data name="Staff.Index.SupportRequests" xml:space="preserve">
+    <value>Izicelo zenkxaso</value>
+  </data>
+  <data name="Staff.Index.RequestStatus" xml:space="preserve">
+    <value>Imeko yesicelo</value>
+  </data>
+  <data name="Staff.Index.Show" xml:space="preserve">
+    <value>Bonisa</value>
+  </data>
+  <data name="Staff.Index.LongestWaitingFirst" xml:space="preserve">
+    <value>Elinde ixesha elide kuqala</value>
+  </data>
+  <data name="Staff.Index.NewestFirst" xml:space="preserve">
+    <value>Ezitsha kuqala</value>
+  </data>
+  <data name="Staff.Index.NothingHereRightNow" xml:space="preserve">
+    <value>Akukho nto apha okwangoku.</value>
+  </data>
+  <data name="Staff.Index.Urgent" xml:space="preserve">
+    <value>Ingxamisekile</value>
+  </data>
+  <data name="Staff.Details.AllRequests" xml:space="preserve">
+    <value>Zonke izicelo</value>
+  </data>
+  <data name="Staff.Details.LastUpdated" xml:space="preserve">
+    <value>Ihlaziywe ngu-</value>
+  </data>
+  <data name="Staff.Details.Email" xml:space="preserve">
+    <value>I-imeyile</value>
+  </data>
+  <data name="Staff.Details.ContactBy" xml:space="preserve">
+    <value>Qhagamshelana nge</value>
+  </data>
+  <data name="Staff.Details.SupportType" xml:space="preserve">
+    <value>Uhlobo lwenkxaso</value>
+  </data>
+  <data name="Staff.Details.TheirSituation" xml:space="preserve">
+    <value>Imeko yabo</value>
+  </data>
+  <data name="Staff.Details.AnythingElse" xml:space="preserve">
+    <value>Nayiphi enye into</value>
+  </data>
+  <data name="Staff.Details.MoveRequest" xml:space="preserve">
+    <value>Hambisa esi sicelo</value>
+  </data>
+  <data name="Staff.Details.WhatHasBeenDone" xml:space="preserve">
+    <value>Okwenziweyo</value>
+  </data>
+  <data name="Staff.Details.TeamNotPersonWho" xml:space="preserve">
+    <value>Yeqela, ingenjeyo mntu ocelileyo. Igcinwa nesicelo.</value>
+  </data>
+  <data name="Staff.Details.MarkAs" xml:space="preserve">
+    <value>Phawula njenge</value>
+  </data>
+  <data name="Staff.Details.PleaseKeepNotesUnder" xml:space="preserve">
+    <value>Nceda ugcine amanqaku ngaphantsi koonobumba abayi-{0}.</value>
+  </data>
+  <data name="Staff.Details.StatusUpdated" xml:space="preserve">
+    <value>Imeko itshintshelwe ku-</value>
+  </data>
+  <data name="StaffText.InProgress" xml:space="preserve">
+    <value>Iyaqhubeka</value>
+  </data>
+  <data name="StaffText.Closed" xml:space="preserve">
+    <value>Ivaliwe</value>
+  </data>
+  <data name="StaffText.New" xml:space="preserve">
+    <value>Entsha</value>
+  </data>
+  <data name="StaffText.JustNow" xml:space="preserve">
+    <value>ngoku nje</value>
+  </data>
+  <data name="StaffText.MinAgo" xml:space="preserve">
+    <value>imizuzu engu-{0} edlulileyo</value>
+  </data>
+  <data name="StaffText.HourAgo" xml:space="preserve">
+    <value>iiyure ezingu-{0} ezidlulileyo</value>
+  </data>
+  <data name="StaffText.HoursAgo" xml:space="preserve">
+    <value>iiyure ezingu-{0} ezidlulileyo</value>
+  </data>
+  <data name="StaffText.DayAgo" xml:space="preserve">
+    <value>iintsuku ezingu-{0} ezidlulileyo</value>
+  </data>
+  <data name="StaffText.DaysAgo" xml:space="preserve">
+    <value>iintsuku ezingu-{0} ezidlulileyo</value>
+  </data>
 </root>
