@@ -4,14 +4,14 @@ using Microsoft.Extensions.Options;
 namespace PhilisaAbantuBethu.Services;
 
 /// <summary>
-/// Where staff alerts go, set under "Alerts" in appsettings (on Railway: Alerts__ApiKey and so
+/// Where staff alerts go, set under "Alerts" in appsettings (as host variables: Alerts__ApiKey and so
 /// on). With no API key nothing is sent, so a laptop or a test run never emails PAB by accident.
 /// </summary>
 public class AlertOptions
 {
     public const string Section = "Alerts";
 
-    /// <summary>The Resend API key. A secret: only ever a Railway variable or user-secrets, never in git.</summary>
+    /// <summary>The Resend API key. A secret: only ever a host variable or user-secrets, never in git.</summary>
     public string ApiKey { get; set; } = "";
 
     /// <summary>Who the email is from, e.g. "PAB Help Centre &lt;alerts@example.org&gt;". The domain must be verified in Resend.</summary>
@@ -20,7 +20,7 @@ public class AlertOptions
     /// <summary>PAB's intake inbox. Several addresses can be separated with commas.</summary>
     public string To { get; set; } = "";
 
-    /// <summary>The live site's address, used for the link to the staff area, e.g. https://pab.up.railway.app</summary>
+    /// <summary>The live site's address, used for the link to the staff area, e.g. https://pab.onrender.com</summary>
     public string SiteUrl { get; set; } = "";
 
     /// <summary>Email PAB about each new support request.</summary>
@@ -46,8 +46,8 @@ public interface IEmailSender
 }
 
 /// <summary>
-/// Sends through Resend's HTTP API. Railway blocks the usual email ports (SMTP) on its cheaper
-/// plans, so an HTTPS call to an email service is what works from there.
+/// Sends through Resend's HTTP API. Free and cheap hosting plans block the usual email ports
+/// (SMTP), so an HTTPS call to an email service is what works from there.
 /// </summary>
 public class ResendEmailSender : IEmailSender
 {

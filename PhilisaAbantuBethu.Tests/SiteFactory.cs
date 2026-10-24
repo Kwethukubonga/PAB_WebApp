@@ -25,7 +25,7 @@ public class SiteFactory : WebApplicationFactory<Program>
     /// <summary>The header the proxy puts the visitor's address in; empty means X-Forwarded-For.</summary>
     public string? TrustProxyHeader { get; init; }
 
-    /// <summary>How many entries at the right of X-Forwarded-For belong to the host's own proxies.</summary>
+    /// <summary>Where the visitor sits in X-Forwarded-For, counting from the right (1 is the last entry).</summary>
     public int? TrustProxyHops { get; init; }
 
     /// <summary>Every alert the site would have emailed, instead of sending it.</summary>

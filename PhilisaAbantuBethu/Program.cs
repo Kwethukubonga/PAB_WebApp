@@ -133,10 +133,11 @@ builder.Services.AddFormRateLimiting(builder.Configuration);
 // Where the visitor's address sits is host-specific, so two settings say where to look:
 //  - TrustProxyHeader names a header that holds the visitor alone, if the host sets one;
 //    left empty, the standard X-Forwarded-For is read.
-//  - TrustProxyHops is how many entries, counting from the right, belong to the host's own
-//    proxies. The visitor is the one just left of them. Anything the visitor wrote themselves
-//    lands further left, so it can't move the entry that is read. The default of 1 suits a host
-//    whose proxy adds the visitor as the last entry.
+//  - TrustProxyHops is where the visitor sits in X-Forwarded-For, counting from the right: 1 is
+//    the last entry, 3 is the third from the right. Whatever is to the right of it was added by
+//    the host's own proxies. Anything the visitor wrote themselves lands further left, so it
+//    can't move the entry that is read. The default of 1 suits a host whose proxy adds the
+//    visitor as the last entry; Render needs 3.
 var trustProxy = builder.Configuration.GetValue<bool>("TrustProxy");
 var trustProxyHeader = builder.Configuration["TrustProxyHeader"];
 var trustProxyHops = Math.Max(1, builder.Configuration.GetValue("TrustProxyHops", 1));
@@ -229,8 +230,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
-// The host checks this before sending visitors to a new deploy (fly.toml), and an uptime monitor can
-// watch it. 200 when the database answers, 503 when not.
+// The host checks this before sending visitors to a new deploy (Render's Health Check Path), and an
+// uptime monitor can watch it. 200 when the database answers, 503 when not.
 app.MapHealthChecks("/health");
 
 // One group per resource, each one calling the same services the pages do (B1, B2, W6).

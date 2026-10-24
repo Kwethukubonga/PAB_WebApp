@@ -413,9 +413,9 @@ public class ApiRateLimitTests
     }
 
     [Fact]
-    public async Task Behind_a_host_with_two_proxies_the_visitor_is_the_entry_just_left_of_them()
+    public async Task Behind_a_host_that_lists_the_visitor_second_from_the_right_that_entry_is_the_one_read()
     {
-        // The host's proxies add the last two entries; the visitor is the one before those, and
+        // The host's own proxy adds the last entry, so the visitor is second from the right, and
         // whatever the visitor wrote themselves sits further left.
         using var site = new SiteFactory { FormPostsPerWindow = 1, TrustProxy = true, TrustProxyHops = 2 };
         var client = site.CreateBrowser();
