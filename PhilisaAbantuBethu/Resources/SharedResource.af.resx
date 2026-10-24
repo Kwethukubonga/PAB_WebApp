@@ -21,4 +21,244 @@
   <data name="Home.FreeAndConfidential" xml:space="preserve">
     <value>Gratis en vertroulik.</value>
   </data>
+  <data name="About.AboutUs" xml:space="preserve">
+    <value>Oor ons</value>
+  </data>
+  <data name="About.Ubuntu" xml:space="preserve">
+    <value>Ubuntu</value>
+  </data>
+  <data name="About.BelieveAfricanPhilosophyPerson" xml:space="preserve">
+    <value>Ons glo in die Afrika-filosofie dat 'n mens 'n mens is deur ander mense. Alles wat ons doen is gegrond in hierdie kollektiewe mensdom.</value>
+  </data>
+  <data name="About.Dignity" xml:space="preserve">
+    <value>Waardigheid</value>
+  </data>
+  <data name="About.EveryIndividualServeTreated" xml:space="preserve">
+    <value>Elke individu wat ons bedien, word met absolute respek en waardigheid behandel, ongeag hul omstandighede of agtergrond.</value>
+  </data>
+  <data name="About.Compassion" xml:space="preserve">
+    <value>Deernis</value>
+  </data>
+  <data name="About.LeadEmpathyTeamListens" xml:space="preserve">
+    <value>Ons lei met empatie. Ons span luister deeglik voordat ons optree, om te verseker dat ons response aangepas is by werklike behoeftes.</value>
+  </data>
+  <data name="About.Empowerment" xml:space="preserve">
+    <value>Bemagtiging</value>
+  </data>
+  <data name="About.DoNotMerelyProvide" xml:space="preserve">
+    <value>Ons verskaf nie net dienste nie: ons bou kapasiteit. Ons wil hê elke persoon wat ons help moet in staat wees om ander te help.</value>
+  </data>
+  <data name="About.Integrity" xml:space="preserve">
+    <value>Integriteit</value>
+  </data>
+  <data name="About.TransparentOperationsAccountableCommunities" xml:space="preserve">
+    <value>Ons is deursigtig in ons bedrywighede, aanspreeklik teenoor ons gemeenskappe, en eerlik in alles wat ons doen.</value>
+  </data>
+  <data name="About.Inclusivity" xml:space="preserve">
+    <value>Inklusiwiteit</value>
+  </data>
+  <data name="About.WelcomeAllPeopleRegardless" xml:space="preserve">
+    <value>Ons verwelkom alle mense ongeag geslag, geloof, taal, of agtergrond. Ons deure is oop vir enigeen in nood.</value>
+  </data>
+  <data name="About.Story" xml:space="preserve">
+    <value>Ons Verhaal</value>
+  </data>
+  <data name="Layout.AboutUs" xml:space="preserve">
+    <value>Oor Ons</value>
+  </data>
+  <data name="About.LearnWhoWhatDrives" xml:space="preserve">
+    <value>Leer wie ons is, wat ons dryf, en die waardes wat elke besluit wat ons neem, rig.</value>
+  </data>
+  <data name="About.History" xml:space="preserve">
+    <value>Ons Geskiedenis</value>
+  </data>
+  <data name="About.15YearsBuildingCommunity" xml:space="preserve">
+    <value>15 Jaar van Gemeenskapsbou</value>
+  </data>
+  <data name="About.PhilisaAbafaziBethuMeaning" xml:space="preserve">
+    <value>Philisa Abafazi Bethu, wat “genees ons vroue” in isiZulu beteken, is in 2009 gestig deur 'n groep vasberade vroue in Kaapstad se noordelike voorstede wat hul bure sonder ondersteuning sien swaarkry het. Wat begin het as 'n klein voedingskema in 'n kerksaal, het gegroei tot een van die Wes-Kaap se mees omvattende gemeenskapswelsynsorganisasies.</value>
+  </data>
+  <data name="About.OverYearsExpandedReach" xml:space="preserve">
+    <value>Deur die jare het ons ons bereik uitgebrei van voedselsekerheid na ondersteuning vir gender-gebaseerde geweld, jeugontwikkeling, kinderwelsyn, en sorg vir bejaardes, en die netwerk van programme en vennote uitgebou wat dit makliker maak vir gemeenskapslede om toegang tot ons dienste te verkry.</value>
+  </data>
+  <data name="About.TodayServeOver14" xml:space="preserve">
+    <value>Vandag bedien ons jaarliks meer as 14 200 gesinne regoor 12 gemeenskappe, aangedryf deur 'n toegewyde span personeel en meer as 320 vrywilligers.</value>
+  </data>
+  <data name="About.Mission" xml:space="preserve">
+    <value>Ons Missie</value>
+  </data>
+  <data name="About.WalkAlongsideCommunitiesTheir" xml:space="preserve">
+    <value>Om saam met gemeenskappe te loop in hul mees kwesbare oomblikke.</value>
+  </data>
+  <data name="About.CommittedProvidingAccessibleDignified" xml:space="preserve">
+    <value>Ons is daartoe verbind om toeganklike, waardige, en holistiese ondersteuningsdienste te bied wat die grondoorsake van armoede, ongelykheid, en maatskaplike uitsluiting aanspreek, en individue en gesinne bemagtig om volhoubare, vervullende lewens te bou.</value>
+  </data>
+  <data name="About.Vision" xml:space="preserve">
+    <value>Ons Visie</value>
+  </data>
+  <data name="About.CommunitiesWhereEveryPerson" xml:space="preserve">
+    <value>Gemeenskappe waar elke persoon met waardigheid en hoop floreer.</value>
+  </data>
+  <data name="About.EnvisionSouthAfricaWhere" xml:space="preserve">
+    <value>Ons visualiseer 'n Suid-Afrika waar geen vrou onveilig is nie, geen kind honger ly nie, geen bejaarde vergeet word nie, en geen jong persoon sonder geleentheid is nie: 'n samelewing waar ubuntu nie net 'n woord is nie, maar 'n geleefde werklikheid.</value>
+  </data>
+  <data name="About.WhatStand" xml:space="preserve">
+    <value>Waarvoor Ons Staan</value>
+  </data>
+  <data name="About.CoreValues" xml:space="preserve">
+    <value>Ons Kernwaardes</value>
+  </data>
+  <data name="About.Founder" xml:space="preserve">
+    <value>Ons Stigter</value>
+  </data>
+  <data name="About.Journey" xml:space="preserve">
+    <value>Ons Reis</value>
+  </data>
+  <data name="About.LucindaEvansDreamProtecting" xml:space="preserve">
+    <value>Lucinda Evans se droom om mishandelde vroue en kinders te beskerm en te bemagtig het werklikheid geword op die dag toe sy 'n skare sien saamdrom het om 'n man wat sy vrou op straat slaan; almal het gekyk, maar niemand het ingegryp om dit te stop nie.</value>
+  </data>
+  <data name="About.SinceThenLucindaHas" xml:space="preserve">
+    <value>Sedertdien het Lucinda daarna gestreef om die persoon te word op wie haar gemeenskap kan staatmaak vir beskerming en gerusstelling. Gebaseer in Lavender Hill, is sy vasbeslote om te verseker dat die vroue en kinders daar altyd 'n plek het wat hoop bied, selfs in hul moeilikste omstandighede.</value>
+  </data>
+  <data name="About.Leadership" xml:space="preserve">
+    <value>Leierskap</value>
+  </data>
+  <data name="About.MeetTeam" xml:space="preserve">
+    <value>Ontmoet die Span</value>
+  </data>
+  <data name="About.DedicatedPeopleWhoMake" xml:space="preserve">
+    <value>Die toegewyde mense wat ons werk elke dag moontlik maak.</value>
+  </data>
+  <data name="About.ReadyMakeDifference" xml:space="preserve">
+    <value>Gereed om 'n Verskil te Maak?</value>
+  </data>
+  <data name="About.ExploreProgrammesReachOut" xml:space="preserve">
+    <value>Verken ons programme of kontak ons om te leer hoe jy ons gemeenskap kan ondersteun of by ons kan aansluit.</value>
+  </data>
+  <data name="Programmes.TenProgrammesOneMission" xml:space="preserve">
+    <value>Tien programme, een missie: om elke persoon wat by ons deure inkom, op te hef en te bemagtig.</value>
+  </data>
+  <data name="Programmes.LearnMore" xml:space="preserve">
+    <value>Leer Meer</value>
+  </data>
+  <data name="Programmes.NeedSupport" xml:space="preserve">
+    <value>Benodig Jy Ondersteuning?</value>
+  </data>
+  <data name="Programmes.GetTouchTeamWill" xml:space="preserve">
+    <value>Kontak ons en ons span sal jou help om die regte program te vind.</value>
+  </data>
+  <data name="ProgrammeDetail.Overview" xml:space="preserve">
+    <value>Oorsig</value>
+  </data>
+  <data name="ProgrammeDetail.Objectives" xml:space="preserve">
+    <value>Doelwitte</value>
+  </data>
+  <data name="ProgrammeDetail.Activities" xml:space="preserve">
+    <value>Aktiwiteite</value>
+  </data>
+  <data name="ProgrammeDetail.Gallery" xml:space="preserve">
+    <value>Galery</value>
+  </data>
+  <data name="ProgrammeDetail.Testimonials" xml:space="preserve">
+    <value>Getuienisse</value>
+  </data>
+  <data name="ProgrammeDetail.Previous" xml:space="preserve">
+    <value>Vorige</value>
+  </data>
+  <data name="ProgrammeDetail.Next" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="ProgrammeDetail.EmergencyContact" xml:space="preserve">
+    <value>Noodkontak</value>
+  </data>
+  <data name="ProgrammeDetail.NeedSupport" xml:space="preserve">
+    <value>Benodig Jy Hierdie Ondersteuning?</value>
+  </data>
+  <data name="ProgrammeDetail.GetTouchTeamWill" xml:space="preserve">
+    <value>Kontak ons en ons span sal met jou skakel om jou te lei.</value>
+  </data>
+  <data name="ProgrammeDetail.FreeQualifyingCommunityMembers" xml:space="preserve">
+    <value>Gratis vir kwalifiserende gemeenskapslede.</value>
+  </data>
+  <data name="ProgrammeDetail.Close" xml:space="preserve">
+    <value>Maak toe</value>
+  </data>
+  <data name="Resources.EssentialContactsServicesInformation" xml:space="preserve">
+    <value>Noodsaaklike kontakte, dienste, en inligting om jou en jou gesin te ondersteun.</value>
+  </data>
+  <data name="Resources.TheseNumbersStayPage" xml:space="preserve">
+    <value>Hierdie nommers bly op hierdie bladsy, selfs sonder data.</value>
+  </data>
+  <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
+    <value>Gereelde Vrae</value>
+  </data>
+  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
+    <value>Vee uit wat hierdie werf op hierdie foon gestoor het</value>
+  </data>
+  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
+    <value>Uitgevee. Die noodnommers sal weer data nodig hê.</value>
+  </data>
+  <data name="Resources.NeedMoreHelp" xml:space="preserve">
+    <value>Benodig Jy Meer Hulp?</value>
+  </data>
+  <data name="Resources.GetTouchTeamWill" xml:space="preserve">
+    <value>Kontak ons en ons span sal binne 2–5 besigheidsdae met jou skakel.</value>
+  </data>
+  <data name="Offline.NoConnection" xml:space="preserve">
+    <value>Geen verbinding</value>
+  </data>
+  <data name="Offline.Offline" xml:space="preserve">
+    <value>Jy is vanlyn</value>
+  </data>
+  <data name="Offline.PageNeedsDataLoad" xml:space="preserve">
+    <value>Hierdie bladsy het data nodig om te laai. Die nommers hieronder werk sonder data op hierdie foon.</value>
+  </data>
+  <data name="Offline.PhilisaAbafaziBethu" xml:space="preserve">
+    <value>Philisa Abafazi Bethu</value>
+  </data>
+  <data name="Offline.CrisisLine" xml:space="preserve">
+    <value>Krisislyn</value>
+  </data>
+  <data name="Offline.Office" xml:space="preserve">
+    <value>Kantoor</value>
+  </data>
+  <data name="Offline.TryAgain" xml:space="preserve">
+    <value>Probeer weer</value>
+  </data>
+  <data name="Layout.OpenMenu" xml:space="preserve">
+    <value>Maak kieslys oop</value>
+  </data>
+  <data name="Layout.SkipContent" xml:space="preserve">
+    <value>Spring na inhoud</value>
+  </data>
+  <data name="Layout.LeaveSite" xml:space="preserve">
+    <value>Verlaat hierdie webwerf</value>
+  </data>
+  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
+    <value>Gaan dadelik na 'n weerblad. Jy kan ook Esc twee keer druk.</value>
+  </data>
+  <data name="Layout.Main" xml:space="preserve">
+    <value>Hoof</value>
+  </data>
+  <data name="Layout.Language" xml:space="preserve">
+    <value>Taal</value>
+  </data>
+  <data name="Layout.Mobile" xml:space="preserve">
+    <value>Mobiel</value>
+  </data>
+  <data name="Layout.WesternCape" xml:space="preserve">
+    <value>Wes-Kaap</value>
+  </data>
+  <data name="Layout.Explore" xml:space="preserve">
+    <value>Verken</value>
+  </data>
+  <data name="Layout.GetHelpNow" xml:space="preserve">
+    <value>Kry nou hulp</value>
+  </data>
+  <data name="Layout.Email" xml:space="preserve">
+    <value>E-pos</value>
+  </data>
+  <data name="Layout.GBVHelpline" xml:space="preserve">
+    <value>Hulplyn vir gender-gebaseerde geweld</value>
+  </data>
 </root>

@@ -21,4 +21,244 @@
   <data name="Home.FreeAndConfidential" xml:space="preserve">
     <value>Mahhala kwaye yimfihlo.</value>
   </data>
+  <data name="About.AboutUs" xml:space="preserve">
+    <value>Ngathi</value>
+  </data>
+  <data name="About.Ubuntu" xml:space="preserve">
+    <value>Ubuntu</value>
+  </data>
+  <data name="About.BelieveAfricanPhilosophyPerson" xml:space="preserve">
+    <value>Sikholelwa kwifilosofi yase-Afrika yokuba umntu ngumntu ngabanye abantu. Yonke into esiyenzayo isekwe kobu buntu bokwabelana.</value>
+  </data>
+  <data name="About.Dignity" xml:space="preserve">
+    <value>Isidima</value>
+  </data>
+  <data name="About.EveryIndividualServeTreated" xml:space="preserve">
+    <value>Wonke umntu esimsebenzelayo uphathwa ngentlonipho nesidima ngokupheleleyo, nokuba ziziphi iimeko okanye imvelaphi yakhe.</value>
+  </data>
+  <data name="About.Compassion" xml:space="preserve">
+    <value>Imfesane</value>
+  </data>
+  <data name="About.LeadEmpathyTeamListens" xml:space="preserve">
+    <value>Sikhokela ngemfesane. Iqela lethu limamela ngenyameko phambi kokuba lisebenze, siqinisekisa ukuba iimpendulo zethu zilungiselelwe iimfuno zokwenene.</value>
+  </data>
+  <data name="About.Empowerment" xml:space="preserve">
+    <value>Ukuxhobisa</value>
+  </data>
+  <data name="About.DoNotMerelyProvide" xml:space="preserve">
+    <value>Asinikezeli ngeenkonzo kuphela: sakha amandla. Sifuna wonke umntu esimncedayo abe nakho ukuncedisa abanye.</value>
+  </data>
+  <data name="About.Integrity" xml:space="preserve">
+    <value>Ukunyaniseka</value>
+  </data>
+  <data name="About.TransparentOperationsAccountableCommunities" xml:space="preserve">
+    <value>Siyabonakala kwimisebenzi yethu, sinoxanduva koluntu lwethu, kwaye siyinyaniso kuyo yonke into esiyenzayo.</value>
+  </data>
+  <data name="About.Inclusivity" xml:space="preserve">
+    <value>Ukubandakanya</value>
+  </data>
+  <data name="About.WelcomeAllPeopleRegardless" xml:space="preserve">
+    <value>Samkela bonke abantu nokuba bubulili bunjani, unqulo, ulwimi, okanye imvelaphi. Iingcango zethu zivulekele wonke umntu okwimfuno.</value>
+  </data>
+  <data name="About.Story" xml:space="preserve">
+    <value>Ibali Lethu</value>
+  </data>
+  <data name="Layout.AboutUs" xml:space="preserve">
+    <value>Ngathi</value>
+  </data>
+  <data name="About.LearnWhoWhatDrives" xml:space="preserve">
+    <value>Funda ukuba singoobani, yintoni esiqhubayo, kunye nezithethe ezikhokela sonke isigqibo esisenzayo.</value>
+  </data>
+  <data name="About.History" xml:space="preserve">
+    <value>Imbali Yethu</value>
+  </data>
+  <data name="About.15YearsBuildingCommunity" xml:space="preserve">
+    <value>Iminyaka eyi-15 Yokwakha Uluntu</value>
+  </data>
+  <data name="About.PhilisaAbafaziBethuMeaning" xml:space="preserve">
+    <value>Philisa Abafazi Bethu, okuthetha “philisa abafazi bethu” ngesiZulu, yasekwa ngo-2009 liqela labafazi abanoluzuko basezindeni ezisemantla eKapa ababebona abamelwane babo bebandezelekile bengenamxhasi. Into eyaqala njengenkqubo encinci yokondla kwiholo yecawa ikhule yaba yenye yemibutho yentlalontle yoluntu ebanzi kakhulu eNtshona Koloni.</value>
+  </data>
+  <data name="About.OverYearsExpandedReach" xml:space="preserve">
+    <value>Ekuhambeni kwexesha, siwandisile ukufikelela kwethu ukusuka kukhuseleko lokutya ukuya kuxhaso lobundlobongela obusekelwe kubulili, uphuhliso lolutsha, intlalontle yabantwana, nokhathalelo lwabadala, sikhulisa inethiwekhi yeenkqubo nabalingane ekwenza kube lula kumalungu oluntu ukufikelela kwiinkonzo zethu.</value>
+  </data>
+  <data name="About.TodayServeOver14" xml:space="preserve">
+    <value>Namhlanje, sisebenzela iintsapho ezingaphezu kwe-14,200 ngonyaka kwiindawo ezili-12, ngeqela elizinikeleyo labasebenzi nabavolontiya abangaphezu kwama-320.</value>
+  </data>
+  <data name="About.Mission" xml:space="preserve">
+    <value>Injongo Yethu</value>
+  </data>
+  <data name="About.WalkAlongsideCommunitiesTheir" xml:space="preserve">
+    <value>Ukuhamba kunye noluntu ngamaxesha alo asengozini kakhulu.</value>
+  </data>
+  <data name="About.CommittedProvidingAccessibleDignified" xml:space="preserve">
+    <value>Sizinikele ekubonelelweni ngeenkonzo zoncedo ezifikelelekayo, ezinesidima, nezibanzi ezijongana neengcambu zobuhlwempu, ukungalingani, nokungabandakanywa kwezentlalo, sinika amandla abantu neentsapho ukuba bakhe ubomi obuzinzileyo, obanelisayo.</value>
+  </data>
+  <data name="About.Vision" xml:space="preserve">
+    <value>Umbono Wethu</value>
+  </data>
+  <data name="About.CommunitiesWhereEveryPerson" xml:space="preserve">
+    <value>Uluntu apho wonke umntu aphumelela ngesidima nethemba.</value>
+  </data>
+  <data name="About.EnvisionSouthAfricaWhere" xml:space="preserve">
+    <value>Siyayibona iNingizimu Afrika apho akukho mfazi ungakhuselekanga, akukho mntwana ulambileyo, akukho mdala ulityalwayo, kwaye akukho mntu osemncinci ongenamathuba: uluntu apho ubuntu ungelilo igama nje, kodwa yinyaniso yokwenene.</value>
+  </data>
+  <data name="About.WhatStand" xml:space="preserve">
+    <value>Esimela Yona</value>
+  </data>
+  <data name="About.CoreValues" xml:space="preserve">
+    <value>Izithethe Zethu Eziphambili</value>
+  </data>
+  <data name="About.Founder" xml:space="preserve">
+    <value>Our Founder</value>
+  </data>
+  <data name="About.Journey" xml:space="preserve">
+    <value>Our Journey</value>
+  </data>
+  <data name="About.LucindaEvansDreamProtecting" xml:space="preserve">
+    <value>Lucinda Evans' dream of protecting and empowering abused women and children became real the day she saw a crowd gather around a man beating his wife in the street; everyone watching, yet no one stepping in to stop it.</value>
+  </data>
+  <data name="About.SinceThenLucindaHas" xml:space="preserve">
+    <value>Since then, Lucinda has worked to become the person her community can lean on for protection and reassurance. Based in Lavender Hill, she is determined to ensure that the women and children there always have a place that offers them hope, even in their most difficult circumstances.</value>
+  </data>
+  <data name="About.Leadership" xml:space="preserve">
+    <value>Ubunkokeli</value>
+  </data>
+  <data name="About.MeetTeam" xml:space="preserve">
+    <value>Yazi Iqela</value>
+  </data>
+  <data name="About.DedicatedPeopleWhoMake" xml:space="preserve">
+    <value>Abantu abazinikeleyo abenza umsebenzi wethu ube nokwenzeka mihla yonke.</value>
+  </data>
+  <data name="About.ReadyMakeDifference" xml:space="preserve">
+    <value>Ukulungele Ukwenza Umahluko?</value>
+  </data>
+  <data name="About.ExploreProgrammesReachOut" xml:space="preserve">
+    <value>Hlola iinkqubo zethu okanye qhagamshelana nathi ukuze ufunde indlela onokuxhasa ngayo okanye ujoyine uluntu lwethu.</value>
+  </data>
+  <data name="Programmes.TenProgrammesOneMission" xml:space="preserve">
+    <value>Iinkqubo ezilishumi, umsebenzi omnye: ukuphakamisa nokunika amandla wonke umntu ofika emahasini ethu.</value>
+  </data>
+  <data name="Programmes.LearnMore" xml:space="preserve">
+    <value>Funda Ngakumbi</value>
+  </data>
+  <data name="Programmes.NeedSupport" xml:space="preserve">
+    <value>Ufuna Uncedo?</value>
+  </data>
+  <data name="Programmes.GetTouchTeamWill" xml:space="preserve">
+    <value>Qhagamshelana nathi kwaye iqela lethu liza kukunceda ukufumana inkqubo efanelekileyo.</value>
+  </data>
+  <data name="ProgrammeDetail.Overview" xml:space="preserve">
+    <value>Isishwankathelo</value>
+  </data>
+  <data name="ProgrammeDetail.Objectives" xml:space="preserve">
+    <value>Iinjongo</value>
+  </data>
+  <data name="ProgrammeDetail.Activities" xml:space="preserve">
+    <value>Imisebenzi</value>
+  </data>
+  <data name="ProgrammeDetail.Gallery" xml:space="preserve">
+    <value>Igaleriya</value>
+  </data>
+  <data name="ProgrammeDetail.Testimonials" xml:space="preserve">
+    <value>Testimonials</value>
+  </data>
+  <data name="ProgrammeDetail.Previous" xml:space="preserve">
+    <value>Okwangaphambili</value>
+  </data>
+  <data name="ProgrammeDetail.Next" xml:space="preserve">
+    <value>Okulandelayo</value>
+  </data>
+  <data name="ProgrammeDetail.EmergencyContact" xml:space="preserve">
+    <value>Uqhagamshelwano Lwongxamiseko</value>
+  </data>
+  <data name="ProgrammeDetail.NeedSupport" xml:space="preserve">
+    <value>Ufuna Le Nkxaso?</value>
+  </data>
+  <data name="ProgrammeDetail.GetTouchTeamWill" xml:space="preserve">
+    <value>Qhagamshelana nathi kwaye iqela lethu liya kuqhagamshelana nawe.</value>
+  </data>
+  <data name="ProgrammeDetail.FreeQualifyingCommunityMembers" xml:space="preserve">
+    <value>Mahhala kumalungu oluntu afanelekileyo.</value>
+  </data>
+  <data name="ProgrammeDetail.Close" xml:space="preserve">
+    <value>Vala</value>
+  </data>
+  <data name="Resources.EssentialContactsServicesInformation" xml:space="preserve">
+    <value>Amanxibelelanisi abalulekileyo, iinkonzo, kunye nolwazi ukukuxhasa wena nosapho lwakho.</value>
+  </data>
+  <data name="Resources.TheseNumbersStayPage" xml:space="preserve">
+    <value>La manani ahlala kweli phepha nangaphandle kwedatha.</value>
+  </data>
+  <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
+    <value>Imibuzo Ebuzwa Rhoqo</value>
+  </data>
+  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
+    <value>Susa oko le sayithi iyigcinileyo kule fowuni</value>
+  </data>
+  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
+    <value>Kususwe. Amanani ongxamiseko aza kufuna idatha kwakhona.</value>
+  </data>
+  <data name="Resources.NeedMoreHelp" xml:space="preserve">
+    <value>Ufuna Uncedo Oluninzi?</value>
+  </data>
+  <data name="Resources.GetTouchTeamWill" xml:space="preserve">
+    <value>Qhagamshelana nathi kwaye iqela lethu liza kuqhagamshelana nawe phakathi kweentsuku ezi-2–5 zomsebenzi.</value>
+  </data>
+  <data name="Offline.NoConnection" xml:space="preserve">
+    <value>Akukho unxibelelwano</value>
+  </data>
+  <data name="Offline.Offline" xml:space="preserve">
+    <value>Awukho kwi-intanethi</value>
+  </data>
+  <data name="Offline.PageNeedsDataLoad" xml:space="preserve">
+    <value>Eli phepha lifuna idatha ukuze livuleke. La manani angezantsi asebenza kule fowuni ngaphandle kwayo.</value>
+  </data>
+  <data name="Offline.PhilisaAbafaziBethu" xml:space="preserve">
+    <value>Philisa Abafazi Bethu</value>
+  </data>
+  <data name="Offline.CrisisLine" xml:space="preserve">
+    <value>Umgca wongxamiseko</value>
+  </data>
+  <data name="Offline.Office" xml:space="preserve">
+    <value>Ihhovisi</value>
+  </data>
+  <data name="Offline.TryAgain" xml:space="preserve">
+    <value>Zama kwakhona</value>
+  </data>
+  <data name="Layout.OpenMenu" xml:space="preserve">
+    <value>Vula imenyu</value>
+  </data>
+  <data name="Layout.SkipContent" xml:space="preserve">
+    <value>Tsibela kumxholo</value>
+  </data>
+  <data name="Layout.LeaveSite" xml:space="preserve">
+    <value>Phuma kule sayithi</value>
+  </data>
+  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
+    <value>Ihamba ngoko nangoko iye kwiphepha lemozulu. Ungacofa kwakhona u-Esc kabini.</value>
+  </data>
+  <data name="Layout.Main" xml:space="preserve">
+    <value>Ephambili</value>
+  </data>
+  <data name="Layout.Language" xml:space="preserve">
+    <value>Ulwimi</value>
+  </data>
+  <data name="Layout.Mobile" xml:space="preserve">
+    <value>Kwifowuni</value>
+  </data>
+  <data name="Layout.WesternCape" xml:space="preserve">
+    <value>Ntshona Koloni</value>
+  </data>
+  <data name="Layout.Explore" xml:space="preserve">
+    <value>Jonga</value>
+  </data>
+  <data name="Layout.GetHelpNow" xml:space="preserve">
+    <value>Fumana uncedo ngoku</value>
+  </data>
+  <data name="Layout.Email" xml:space="preserve">
+    <value>I-imeyili</value>
+  </data>
+  <data name="Layout.GBVHelpline" xml:space="preserve">
+    <value>Umgca woncedo we-GBV</value>
+  </data>
 </root>

@@ -3,7 +3,7 @@
 @{
     var s = HttpContext.Strings();
     var lang = HttpContext.CurrentLang();
-    ViewData["Title"] = s.Pick("No connection", "Akukho unxibelelwano", "Geen verbinding");
+    ViewData["Title"] = s["Offline.NoConnection"];
     ViewData["NoIndex"] = true;
 }
 
@@ -15,12 +15,10 @@
     <div class="max-w-2xl mx-auto px-4 sm:px-6">
 
         <h1 class="text-3xl font-bold text-ink-900 font-serif">
-            @s.Pick("You are offline", "Awukho kwi-intanethi", "Jy is vanlyn")
+            @s["Offline.Offline"]
         </h1>
         <p class="mt-3 text-ink-600 leading-relaxed">
-            @s.Pick("This page needs data to load. The numbers below work from this phone without it.",
-                    "Eli phepha lifuna idatha ukuze livuleke. La manani angezantsi asebenza kule fowuni ngaphandle kwayo.",
-                    "Hierdie bladsy het data nodig om te laai. Die nommers hieronder werk sonder data op hierdie foon.")
+            @s["Offline.PageNeedsDataLoad"]
         </p>
 
         <div class="card mt-8 p-7">
@@ -42,11 +40,11 @@
         </div>
 
         <div class="card mt-6 p-7">
-            <h2 class="font-bold text-ink-900 text-lg font-serif">@s.Pick("Philisa Abafazi Bethu", "Philisa Abafazi Bethu", "Philisa Abafazi Bethu")</h2>
+            <h2 class="font-bold text-ink-900 text-lg font-serif">@s["Offline.PhilisaAbafaziBethu"]</h2>
             <ul class="mt-4 space-y-3 text-ink-900">
-                <li>@s.Pick("Crisis line", "Umgca wongxamiseko", "Krisislyn"):
+                <li>@s["Offline.CrisisLine"]:
                     <a href="tel:+27817469889" class="font-semibold text-brand-700 hover:underline">+27 (0)81 746 9889</a></li>
-                <li>@s.Pick("Office", "Ihhovisi", "Kantoor"):
+                <li>@s["Offline.Office"]:
                     <a href="tel:+27215650668" class="font-semibold text-brand-700 hover:underline">+27 (0)21 565 0668</a></li>
                 <li class="text-sm text-ink-600">55 Strauss Road, Steenberg, 7965</li>
             </ul>
@@ -54,7 +52,7 @@
 
         <div class="mt-8 flex flex-wrap gap-3">
             <button type="button" onclick="location.reload()" class="btn-primary">
-                @s.Pick("Try again", "Zama kwakhona", "Probeer weer")
+                @s["Offline.TryAgain"]
             </button>
             <a href="/Resources" class="btn-secondary">@s.Nav.Resources</a>
         </div>

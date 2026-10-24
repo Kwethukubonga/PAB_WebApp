@@ -21,4 +21,244 @@
   <data name="Home.FreeAndConfidential" xml:space="preserve">
     <value>Free and confidential.</value>
   </data>
+  <data name="About.AboutUs" xml:space="preserve">
+    <value>About us</value>
+  </data>
+  <data name="About.Ubuntu" xml:space="preserve">
+    <value>Ubuntu</value>
+  </data>
+  <data name="About.BelieveAfricanPhilosophyPerson" xml:space="preserve">
+    <value>We believe in the African philosophy that a person is a person through other persons. Everything we do is grounded in this collective humanity.</value>
+  </data>
+  <data name="About.Dignity" xml:space="preserve">
+    <value>Dignity</value>
+  </data>
+  <data name="About.EveryIndividualServeTreated" xml:space="preserve">
+    <value>Every individual we serve is treated with absolute respect and dignity, regardless of their circumstances or background.</value>
+  </data>
+  <data name="About.Compassion" xml:space="preserve">
+    <value>Compassion</value>
+  </data>
+  <data name="About.LeadEmpathyTeamListens" xml:space="preserve">
+    <value>We lead with empathy. Our team listens deeply before acting, ensuring our responses are tailored to real needs.</value>
+  </data>
+  <data name="About.Empowerment" xml:space="preserve">
+    <value>Empowerment</value>
+  </data>
+  <data name="About.DoNotMerelyProvide" xml:space="preserve">
+    <value>We do not merely provide services: we build capacity. We want every person we help to become capable of helping others.</value>
+  </data>
+  <data name="About.Integrity" xml:space="preserve">
+    <value>Integrity</value>
+  </data>
+  <data name="About.TransparentOperationsAccountableCommunities" xml:space="preserve">
+    <value>We are transparent in our operations, accountable to our communities, and honest in everything we do.</value>
+  </data>
+  <data name="About.Inclusivity" xml:space="preserve">
+    <value>Inclusivity</value>
+  </data>
+  <data name="About.WelcomeAllPeopleRegardless" xml:space="preserve">
+    <value>We welcome all people regardless of gender, religion, language, or background. Our doors are open to everyone in need.</value>
+  </data>
+  <data name="About.Story" xml:space="preserve">
+    <value>Our Story</value>
+  </data>
+  <data name="Layout.AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="About.LearnWhoWhatDrives" xml:space="preserve">
+    <value>Learn who we are, what drives us, and the values that guide every decision we make.</value>
+  </data>
+  <data name="About.History" xml:space="preserve">
+    <value>Our History</value>
+  </data>
+  <data name="About.15YearsBuildingCommunity" xml:space="preserve">
+    <value>15 Years of Building Community</value>
+  </data>
+  <data name="About.PhilisaAbafaziBethuMeaning" xml:space="preserve">
+    <value>Philisa Abafazi Bethu, meaning “heal our women” in isiZulu, was founded in 2009 by a group of determined women in Cape Town's northern suburbs who saw their neighbours suffering without support. What began as a small feeding scheme in a church hall has grown into one of the Western Cape's most comprehensive community welfare organisations.</value>
+  </data>
+  <data name="About.OverYearsExpandedReach" xml:space="preserve">
+    <value>Over the years, we expanded our reach from food security to gender-based violence support, youth development, child welfare, and elder care, growing the network of programmes and partners that makes it easier for community members to access our services.</value>
+  </data>
+  <data name="About.TodayServeOver14" xml:space="preserve">
+    <value>Today, we serve over 14,200 families annually across 12 communities, powered by a committed team of staff and more than 320 volunteers.</value>
+  </data>
+  <data name="About.Mission" xml:space="preserve">
+    <value>Our Mission</value>
+  </data>
+  <data name="About.WalkAlongsideCommunitiesTheir" xml:space="preserve">
+    <value>To walk alongside communities in their most vulnerable moments.</value>
+  </data>
+  <data name="About.CommittedProvidingAccessibleDignified" xml:space="preserve">
+    <value>We are committed to providing accessible, dignified, and holistic support services that address the root causes of poverty, inequality, and social exclusion, empowering individuals and families to build sustainable, fulfilling lives.</value>
+  </data>
+  <data name="About.Vision" xml:space="preserve">
+    <value>Our Vision</value>
+  </data>
+  <data name="About.CommunitiesWhereEveryPerson" xml:space="preserve">
+    <value>Communities where every person thrives with dignity and hope.</value>
+  </data>
+  <data name="About.EnvisionSouthAfricaWhere" xml:space="preserve">
+    <value>We envision a South Africa where no woman is unsafe, no child goes hungry, no elder is forgotten, and no young person is without opportunity: a society where ubuntu is not just a word, but a lived reality.</value>
+  </data>
+  <data name="About.WhatStand" xml:space="preserve">
+    <value>What We Stand For</value>
+  </data>
+  <data name="About.CoreValues" xml:space="preserve">
+    <value>Our Core Values</value>
+  </data>
+  <data name="About.Founder" xml:space="preserve">
+    <value>Our Founder</value>
+  </data>
+  <data name="About.Journey" xml:space="preserve">
+    <value>Our Journey</value>
+  </data>
+  <data name="About.LucindaEvansDreamProtecting" xml:space="preserve">
+    <value>Lucinda Evans' dream of protecting and empowering abused women and children became real the day she saw a crowd gather around a man beating his wife in the street; everyone watching, yet no one stepping in to stop it.</value>
+  </data>
+  <data name="About.SinceThenLucindaHas" xml:space="preserve">
+    <value>Since then, Lucinda has worked to become the person her community can lean on for protection and reassurance. Based in Lavender Hill, she is determined to ensure that the women and children there always have a place that offers them hope, even in their most difficult circumstances.</value>
+  </data>
+  <data name="About.Leadership" xml:space="preserve">
+    <value>Leadership</value>
+  </data>
+  <data name="About.MeetTeam" xml:space="preserve">
+    <value>Meet the Team</value>
+  </data>
+  <data name="About.DedicatedPeopleWhoMake" xml:space="preserve">
+    <value>The dedicated people who make our work possible every day.</value>
+  </data>
+  <data name="About.ReadyMakeDifference" xml:space="preserve">
+    <value>Ready to Make a Difference?</value>
+  </data>
+  <data name="About.ExploreProgrammesReachOut" xml:space="preserve">
+    <value>Explore our programmes or reach out to learn how you can support or join our community.</value>
+  </data>
+  <data name="Programmes.TenProgrammesOneMission" xml:space="preserve">
+    <value>Ten programmes, one mission: to uplift and empower every person who walks through our doors.</value>
+  </data>
+  <data name="Programmes.LearnMore" xml:space="preserve">
+    <value>Learn More</value>
+  </data>
+  <data name="Programmes.NeedSupport" xml:space="preserve">
+    <value>Need Support?</value>
+  </data>
+  <data name="Programmes.GetTouchTeamWill" xml:space="preserve">
+    <value>Get in touch and our team will help guide you to the right programme.</value>
+  </data>
+  <data name="ProgrammeDetail.Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="ProgrammeDetail.Objectives" xml:space="preserve">
+    <value>Objectives</value>
+  </data>
+  <data name="ProgrammeDetail.Activities" xml:space="preserve">
+    <value>Activities</value>
+  </data>
+  <data name="ProgrammeDetail.Gallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="ProgrammeDetail.Testimonials" xml:space="preserve">
+    <value>Testimonials</value>
+  </data>
+  <data name="ProgrammeDetail.Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="ProgrammeDetail.Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ProgrammeDetail.EmergencyContact" xml:space="preserve">
+    <value>Emergency Contact</value>
+  </data>
+  <data name="ProgrammeDetail.NeedSupport" xml:space="preserve">
+    <value>Need This Support?</value>
+  </data>
+  <data name="ProgrammeDetail.GetTouchTeamWill" xml:space="preserve">
+    <value>Get in touch and our team will be in touch to guide you.</value>
+  </data>
+  <data name="ProgrammeDetail.FreeQualifyingCommunityMembers" xml:space="preserve">
+    <value>Free for qualifying community members.</value>
+  </data>
+  <data name="ProgrammeDetail.Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Resources.EssentialContactsServicesInformation" xml:space="preserve">
+    <value>Essential contacts, services, and information to support you and your family.</value>
+  </data>
+  <data name="Resources.TheseNumbersStayPage" xml:space="preserve">
+    <value>These numbers stay on this page even with no data.</value>
+  </data>
+  <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
+    <value>Frequently Asked Questions</value>
+  </data>
+  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
+    <value>Clear what this site has saved on this phone</value>
+  </data>
+  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
+    <value>Cleared. The emergency numbers will need data again.</value>
+  </data>
+  <data name="Resources.NeedMoreHelp" xml:space="preserve">
+    <value>Need More Help?</value>
+  </data>
+  <data name="Resources.GetTouchTeamWill" xml:space="preserve">
+    <value>Get in touch and our team will be in touch within 2–5 business days.</value>
+  </data>
+  <data name="Offline.NoConnection" xml:space="preserve">
+    <value>No connection</value>
+  </data>
+  <data name="Offline.Offline" xml:space="preserve">
+    <value>You are offline</value>
+  </data>
+  <data name="Offline.PageNeedsDataLoad" xml:space="preserve">
+    <value>This page needs data to load. The numbers below work from this phone without it.</value>
+  </data>
+  <data name="Offline.PhilisaAbafaziBethu" xml:space="preserve">
+    <value>Philisa Abafazi Bethu</value>
+  </data>
+  <data name="Offline.CrisisLine" xml:space="preserve">
+    <value>Crisis line</value>
+  </data>
+  <data name="Offline.Office" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="Offline.TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="Layout.OpenMenu" xml:space="preserve">
+    <value>Open menu</value>
+  </data>
+  <data name="Layout.SkipContent" xml:space="preserve">
+    <value>Skip to content</value>
+  </data>
+  <data name="Layout.LeaveSite" xml:space="preserve">
+    <value>Leave this site</value>
+  </data>
+  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
+    <value>Leaves straight away for a weather page. You can also press Esc twice.</value>
+  </data>
+  <data name="Layout.Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Layout.Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Layout.Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="Layout.WesternCape" xml:space="preserve">
+    <value>Western Cape</value>
+  </data>
+  <data name="Layout.Explore" xml:space="preserve">
+    <value>Explore</value>
+  </data>
+  <data name="Layout.GetHelpNow" xml:space="preserve">
+    <value>Get help now</value>
+  </data>
+  <data name="Layout.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Layout.GBVHelpline" xml:space="preserve">
+    <value>GBV helpline</value>
+  </data>
 </root>
