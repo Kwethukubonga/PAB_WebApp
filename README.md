@@ -182,8 +182,9 @@ If something is missing or wrong, the form comes back with what they typed still
 2. On submit, the form is posted to `RequestSupport.cshtml.cs`. More than 5 sends from one connection in 10 minutes gets a "please wait" page with the crisis line instead.
 3. `Forms/SupportRequestForm.cs` checks every field again on the server, including South African phone numbers (the same rules as the Philisa Volunteers app). Anything wrong goes back to the form; nothing is saved.
 4. `Services/SupportRequestService.cs` gives it a reference number such as `PAB-7KQ39M` and saves it to `SupportRequests` with the status **New**. A unique index makes a repeated reference impossible.
-5. The person is sent to the **Confirmation** page with their reference number.
-6. PAB staff see it under **Staff → Support requests**, urgent requests first, and move it to **In progress** and then **Closed**.
+5. Once it's saved, `Services/StaffAlerts.cs` emails PAB's inbox: the reference, the kind of help (in English), whether it's urgent, when it arrived and a link to the request. Nothing personal goes in the email (see section 9). If the email fails, the request is still saved and the person still gets their reference.
+6. The person is sent to the **Confirmation** page with their reference number.
+7. PAB staff see it under **Staff → Support requests**, urgent requests first, and move it to **In progress** and then **Closed**.
 
 The **Contact** form works the same way, saving to `ContactInquiries`.
 
@@ -321,6 +322,7 @@ Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists
 | Quick exit | **Leave this site** (or Esc twice) replaces the page with a weather search, and the Back button doesn't return to it |
 | Logs | One line per request: method, path, status and time. The parts of a path that identify a request are reduced to a shape, so `/api/support-requests/41` is logged as `/api/support-requests/{id}`. No addresses, no query strings, nothing from a form. |
 | Encryption at rest | The two columns that hold what somebody wrote about their situation are encrypted with ASP.NET Data Protection, so a copy of the database file or a backup can't be read. Everything else stays readable so staff can work. |
+| Staff email alerts | The email about a new request carries only the reference, the kind of help, whether it's urgent and the time. Names, phone numbers, email addresses, the area and what the person wrote are never emailed, because inboxes get forwarded, synced to phones and read over shoulders. Staff sign in to see the rest. |
 | Retention | Closed requests and contact messages are deleted after 12 months by a scheduled cleanup (`Services/RetentionService.cs`). A request nobody has closed is never deleted, however old. |
 | Consent | A consent declaration must be ticked before submitting |
 | Database file | `*.db` files are excluded from Git and the Docker image |
@@ -363,6 +365,24 @@ Go to `http://localhost:5277`.
 - **On Railway:** set the variable `Firebase__ApiKey`.
 
 Firebase web API keys aren't secret; every web page that uses Firebase sends one. For Google sign-in, also add the site's domain under Firebase → Authentication → Settings → Authorised domains.
+
+**Email alerts (optional):** with no settings the site simply doesn't send them. Alerts go through [Resend](https://resend.com) (free for this volume), because Railway blocks ordinary email (SMTP) on its cheaper plans.
+
+| Setting | Railway variable | Example |
+|---------|------------------|---------|
+| Resend API key (**secret**) | `Alerts__ApiKey` | `re_…` |
+| Sender, on a domain verified in Resend | `Alerts__From` | `PAB Help Centre <alerts@yourdomain.org>` |
+| PAB's inbox (commas for more than one) | `Alerts__To` | `intake@yourdomain.org` |
+| The live site, for the link in the email | `Alerts__SiteUrl` | `https://your-site.up.railway.app` |
+| Turn support request alerts off | `Alerts__SupportRequests` | `false` |
+
+The API key is a secret: never put it in `appsettings.json` or anywhere in Git. To try alerts on your own computer, keep it in user-secrets:
+
+```bash
+dotnet user-secrets set "Alerts:ApiKey" "re_your_key" --project PhilisaAbantuBethu
+```
+
+Until a domain is verified, Resend only lets `onboarding@resend.dev` send, and only to the email address the Resend account was made with.
 
 **Run the tests:**
 
@@ -448,7 +468,7 @@ The website is hosted on **Railway**, built from the project's `Dockerfile`.
 | Database | Stored at `/data/philisa.db`, on a Railway volume so it survives redeploys |
 | Session keys | Stored at `/data/keys`, so a redeploy doesn't sign staff out or break a form someone has open |
 | Health check | `railway.json` points Railway at `/health`, which answers 200 only when the database responds. A deploy that fails it never receives visitors. |
-| Settings | `Firebase__ApiKey` for staff sign-in. Optional: `RateLimiting__FormPostsPerWindow` and `RateLimiting__WindowMinutes`. |
+| Settings | `Firebase__ApiKey` for staff sign-in. `Alerts__ApiKey`, `Alerts__From`, `Alerts__To` and `Alerts__SiteUrl` for new-request emails (section 10). Optional: `RateLimiting__FormPostsPerWindow` and `RateLimiting__WindowMinutes`. |
 
 ### 12.2 CI/CD
 
@@ -509,11 +529,11 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 | Photos as WebP, lazy, at the width they are shown | ✔ Complete |
 | Emergency numbers readable with no data | ✔ Complete |
 | Managed Postgres database | ◑ Code ready, database not yet provisioned |
-| Notifying PAB staff of new requests | ☐ Planned |
+| Emailing PAB about new requests, with no personal details | ✔ Complete (needs the `Alerts__` variables on Railway) |
 
 ### 14.2 Future Improvements
 
-- **New-request alerts:** an email to PAB's intake address, or a notification on PAB admins' phones through the Philisa Volunteers app. This is the last piece of the marker's "a view or notification so PAB staff can act".
+- **Contact form alerts:** the same kind of email for new messages through the Contact page.
 - **Managed database:** the site already uses Postgres wherever the connection string points at one, and falls back to SQLite locally (`Data/DatabaseProvider.cs`). What is left is provisioning the database and generating a Postgres migration set: the migrations in `Migrations/` were generated for SQLite and its `AUTOINCREMENT` annotation does not carry across.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
 - **Moving the programmes into a content file:** the page text is now in `.resx` files (section 7), but the programmes are still written in `Data/SiteData.cs` and `Localization/ProgrammeTranslations.cs`.
