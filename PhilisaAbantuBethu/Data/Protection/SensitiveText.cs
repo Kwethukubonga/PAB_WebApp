@@ -15,7 +15,7 @@ public interface ISensitiveText
 /// <summary>
 /// Encrypts the columns that hold what someone wrote about their situation, so a copy of the
 /// database file or a backup can't be read (A5). The key comes from ASP.NET Data Protection,
-/// which on Railway is kept on the volume at DataProtection:KeysPath, so a redeploy can still
+/// which on the hosted site is kept on the volume at DataProtection:KeysPath, so a redeploy can still
 /// read what was saved before it.
 ///
 /// Text saved before this was added, and text written by the EF design-time tools, is stored in

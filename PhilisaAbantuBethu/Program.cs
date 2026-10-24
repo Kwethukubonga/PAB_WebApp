@@ -97,7 +97,7 @@ builder.Services.AddProblemDetails();
 // Publishes the API's description at /openapi/v1.json (B1).
 builder.Services.AddOpenApi();
 
-// Sign-in cookies and form tokens are encrypted with these keys. Keeping them on the Railway
+// Sign-in cookies and form tokens are encrypted with these keys. Keeping them on the hosting
 // volume means a redeploy doesn't sign staff out or break a form someone has open.
 var keysPath = builder.Configuration["DataProtection:KeysPath"];
 var dataProtection = builder.Services.AddDataProtection().SetApplicationName("PhilisaAbantuBethu");
@@ -108,28 +108,41 @@ if (!string.IsNullOrWhiteSpace(keysPath))
 
 builder.Services.AddFormRateLimiting(builder.Configuration);
 
-// Railway's proxy handles HTTPS and passes the visitor's address on. Its address isn't fixed,
-// so any proxy is trusted, but only the last hop it added is read.
+// The host's proxy handles HTTPS and passes the visitor's address on. Its address isn't fixed,
+// so any proxy is trusted, but only the entries the host's own proxies added are read.
 //
-// Trusting X-Forwarded-For from any peer is only safe when there really is a proxy in front that
-// overwrites the rightmost entry with the true client address, as Railway's does. Reached without
-// that proxy - run straight from the Docker image, locally, or on any host where a request can
-// hit the container directly - the header is attacker-controlled, and since the rate limiter
-// partitions on the client address, rotating it bypasses the limit on the forms entirely.
+// Trusting a forwarded header from any peer is only safe when there really is a proxy in front
+// that sets it to the true client address. Reached without that proxy - run straight from the
+// Docker image, locally, or on any host where a request can hit the container directly - the header
+// is attacker-controlled, and since the rate limiter partitions on the client address, rotating it
+// bypasses the limit on the forms entirely.
 //
-// So forwarded headers are trusted only when TrustProxy is set, which belongs on Railway and
-// nowhere else. Off Railway the un-spoofable connection address is used, which is correct there.
+// So forwarded headers are trusted only when TrustProxy is set, which belongs on the hosted site
+// (a host setting) and nowhere else. Without it the un-spoofable connection address is used, which
+// is correct there.
+//
+// Where the visitor's address sits is host-specific, so two settings say where to look:
+//  - TrustProxyHeader names a header that holds the visitor alone, if the host sets one;
+//    left empty, the standard X-Forwarded-For is read.
+//  - TrustProxyHops is how many entries, counting from the right, belong to the host's own
+//    proxies. The visitor is the one just left of them. Anything the visitor wrote themselves
+//    lands further left, so it can't move the entry that is read. The default of 1 suits a host
+//    whose proxy adds the visitor as the last entry.
 var trustProxy = builder.Configuration.GetValue<bool>("TrustProxy");
+var trustProxyHeader = builder.Configuration["TrustProxyHeader"];
+var trustProxyHops = Math.Max(1, builder.Configuration.GetValue("TrustProxyHops", 1));
 if (trustProxy)
 {
     builder.Services.Configure<ForwardedHeadersOptions>(options =>
     {
         options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+        if (!string.IsNullOrWhiteSpace(trustProxyHeader))
+        {
+            options.ForwardedForHeaderName = trustProxyHeader;
+        }
         options.KnownIPNetworks.Clear();
         options.KnownProxies.Clear();
-        // Only the entry the trusted proxy itself added is read; anything the client put to the
-        // left of it is ignored.
-        options.ForwardLimit = 1;
+        options.ForwardLimit = trustProxyHops;
     });
 }
 
@@ -153,7 +166,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-// Only when there is a trusted proxy in front (Railway). See the ForwardedHeaders note above.
+// Only when there is a trusted proxy in front of the site. See the ForwardedHeaders note above.
 if (trustProxy)
 {
     app.UseForwardedHeaders();
@@ -207,7 +220,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
-// Railway checks this before sending visitors to a new deploy. 200 when the database answers, 503 when not.
+// The host checks this before sending visitors to a new deploy (fly.toml), and an uptime monitor can
+// watch it. 200 when the database answers, 503 when not.
 app.MapHealthChecks("/health");
 
 // One group per resource, each one calling the same services the pages do (B1, B2, W6).

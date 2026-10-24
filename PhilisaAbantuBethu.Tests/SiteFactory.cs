@@ -18,12 +18,24 @@ public class SiteFactory : WebApplicationFactory<Program>
 
     public int FormPostsPerWindow { get; init; } = 1000;
 
+    /// <summary>Behaves as the hosted site does, with a proxy in front that reports the visitor's address.</summary>
+    public bool TrustProxy { get; init; }
+
+    /// <summary>The header the proxy puts the visitor's address in; empty means X-Forwarded-For.</summary>
+    public string? TrustProxyHeader { get; init; }
+
+    /// <summary>How many entries at the right of X-Forwarded-For belong to the host's own proxies.</summary>
+    public int? TrustProxyHops { get; init; }
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
         builder.UseSetting("ConnectionStrings:DefaultConnection", $"Data Source={_dbPath}");
         builder.UseSetting("RateLimiting:FormPostsPerWindow", FormPostsPerWindow.ToString());
         builder.UseSetting("Firebase:ApiKey", "test-api-key");
+        if (TrustProxy) builder.UseSetting("TrustProxy", "true");
+        if (TrustProxyHeader is not null) builder.UseSetting("TrustProxyHeader", TrustProxyHeader);
+        if (TrustProxyHops is not null) builder.UseSetting("TrustProxyHops", TrustProxyHops.Value.ToString());
 
         builder.ConfigureServices(services =>
         {

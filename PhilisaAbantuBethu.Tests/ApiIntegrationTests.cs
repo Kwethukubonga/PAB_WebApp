@@ -371,4 +371,80 @@ public class ApiRateLimitTests
             Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/api/resources")).StatusCode);
         }
     }
+
+    private static readonly object SupportBody = new
+    {
+        firstName = "Nomsa", surname = "Mkoka", phone = "082 123 4567", area = "Lavender Hill",
+        contactMethod = "phone", supportType = "Emergency Shelter",
+        situation = "I need somewhere safe for tonight.", urgent = "yes", declaration = true
+    };
+
+    private static Task<HttpResponseMessage> SendAs(HttpClient client, string header, string address, string? forwardedFor = null)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Post, "/api/support-requests") { Content = JsonContent.Create(SupportBody) };
+        request.Headers.Add(header, address);
+        if (forwardedFor is not null) request.Headers.Add("X-Forwarded-For", forwardedFor);
+        return client.SendAsync(request);
+    }
+
+    [Fact]
+    public async Task Behind_the_proxy_each_visitor_gets_their_own_limit_from_the_header_the_host_names()
+    {
+        // The hosted site reads Fly-Client-IP: Fly puts its own address at the right of
+        // X-Forwarded-For, so reading that would give every visitor one shared limit.
+        using var site = new SiteFactory { FormPostsPerWindow = 1, TrustProxy = true, TrustProxyHeader = "Fly-Client-IP" };
+        var client = site.CreateBrowser();
+
+        Assert.Equal(HttpStatusCode.Created, (await SendAs(client, "Fly-Client-IP", "203.0.113.10")).StatusCode);
+        Assert.Equal(HttpStatusCode.TooManyRequests, (await SendAs(client, "Fly-Client-IP", "203.0.113.10")).StatusCode);
+
+        // A different visitor is not held up by the first one's limit.
+        Assert.Equal(HttpStatusCode.Created, (await SendAs(client, "Fly-Client-IP", "203.0.113.11")).StatusCode);
+    }
+
+    [Fact]
+    public async Task Behind_the_proxy_a_rotating_x_forwarded_for_does_not_get_round_the_limit()
+    {
+        using var site = new SiteFactory { FormPostsPerWindow = 1, TrustProxy = true, TrustProxyHeader = "Fly-Client-IP" };
+        var client = site.CreateBrowser();
+
+        Assert.Equal(HttpStatusCode.Created, (await SendAs(client, "Fly-Client-IP", "203.0.113.20", "198.51.100.1")).StatusCode);
+        Assert.Equal(HttpStatusCode.TooManyRequests, (await SendAs(client, "Fly-Client-IP", "203.0.113.20", "198.51.100.2")).StatusCode);
+    }
+
+    [Fact]
+    public async Task Behind_a_host_with_two_proxies_the_visitor_is_the_entry_just_left_of_them()
+    {
+        // The host's proxies add the last two entries; the visitor is the one before those, and
+        // whatever the visitor wrote themselves sits further left.
+        using var site = new SiteFactory { FormPostsPerWindow = 1, TrustProxy = true, TrustProxyHops = 2 };
+        var client = site.CreateBrowser();
+
+        Assert.Equal(HttpStatusCode.Created, (await ForwardedFor(client, "198.51.100.1, 203.0.113.40, 10.0.0.1")).StatusCode);
+
+        // Same visitor, a different made-up address to the left: still the same limit.
+        Assert.Equal(HttpStatusCode.TooManyRequests, (await ForwardedFor(client, "198.51.100.2, 203.0.113.40, 10.0.0.1")).StatusCode);
+        Assert.Equal(HttpStatusCode.TooManyRequests, (await ForwardedFor(client, "203.0.113.40, 10.0.0.1")).StatusCode);
+
+        // A different visitor is not held up by the first one's limit.
+        Assert.Equal(HttpStatusCode.Created, (await ForwardedFor(client, "198.51.100.2, 203.0.113.41, 10.0.0.1")).StatusCode);
+    }
+
+    private static Task<HttpResponseMessage> ForwardedFor(HttpClient client, string forwardedFor)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Post, "/api/support-requests") { Content = JsonContent.Create(SupportBody) };
+        request.Headers.Add("X-Forwarded-For", forwardedFor);
+        return client.SendAsync(request);
+    }
+
+    [Fact]
+    public async Task Without_a_proxy_the_forwarded_headers_are_ignored()
+    {
+        // Reached directly (docker compose, a plain docker run) the header is the visitor's to forge.
+        using var site = new SiteFactory { FormPostsPerWindow = 1 };
+        var client = site.CreateBrowser();
+
+        Assert.Equal(HttpStatusCode.Created, (await SendAs(client, "Fly-Client-IP", "203.0.113.30")).StatusCode);
+        Assert.Equal(HttpStatusCode.TooManyRequests, (await SendAs(client, "Fly-Client-IP", "203.0.113.31", "198.51.100.3")).StatusCode);
+    }
 }

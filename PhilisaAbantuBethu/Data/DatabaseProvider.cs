@@ -25,7 +25,7 @@ public static class DatabaseProvider
     public static string Name(string? connectionString) => IsPostgres(connectionString) ? "Postgres" : "SQLite";
 
     /// <summary>
-    /// Npgsql wants <c>Host=…;Port=…;Database=…;Username=…;Password=…</c>, but Railway, Neon and
+    /// Npgsql wants <c>Host=…;Port=…;Database=…;Username=…;Password=…</c>, but Render, Neon and
     /// Supabase all hand out a <c>postgresql://</c> URL. This turns one into the other and leaves
     /// a keyword string alone, so DATABASE_URL can be used as given.
     /// </summary>
