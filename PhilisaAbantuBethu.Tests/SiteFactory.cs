@@ -108,4 +108,5 @@ public class RecordingEmailSender : IEmailSender
 public class NoAlerts : IStaffAlerts
 {
     public Task SupportRequestReceivedAsync(PhilisaAbantuBethu.Models.SupportRequest request, CancellationToken ct = default) => Task.CompletedTask;
+    public Task ContactMessageReceivedAsync(PhilisaAbantuBethu.Models.ContactInquiry message, CancellationToken ct = default) => Task.CompletedTask;
 }

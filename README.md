@@ -186,7 +186,7 @@ If something is missing or wrong, the form comes back with what they typed still
 6. The person is sent to the **Confirmation** page with their reference number.
 7. PAB staff see it under **Staff → Support requests**, urgent requests first, and move it to **In progress** and then **Closed**.
 
-The **Contact** form works the same way, saving to `ContactInquiries`.
+The **Contact** form works the same way, saving to `ContactInquiries`. PAB gets an email with the message's subject and time, and staff read the message itself under **Staff → Messages**.
 
 ### 6.2 How Staff Sign In
 
@@ -322,7 +322,7 @@ Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists
 | Quick exit | **Leave this site** (or Esc twice) replaces the page with a weather search, and the Back button doesn't return to it |
 | Logs | One line per request: method, path, status and time. The parts of a path that identify a request are reduced to a shape, so `/api/support-requests/41` is logged as `/api/support-requests/{id}`. No addresses, no query strings, nothing from a form. |
 | Encryption at rest | The two columns that hold what somebody wrote about their situation are encrypted with ASP.NET Data Protection, so a copy of the database file or a backup can't be read. Everything else stays readable so staff can work. |
-| Staff email alerts | The email about a new request carries only the reference, the kind of help, whether it's urgent and the time. Names, phone numbers, email addresses, the area and what the person wrote are never emailed, because inboxes get forwarded, synced to phones and read over shoulders. Staff sign in to see the rest. |
+| Staff email alerts | The email about a new request carries only the reference, the kind of help, whether it's urgent and the time. Names, phone numbers, email addresses, the area and what the person wrote are never emailed, because inboxes get forwarded, synced to phones and read over shoulders. Staff sign in to see the rest. Contact message emails carry only the subject and the time; who sent it and what they wrote are on **Staff → Messages**. |
 | Retention | Closed requests and contact messages are deleted after 12 months by a scheduled cleanup (`Services/RetentionService.cs`). A request nobody has closed is never deleted, however old. |
 | Consent | A consent declaration must be ticked before submitting |
 | Database file | `*.db` files are excluded from Git and the Docker image |
@@ -375,6 +375,7 @@ Firebase web API keys aren't secret; every web page that uses Firebase sends one
 | PAB's inbox (commas for more than one) | `Alerts__To` | `intake@yourdomain.org` |
 | The live site, for the link in the email | `Alerts__SiteUrl` | `https://your-site.up.railway.app` |
 | Turn support request alerts off | `Alerts__SupportRequests` | `false` |
+| Turn contact message alerts off | `Alerts__ContactMessages` | `false` |
 
 The API key is a secret: never put it in `appsettings.json` or anywhere in Git. To try alerts on your own computer, keep it in user-secrets:
 
@@ -529,11 +530,11 @@ Then switch off Railway's own automatic deploys from GitHub, so every release go
 | Photos as WebP, lazy, at the width they are shown | ✔ Complete |
 | Emergency numbers readable with no data | ✔ Complete |
 | Managed Postgres database | ◑ Code ready, database not yet provisioned |
-| Emailing PAB about new requests, with no personal details | ✔ Complete (needs the `Alerts__` variables on Railway) |
+| Emailing PAB about new requests and contact messages, with no personal details | ✔ Complete (needs the `Alerts__` variables on Railway) |
+| Staff page for reading contact messages | ✔ Complete |
 
 ### 14.2 Future Improvements
 
-- **Contact form alerts:** the same kind of email for new messages through the Contact page.
 - **Managed database:** the site already uses Postgres wherever the connection string points at one, and falls back to SQLite locally (`Data/DatabaseProvider.cs`). What is left is provisioning the database and generating a Postgres migration set: the migrations in `Migrations/` were generated for SQLite and its `AUTOINCREMENT` annotation does not carry across.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
 - **Moving the programmes into a content file:** the page text is now in `.resx` files (section 7), but the programmes are still written in `Data/SiteData.cs` and `Localization/ProgrammeTranslations.cs`.
