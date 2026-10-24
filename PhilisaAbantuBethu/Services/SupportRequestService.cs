@@ -30,12 +30,14 @@ public class SupportRequestService : ISupportRequestService
 
     private readonly AppDbContext _db;
     private readonly IReferenceGenerator _references;
+    private readonly IStaffAlerts _alerts;
     private readonly ILogger<SupportRequestService> _log;
 
-    public SupportRequestService(AppDbContext db, IReferenceGenerator references, ILogger<SupportRequestService> log)
+    public SupportRequestService(AppDbContext db, IReferenceGenerator references, IStaffAlerts alerts, ILogger<SupportRequestService> log)
     {
         _db = db;
         _references = references;
+        _alerts = alerts;
         _log = log;
     }
 
@@ -67,6 +69,10 @@ public class SupportRequestService : ISupportRequestService
                 await _db.SaveChangesAsync(ct);
                 // Ids and references only: the details stay out of the logs.
                 _log.LogInformation("Support request {Id} saved as {Reference}", request.Id, request.Reference);
+
+                // Only once it's safely saved, and never with the person's cancel token: if they
+                // close the tab, PAB should still hear about it (W10).
+                await _alerts.SupportRequestReceivedAsync(request, CancellationToken.None);
                 return request.Reference;
             }
             catch (DbUpdateException) when (attempt < MaxReferenceAttempts)

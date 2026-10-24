@@ -47,6 +47,15 @@ builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IRetentionService, RetentionService>();
 builder.Services.AddSingleton<IReferenceGenerator, ReferenceGenerator>();
 
+// PAB's inbox hears about each new support request, without any personal details (W10).
+builder.Services.Configure<AlertOptions>(builder.Configuration.GetSection(AlertOptions.Section));
+builder.Services.AddHttpClient<IEmailSender, ResendEmailSender>(http =>
+{
+    http.BaseAddress = new Uri("https://api.resend.com/");
+    http.Timeout = TimeSpan.FromSeconds(10);
+});
+builder.Services.AddScoped<IStaffAlerts, StaffAlerts>();
+
 // What someone writes about their situation is encrypted in the database (A5).
 builder.Services.AddSingleton<ISensitiveText, SensitiveText>();
 
