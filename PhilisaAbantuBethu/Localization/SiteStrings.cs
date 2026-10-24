@@ -100,6 +100,13 @@ public class SiteStrings
 		_ => en
 	};
 
+	/// <summary>The text for a key in Resources/SharedResource.resx, in this language.</summary>
+	public string this[string key] => Text.Get(key, Lang);
+
+	/// <summary>The same, with values filled into its {0}, {1} placeholders.</summary>
+	public string Format(string key, params object[] args) =>
+		string.Format(Text.CultureFor(Lang), this[key], args);
+
 	public static SiteStrings For(string lang) => lang switch
 	{
 		"xh" => Xh,
