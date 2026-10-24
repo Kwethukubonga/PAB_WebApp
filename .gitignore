@@ -371,3 +371,10 @@ node_modules/
 
 # Local editor/tool config, not part of the project.
 .claude/
+
+# Secrets and backups. Certificates, database backups and the folders the tools write them to
+# must never be committed: a backup holds names and phone numbers.
+*.pfx
+*.dump
+pab-secrets/
+pab-backups/
