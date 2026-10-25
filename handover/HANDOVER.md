@@ -1,11 +1,11 @@
 # Handover: what's done and what's left
 
-PAB Volunteers (Android) and the Help Centre (web). Updated 22 October 2026.
+PAB Volunteers (Android) and the Help Centre (web). Updated 25 October 2026.
 
 Task 2 got 176/270 (65%). Most marks were lost on the **web app** (APIs, Database, Data Flow, Security, CI/CD). Most of that is now fixed on web `develop`, but **none of it is live yet** because Railway only deploys `main`.
 
 **Repos:** Android `Kwethukubonga/PAB_Volunteers` · Web `Kwethukubonga/PAB_WebApp`. Clone both into the same folder.
-**Full checklist:** [`IMPROVEMENT_PLAN.md`](IMPROVEMENT_PLAN.md) in this folder (100 items: 39 done, 10 part done). Each item says how to do it and how to know it's finished.
+**Full checklist:** [`IMPROVEMENT_PLAN.md`](IMPROVEMENT_PLAN.md) in this folder (108 items: 61 done, 16 part done; section 8 lists what's left on Android, in order). Each item says how to do it and how to know it's finished.
 
 > ⚠️ **These notes live only on the `changes_final_POE` branch**, which exists in both repos with the same `handover/` folder and a `changes_POE.md` project guide. They are for the team only, never go into `develop`, `main` or `master`, and **both `changes_final_POE` branches are deleted before the final submission** (section 5).
 
@@ -46,6 +46,7 @@ Each repo's `changes_final_POE` branch has `changes_POE.md`: what the project is
 | Web | `revert-7-feature/api` | Made with GitHub's Revert button on PR #7, never opened as a PR. **Don't merge it**: it would undo all the new web work. Delete it if nobody needs it. |
 | Web | `feature/database-persistence`, `feature/update-programme-images`, `unathi` | Old, and they carry a stray `.claude/launch.json`. Delete if finished with. |
 | Android | `develop` | Same as `master` plus new rules tests (40 pass). All 17 requirements (PV-FR01–17) implemented. |
+| Android | `feature/tlhogi/settings` → `feature/tlhogi/collective-features` → `feature/tlhogi/mockup-screens` | Each builds on the one before; PR them into `develop` in that order. The mockup branch has six "UI:" commits (Home planner, activity details, Profile tabs, fingerprint lock, emergency contact and reminders). |
 | Android | `feature/kwethu/design-tokens` | Shared palette + header contrast fix (E1, F9). **No PR yet.** Its commit message has a `Co-Authored-By: Claude` line; reword it before the PR. |
 
 ### Done on web `develop`
@@ -93,13 +94,13 @@ Check the isiXhosa and Afrikaans text on the new pages, form errors, the 429 pag
 |---|---|---|---|
 | C1 | P1 | Provision Postgres on Railway (code is ready: `Data/DatabaseProvider.cs`), set the connection string, turn on backups, test a restore | |
 | D4 | P2 | Branch protection on web `develop` and `main` (CI must pass + 1 review). Dependabot and the badge are done | |
-| W12 | P2 | Staff list: New / In progress / Closed tabs with counts, relative times, confirm before closing | |
-| A8 | P2 | Move programmes out of `Data/SiteData.cs` and UI text out of `s.Pick(...)` into content / `.resx` files | |
+| W12 | P2 | ~~Staff list: New / In progress / Closed tabs with counts, relative times, confirm before closing~~ done (PR #11) | Unathi |
+| A8 | P2 | ~~Move programmes out of `Data/SiteData.cs` and UI text out of `s.Pick(...)` into content / `.resx` files~~ done (PRs #10, #19) | Unathi |
 | C4 | P2 | Free uptime monitor (e.g. UptimeRobot) on `/health`; put the uptime figure in the README | |
 | D5 | P2 | Tag a release (`v1.1.0`) when `develop` goes to `main`, with notes from the merged PRs | |
 | H4 | P3 | Lighthouse CI on PRs, with minimum Performance and Accessibility scores | |
-| G7 | P2 | Edge cases: very long names, emoji in every field, fast repeated Submit | |
-| J4 | P2 | PR template for the web repo (what changed, how it was tested, screenshots) | |
+| G7 | P2 | ~~Edge cases: very long names, emoji in every field, fast repeated Submit~~ done on web (PR #16) | Unathi |
+| J4 | P2 | ~~PR template for the web repo (what changed, how it was tested, screenshots)~~ done (PR #17) | Unathi |
 
 ---
 
@@ -135,6 +136,7 @@ Open a PR from `feature/kwethu/design-tokens` into Android `develop` (reword the
 | F12 | Check large text (1.3×) and dark mode in all 3 languages, fix clipping | |
 | K1–K4 | ~~Settings rows, change password, two-step delete, offline banner~~ built on `feature/tlhogi/settings`. Next: PR into `develop`, check on a phone (3 languages, dark mode) | Tlhogi |
 | K19–K26 | ~~Milestones, clearance, report a concern, search, "How did it go?", directions, animated splash, phone spacing~~ built on `feature/tlhogi/collective-features` (on top of the Settings branch). Next: PR after the Settings one, check on a phone, and **publish the new `firestore.rules`** | Tlhogi |
+| K7, K9–K14, E6, F9, I1, I3 | ~~Solid headers, Home planner, details with top bar, calendar and "I need help", Profile tabs and colour, fingerprint lock, emergency contact and reminders~~ built on `feature/tlhogi/mockup-screens` (on top of collective-features). Next: PR after collective-features, check on a phone, **confirm the crisis line 081 746 9889 with PAB**. Parts left: see the plan, section 8 | Tlhogi |
 | K16 | Google sign-in through Credential Manager (removes the deprecated API) | |
 
 **P2:**
@@ -142,16 +144,16 @@ Open a PR from `feature/kwethu/design-tokens` into Android `develop` (reword the
 | ID | Task | Owner |
 |---|---|---|
 | E3, E4 | Same fonts as the web (Lora + Source Sans 3 in `res/font`), remove eyebrow labels | |
-| E9, E6, K7 | Material 3, solid header instead of gradient, tinted neutrals | |
-| G1, G2, K5, K6 | Snackbars instead of Toasts, buttons on empty screens, Retry on errors, main action pinned at the bottom | |
+| E9, K7 | Material 3, tinted neutrals (the solid header is done) | |
+| G1, G2, K5, K6 | Snackbars instead of Toasts, buttons on empty screens, Retry on errors, Save pinned at the bottom of the editors and Edit Profile | |
 | F11, F13, F14 | Predictive Back, TalkBack pass, `ListAdapter` + `DiffUtil` | |
-| I1–I5, K8–K10, K12–K14 | Reminders, "only my programmes", add to calendar, contact PAB, privacy/POPIA, intro screens, home planner, schedule tabs, safety sheet, fingerprint lock | |
+| I2, I4, I5, K8, K10, K13 | "Only my programmes", contact PAB (call, WhatsApp, directions), privacy/POPIA, intro screens, Upcoming/Past tabs on Schedule, suggest the lock to admins | |
 | D4 | Branch protection on Android `develop` and `master`, Dependabot, CI badge | |
 | D5 | Tag releases and attach the APK to a GitHub Release | |
 | C4 | Uptime monitor on the download page | |
 | G7, J4 | Edge-case testing, PR template for the Android repo | |
 
-**P3:** E7, E10, G3, I6, I7 (needs Firebase's paid Blaze plan), K11, K15, K17, K18. See the plan for details.
+**P3:** E7 (Admin tiles), E10 (other sub-screens), G3, I6, I7 (needs Firebase's paid Blaze plan), K11 (admin lists), K15, K17, K18. See the plan for details.
 
 ---
 
@@ -160,12 +162,12 @@ Open a PR from `feature/kwethu/design-tokens` into Android `develop` (reword the
 | ID | Web team (Unathi, Nuha, Ash) | Android team (Tlhogi, Kwethu) |
 |---|---|---|
 | **B3** Android uses the web API | Keep `GET /api/support-requests` working with a Firebase ID token; help test | Admin screen that lists web requests through the API (send the ID token the app already has). Makes PAB-FR14 fully true |
-| **W10** Alert admin phones about new requests | Send a push through the Firebase Admin SDK when a request is saved (no personal details in it) | Add FCM to the app to receive it (I7) |
+| **W10** Alert staff about new requests | ~~Send a push when a request is saved~~ done by email instead (Unathi, PRs #12, #13): new requests and contact messages email staff with no personal details | Nothing needed now; FCM (I7) only if push is wanted later |
 | **J2** Architecture and threat model | Threat model for the GBV data (who could misuse it, what stops them), web side of the diagram | Android side of the diagram (Firebase, rules, notifications) |
 | **J5** Demo script | Validation error, 429 page, staff view, auto-deploy | Joining, notifications, 3 languages, dark mode |
 | **E2** PRODUCT.md and DESIGN.md | Web components and states | Android components; tokens are shared from `design/tokens.json` |
 
-Agree as a whole group how staff hear about new requests (email or push, W10) before starting on it.
+The group chose email for W10, so staff hear about new requests and contact messages by email.
 
 ---
 
