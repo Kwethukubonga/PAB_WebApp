@@ -20,4 +20,7 @@ public class Programme
     public string? EmergencyAddress { get; set; }
     public string? EmergencyPhone { get; set; }
 
+    // isiXhosa and Afrikaans words, keyed by language code. The English ones are the fields above.
+    public Dictionary<string, Localization.ProgrammeText> Translations { get; set; } = new();
+
 }
