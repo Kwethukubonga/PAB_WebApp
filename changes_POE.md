@@ -11,17 +11,17 @@ Sister repo: the Android volunteer app, `Kwethukubonga/PAB_Volunteers`. Clone bo
 ## Where to start
 
 1. `handover/HANDOVER.md` (on this branch): what's done, what's left, in order, with owners. The web team's jobs are section 2.
-2. `handover/IMPROVEMENT_PLAN.md` (on this branch): the full checklist (items A1–K18, W1–W12; each says how to do it and how to know it's finished).
+2. `handover/IMPROVEMENT_PLAN.md` (on this branch): the full checklist (items A1–K26, W1–W12; each says how to do it and how to know it's finished; section 8 is the Android to-do in order).
 3. `README.md` section 2 maps every requirement (PAB-FR01–15) to its page, code and test. Keep it true when you change behaviour.
 
 Read the notes without leaving your work branch: `git show origin/changes_final_POE:handover/HANDOVER.md`. The same `handover/` folder is on the Android repo's `changes_final_POE` branch; keep the two copies identical.
 
 ## Stack
 
-- ASP.NET Core Razor Pages + minimal API endpoints, .NET 10, EF Core 10 (SQLite locally and on Railway today; Npgsql when the connection string points at Postgres, see `Data/DatabaseProvider.cs`).
+- ASP.NET Core Razor Pages + minimal API endpoints, .NET 10, EF Core 10 (SQLite locally; Postgres on Neon in production, with its own migrations in `Migrations/Postgres`; `Data/DatabaseProvider.cs` picks one from the connection string).
 - Tailwind compiled at build time from `design/tokens.json` (`npm run build`); fonts and images are self-hosted. No CDNs: the CSP forbids them.
 - Staff sign in with their PAB Firebase account (project `pab-volunteers`); the server checks the ID token and that `users/{uid}.role == "admin"` in Firestore.
-- Hosting: Docker on Railway. CI (`.github/workflows/dotnet-tests.yml`) tests, checks the built CSS matches the tokens, reports coverage, builds the image, and deploys `main` to Railway.
+- Hosting: Docker on Render's free plan. CI (`.github/workflows/dotnet-tests.yml`) tests (with a Postgres for the Postgres tests), checks the built CSS matches the tokens, reports coverage, builds the image, and deploys `main` to Render through the `RENDER_DEPLOY_HOOK` secret.
 
 ## Commands
 
@@ -48,7 +48,7 @@ node tools/tokens/build.js --android ../PAB_Volunteers   # writes Android's colo
 - **No AI attribution anywhere**: no `Co-Authored-By: Claude`/Copilot trailers, no "Generated with" lines, in commits, PRs, code or comments. The README's AI Usage Declaration section is the one place AI use is described.
 - **Merge PRs with "Create a merge commit"**, never squash: squashing rewrote a teammate's commits under one name once already, and the marker grades individual contribution.
 - Work on `feature/<name>/<topic>` branches, PR into `develop`; `develop` → `main` is a deliberate release (it deploys).
-- Never commit secrets: Firebase service account keys, `.pfx` certificates, Railway tokens. The Firebase *web* API key goes in Railway's `Firebase__ApiKey` variable, not in git.
+- Never commit secrets: Firebase service account keys, `.pfx` certificates, the Render deploy hook, the data-protection certificate and its password. The Firebase *web* API key goes in Render's `Firebase__ApiKey` variable, not in git.
 - Support requests describe abuse. Never log or email personal fields, keep staff pages `no-store`/`noindex`, and keep the quick exit button on every public page.
-- Never delete data in the live Firebase project or the Railway database.
+- Never delete data in the live Firebase project or the Neon database.
 - Write plain, warm UK/SA English in the UI. Commit messages: short imperative summary, body says why.
