@@ -60,7 +60,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | PAB-FR05 | Give PAB the information it needs to respond. | Steps 1–2 | `SupportRequestValidator.Validate` | `FormValidatorTests`, `ApiIntegrationTests.Posting_an_empty_request_returns_400…` |
 | PAB-FR06 | Receive confirmation once a request is submitted. | `/Confirmation` | `RequestSupportModel.OnPostAsync`, `ReferenceGenerator` | `RequestSupport_SavesAValidRequest_AndShowsItsReference`, `ReferenceGeneratorTests` |
 | PAB-FR07 | Access helpful resources. | `/Resources`, `/offline` | `Data/ResourceData.cs` | `ApiIntegrationTests.Resources_lead_with_the_emergency_numbers` |
-| PAB-FR08 | View information about PAB's programmes. | `/Programmes`, `/Programmes/{id}` | `Data/SiteData.cs`, `Api/ContentEndpoints.cs` | `ApiIntegrationTests.A_programme_comes_back_in_the_language_asked_for` |
+| PAB-FR08 | View information about PAB's programmes. | `/Programmes`, `/Programmes/{id}` | `Content/programmes.json`, `Data/ProgrammeContent.cs`, `Api/ContentEndpoints.cs` | `ProgrammeContentTests`, `ApiIntegrationTests.A_programme_comes_back_in_the_language_asked_for` |
 | PAB-FR09 | Switch between English, isiXhosa and Afrikaans. | Every page | `Localization/`, `LangExtensions` | `PublicPageTests.A_page_comes_back_in_the_language_asked_for`, `…The_chosen_language_is_remembered_for_the_next_page`, `ApiIntegrationTests.A_programme_comes_back_in_the_language_asked_for` |
 | PAB-FR10 | Submit a request from outside PAB's main service areas. | Step 1 | Area is free text with no area check | `FormValidatorTests` (any area passes) |
 
@@ -301,7 +301,7 @@ erDiagram
 
 Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists quick.
 
-**Programmes** are not stored in the database. They're defined in `Data/SiteData.cs`, because they rarely change and are the same for every visitor.
+**Programmes** are not stored in the database. They live in `Content/programmes.json`, with each programme's words in English, isiXhosa and Afrikaans side by side, because they rarely change and are the same for every visitor. The file is built into the app, and `ProgrammeContentTests` checks every programme has its English words, matching translations and pictures that exist.
 
 ---
 
@@ -560,7 +560,6 @@ The site creates its tables the first time it starts. If the connection string o
 
 - **Managed database, finishing touches:** the site uses Postgres wherever the connection string points at one, with its own migrations and its encryption keys in the database (section 12.4). What is left is scheduling the backups instead of running them by hand, and checking the database server's certificate: the connection to Neon is encrypted, but `Data/DatabaseProvider.cs` still sets `Trust Server Certificate=true`, so it does not yet prove it is talking to Neon itself.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
-- **Moving the programmes into a content file:** the page text is now in `.resx` files (section 7), but the programmes are still written in `Data/SiteData.cs` and `Localization/ProgrammeTranslations.cs`.
 - **Lighthouse in CI:** a minimum score for performance and accessibility on every pull request.
 
 ---
