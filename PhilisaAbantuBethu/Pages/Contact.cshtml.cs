@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhilisaAbantuBethu.Forms;
@@ -9,15 +10,19 @@ namespace PhilisaAbantuBethu.Pages
     // The longest field here is the 3000-character message, so 64KB is ample. See the note on
     // RequestSupportModel for why the 30MB Kestrel default is worth narrowing on a public form.
     [RequestSizeLimit(64 * 1024)]
+    // Checked in OnPostAsync instead, so an expired form keeps the message (G7).
+    [IgnoreAntiforgeryToken]
     public class ContactModel : PageModel
     {
 
         private readonly IContactService _contact;
+        private readonly IAntiforgery _antiforgery;
 
-        public ContactModel(IContactService contact)
+        public ContactModel(IContactService contact, IAntiforgery antiforgery)
         {
 
             _contact = contact;
+            _antiforgery = antiforgery;
 
         }
 
@@ -44,13 +49,23 @@ namespace PhilisaAbantuBethu.Pages
 
             var s = HttpContext.Strings();
 
+            switch (await FormCheck.CheckAsync(_antiforgery, HttpContext))
+            {
+                case FormCheckResult.Expired:
+                    FormError = s["Forms.ExpiredSendAgain"];
+                    return Page();
+                case FormCheckResult.Unreadable:
+                    FormError = s["Forms.UnreadableTypeAgain"];
+                    return Page();
+            }
+
             if (!string.IsNullOrEmpty(Website))
             {
                 FormError = s["Contact.CouldntSendMessagePlease"];
                 return Page();
             }
 
-            var input = new ContactInput(Name, Email, Phone, Subject, Message);
+            var input = new ContactInput(Name, Email, Phone, Subject, Message).Cleaned();
 
             foreach (var (field, message) in ContactValidator.Validate(input, s))
             {

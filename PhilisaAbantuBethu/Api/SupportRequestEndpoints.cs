@@ -122,10 +122,10 @@ public static class SupportRequestEndpoints
         CancellationToken ct)
     {
         // Error messages come back in the language the caller asked for, as on the web form.
-        var errors = SupportRequestValidator.Validate(body.ToInput(), http.Strings());
+        var errors = SupportRequestValidator.Validate(body.ToInput().Cleaned(), http.Strings());
         if (errors.Count > 0) return ApiProblem.Validation(errors);
 
-        var reference = await requests.SubmitAsync(body.ToInput(), ct);
+        var reference = await requests.SubmitAsync(body.ToInput().Cleaned(), ct);
         return TypedResults.Created($"/api/support-requests/by-reference/{reference}", new SupportRequestAccepted(reference));
     }
 

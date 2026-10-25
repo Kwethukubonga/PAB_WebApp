@@ -108,6 +108,22 @@
     }
 
     /* ---------------------------------------------------------------
+       Invisible characters (G7). Text pasted from other apps can carry
+       control codes the server refuses outright (a null makes the whole
+       form unreadable), or direction marks that make a name display
+       backwards. They are removed before sending, so nothing typed is
+       lost. The server removes them too, for anyone without JavaScript.
+    --------------------------------------------------------------- */
+    var invisible = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F‪-‮⁦-⁩]/g;
+    document.addEventListener('submit', function (e) {
+        e.target.querySelectorAll('input:not([type]), input[type="text"], input[type="tel"], input[type="email"], textarea')
+            .forEach(function (field) {
+                if (invisible.test(field.value)) field.value = field.value.replace(invisible, '');
+                invisible.lastIndex = 0;
+            });
+    }, true);
+
+    /* ---------------------------------------------------------------
        Busy state for simple forms (Pages/Contact.cshtml): one message
        per press, and the button shows that it is sending.
     --------------------------------------------------------------- */

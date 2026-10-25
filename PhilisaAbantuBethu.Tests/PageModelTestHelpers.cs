@@ -22,3 +22,17 @@ internal static class PageModelTestHelpers
         };
     }
 }
+
+/// <summary>
+/// Stands in for the form-token check in tests that call a page handler directly, where there is
+/// no real request to carry a token. The real check is covered through the whole site in
+/// EdgeCaseTests.
+/// </summary>
+internal class AcceptingAntiforgery : Microsoft.AspNetCore.Antiforgery.IAntiforgery
+{
+    public Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet GetAndStoreTokens(HttpContext httpContext) => new("request", "cookie", "form", "header");
+    public Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet GetTokens(HttpContext httpContext) => new("request", "cookie", "form", "header");
+    public Task<bool> IsRequestValidAsync(HttpContext httpContext) => Task.FromResult(true);
+    public Task ValidateRequestAsync(HttpContext httpContext) => Task.CompletedTask;
+    public void SetCookieTokenAndHeader(HttpContext httpContext) { }
+}

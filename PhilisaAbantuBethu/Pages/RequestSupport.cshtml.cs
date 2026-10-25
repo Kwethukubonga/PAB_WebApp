@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhilisaAbantuBethu.Forms;
@@ -10,15 +11,20 @@ namespace PhilisaAbantuBethu.Pages;
 // 64KB. Kestrel's default 30MB would otherwise let someone force a 30MB allocation per post, and
 // with the rate limit only 5 posts a window, that is a cheap way to lean on the server's memory.
 [RequestSizeLimit(64 * 1024)]
+// The token is still checked on every post, but in OnPostAsync rather than by the framework, so an
+// expired form comes back with what was typed instead of turning into an error page (G7).
+[IgnoreAntiforgeryToken]
 public class RequestSupportModel : PageModel
 {
 
     private readonly ISupportRequestService _requests;
+    private readonly IAntiforgery _antiforgery;
 
-    public RequestSupportModel(ISupportRequestService requests)
+    public RequestSupportModel(ISupportRequestService requests, IAntiforgery antiforgery)
     {
 
         _requests = requests;
+        _antiforgery = antiforgery;
 
     }
 
@@ -47,6 +53,18 @@ public class RequestSupportModel : PageModel
 
         var s = HttpContext.Strings();
 
+        switch (await FormCheck.CheckAsync(_antiforgery, HttpContext))
+        {
+            case FormCheckResult.Expired:
+                // Nothing is saved. The page comes back with a fresh token and everything they typed,
+                // which matters most to someone who has just written out what is happening to them.
+                FormError = s["Forms.ExpiredSendAgain"];
+                return Page();
+            case FormCheckResult.Unreadable:
+                FormError = s["Forms.UnreadableTypeAgain"];
+                return Page();
+        }
+
         if (!string.IsNullOrEmpty(Website))
         {
             // Nothing is saved. A real person who somehow filled it in still gets a way to reach PAB.
@@ -56,7 +74,7 @@ public class RequestSupportModel : PageModel
 
         var input = new SupportRequestInput(
             FirstName, Surname, Phone, Email, Area, ContactMethod,
-            SupportType, Situation, Urgent, Extra, Declaration);
+            SupportType, Situation, Urgent, Extra, Declaration).Cleaned();
 
         foreach (var (field, message) in SupportRequestValidator.Validate(input, s))
         {

@@ -16,7 +16,17 @@ public record SupportRequestInput(
     string? Situation,
     string? Urgent,
     string? Extra,
-    bool Declaration);
+    bool Declaration)
+{
+    /// <summary>The same input with invisible control and direction characters removed (G7).</summary>
+    public SupportRequestInput Cleaned() => this with
+    {
+        FirstName = TextInput.Clean(FirstName), Surname = TextInput.Clean(Surname), Phone = TextInput.Clean(Phone),
+        Email = TextInput.Clean(Email), Area = TextInput.Clean(Area), ContactMethod = TextInput.Clean(ContactMethod),
+        SupportType = TextInput.Clean(SupportType), Situation = TextInput.Clean(Situation), Urgent = TextInput.Clean(Urgent),
+        Extra = TextInput.Clean(Extra)
+    };
+}
 
 /// <summary>
 /// Checks a support request on the server. The browser checks the same things, but it can be
@@ -49,12 +59,12 @@ public static class SupportRequestValidator
 
         if (string.IsNullOrWhiteSpace(input.FirstName))
             errors["FirstName"] = s["SupportRequestForm.PleaseEnterFirstName"];
-        else if (input.FirstName.Trim().Length > NameMax)
+        else if (TextInput.Length(input.FirstName.Trim()) > NameMax)
             errors["FirstName"] = TooLong(s, NameMax);
 
         if (string.IsNullOrWhiteSpace(input.Surname))
             errors["Surname"] = s["SupportRequestForm.PleaseEnterSurname"];
-        else if (input.Surname.Trim().Length > NameMax)
+        else if (TextInput.Length(input.Surname.Trim()) > NameMax)
             errors["Surname"] = TooLong(s, NameMax);
 
         if (string.IsNullOrWhiteSpace(input.Phone))
@@ -67,7 +77,7 @@ public static class SupportRequestValidator
 
         if (string.IsNullOrWhiteSpace(input.Area))
             errors["Area"] = s["SupportRequestForm.PleaseTellUsArea"];
-        else if (input.Area.Trim().Length > AreaMax)
+        else if (TextInput.Length(input.Area.Trim()) > AreaMax)
             errors["Area"] = TooLong(s, AreaMax);
 
         if (!ContactMethods.Contains(input.ContactMethod))
@@ -80,13 +90,13 @@ public static class SupportRequestValidator
 
         if (string.IsNullOrWhiteSpace(input.Situation))
             errors["Situation"] = s["SupportRequestForm.PleaseTellUsLittle"];
-        else if (input.Situation.Trim().Length > SituationMax)
+        else if (TextInput.Length(input.Situation.Trim()) > SituationMax)
             errors["Situation"] = TooLong(s, SituationMax);
 
         if (!UrgentValues.Contains(input.Urgent))
             errors["Urgent"] = s["SupportRequestForm.PleaseTellUsWhether"];
 
-        if ((input.Extra?.Trim().Length ?? 0) > ExtraMax)
+        if (TextInput.Length(input.Extra?.Trim() ?? "") > ExtraMax)
             errors["Extra"] = TooLong(s, ExtraMax);
 
         if (!input.Declaration)

@@ -68,11 +68,18 @@ public static class ApiProblem
         var status = response.StatusCode;
 
         response.StatusCode = status;
+
+        // A 400 with no body of its own means the body couldn't be read at all: broken JSON, the
+        // wrong shape, or a field of the wrong type. Say so, so the caller knows what to fix (G7).
+        var request = context.HttpContext.Request;
+        var unreadableBody = status == StatusCodes.Status400BadRequest && (HttpMethods.IsPost(request.Method) || HttpMethods.IsPatch(request.Method));
+
         await response.WriteAsJsonAsync(new ProblemDetails
         {
             Status = status,
-            Title = TitleFor(status),
-            Instance = context.HttpContext.Request.Path
+            Title = unreadableBody ? "The request body could not be read." : TitleFor(status),
+            Detail = unreadableBody ? "Send a JSON object with the documented fields and types (see /openapi/v1.json); for example, \"declaration\" is true or false." : null,
+            Instance = request.Path
         }, options: null, contentType: "application/problem+json", context.HttpContext.RequestAborted);
     }
 
