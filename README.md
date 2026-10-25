@@ -150,6 +150,8 @@ If something is missing or wrong, the form comes back with what they typed still
 
 ## 6. System Architecture
 
+A fuller diagram, with trust boundaries and the request and staff sign-in flows, is in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  BROWSER                                                     │
@@ -306,6 +308,8 @@ Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists
 ---
 
 ## 9. Security and Privacy
+
+Who could misuse the information on this site, what stops each of them, and the risks still open are set out in the [threat model](docs/THREAT_MODEL.md).
 
 | Area | Measure |
 |------|---------|
