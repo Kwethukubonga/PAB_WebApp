@@ -483,6 +483,8 @@ The website is hosted on **Render** (free plan), built from the project's `Docke
 | **Build and test** | Restores, builds and runs every unit and integration test, keeps the results as a download, and builds the Docker image Render will use |
 | **Deploy to Render** | Only on `main`, and only after the job above passes: asks Render to deploy that exact commit through its deploy hook, then checks the live `/health` |
 
+`.github/workflows/lighthouse.yml` runs on every pull request into `develop` or `main`. It starts the site with production settings and runs Lighthouse three times on the main public pages (Home, About, Programmes, Resources, Request Support, Contact, Privacy). The PR fails if a page's median **Performance** score is below **80** or **Accessibility** below **90**; Best Practices and SEO are reported as warnings. The scores are posted as a comment on the PR and on the run's summary page, with the full reports as a download. The minimums are in `lighthouserc.json`.
+
 To turn the deploy on, add one repository secret under **Settings → Secrets and variables → Actions**:
 - `RENDER_DEPLOY_HOOK`: the service's deploy hook, from Render under **Settings → Deploy Hook**. Treat it like a password: anyone who has it can start a deploy.
 
