@@ -130,10 +130,15 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
     public async Task RequestSupport_RefusesAPostWithoutTheFormToken()
     {
         var form = ValidRequest("not-a-real-token");
+        form["FirstName"] = "NoToken";
 
         var response = await _site.CreateBrowser().PostAsync("/RequestSupport", new FormUrlEncodedContent(form));
 
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        // Refused all the same: nothing is saved. The form comes back with a message and what was
+        // typed, rather than an error page (G7).
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Contains("open for a while", await response.Content.ReadAsStringAsync());
+        Assert.False(_site.WithDb(db => db.SupportRequests.Any(r => r.FirstName == "NoToken")));
     }
 
     [Fact]

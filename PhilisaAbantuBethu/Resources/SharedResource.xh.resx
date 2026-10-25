@@ -885,4 +885,10 @@
   <data name="Staff.Details.ConfirmCloseCancel" xml:space="preserve">
     <value>Rhoxisa</value>
   </data>
+  <data name="Forms.ExpiredSendAgain" xml:space="preserve">
+    <value>Le fomu ibivulekile ixesha elide, ngoko ayithunyelwanga. Yonke into oyibhalileyo isekhona: nceda uyijonge uze uyithumele kwakhona.</value>
+  </data>
+  <data name="Forms.UnreadableTypeAgain" xml:space="preserve">
+    <value>Enye into kwinto oyibhalileyo ayikwazanga ukufundwa, ngokufuthi luphawu olungabonakaliyo oluvela ekukhupheleni nasekuncamatheliseni, ngoko ayithunyelwanga. Nceda uyibhale kwakhona, okanye usifowunele.</value>
+  </data>
 </root>

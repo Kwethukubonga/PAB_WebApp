@@ -885,4 +885,10 @@
   <data name="Staff.Details.ConfirmCloseCancel" xml:space="preserve">
     <value>Kanselleer</value>
   </data>
+  <data name="Forms.ExpiredSendAgain" xml:space="preserve">
+    <value>Hierdie vorm was &apos;n ruk oop, so dit is nie gestuur nie. Alles wat jy getik het, is nog hier: kyk asseblief daarna en stuur dit weer.</value>
+  </data>
+  <data name="Forms.UnreadableTypeAgain" xml:space="preserve">
+    <value>Iets in wat jy getik het, kon nie gelees word nie, dikwels &apos;n onsigbare karakter van kopieer en plak, so dit is nie gestuur nie. Tik dit asseblief weer in, of bel ons.</value>
+  </data>
 </root>
