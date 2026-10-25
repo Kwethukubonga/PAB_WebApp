@@ -34,17 +34,10 @@ public static partial class PhoneNumber
     public static bool IsValid(string? input)
     {
         if (string.IsNullOrWhiteSpace(input)) return false;
-        var compact = string.Concat(input.Where(c => !char.IsWhiteSpace(c) && c != '-' && c != '(' && c != ')'));
+        var compact = Compact(input);
 
-        string local;
-        if (compact.StartsWith("+27"))
-        {
-            // Also accepts the written form +27 (0)82 123 4567, which the site itself uses.
-            var rest = compact[3..];
-            local = rest.StartsWith('0') ? rest : "0" + rest;
-        }
-        else if (compact.StartsWith('0')) local = compact;
-        else return International().IsMatch(compact);
+        var local = SouthAfricanLocal(compact);
+        if (local is null) return International().IsMatch(compact);
 
         if (!LocalShape().IsMatch(local)) return false;
         if (!MobileCodes.Contains(local.Substring(1, 2))) return false;
@@ -53,7 +46,32 @@ public static partial class PhoneNumber
         return local[3..].Distinct().Count() > 1;
     }
 
-    /// <summary>Trims it and keeps single spaces, so it is stored the way it reads.</summary>
-    public static string Tidy(string? input) =>
-        string.Join(' ', (input ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries));
+    /// <summary>
+    /// How a number is stored. A South African cellphone number always reads 082 123 4567, however
+    /// it was typed (+27 82..., 082-123-4567, (082) 123 4567), so staff see one format (G7). Any
+    /// other number is trimmed and keeps single spaces, the way it was written.
+    /// </summary>
+    public static string Tidy(string? input)
+    {
+        var spaced = string.Join(' ', (input ?? "").Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        if (!IsValid(spaced)) return spaced;
+
+        var local = SouthAfricanLocal(Compact(spaced));
+        return local is null ? spaced : $"{local[..3]} {local[3..6]} {local[6..]}";
+    }
+
+    private static string Compact(string input) =>
+        string.Concat(input.Where(c => !char.IsWhiteSpace(c) && c != '-' && c != '(' && c != ')'));
+
+    /// <summary>The number in its 0XX form when it is South African, otherwise null.</summary>
+    private static string? SouthAfricanLocal(string compact)
+    {
+        if (compact.StartsWith("+27"))
+        {
+            // Also accepts the written form +27 (0)82 123 4567, which the site itself uses.
+            var rest = compact[3..];
+            return rest.StartsWith('0') ? rest : "0" + rest;
+        }
+        return compact.StartsWith('0') ? compact : null;
+    }
 }

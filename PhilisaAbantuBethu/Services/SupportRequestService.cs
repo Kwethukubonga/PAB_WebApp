@@ -28,6 +28,17 @@ public class SupportRequestService : ISupportRequestService
     // A clash is roughly one in a hundred million, so a few tries is plenty.
     private const int MaxReferenceAttempts = 5;
 
+    /// <summary>
+    /// The same request sent again within this time is treated as the one already saved: a double
+    /// tap, the Back button followed by Submit, or a phone retrying on a weak signal (G7).
+    /// </summary>
+    internal static readonly TimeSpan DuplicateWindow = TimeSpan.FromMinutes(10);
+
+    // One submission at a time, so two copies arriving together can't both pass the duplicate
+    // check. Requests are rare enough that the wait is never noticed. This holds within one
+    // running copy of the site, which is how it is hosted.
+    private static readonly SemaphoreSlim SubmitLock = new(1, 1);
+
     private readonly AppDbContext _db;
     private readonly IReferenceGenerator _references;
     private readonly IStaffAlerts _alerts;
@@ -59,6 +70,49 @@ public class SupportRequestService : ISupportRequestService
             SubmittedAt = DateTime.UtcNow,
             Status = SupportRequestStatus.New
         };
+
+        await SubmitLock.WaitAsync(ct);
+        try
+        {
+            var earlier = await SameRequestRecentlyAsync(request, ct);
+            if (earlier is not null)
+            {
+                // The person gets the reference they were already given; PAB isn't emailed twice.
+                _log.LogInformation("Support request {Id} sent again; kept the first copy", earlier.Id);
+                return earlier.Reference;
+            }
+            return await SaveAsync(request, ct);
+        }
+        finally
+        {
+            SubmitLock.Release();
+        }
+    }
+
+    /// <summary>
+    /// A request saved in the last few minutes with the same details, or null. The situation is
+    /// encrypted in the database, so the likely matches are narrowed by name, phone and type there,
+    /// and the text itself is compared here, once it has been decrypted.
+    /// </summary>
+    private async Task<SupportRequest?> SameRequestRecentlyAsync(SupportRequest request, CancellationToken ct)
+    {
+        var since = request.SubmittedAt - DuplicateWindow;
+        var candidates = await _db.SupportRequests.AsNoTracking()
+            .Where(r => r.SubmittedAt >= since
+                && r.Phone == request.Phone
+                && r.FirstName == request.FirstName
+                && r.Surname == request.Surname
+                && r.SupportType == request.SupportType)
+            .ToListAsync(ct);
+
+        return candidates.FirstOrDefault(r =>
+            r.Situation == request.Situation && r.Extra == request.Extra
+            && r.Urgent == request.Urgent && r.Area == request.Area
+            && r.ContactMethod == request.ContactMethod && r.Email == request.Email);
+    }
+
+    private async Task<string> SaveAsync(SupportRequest request, CancellationToken ct)
+    {
         _db.SupportRequests.Add(request);
 
         for (var attempt = 1; ; attempt++)
