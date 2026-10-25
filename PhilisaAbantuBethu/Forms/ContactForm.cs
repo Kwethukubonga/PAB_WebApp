@@ -4,7 +4,15 @@ using PhilisaAbantuBethu.Services;
 namespace PhilisaAbantuBethu.Forms;
 
 /// <summary>What someone typed into the Contact form, before it is checked.</summary>
-public record ContactInput(string? Name, string? Email, string? Phone, string? Subject, string? Message);
+public record ContactInput(string? Name, string? Email, string? Phone, string? Subject, string? Message)
+{
+    /// <summary>The same input with invisible control and direction characters removed (G7).</summary>
+    public ContactInput Cleaned() => this with
+    {
+        Name = TextInput.Clean(Name), Email = TextInput.Clean(Email), Phone = TextInput.Clean(Phone),
+        Subject = TextInput.Clean(Subject), Message = TextInput.Clean(Message)
+    };
+}
 
 /// <summary>Checks a contact message on the server. Messages come back keyed by form field.</summary>
 public static class ContactValidator
@@ -41,7 +49,7 @@ public static class ContactValidator
 
         if (string.IsNullOrWhiteSpace(input.Name))
             errors["Name"] = s["ContactForm.PleaseEnterName"];
-        else if (input.Name.Trim().Length > NameMax)
+        else if (TextInput.Length(input.Name.Trim()) > NameMax)
             errors["Name"] = SupportRequestValidator.TooLong(s, NameMax);
 
         var hasEmail = !string.IsNullOrWhiteSpace(input.Email);
@@ -62,7 +70,7 @@ public static class ContactValidator
 
         if (string.IsNullOrWhiteSpace(input.Message))
             errors["Message"] = s["ContactForm.PleaseWriteMessage"];
-        else if (input.Message.Trim().Length > MessageMax)
+        else if (TextInput.Length(input.Message.Trim()) > MessageMax)
             errors["Message"] = SupportRequestValidator.TooLong(s, MessageMax);
 
         return errors;

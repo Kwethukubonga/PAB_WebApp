@@ -31,10 +31,10 @@ public static class ContactEndpoints
         HttpContext http,
         CancellationToken ct)
     {
-        var errors = ContactValidator.Validate(body.ToInput(), http.Strings());
+        var errors = ContactValidator.Validate(body.ToInput().Cleaned(), http.Strings());
         if (errors.Count > 0) return ApiProblem.Validation(errors);
 
-        await contact.SubmitAsync(body.ToInput(), ct);
+        await contact.SubmitAsync(body.ToInput().Cleaned(), ct);
         return TypedResults.NoContent();
     }
 }
