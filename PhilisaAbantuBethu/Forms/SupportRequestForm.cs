@@ -61,11 +61,15 @@ public static class SupportRequestValidator
             errors["FirstName"] = s["SupportRequestForm.PleaseEnterFirstName"];
         else if (TextInput.Length(input.FirstName.Trim()) > NameMax)
             errors["FirstName"] = TooLong(s, NameMax);
+        else if (!HasLetter(input.FirstName))
+            errors["FirstName"] = NeedsLetter(s);
 
         if (string.IsNullOrWhiteSpace(input.Surname))
             errors["Surname"] = s["SupportRequestForm.PleaseEnterSurname"];
         else if (TextInput.Length(input.Surname.Trim()) > NameMax)
             errors["Surname"] = TooLong(s, NameMax);
+        else if (!HasLetter(input.Surname))
+            errors["Surname"] = NeedsLetter(s);
 
         if (string.IsNullOrWhiteSpace(input.Phone))
             errors["Phone"] = s["SupportRequestForm.PleaseEnterPhoneNumber"];
@@ -113,6 +117,14 @@ public static class SupportRequestValidator
             && new EmailAddressAttribute().IsValid(email)
             && email[(email.LastIndexOf('@') + 1)..].Contains('.');
     }
+
+    /// <summary>
+    /// A name needs at least one letter, in any alphabet, so "12345" or "!!!" is sent back (#27).
+    /// Nothing else is checked: names can hold apostrophes, hyphens, spaces and accents.
+    /// </summary>
+    internal static bool HasLetter(string value) => value.Any(char.IsLetter);
+
+    internal static string NeedsLetter(SiteStrings s) => s["SupportRequestForm.NameNeedsLetter"];
 
     internal static string TooLong(SiteStrings s, int max) => s.Format("SupportRequestForm.PleaseKeepUnderCharacters", max);
 

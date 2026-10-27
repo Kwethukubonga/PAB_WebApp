@@ -85,4 +85,33 @@ public class FormValidatorTests
     [Fact]
     public void Contact_RefusesAnInventedSubject() =>
         Assert.Contains("Subject", ContactValidator.Validate(new ContactInput("Nomsa", "nomsa@example.com", "", "Win a prize", "Hello"), SiteStrings.En).Keys);
+
+    // A name needs a letter, in any alphabet, but nothing more (#27).
+    [Theory]
+    [InlineData("12345")]
+    [InlineData("!!!")]
+    [InlineData("-")]
+    public void SupportRequest_RefusesANameWithNoLetters(string name)
+    {
+        var errors = SupportRequestValidator.Validate(ValidRequest() with { FirstName = name, Surname = name }, SiteStrings.En);
+
+        Assert.Equal("Please write your name using letters.", errors["FirstName"]);
+        Assert.Contains("Surname", errors.Keys);
+    }
+
+    [Theory]
+    [InlineData("O'Brien")]
+    [InlineData("Mary-Jane")]
+    [InlineData("Zoë")]
+    [InlineData("Nomsa 2")]
+    public void SupportRequest_AcceptsRealNames(string name) =>
+        Assert.Empty(SupportRequestValidator.Validate(ValidRequest() with { FirstName = name, Surname = name }, SiteStrings.En));
+
+    [Fact]
+    public void Contact_RefusesANameWithNoLetters() =>
+        Assert.Contains("Name", ContactValidator.Validate(new ContactInput("12345", "nomsa@example.com", "", "Volunteering", "Hello"), SiteStrings.En).Keys);
+
+    [Fact]
+    public void SupportRequest_AcceptsALandline() =>
+        Assert.Empty(SupportRequestValidator.Validate(ValidRequest() with { Phone = "021 123 4567" }, SiteStrings.En));
 }

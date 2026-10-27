@@ -472,7 +472,7 @@
     <value>Kontroleer asseblief die e-posadres.</value>
   </data>
   <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
-    <value>Vul 'n Suid-Afrikaanse selfoonnommer in, soos 082 123 4567, of 'n internasionale nommer wat met + begin.</value>
+    <value>Vul 'n Suid-Afrikaanse telefoonnommer in, soos 082 123 4567 of 021 123 4567, of 'n internasionale nommer wat met + begin.</value>
   </data>
   <data name="ContactForm.PleaseEnterName" xml:space="preserve">
     <value>Vul asseblief jou naam in.</value>
@@ -577,7 +577,7 @@
     <value>E-pos</value>
   </data>
   <data name="Staff.Details.ContactBy" xml:space="preserve">
-    <value>Kontak per</value>
+    <value>Kontakmetode</value>
   </data>
   <data name="Staff.Details.SupportType" xml:space="preserve">
     <value>Tipe ondersteuning</value>
@@ -953,5 +953,23 @@
   </data>
   <data name="Privacy.QuestionsBody" xml:space="preserve">
     <value>Ons verduidelik graag enige hiervan voordat jy uitreik.</value>
+  </data>
+  <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
+    <value>Skryf asseblief jou naam met letters.</value>
+  </data>
+  <data name="RequestSupport.ContactBy" xml:space="preserve">
+    <value>Kontakmetode</value>
+  </data>
+  <data name="RequestSupport.Email" xml:space="preserve">
+    <value>E-pos</value>
+  </data>
+  <data name="RequestSupport.Situation" xml:space="preserve">
+    <value>Jou situasie</value>
+  </data>
+  <data name="Staff.Details.UnknownStatus" xml:space="preserve">
+    <value>Daardie status is nie Nuut, Aan die gang of Gesluit nie, so niks is verander nie.</value>
+  </data>
+  <data name="Layout.LeaveShort" xml:space="preserve">
+    <value>Verlaat</value>
   </data>
 </root>

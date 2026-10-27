@@ -51,6 +51,8 @@ public static class ContactValidator
             errors["Name"] = s["ContactForm.PleaseEnterName"];
         else if (TextInput.Length(input.Name.Trim()) > NameMax)
             errors["Name"] = SupportRequestValidator.TooLong(s, NameMax);
+        else if (!SupportRequestValidator.HasLetter(input.Name))
+            errors["Name"] = SupportRequestValidator.NeedsLetter(s);
 
         var hasEmail = !string.IsNullOrWhiteSpace(input.Email);
         var hasPhone = !string.IsNullOrWhiteSpace(input.Phone);

@@ -472,7 +472,7 @@
     <value>Please check the email address.</value>
   </data>
   <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
-    <value>Enter a South African cellphone number, like 082 123 4567, or an international number starting with +.</value>
+    <value>Enter a South African phone number, like 082 123 4567 or 021 123 4567, or an international number starting with +.</value>
   </data>
   <data name="ContactForm.PleaseEnterName" xml:space="preserve">
     <value>Please enter your name.</value>
@@ -953,5 +953,23 @@
   </data>
   <data name="Privacy.QuestionsBody" xml:space="preserve">
     <value>We're happy to talk you through any of this before you reach out.</value>
+  </data>
+  <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
+    <value>Please write your name using letters.</value>
+  </data>
+  <data name="RequestSupport.ContactBy" xml:space="preserve">
+    <value>Contact by</value>
+  </data>
+  <data name="RequestSupport.Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="RequestSupport.Situation" xml:space="preserve">
+    <value>Your situation</value>
+  </data>
+  <data name="Staff.Details.UnknownStatus" xml:space="preserve">
+    <value>That status is not one of New, In progress or Closed, so nothing was changed.</value>
+  </data>
+  <data name="Layout.LeaveShort" xml:space="preserve">
+    <value>Leave</value>
   </data>
 </root>
