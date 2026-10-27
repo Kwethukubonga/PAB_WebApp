@@ -7,7 +7,7 @@
 
     var reference = Model.Reference;
 
-    var today = DateTime.Now.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("en-ZA"));
+    var today = Model.SubmittedOn;
 
     var keepRefNote = s.Lang switch
     {

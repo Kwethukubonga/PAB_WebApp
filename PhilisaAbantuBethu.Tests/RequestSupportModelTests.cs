@@ -116,3 +116,25 @@ public class RequestSupportModelTests
         Assert.NotNull(model.FormError);
     }
 }
+
+/// <summary>The date on the confirmation page (#27).</summary>
+public class ConfirmationDateTests
+{
+    [Fact]
+    public void JustAfterMidnight_InSouthAfrica_ShowsTodayNotYesterday()
+    {
+        // 23:30 UTC on 26 October is 01:30 on 27 October in South Africa.
+        var utc = new DateTime(2026, 10, 26, 23, 30, 0, DateTimeKind.Utc);
+
+        Assert.Equal("27 October 2026", ConfirmationModel.DateFor(utc, "en"));
+    }
+
+    [Fact]
+    public void TheMonth_IsInTheChosenLanguage()
+    {
+        var utc = new DateTime(2026, 10, 27, 9, 0, 0, DateTimeKind.Utc);
+
+        Assert.Equal("27 Oktober 2026", ConfirmationModel.DateFor(utc, "af"));
+        Assert.DoesNotContain("October", ConfirmationModel.DateFor(utc, "xh"));
+    }
+}

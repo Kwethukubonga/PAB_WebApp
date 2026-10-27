@@ -111,4 +111,52 @@ public class StaffCloseTests : IClassFixture<SiteFactory>
         Assert.Contains(question, html);
         Assert.Contains(yes, html);
     }
+
+    // A made-up status gets a message, not the "not found" page (#27).
+    [Fact]
+    public async Task AnUnknownStatus_GetsAMessage_AndChangesNothing()
+    {
+        var id = AddRequest("PAB-CLOSE4");
+        var browser = await SignedInAsync();
+
+        var response = await MoveAsync(browser, id, "deleted", "");
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+
+        var page = await browser.GetStringAsync(response.Headers.Location!.OriginalString);
+        Assert.Contains("nothing was changed", page);
+        Assert.Equal(SupportRequestStatus.New, Saved(id).Status);
+    }
+
+    // Notes over the limit come back with what was typed, instead of being thrown away (#27).
+    [Fact]
+    public async Task TooLongNotes_ComeBackAsTyped_AndChangeNothing()
+    {
+        var id = AddRequest("PAB-CLOSE5");
+        var browser = await SignedInAsync();
+        var notes = "Spoke to her twice. " + new string('x', 2000);
+
+        var response = await MoveAsync(browser, id, SupportRequestStatus.InProgress, notes);
+        var html = await response.Content.ReadAsStringAsync();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Contains("Spoke to her twice. xxxx", html);
+        Assert.Contains("staff-notes-error", html);
+        var saved = Saved(id);
+        Assert.Equal(SupportRequestStatus.New, saved.Status);
+        Assert.Null(saved.StaffNotes);
+    }
+
+    // Counted the way the database counts: 2000 emoji are 2000 characters, not 4000 (G7, #27).
+    [Fact]
+    public async Task NotesAreCountedAsCharacters_NotCodeUnits()
+    {
+        var id = AddRequest("PAB-CLOSE6");
+        var browser = await SignedInAsync();
+        var notes = string.Concat(Enumerable.Repeat("😊", 1500));
+
+        var response = await MoveAsync(browser, id, SupportRequestStatus.InProgress, notes);
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Equal(notes, Saved(id).StaffNotes);
+    }
 }

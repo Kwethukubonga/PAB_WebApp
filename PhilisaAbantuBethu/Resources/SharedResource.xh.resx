@@ -472,7 +472,7 @@
     <value>Nceda ujonge idilesi ye-imeyile.</value>
   </data>
   <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
-    <value>Faka inombolo yeselfowuni yaseMzantsi Afrika, efana no-082 123 4567, okanye inombolo yamanye amazwe eqala ngo-+.</value>
+    <value>Faka inombolo yefowuni yaseMzantsi Afrika, efana no-082 123 4567 okanye 021 123 4567, okanye inombolo yamanye amazwe eqala ngo-+.</value>
   </data>
   <data name="ContactForm.PleaseEnterName" xml:space="preserve">
     <value>Nceda ubhale igama lakho.</value>
@@ -577,7 +577,7 @@
     <value>I-imeyile</value>
   </data>
   <data name="Staff.Details.ContactBy" xml:space="preserve">
-    <value>Qhagamshelana nge</value>
+    <value>Indlela yoqhagamshelwano</value>
   </data>
   <data name="Staff.Details.SupportType" xml:space="preserve">
     <value>Uhlobo lwenkxaso</value>
@@ -953,5 +953,23 @@
   </data>
   <data name="Privacy.QuestionsBody" xml:space="preserve">
     <value>Siyavuya ukukuchazela nantoni na kwezi ngaphambi kokuba uqhagamshelane nathi.</value>
+  </data>
+  <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
+    <value>Nceda ubhale igama lakho usebenzisa oonobumba.</value>
+  </data>
+  <data name="RequestSupport.ContactBy" xml:space="preserve">
+    <value>Indlela yoqhagamshelwano</value>
+  </data>
+  <data name="RequestSupport.Email" xml:space="preserve">
+    <value>I-imeyile</value>
+  </data>
+  <data name="RequestSupport.Situation" xml:space="preserve">
+    <value>Imeko yakho</value>
+  </data>
+  <data name="Staff.Details.UnknownStatus" xml:space="preserve">
+    <value>Elo nqanaba asilolinye kwala: Entsha, Iyaqhubeka okanye Ivaliwe, ngoko akukho nto itshintshiweyo.</value>
+  </data>
+  <data name="Layout.LeaveShort" xml:space="preserve">
+    <value>Phuma</value>
   </data>
 </root>

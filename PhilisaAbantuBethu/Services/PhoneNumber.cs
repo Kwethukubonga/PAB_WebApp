@@ -7,10 +7,12 @@ namespace PhilisaAbantuBethu.Services;
 /// same rules as the Philisa Volunteers Android app (utils/PhoneNumber.kt). The website also
 /// allows the dashes, brackets and "+27 (0)" that people type when the keyboard doesn't stop them.
 ///
-/// A South African cellphone number is 10 digits: 0, a two digit network code, then seven digits,
-/// for example 082 123 4567, or +27 82 123 4567. Only codes given to the cellphone networks pass,
-/// because PAB needs a number it can call, SMS or WhatsApp. People from abroad can use an
-/// international number starting with + and their country code.
+/// A South African number is 10 digits: 0, a two digit code, then seven digits, for example
+/// 082 123 4567, or +27 82 123 4567. Cellphone codes pass, and so do landlines (021 for Cape Town
+/// and the other area codes starting 01 to 05): someone with only a landline must still be able to
+/// ask for help, and PAB can phone them back (#27). Toll-free and share-call numbers (0800, 0861)
+/// don't, since nobody answers them. People from abroad can use an international number starting
+/// with + (or 00) and their country code.
 /// </summary>
 public static partial class PhoneNumber
 {
@@ -28,6 +30,10 @@ public static partial class PhoneNumber
     [GeneratedRegex(@"^0\d{9}$")]
     private static partial Regex LocalShape();
 
+    // Geographic (landline) numbers: area codes 01x to 05x, such as 021 Cape Town or 011 Johannesburg.
+    [GeneratedRegex(@"^0[1-5]")]
+    private static partial Regex Landline();
+
     [GeneratedRegex(@"^\+[1-9]\d{7,14}$")]
     private static partial Regex International();
 
@@ -40,7 +46,7 @@ public static partial class PhoneNumber
         if (local is null) return International().IsMatch(compact);
 
         if (!LocalShape().IsMatch(local)) return false;
-        if (!MobileCodes.Contains(local.Substring(1, 2))) return false;
+        if (!MobileCodes.Contains(local.Substring(1, 2)) && !Landline().IsMatch(local)) return false;
 
         // The right shape, but plainly made up, like 082 222 2222.
         return local[3..].Distinct().Count() > 1;
@@ -60,8 +66,17 @@ public static partial class PhoneNumber
         return local is null ? spaced : $"{local[..3]} {local[3..6]} {local[6..]}";
     }
 
-    private static string Compact(string input) =>
-        string.Concat(input.Where(c => !char.IsWhiteSpace(c) && c != '-' && c != '(' && c != ')'));
+    // Spaces, dashes, brackets and dots (082.123.4567) are how people group the digits.
+    private static string Compact(string input)
+    {
+        var compact = string.Concat(input.Where(c => !char.IsWhiteSpace(c) && c != '-' && c != '(' && c != ')' && c != '.'));
+
+        // 00 is how an international number is dialled from a landline: 0027 82... is +27 82...
+        if (compact.StartsWith("00")) return "+" + compact[2..];
+        // 27 82 123 4567 without the plus, the way people copy it from WhatsApp.
+        if (compact.Length == 11 && compact.StartsWith("27") && compact.All(char.IsDigit)) return "+" + compact;
+        return compact;
+    }
 
     /// <summary>The number in its 0XX form when it is South African, otherwise null.</summary>
     private static string? SouthAfricanLocal(string compact)

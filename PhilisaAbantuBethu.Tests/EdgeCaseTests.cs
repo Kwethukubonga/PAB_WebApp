@@ -33,7 +33,9 @@ public class TextInputTests
     [Fact]
     public void FortyEmoji_FitAName()
     {
-        var input = Valid() with { FirstName = string.Concat(Enumerable.Repeat("\U0001F600", 40)) };
+        // Each emoji counts as one character: 5 letters and 40 emoji are 45, under the 60 limit,
+        // though .Length says 85. The letters are there because a name needs one (#27).
+        var input = Valid() with { FirstName = "Nomsa" + string.Concat(Enumerable.Repeat("\U0001F600", 40)) };
 
         Assert.DoesNotContain("FirstName", SupportRequestValidator.Validate(input, SiteStrings.En).Keys);
     }

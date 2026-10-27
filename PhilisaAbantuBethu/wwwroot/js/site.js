@@ -150,18 +150,29 @@
     /* ---------------------------------------------------------------
        Quick exit (Pages/Shared/_Layout.cshtml). Someone may need to leave
        this site at once if the person hurting them walks in. The button,
-       or Esc twice, swaps the page for a neutral one; replace() means the
-       Back button doesn't return here.
+       or Esc twice, opens a neutral page in a new tab, which has no history
+       of this site at all, and swaps this tab for the same page.
+
+       A page can't wipe the tab's history: replace() only swaps the current
+       page, so Back in this tab can still reach the page before it (#27).
+       The new tab is the one in front, so that is what someone sees and
+       what Back works on.
     --------------------------------------------------------------- */
-    var quickExit = document.querySelector('[data-quick-exit]');
-    if (quickExit) {
+    // Two buttons: one in the header on phones, one in the corner on bigger screens.
+    var quickExits = Array.prototype.slice.call(document.querySelectorAll('[data-quick-exit]'));
+    if (quickExits.length) {
         var leave = function () {
-            window.location.replace(quickExit.getAttribute('href'));
+            var neutral = quickExits[0].getAttribute('href');
+            // A pop-up blocker may refuse the new tab; this tab still leaves.
+            window.open(neutral, '_blank', 'noopener');
+            window.location.replace(neutral);
         };
 
-        quickExit.addEventListener('click', function (e) {
-            e.preventDefault();
-            leave();
+        quickExits.forEach(function (button) {
+            button.addEventListener('click', function (e) {
+                e.preventDefault();
+                leave();
+            });
         });
 
         // Twice, so an Esc meant for a dropdown doesn't throw away a half-written request.

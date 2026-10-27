@@ -86,6 +86,11 @@
                 var yesLabel = stepForm.dataset.yesLabel || 'Yes';
                 var noLabel = stepForm.dataset.noLabel || 'No';
                 value = checked && checked.value === 'yes' ? yesLabel : noLabel;
+            } else if (name === 'ContactMethod') {
+                // The words on the chosen option, in the page's language, not the stored value.
+                var method = stepForm.querySelector('[name="ContactMethod"]:checked');
+                var label = method && method.closest('label');
+                value = label ? label.textContent.trim() : '';
             } else if (field) {
                 value = field.value;
             }

@@ -79,8 +79,13 @@
             </p>
             <textarea id="staff-notes" name="StaffNotes" rows="3"
                       maxlength="@PhilisaAbantuBethu.Forms.SupportRequestValidator.StaffNotesMax"
-                      aria-describedby="staff-notes-hint"
-                      class="mt-2 w-full rounded-xl border border-ink-300 px-4 py-3 text-ink-900 focus:border-brand-700 focus:ring-2 focus:ring-brand-100">@(Model.ConfirmingClose ? Model.StaffNotes : r.StaffNotes)</textarea>
+                      aria-describedby="@(Model.NotesError is null ? "staff-notes-hint" : "staff-notes-hint staff-notes-error")"
+                      aria-invalid="@(Model.NotesError is null ? "false" : "true")"
+                      class="mt-2 w-full rounded-xl border border-ink-300 px-4 py-3 text-ink-900 focus:border-brand-700 focus:ring-2 focus:ring-brand-100">@(Model.KeepTypedNotes ? Model.StaffNotes : r.StaffNotes)</textarea>
+            @if (Model.NotesError is string notesError)
+            {
+                <p id="staff-notes-error" class="mt-2 text-sm font-semibold text-status-urgent" role="alert">@notesError</p>
+            }
 
             @if (Model.ConfirmingClose)
             {
