@@ -116,11 +116,13 @@
         }
     }
 
-    nextBtn.addEventListener('click', function () {
+    function goNext() {
         if (!validateStep()) return;
         current = Math.min(total, current + 1);
         showStep();
-    });
+    }
+
+    nextBtn.addEventListener('click', goNext);
 
     backBtn.addEventListener('click', function () {
         current = Math.max(1, current - 1);
@@ -129,6 +131,10 @@
 
     // One request per press: the button locks and shows that it is sending.
     stepForm.addEventListener('submit', function (e) {
+        // Pressing Enter in a field sends the form even while the Submit button is hidden. Before
+        // the last step that would send questions the person hasn't seen yet, show them errors,
+        // and use up one of their few sends, so Enter does what Next does instead (issue #23).
+        if (current < total) { e.preventDefault(); goNext(); return; }
         if (submitBtn.disabled) { e.preventDefault(); return; }
         submitBtn.disabled = true;
         submitBtn.setAttribute('aria-busy', 'true');

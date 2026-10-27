@@ -14,6 +14,7 @@ namespace PhilisaAbantuBethu.Pages;
 // The token is still checked on every post, but in OnPostAsync rather than by the framework, so an
 // expired form comes back with what was typed instead of turning into an error page (G7).
 [IgnoreAntiforgeryToken]
+[Security.LimitFormSends]
 public class RequestSupportModel : PageModel
 {
 
@@ -89,9 +90,12 @@ public class RequestSupportModel : PageModel
 
         var reference = await _requests.SubmitAsync(input, HttpContext.RequestAborted);
 
-        // "by" lets the confirmation page say back how PAB will reach them (G6). It is the
-        // choice they just made, not anything identifying.
-        return RedirectToPage("/Confirmation", new { reference, by = ContactMethod });
+        // Passed in TempData rather than the address, so only a request that was really saved
+        // shows the confirmation (issue #24). The contact method lets that page say back how PAB
+        // will reach them (G6).
+        TempData[ConfirmationModel.ReferenceKey] = reference;
+        TempData[ConfirmationModel.ContactMethodKey] = ContactMethod;
+        return RedirectToPage("/Confirmation");
 
     }
 
