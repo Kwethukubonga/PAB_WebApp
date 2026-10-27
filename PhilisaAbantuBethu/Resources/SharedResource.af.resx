@@ -891,4 +891,67 @@
   <data name="Forms.UnreadableTypeAgain" xml:space="preserve">
     <value>Iets in wat jy getik het, kon nie gelees word nie, dikwels &apos;n onsigbare karakter van kopieer en plak, so dit is nie gestuur nie. Tik dit asseblief weer in, of bel ons.</value>
   </data>
+  <data name="Privacy.Title" xml:space="preserve">
+    <value>Privaatheidsbeleid</value>
+  </data>
+  <data name="Privacy.Eyebrow" xml:space="preserve">
+    <value>Jou Inligting, Beskerm</value>
+  </data>
+  <data name="Privacy.Intro" xml:space="preserve">
+    <value>Hoe Philisa Abafazi Bethu die inligting wat jy met ons deel, insamel, gebruik en beskerm.</value>
+  </data>
+  <data name="Privacy.WhyTitle" xml:space="preserve">
+    <value>Hoekom dit vir ons saak maak</value>
+  </data>
+  <data name="Privacy.WhyBody" xml:space="preserve">
+    <value>Om hulp te vra kan reeds moeilik voel. Ons wil nooit hê dat bekommernis oor jou privaatheid nog 'n struikelblok moet wees nie. Hierdie bladsy verduidelik in eenvoudige taal watter inligting ons deur hierdie webwerf vra, hoekom ons dit vra, en wat daarna daarmee gebeur. Ons hanteer jou inligting in ooreenstemming met Suid-Afrika se Wet op die Beskerming van Persoonlike Inligting (POPIA).</value>
+  </data>
+  <data name="Privacy.CollectTitle" xml:space="preserve">
+    <value>Wat ons insamel</value>
+  </data>
+  <data name="Privacy.CollectIntro" xml:space="preserve">
+    <value>Ons vra net vir wat ons nodig het om jou te verstaan en te antwoord:</value>
+  </data>
+  <data name="Privacy.CollectSupportLabel" xml:space="preserve">
+    <value>Wanneer jy om ondersteuning vra:</value>
+  </data>
+  <data name="Privacy.CollectSupport" xml:space="preserve">
+    <value>jou naam, telefoonnommer, e-posadres (as jy dit wil deel), area, hoe jy verkies om gekontak te word, die soort ondersteuning wat jy nodig het, en 'n beskrywing van jou situasie.</value>
+  </data>
+  <data name="Privacy.CollectContactLabel" xml:space="preserve">
+    <value>Wanneer jy ons kontak:</value>
+  </data>
+  <data name="Privacy.CollectContact" xml:space="preserve">
+    <value>jou naam, e-pos, telefoonnommer, die onderwerp van jou boodskap, en die boodskap self.</value>
+  </data>
+  <data name="Privacy.NoAccount" xml:space="preserve">
+    <value>Jy hoef nooit 'n rekening te skep om ondersteuning te vra of met ons in aanraking te kom nie: ons het rekeninge doelbewus van hierdie platform weggelaat, sodat hulp vra nooit soos 'n burokratiese struikelblok voel nie.</value>
+  </data>
+  <data name="Privacy.UseTitle" xml:space="preserve">
+    <value>Hoe ons dit gebruik</value>
+  </data>
+  <data name="Privacy.UseBody" xml:space="preserve">
+    <value>Inligting wat jy stuur, word slegs gebruik om jou versoek te verstaan, jou te kontak op die manier wat jy gekies het, en jou in verbinding te bring met die regte persoon of program in ons span. Situasies wat jy aan ons beskryf, word slegs gelees deur die personeel wat jou antwoord, en word nooit vir bemarking, navorsing of enige ander doel gedeel sonder jou aparte, uitdruklike toestemming nie.</value>
+  </data>
+  <data name="Privacy.ProtectTitle" xml:space="preserve">
+    <value>Hoe ons dit beskerm</value>
+  </data>
+  <data name="Privacy.ProtectBody" xml:space="preserve">
+    <value>Jou inligting word veilig gestoor en is slegs toeganklik vir gemagtigde personeel van Philisa Abafazi Bethu wat dit nodig het om jou te help. Ons hou dit net so lank as wat nodig is om jou by te staan en akkurate rekords van ons werk te hou, en ons verkoop of verruil nooit jou inligting aan enigiemand nie, onder geen omstandighede nie.</value>
+  </data>
+  <data name="Privacy.RightsTitle" xml:space="preserve">
+    <value>Jou regte</value>
+  </data>
+  <data name="Privacy.RightsBody" xml:space="preserve">
+    <value>Onder POPIA het jy die reg om te vra watter inligting ons oor jou hou, om dit te laat regstel as dit verkeerd is, of om ons te vra om dit uit te vee. As jy enige hiervan wil doen, of vrae het oor hoe jou inligting hanteer word, kontak ons by</value>
+  </data>
+  <data name="Privacy.RightsAfter" xml:space="preserve">
+    <value>en ons sal so gou as moontlik antwoord.</value>
+  </data>
+  <data name="Privacy.QuestionsTitle" xml:space="preserve">
+    <value>Het jy nog vrae?</value>
+  </data>
+  <data name="Privacy.QuestionsBody" xml:space="preserve">
+    <value>Ons verduidelik graag enige hiervan voordat jy uitreik.</value>
+  </data>
 </root>

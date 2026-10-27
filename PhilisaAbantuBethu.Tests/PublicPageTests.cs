@@ -56,6 +56,24 @@ public class PublicPageTests : IClassFixture<SiteFactory>
         Assert.Contains(heading, html);
     }
 
+    // The Privacy page was English only (#26). It is where understanding matters most.
+    [Theory]
+    [InlineData("en", "en-ZA", "Privacy Policy")]
+    [InlineData("xh", "xh-ZA", "Umgaqo-nkqubo Wabucala")]
+    [InlineData("af", "af-ZA", "Privaatheidsbeleid")]
+    public async Task The_privacy_page_comes_back_in_the_language_asked_for(string lang, string htmlLang, string heading)
+    {
+        var html = await _site.CreateBrowser().GetStringAsync($"/Privacy?lang={lang}");
+
+        Assert.Contains($"<html lang=\"{htmlLang}\">", html);
+        Assert.Contains(heading, html);
+        if (lang != "en")
+        {
+            Assert.DoesNotContain("What we collect", html);
+            Assert.DoesNotContain("Your rights", html);
+        }
+    }
+
     [Fact]
     public async Task The_chosen_language_is_remembered_for_the_next_page()
     {

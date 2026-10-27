@@ -891,4 +891,67 @@
   <data name="Forms.UnreadableTypeAgain" xml:space="preserve">
     <value>Enye into kwinto oyibhalileyo ayikwazanga ukufundwa, ngokufuthi luphawu olungabonakaliyo oluvela ekukhupheleni nasekuncamatheliseni, ngoko ayithunyelwanga. Nceda uyibhale kwakhona, okanye usifowunele.</value>
   </data>
+  <data name="Privacy.Title" xml:space="preserve">
+    <value>Umgaqo-nkqubo Wabucala</value>
+  </data>
+  <data name="Privacy.Eyebrow" xml:space="preserve">
+    <value>Iinkcukacha Zakho, Zikhuselekile</value>
+  </data>
+  <data name="Privacy.Intro" xml:space="preserve">
+    <value>Indlela i-Philisa Abafazi Bethu eziqokelela ngayo, ezisebenzisa ngayo nezikhusela ngayo iinkcukacha owabelana ngazo nathi.</value>
+  </data>
+  <data name="Privacy.WhyTitle" xml:space="preserve">
+    <value>Kutheni le nto ibalulekile kuthi</value>
+  </data>
+  <data name="Privacy.WhyBody" xml:space="preserve">
+    <value>Ukucela uncedo kunokuba nzima kakade. Asifuni ukuba ukukhathazeka ngobumfihlo bakho kube ngomnye umqobo. Eli phepha licacisa, ngolwimi olulula, ukuba zeziphi iinkcukacha esizicelayo kule webhusayithi, kutheni sizicela, nokuba kwenzeka ntoni kuzo emva koko. Iinkcukacha zakho sizisebenzisa ngokuhambelana noMthetho woKhuselo lweeNkcukacha zoBuqu woMzantsi Afrika (POPIA).</value>
+  </data>
+  <data name="Privacy.CollectTitle" xml:space="preserve">
+    <value>Esikuqokelelayo</value>
+  </data>
+  <data name="Privacy.CollectIntro" xml:space="preserve">
+    <value>Sicela kuphela oko sikudingayo ukuze sikuqonde kwaye sikuphendule:</value>
+  </data>
+  <data name="Privacy.CollectSupportLabel" xml:space="preserve">
+    <value>Xa ucela uncedo:</value>
+  </data>
+  <data name="Privacy.CollectSupport" xml:space="preserve">
+    <value>igama lakho, inombolo yefowuni, idilesi ye-imeyile (ukuba ukhetha ukusinika yona), indawo ohlala kuyo, indlela okhetha ukuqhagamshelwa ngayo, uhlobo loncedo olufunayo, kunye nenkcazelo yemeko yakho.</value>
+  </data>
+  <data name="Privacy.CollectContactLabel" xml:space="preserve">
+    <value>Xa uqhagamshelana nathi:</value>
+  </data>
+  <data name="Privacy.CollectContact" xml:space="preserve">
+    <value>igama lakho, i-imeyile, inombolo yefowuni, umxholo womyalezo wakho, kunye nomyalezo ngokwawo.</value>
+  </data>
+  <data name="Privacy.NoAccount" xml:space="preserve">
+    <value>Akuze kufuneke wenze i-akhawunti ukuze ucele uncedo okanye uqhagamshelane nathi: ngabom asizifakanga ii-akhawunti kule platfom, ukuze ukucela uncedo kungaze kuzive njengomqobo wamaphepha.</value>
+  </data>
+  <data name="Privacy.UseTitle" xml:space="preserve">
+    <value>Indlela esizisebenzisa ngayo</value>
+  </data>
+  <data name="Privacy.UseBody" xml:space="preserve">
+    <value>Iinkcukacha ozithumelayo zisetyenziswa kuphela ukuqonda isicelo sakho, ukuqhagamshelana nawe ngendlela oyikhethileyo, nokukudibanisa nomntu okanye inkqubo efanelekileyo kwiqela lethu. Iimeko osichazela zona zifundwa kuphela ngabasebenzi abakuphendulayo, kwaye azize zabelwane ngazo ngenjongo yentengiso, yophando okanye nayiphi na enye injongo ngaphandle kwemvume yakho eyahlukileyo necacileyo.</value>
+  </data>
+  <data name="Privacy.ProtectTitle" xml:space="preserve">
+    <value>Indlela esizikhusela ngayo</value>
+  </data>
+  <data name="Privacy.ProtectBody" xml:space="preserve">
+    <value>Iinkcukacha zakho zigcinwa ngokukhuselekileyo kwaye zifikeleleka kuphela kubasebenzi abagunyazisiweyo be-Philisa Abafazi Bethu abazidingayo ukuze bakuncede. Sizigcina kuphela ixesha elifunekayo ukuze sikuncede kwaye sigcine iirekhodi ezichanekileyo zomsebenzi wethu, kwaye asizithengisi okanye sizirhwebe kubani na, nangayiphi na imeko.</value>
+  </data>
+  <data name="Privacy.RightsTitle" xml:space="preserve">
+    <value>Amalungelo akho</value>
+  </data>
+  <data name="Privacy.RightsBody" xml:space="preserve">
+    <value>Phantsi kwe-POPIA, unelungelo lokubuza ukuba zeziphi iinkcukacha esinazo ngawe, lokuba zilungiswe ukuba azichanekanga, okanye lokucela ukuba sizicime. Ukuba ungathanda ukwenza nayiphi na kwezi, okanye unemibuzo malunga nendlela iinkcukacha zakho eziphathwa ngayo, qhagamshelana nathi kule dilesi ye-imeyile:</value>
+  </data>
+  <data name="Privacy.RightsAfter" xml:space="preserve">
+    <value>kwaye siya kuphendula ngokukhawuleza kangangoko sinako.</value>
+  </data>
+  <data name="Privacy.QuestionsTitle" xml:space="preserve">
+    <value>Usenemibuzo?</value>
+  </data>
+  <data name="Privacy.QuestionsBody" xml:space="preserve">
+    <value>Siyavuya ukukuchazela nantoni na kwezi ngaphambi kokuba uqhagamshelane nathi.</value>
+  </data>
 </root>

@@ -1,16 +1,19 @@
 @page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Privacy Policy";
+    // Every word comes from the language files, like the other public pages: this is the page
+    // where understanding how information is used matters most (FR09, POPIA, #26).
+    var s = HttpContext.Strings();
+    ViewData["Title"] = s["Privacy.Title"];
 }
 
 <!-- Page hero -->
 <section class="relative py-20 bg-brand-900 overflow-hidden">
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-        <p class="text-on-brand-muted text-sm font-semibold uppercase tracking-widest mb-3">Your Information, Protected</p>
+        <p class="text-on-brand-muted text-sm font-semibold uppercase tracking-widest mb-3">@s["Privacy.Eyebrow"]</p>
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-5 font-serif">@ViewData["Title"]</h1>
         <p class="text-on-brand-muted text-lg max-w-2xl mx-auto leading-relaxed">
-            How Philisa Abafazi Bethu collects, uses, and protects the information you share with us.
+            @s["Privacy.Intro"]
         </p>
     </div>
 </section>
@@ -19,68 +22,56 @@
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
         <div>
-            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">Why this matters to us</h2>
+            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Privacy.WhyTitle"]</h2>
             <p class="text-ink-600 leading-relaxed">
-                Reaching out for support can already feel difficult. We never want worrying about your privacy to be
-                another barrier. This page explains, in plain language, what information we ask for through this
-                website, why we ask for it, and what happens to it afterwards. We handle your information in line
-                with South Africa's Protection of Personal Information Act (POPIA).
+                @s["Privacy.WhyBody"]
             </p>
         </div>
 
         <div>
-            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">What we collect</h2>
+            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Privacy.CollectTitle"]</h2>
             <p class="text-ink-600 leading-relaxed mb-4">
-                We only ask for what we need to understand and respond to you:
+                @s["Privacy.CollectIntro"]
             </p>
             <ul class="space-y-3 text-ink-600">
                 <li class="flex items-start gap-3">
                     <span class="flex-shrink-0 w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center mt-0.5" aria-hidden="true">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-700"></span>
                     </span>
-                    <span><strong class="text-ink-900">When you request support:</strong> your name, phone number, email address (if you choose to share it), area, preferred contact method, the type of support you need, and a description of your situation.</span>
+                    <span><strong class="text-ink-900">@s["Privacy.CollectSupportLabel"]</strong> @s["Privacy.CollectSupport"]</span>
                 </li>
                 <li class="flex items-start gap-3">
                     <span class="flex-shrink-0 w-5 h-5 rounded-full bg-brand-100 flex items-center justify-center mt-0.5" aria-hidden="true">
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-700"></span>
                     </span>
-                    <span><strong class="text-ink-900">When you contact us:</strong> your name, email, phone number, the subject of your message, and the message itself.</span>
+                    <span><strong class="text-ink-900">@s["Privacy.CollectContactLabel"]</strong> @s["Privacy.CollectContact"]</span>
                 </li>
             </ul>
             <p class="text-ink-600 leading-relaxed mt-4">
-                You never need to create an account to request support or get in touch: we deliberately kept
-                account creation out of this platform so that asking for help never feels like a bureaucratic hurdle.
+                @s["Privacy.NoAccount"]
             </p>
         </div>
 
         <div>
-            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">How we use it</h2>
+            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Privacy.UseTitle"]</h2>
             <p class="text-ink-600 leading-relaxed">
-                Information you submit is used solely to understand your request, contact you using the method you
-                chose, and connect you with the right person or programme on our team. Situations you describe to us
-                are read only by the staff involved in responding to you, and never shared for marketing, research, or
-                any other purpose without your separate, explicit consent.
+                @s["Privacy.UseBody"]
             </p>
         </div>
 
         <div>
-            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">How we protect it</h2>
+            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Privacy.ProtectTitle"]</h2>
             <p class="text-ink-600 leading-relaxed">
-                Your information is stored securely and is only accessible to authorised Philisa Abafazi Bethu staff
-                who need it to help you. We keep it only for as long as necessary to assist you and maintain
-                accurate records of our work, and we do not sell or trade your information to anyone, under any
-                circumstances.
+                @s["Privacy.ProtectBody"]
             </p>
         </div>
 
         <div>
-            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">Your rights</h2>
+            <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Privacy.RightsTitle"]</h2>
             <p class="text-ink-600 leading-relaxed">
-                Under POPIA, you have the right to ask what information we hold about you, to have it corrected if
-                it's wrong, or to ask us to delete it. If you'd like to do any of these, or have any questions about
-                how your information is handled, contact us at
+                @s["Privacy.RightsBody"]
                 <a href="mailto:admin@philisaabafazi.org" class="text-brand-700 font-semibold hover:text-brand-900">admin@philisaabafazi.org</a>
-                and we will respond as quickly as we can.
+                @s["Privacy.RightsAfter"]
             </p>
         </div>
 
@@ -90,8 +81,8 @@
 <!-- CTA -->
 <section class="py-16 bg-amber-50 border-t border-amber-100 text-center">
     <div class="max-w-2xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">Still have questions?</h2>
-        <p class="text-ink-600 mb-6 text-sm">We're happy to talk you through any of this before you reach out.</p>
-        <a href="/Contact" class="inline-block bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">Contact Us</a>
+        <h2 class="text-2xl font-bold text-ink-900 mb-4 font-serif">@s["Privacy.QuestionsTitle"]</h2>
+        <p class="text-ink-600 mb-6 text-sm">@s["Privacy.QuestionsBody"]</p>
+        <a href="/Contact" class="inline-block bg-brand-700 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full transition-colors">@s["Contact.ContactUs"]</a>
     </div>
 </section>
