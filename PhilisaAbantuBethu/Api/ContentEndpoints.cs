@@ -53,9 +53,8 @@ public static class ContentEndpoints
 
         programmes.MapGet("/{id}", Results<Ok<ProgrammeDetailBody>, ProblemHttpResult> (string id, HttpContext http) =>
         {
-            // FindProgramme falls back to the first programme, so the id is checked here.
             var programme = SiteData.FindProgramme(id);
-            if (programme.Id != id)
+            if (programme is null)
             {
                 return ApiProblem.Problem(StatusCodes.Status404NotFound, $"There is no programme called \"{id}\".");
             }

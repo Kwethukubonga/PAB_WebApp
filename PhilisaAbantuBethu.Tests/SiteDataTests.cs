@@ -7,26 +7,21 @@ public class SiteDataTests
     [Fact]
     public void FindProgramme_ReturnsMatchingProgramme_ForValidId()
     {
-        var prog = SiteData.FindProgramme("baby-saver");
+        var prog = SiteData.FindProgramme("baby-saver")!;
 
         Assert.Equal("baby-saver", prog.Id);
         Assert.Equal("Baby Saver", prog.Title);
     }
 
-    [Fact]
-    public void FindProgramme_FallsBackToFirstProgramme_ForUnknownId()
+    // No fallback to the first programme: the page answers 404 instead (#25).
+    [Theory]
+    [InlineData("does-not-exist")]
+    [InlineData("<script>")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void FindProgramme_FindsNothing_ForAnUnknownId(string? id)
     {
-        var prog = SiteData.FindProgramme("does-not-exist");
-
-        Assert.Equal(SiteData.Programmes[0].Id, prog.Id);
-    }
-
-    [Fact]
-    public void FindProgramme_FallsBackToFirstProgramme_ForNullId()
-    {
-        var prog = SiteData.FindProgramme(null);
-
-        Assert.Equal(SiteData.Programmes[0].Id, prog.Id);
+        Assert.Null(SiteData.FindProgramme(id));
     }
 
     [Fact]
@@ -46,7 +41,7 @@ public class SiteDataTests
     [Fact]
     public void BabySaver_HasEmergencyContactInfo()
     {
-        var prog = SiteData.FindProgramme("baby-saver");
+        var prog = SiteData.FindProgramme("baby-saver")!;
 
         Assert.False(string.IsNullOrEmpty(prog.EmergencyAddress));
         Assert.False(string.IsNullOrEmpty(prog.EmergencyPhone));

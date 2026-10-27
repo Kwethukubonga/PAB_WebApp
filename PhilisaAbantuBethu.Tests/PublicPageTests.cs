@@ -126,4 +126,28 @@ public class PublicPageTests : IClassFixture<SiteFactory>
         Assert.Contains("type=\"image/webp\"", html);
         Assert.Matches("<img[^>]*width=\"\\d+\"[^>]*height=\"\\d+\"", html);
     }
+
+    [Theory]
+    [InlineData("/Programmes/nope")]
+    [InlineData("/Programmes/%3Cscript%3E")]
+    [InlineData("/Programmes/Womens-Empowerment")]
+    public async Task An_address_that_is_not_a_programme_gets_the_404_page(string url)
+    {
+        var response = await _site.CreateBrowser().GetAsync(url);
+        var html = await response.Content.ReadAsStringAsync();
+
+        // Not another programme's page with 200 (#25): the site's own 404, with a way to reach PAB.
+        Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        Assert.Contains("We can&#x27;t find that page", html);
+        Assert.Contains("data-quick-exit", html);
+    }
+
+    [Fact]
+    public async Task A_real_programme_still_opens()
+    {
+        var response = await _site.CreateBrowser().GetAsync("/Programmes/baby-saver");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Contains("Baby Saver", await response.Content.ReadAsStringAsync());
+    }
 }

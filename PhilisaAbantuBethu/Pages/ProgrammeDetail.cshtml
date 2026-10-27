@@ -1,7 +1,8 @@
 @page "/Programmes/{id}"
+@model ProgrammeDetailModel
 @{
     var s = HttpContext.Strings();
-    var prog = SiteData.FindProgramme(RouteData.Values["id"]?.ToString());
+    var prog = Model.Programme;
     ViewData["Title"] = prog.TitleFor(s);
 
     var testimonials = new[]
