@@ -14,6 +14,7 @@ namespace PhilisaAbantuBethu.Pages;
 // The token is still checked on every post, but in OnPostAsync rather than by the framework, so an
 // expired form comes back with what was typed instead of turning into an error page (G7).
 [IgnoreAntiforgeryToken]
+[Security.LimitFormSends]
 public class RequestSupportModel : PageModel
 {
 

@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -251,5 +252,47 @@ public class RateLimitTests : IClassFixture<RateLimitTests.LowLimitSite>
 
         // Reading pages is never limited.
         Assert.Equal(HttpStatusCode.OK, (await browser.GetAsync("/RequestSupport")).StatusCode);
+    }
+}
+
+/// <summary>
+/// Routing still serves a form at "/Contact/" or "/CONTACT", so the limit has to follow the page,
+/// not the exact address. Otherwise a trailing slash gets round it (issue #22).
+/// </summary>
+public class RateLimitAddressTests
+{
+    [Theory]
+    [InlineData("/RequestSupport/")]
+    [InlineData("/Contact/")]
+    [InlineData("/api/support-requests/")]
+    [InlineData("/api/contact/")]
+    [InlineData("/REQUESTSUPPORT")]
+    [InlineData("/Api/Contact")]
+    public async Task Another_spelling_of_a_form_address_is_limited_too(string path)
+    {
+        using var site = new SiteFactory { FormPostsPerWindow = 1 };
+        var client = site.CreateBrowser();
+        // The API only accepts JSON; anything else is turned away by routing, before it can be saved.
+        Func<HttpContent> empty = path.StartsWith("/api", StringComparison.OrdinalIgnoreCase)
+            ? () => JsonContent.Create(new { })
+            : () => new FormUrlEncodedContent(new Dictionary<string, string>());
+
+        // The first send uses up the one allowed. It only counts if the address reached the form.
+        await client.PostAsync(path, empty());
+        var second = await client.PostAsync(path, empty());
+
+        Assert.Equal(HttpStatusCode.TooManyRequests, second.StatusCode);
+    }
+
+    [Fact]
+    public async Task The_limit_is_shared_between_the_spellings()
+    {
+        using var site = new SiteFactory { FormPostsPerWindow = 1 };
+        var client = site.CreateBrowser();
+
+        await client.PostAsync("/api/support-requests", JsonContent.Create(new { }));
+        var refused = await client.PostAsync("/api/support-requests/", JsonContent.Create(new { }));
+
+        Assert.Equal(HttpStatusCode.TooManyRequests, refused.StatusCode);
     }
 }

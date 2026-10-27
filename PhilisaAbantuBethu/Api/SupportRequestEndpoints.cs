@@ -97,6 +97,7 @@ public static class SupportRequestEndpoints
 
         group.MapPost("/", Submit)
             .AllowAnonymous()
+            .WithMetadata(new Security.LimitFormSendsAttribute())
             .WithSummary("Ask PAB for support")
             .WithDescription("Open to anyone. Rate-limited per address, the same as the web form.");
 

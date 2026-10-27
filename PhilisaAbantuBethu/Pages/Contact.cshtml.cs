@@ -12,6 +12,7 @@ namespace PhilisaAbantuBethu.Pages
     [RequestSizeLimit(64 * 1024)]
     // Checked in OnPostAsync instead, so an expired form keeps the message (G7).
     [IgnoreAntiforgeryToken]
+    [Security.LimitFormSends]
     public class ContactModel : PageModel
     {
 

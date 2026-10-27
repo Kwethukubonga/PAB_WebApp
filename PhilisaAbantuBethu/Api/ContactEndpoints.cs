@@ -19,6 +19,7 @@ public static class ContactEndpoints
 
         group.MapPost("/", Send)
             .AllowAnonymous()
+            .WithMetadata(new Security.LimitFormSendsAttribute())
             .WithSummary("Send the PAB office a message")
             .WithDescription("Rate-limited per address, the same as the web form.");
 

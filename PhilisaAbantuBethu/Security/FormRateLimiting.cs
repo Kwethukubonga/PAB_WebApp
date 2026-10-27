@@ -12,15 +12,15 @@ public class FormRateLimitOptions
     public int WindowMinutes { get; set; } = 10;
 }
 
+/// <summary>
+/// Marks a page or endpoint whose sends are limited: the two public forms and the API endpoints
+/// that save the same two forms, so going through /api is no way around it.
+/// </summary>
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class LimitFormSendsAttribute : Attribute;
+
 public static class FormRateLimiting
 {
-    // Only sending these forms is limited. Reading any page never is. The API endpoints that save
-    // the same two forms are limited the same way, so going through /api is no way around it.
-    private static readonly string[] LimitedPaths =
-    {
-        "/RequestSupport", "/Contact", "/api/support-requests", "/api/contact"
-    };
-
     public static IServiceCollection AddFormRateLimiting(this IServiceCollection services, IConfiguration config)
     {
         services.Configure<FormRateLimitOptions>(config.GetSection(FormRateLimitOptions.Section));
@@ -50,8 +50,11 @@ public static class FormRateLimiting
 
             limiter.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
             {
+                // Only sending these forms is limited. Reading any page never is. The check uses the
+                // endpoint routing matched rather than the address, so "/Contact/" or "/CONTACT"
+                // can't get round it (routing runs before this middleware).
                 var isFormPost = HttpMethods.IsPost(context.Request.Method)
-                    && LimitedPaths.Any(path => context.Request.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
+                    && context.GetEndpoint()?.Metadata.GetMetadata<LimitFormSendsAttribute>() is not null;
                 if (!isFormPost) return RateLimitPartition.GetNoLimiter("reads");
 
                 var options = Settings(context);
