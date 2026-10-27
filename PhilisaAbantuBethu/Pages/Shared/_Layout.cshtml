@@ -127,6 +127,22 @@
                 </div>
             </div>
 
+            @if (showQuickExit)
+            {
+                @* On a phone the way out sits here, in the header that stays on screen, so it never
+                   covers the page: as a floating button it lay over Home's "Request Support" on a
+                   small phone (#27). From sm up the round corner button below is used instead. *@
+                <a href="https://www.google.com/search?q=weather+cape+town" data-quick-exit rel="noreferrer"
+                   title="@quickExitHint"
+                   class="sm:hidden ml-auto mr-1 inline-flex items-center gap-1.5 min-h-[44px] px-3.5 rounded-full bg-ink-900 hover:bg-black text-white text-sm font-semibold">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/>
+                    </svg>
+                    @s["Layout.LeaveShort"]
+                    <span class="sr-only">. @quickExitHint</span>
+                </a>
+            }
+
             <button type="button" data-nav-toggle
                     class="lg:hidden w-11 h-11 -mr-2 flex items-center justify-center text-ink-700 rounded-lg hover:bg-ink-100 transition-colors"
                     aria-controls="mobile-nav" aria-expanded="false" aria-label="@openMenuLabel">
@@ -194,9 +210,10 @@
 
 @if (showQuickExit)
 {
+    @* From sm up; on a phone the header's "Leave" button takes its place (#27). *@
     <a href="https://www.google.com/search?q=weather+cape+town" data-quick-exit rel="noreferrer"
        title="@quickExitHint"
-       class="fixed bottom-4 right-4 z-[60] inline-flex items-center gap-2 min-h-[44px] bg-ink-900 hover:bg-black text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
+       class="fixed bottom-4 right-4 z-[60] hidden sm:inline-flex items-center gap-2 min-h-[44px] bg-ink-900 hover:bg-black text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/>
         </svg>
