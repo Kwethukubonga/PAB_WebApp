@@ -44,14 +44,32 @@ public class DetailsModel : StaffPageModel
     /// <summary>True while the page is asking "are you sure?" before a request is closed (W12).</summary>
     public bool ConfirmingClose { get; private set; }
 
+    /// <summary>Why the notes weren't saved. The page is shown again with the notes as typed.</summary>
+    public string? NotesError { get; private set; }
+
+    /// <summary>The notes box shows what was just typed rather than what is saved.</summary>
+    public bool KeepTypedNotes => ConfirmingClose || NotesError is not null;
+
     public async Task<IActionResult> OnPostStatusAsync(string status, bool confirm = false)
     {
         var s = HttpContext.Strings();
 
-        if (StaffNotes?.Length > SupportRequestValidator.StaffNotesMax)
+        // Only the three buttons' values are real. Anything else is a hand-made post, and gets a
+        // message rather than the "not found" page, which would suggest the request was gone (#27).
+        if (!SupportRequestStatus.All.Contains(status))
         {
-            StatusMessage = s.Format("Staff.Details.PleaseKeepNotesUnder", SupportRequestValidator.StaffNotesMax);
+            StatusMessage = s["Staff.Details.UnknownStatus"];
             return RedirectToPage(new { id = Id });
+        }
+
+        // Counted the way the database counts (G7), and shown again rather than redirected, so
+        // a long note isn't thrown away (#27).
+        if (TextInput.Length(StaffNotes ?? "") > SupportRequestValidator.StaffNotesMax)
+        {
+            SupportRequest = await _requests.FindAsync(Id, HttpContext.RequestAborted);
+            if (SupportRequest is null) return NotFound();
+            NotesError = s.Format("Staff.Details.PleaseKeepNotesUnder", SupportRequestValidator.StaffNotesMax);
+            return Page();
         }
 
         // Closing takes a request off the working lists, so ask first. The question is a page of
