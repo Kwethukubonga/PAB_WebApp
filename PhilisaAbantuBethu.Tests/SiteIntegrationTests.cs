@@ -101,9 +101,35 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
         var response = await browser.PostAsync("/RequestSupport", new FormUrlEncodedContent(ValidRequest(token)));
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        // "by" carries the contact method just chosen, so the confirmation page can say how PAB
-        // will be in touch (G6). It is one of a fixed list of choices, never anything identifying.
-        Assert.Matches("^/Confirmation\\?reference=PAB-[2-9A-Z]{6}&by=phone$", response.Headers.Location!.OriginalString);
+        // Nothing in the address: the reference travels in TempData (issue #24).
+        Assert.Equal("/Confirmation", response.Headers.Location!.OriginalString);
+
+        var confirmation = await browser.GetAsync("/Confirmation");
+        var html = await confirmation.Content.ReadAsStringAsync();
+        Assert.Equal(HttpStatusCode.OK, confirmation.StatusCode);
+        Assert.Matches("PAB-[2-9A-Z]{6}", html);
+        // It still says back how PAB will be in touch (G6).
+        Assert.Contains("by phone", html);
+        Assert.Contains("no-store", confirmation.Headers.CacheControl!.ToString());
+
+        // Shown once: opening it again goes back to the form instead of claiming a new request.
+        var again = await browser.GetAsync("/Confirmation");
+        Assert.Equal(HttpStatusCode.Redirect, again.StatusCode);
+        Assert.Equal("/RequestSupport", again.Headers.Location!.OriginalString);
+    }
+
+    [Theory]
+    [InlineData("/Confirmation")]
+    [InlineData("/Confirmation?reference=CALL-0800-FAKE-NUMBER")]
+    [InlineData("/Confirmation?reference=PAB-ABCDEF&by=phone")]
+    public async Task Confirmation_DoesNotClaimARequest_WhenNoneWasJustSent(string address)
+    {
+        var browser = _site.CreateBrowser();
+
+        var response = await browser.GetAsync(address);
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        Assert.Equal("/RequestSupport", response.Headers.Location!.OriginalString);
     }
 
     [Fact]

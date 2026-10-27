@@ -165,11 +165,12 @@ public class StaffAlertsSiteTests : IClassFixture<SiteFactory>
         _site = site;
     }
 
-    private async Task<HttpResponseMessage> SubmitAsync(string firstName)
+    /// <summary>Sends the form and returns the response with the reference the person was shown.</summary>
+    private async Task<(HttpResponseMessage Response, string Reference)> SubmitAsync(string firstName)
     {
         var browser = _site.CreateBrowser();
         var token = await SiteFactory.FormTokenAsync(browser, "/RequestSupport?lang=xh");
-        return await browser.PostAsync("/RequestSupport?lang=xh", new FormUrlEncodedContent(new Dictionary<string, string>
+        var response = await browser.PostAsync("/RequestSupport?lang=xh", new FormUrlEncodedContent(new Dictionary<string, string>
         {
             ["__RequestVerificationToken"] = token,
             ["FirstName"] = firstName,
@@ -185,16 +186,18 @@ public class StaffAlertsSiteTests : IClassFixture<SiteFactory>
             ["Declaration"] = "true",
             ["Website"] = ""
         }));
-    }
 
-    private static string ReferenceFrom(HttpResponseMessage response) =>
-        System.Text.RegularExpressions.Regex.Match(response.Headers.Location!.OriginalString, "PAB-[2-9A-Z]{6}").Value;
+        // The reference is no longer in the redirect address (issue #24), so read it off the page.
+        var confirmation = await (await browser.GetAsync("/Confirmation")).Content.ReadAsStringAsync();
+        var reference = System.Text.RegularExpressions.Regex.Match(confirmation, "PAB-[2-9A-Z]{6}").Value;
+        Assert.NotEmpty(reference);
+        return (response, reference);
+    }
 
     [Fact]
     public async Task ANewRequest_EmailsPab()
     {
-        var response = await SubmitAsync("Nomsa");
-        var reference = ReferenceFrom(response);
+        var (_, reference) = await SubmitAsync("Nomsa");
 
         var email = Assert.Single(_site.Emails.Sent, e => e.Text.Contains(reference));
         Assert.Equal("New support request · URGENT · Food Assistance", email.Subject);
@@ -208,10 +211,9 @@ public class StaffAlertsSiteTests : IClassFixture<SiteFactory>
         _site.Emails.Fail = true;
         try
         {
-            var response = await SubmitAsync("Thandeka");
+            var (response, reference) = await SubmitAsync("Thandeka");
 
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-            var reference = ReferenceFrom(response);
             Assert.True(_site.WithDb(db => db.SupportRequests.Any(r => r.Reference == reference)));
         }
         finally

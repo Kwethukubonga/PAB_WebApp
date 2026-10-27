@@ -22,6 +22,7 @@ public class RequestSupportModelTests
         new(new SupportRequestService(db, new ReferenceGenerator(), new NoAlerts(), NullLogger<SupportRequestService>.Instance), new AcceptingAntiforgery())
         {
             PageContext = PageModelTestHelpers.CreatePageContext(),
+            TempData = PageModelTestHelpers.CreateTempData(),
             FirstName = "Nomsa",
             Surname = "Dlamini",
             Phone = "071 123 4567",
@@ -61,9 +62,11 @@ public class RequestSupportModelTests
 
         var redirect = Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal("/Confirmation", redirect.PageName);
-        var reference = Assert.IsType<string>(
-            redirect.RouteValues!["reference"]);
+        // The reference goes through TempData, never the address (issue #24).
+        Assert.Null(redirect.RouteValues);
+        var reference = Assert.IsType<string>(model.TempData[ConfirmationModel.ReferenceKey]);
         Assert.Matches("^PAB-[2-9A-Z]{6}$", reference);
+        Assert.Equal("phone", model.TempData[ConfirmationModel.ContactMethodKey]);
     }
 
     [Fact]

@@ -1,11 +1,11 @@
 @page
+@model ConfirmationModel
 @{
     var s = HttpContext.Strings();
     var c = s.Confirmation;
     ViewData["Title"] = c.Title;
 
-    var reference = Request.Query["reference"].ToString();
-    if (string.IsNullOrWhiteSpace(reference)) { reference = "PAB000"; }
+    var reference = Model.Reference;
 
     var today = DateTime.Now.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("en-ZA"));
 
@@ -17,8 +17,8 @@
     };
 
     // How the person asked to be reached, so the page can say it back to them rather than
-    // leaving them watching the wrong thing (G6). The form posts this through.
-    var method = Request.Query["by"].ToString();
+    // leaving them watching the wrong thing (G6). The form passes this through with the reference.
+    var method = Model.ContactMethod;
     var methodLabel = method switch
     {
         "phone" => s["Confirmation.Phone"],
