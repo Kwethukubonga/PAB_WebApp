@@ -72,7 +72,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | PAB-FR12 | PAB staff can see and act on requests. | `/Staff/Requests` | `Pages/Staff/`, `SupportRequestService` | `SiteIntegrationTests` staff cases, `ApiIntegrationTests` listing and status cases |
 | PAB-FR13 | Leave the site at once if somebody walks in. | Every public page | `site.js` quick exit, Esc twice | `PublicPageTests.Every_public_page_has_the_quick_exit_button` (all nine pages) |
 | PAB-FR14 | One API that both clients can use. | `/api/*` | `Api/` | The whole of `ApiIntegrationTests`. The Android app does not call it yet (planned: admins read web requests through it). |
-| PAB-FR15 | The emergency numbers work with no data. | `/Resources`, `/offline` | `wwwroot/sw.js` | Checked by hand with the network switched off |
+| PAB-FR15 | The emergency numbers work with no data. | `/Resources`, `/offline` | `wwwroot/sw.js` | `ServiceWorkerTests` (what the worker keeps and what it never keeps), and checked by hand with the network switched off |
 
 ---
 
@@ -85,7 +85,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | **Usability** | The support form is split into three short steps with a progress bar and a summary before submitting. **Request Support** is always in the header. |
 | **Reliability** | Requests are saved before the confirmation page is shown, and Render only switches to a new deploy once `/health` answers. |
 | **Security** | Every submission is checked on the server, the forms are rate-limited and have a spam trap, staff pages need a PAB admin sign-in, and every page sends strict security headers (see section 9). |
-| **Safety** | A **Leave this site** button on every public page (or Esc twice) swaps the page for a weather search, for someone who needs to hide that they were looking for help. |
+| **Safety** | A **Leave this site** button on every public page (or Esc twice) swaps the page for a weather search and opens the same search in a new tab, for someone who needs to hide that they were looking for help. |
 
 ---
 
@@ -132,8 +132,8 @@ If something is missing or wrong, the form comes back with what they typed still
 | Area | Technology |
 |------|------------|
 | Framework | ASP.NET Core Razor Pages (.NET 10), C# |
-| Database | SQLite, through Entity Framework Core 10 |
-| Styling | Tailwind CSS, with Lora and Inter fonts |
+| Database | Postgres on the live site and SQLite on a developer's computer, both through Entity Framework Core 10 |
+| Styling | Tailwind CSS, with Lora and Source Sans 3 fonts |
 | Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery, quick exit) |
 | Staff sign-in | Firebase Authentication, the same accounts as the Philisa Volunteers app |
 | Hosting | Docker, on Render |
@@ -142,9 +142,9 @@ If something is missing or wrong, the form comes back with what they typed still
 
 **Why Razor Pages:** each page keeps its layout and logic together, which suits a content website with a few forms, and pages are rendered on the server, so they load quickly on slow connections.
 
-**Why SQLite:** the whole database is one file, so there's no separate database server to run or pay for. Entity Framework creates and updates it automatically when the app starts.
+**Why two databases:** SQLite keeps everything in one file, so nobody needs to install a database to work on the site. That file wouldn't survive on the free hosting plan, which wipes its disk every time the site restarts, so the live site uses a Postgres database on Neon. Which one runs depends only on the connection string. Entity Framework builds the tables when the site starts, and each database has its own set of migrations.
 
-> **Change from the design document:** the design planned Google Cloud Firestore for both systems. The website only needs to save two kinds of form submissions, so we moved it to SQLite, which is simpler and cheaper.
+> **Change from the design document:** the design planned Google Cloud Firestore for both systems. The website only needs to save two kinds of form submissions, so we moved it to an ordinary SQL database (SQLite while developing, Postgres on the live site), which is simpler and cheaper.
 
 ---
 
@@ -164,13 +164,13 @@ If something is missing or wrong, the form comes back with what they typed still
 │  Staff/             Staff sign-in and admin check            │
 │  Security/          Rate limiting and security headers       │
 │  Localization/      English, isiXhosa and Afrikaans text     │
-│  Data/SiteData      Programme content (stored in code)       │
+│  Content/           Programme text, in three languages       │
 │  Data/AppDbContext  Entity Framework database access         │
 └──────────────┬────────────────────────────┬──────────────────┘
                │                            │ staff sign-in only
 ┌──────────────▼───────────────┐ ┌──────────▼───────────────────┐
-│  SQLite DATABASE             │ │  FIREBASE (Google)           │
-│  (philisa.db)                │ │  Authentication · Firestore  │
+│  DATABASE (Postgres on Neon) │ │  FIREBASE (Google)           │
+│  (a SQLite file when coding) │ │  Authentication · Firestore  │
 │  SupportRequests             │ │  users/{uid}.role == admin   │
 │  ContactInquiries            │ │                              │
 └──────────────────────────────┘ └──────────────────────────────┘
@@ -319,9 +319,9 @@ Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists
 | Cross-site request forgery | Razor Pages add and check an anti-forgery token on every form |
 | Cross-site scripting | Razor encodes anything a user types before displaying it |
 | SQL injection | Entity Framework uses parameterised queries |
-| Quick exit | **Leave this site** (or Esc twice) replaces the page with a weather search, and the Back button doesn't return to it |
+| Quick exit | **Leave this site** (or Esc twice) opens a weather search in a new tab and swaps the current tab for it too. The new tab has no history of this site. Back in the old tab can still reach the page before it, because a page can't clear a tab's history. |
 | Logs | One line per request: method, path, status and time. The parts of a path that identify a request are reduced to a shape, so `/api/support-requests/41` is logged as `/api/support-requests/{id}`. No addresses, no query strings, nothing from a form. |
-| Encryption at rest | The two columns that hold what somebody wrote about their situation are encrypted with ASP.NET Data Protection, so a copy of the database file or a backup can't be read. Everything else stays readable so staff can work. |
+| Encryption at rest | The two columns that hold what somebody wrote about their situation are encrypted with ASP.NET Data Protection, so a copy of the database or a backup can't be read. The keys are kept in the database too, locked with a certificate that only the host holds (section 12.4). Everything else stays readable so staff can work. |
 | Staff email alerts | The email about a new request carries only the reference, the kind of help, whether it's urgent and the time. Names, phone numbers, email addresses, the area and what the person wrote are never emailed, because inboxes get forwarded, synced to phones and read over shoulders. Staff sign in to see the rest. Contact message emails carry only the subject and the time; who sent it and what they wrote are on **Staff → Messages**. |
 | Retention | Closed requests and contact messages are deleted after 12 months by a scheduled cleanup (`Services/RetentionService.cs`). A request nobody has closed is never deleted, however old. |
 | Consent | A consent declaration must be ticked before submitting |
@@ -356,7 +356,7 @@ dotnet run
 
 Go to `http://localhost:5277`.
 
-> **Note:** No database setup is needed. `philisa.db` is created automatically the first time the app starts. To view submissions during development, open it with a SQLite viewer such as **DB Browser for SQLite**.
+> **Note:** No database setup is needed. `philisa.db` is created automatically the first time the app starts. To view submissions during development, open it with a SQLite viewer such as **DB Browser for SQLite**. The live site uses Postgres instead, chosen by its connection string (section 12.4).
 
 **With Docker (Windows):** double-click `docker-setup.bat`. It makes a local development certificate, builds and starts the container, and opens `https://localhost:8443` (plain HTTP is on `http://localhost:8080`). After the first run, `docker compose up --build` is enough. Submissions are kept in the `philisa-data` volume. The container runs as a non-root user, and `TrustProxy` is off locally so the rate limiter uses the real connection address; it is only switched on behind the host's proxy (section 12.1).
 
@@ -392,6 +392,8 @@ dotnet test PhilisaAbantuBethu.slnx
 ```
 
 The integration tests start the real site against a throwaway database, with stand-ins for Google, so they run offline.
+
+Six tests need a real Postgres server, and are skipped unless the variable `PAB_TEST_POSTGRES` holds a connection string to one, for example `Host=localhost;Port=5433;Username=postgres;Password=...` for a Postgres started in Docker. CI starts one, so those six always run there.
 
 **Changing the design.** Colours, type, spacing and radii live in one file, `design/tokens.json`,
 and are shared with the Android app. The stylesheet and the Tailwind theme are generated from it
@@ -543,7 +545,7 @@ The site creates its tables the first time it starts. If the connection string o
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
 | Security headers, health check and quick exit | ✔ Complete |
-| Automated tests (271) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
+| Automated tests (362) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |
 | Constrained schema, staff notes and indexes | ✔ Complete |
@@ -552,7 +554,7 @@ The site creates its tables the first time it starts. If the connection string o
 | Tailwind compiled at build time; fonts served from this site | ✔ Complete |
 | Photos as WebP, lazy, at the width they are shown | ✔ Complete |
 | Emergency numbers readable with no data | ✔ Complete |
-| Managed Postgres database, keys in the database, backup and tested restore | ◑ Code, tests and tools ready; the live site switches over when Neon's connection string and the certificate are set on Render |
+| Postgres database on Neon, encryption keys in the database, backup and tested restore | ✔ Complete (section 12.4) |
 | Emailing PAB about new requests and contact messages, with no personal details | ✔ Complete (needs the `Alerts__` variables on the host) |
 | Staff page for reading contact messages | ✔ Complete |
 
