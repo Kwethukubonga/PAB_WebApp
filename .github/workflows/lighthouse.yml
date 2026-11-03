@@ -1,0 +1,130 @@
+name: Lighthouse
+
+# Scores the main public pages on every pull request (H4). A PR fails if any page's median
+# Performance score drops below 80 or Accessibility below 90. Best Practices and SEO are reported
+# but only warn. The minimums are in lighthouserc.json.
+#
+# Only public pages are tested: nothing here signs in, sends a form or touches real data. The site
+# runs on a throwaway SQLite file that is deleted with the runner.
+on:
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: lighthouse-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse scores
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build the site
+        run: dotnet build PhilisaAbantuBethu/PhilisaAbantuBethu.csproj --configuration Release
+
+      # Production settings, so the scores match what visitors get (no development tools, real
+      # error pages). No secrets are needed for the public pages.
+      - name: Start the site
+        env:
+          ASPNETCORE_ENVIRONMENT: Production
+          ASPNETCORE_URLS: http://127.0.0.1:5277
+          ConnectionStrings__DefaultConnection: Data Source=${{ runner.temp }}/lighthouse.db
+          DataProtection__KeysPath: ${{ runner.temp }}/keys
+        run: |
+          nohup dotnet run --project PhilisaAbantuBethu --configuration Release --no-build --no-launch-profile \
+            > "${{ runner.temp }}/site.log" 2>&1 &
+          for i in $(seq 1 60); do
+            if curl --silent --fail http://127.0.0.1:5277/alive > /dev/null; then
+              echo "The site is up."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::The site did not start within 2 minutes."
+          cat "${{ runner.temp }}/site.log"
+          exit 1
+
+      - name: Run Lighthouse
+        id: lhci
+        run: npx --yes @lhci/cli@0.14.0 autorun
+
+      # A table of the scores on the run's summary page and as a comment on the PR, whether the
+      # minimums passed or not.
+      - name: Write the scores
+        if: always() && steps.lhci.outcome != 'skipped'
+        run: |
+          node <<'EOF'
+          const fs = require('fs');
+          const path = './lighthouse-reports/manifest.json';
+          if (!fs.existsSync(path)) {
+            fs.writeFileSync('lighthouse-summary.md', '## Lighthouse\n\nNo scores were produced. Check the "Run Lighthouse" step.\n');
+            process.exit(0);
+          }
+          const runs = JSON.parse(fs.readFileSync(path, 'utf8')).filter(r => r.isRepresentativeRun);
+          const pct = v => (v == null ? '–' : Math.round(v * 100));
+          const mark = (v, min) => (v == null ? '' : v >= min ? ' ✅' : ' ❌');
+          let md = '## Lighthouse scores\n\n';
+          md += 'Median of 3 runs per page, desktop. Minimums: Performance 80, Accessibility 90.\n\n';
+          md += '| Page | Performance | Accessibility | Best Practices | SEO |\n|---|---|---|---|---|\n';
+          for (const r of runs) {
+            const page = new URL(r.url).pathname;
+            const s = r.summary;
+            md += `| ${page} | ${pct(s.performance)}${mark(s.performance, 0.8)} | ${pct(s.accessibility)}${mark(s.accessibility, 0.9)} | ${pct(s['best-practices'])} | ${pct(s.seo)} |\n`;
+          }
+          md += '\nFull reports are attached to this run as **lighthouse-reports**.\n';
+          fs.writeFileSync('lighthouse-summary.md', md);
+          EOF
+          cat lighthouse-summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the full reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: lighthouse-reports/
+          if-no-files-found: ignore
+
+      # One comment per PR, updated on each push rather than adding a new one every time. A PR from
+      # a fork can't comment, so this step is allowed to fail; the scores are still on the summary.
+      - name: Comment the scores on the PR
+        if: always() && github.event_name == 'pull_request'
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            if (!fs.existsSync('lighthouse-summary.md')) return;
+            const body = '<!-- lighthouse-scores -->\n' + fs.readFileSync('lighthouse-summary.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const mine = comments.find(c => c.body && c.body.startsWith('<!-- lighthouse-scores -->'));
+            if (mine) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: mine.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+      - name: Show the site's log if something went wrong
+        if: failure()
+        run: cat "${{ runner.temp }}/site.log" || true

@@ -378,3 +378,7 @@ node_modules/
 *.dump
 pab-secrets/
 pab-backups/
+
+# Lighthouse CI reports (H4)
+lighthouse-reports/
+.lighthouseci/
