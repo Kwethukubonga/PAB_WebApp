@@ -30,14 +30,54 @@ public class TextInputTests
     public void Length_CountsCharactersAsPeopleDo(string text, int length) =>
         Assert.Equal(length, TextInput.Length(text));
 
-    [Fact]
-    public void FortyEmoji_FitAName()
-    {
-        // Each emoji counts as one character: 5 letters and 40 emoji are 45, under the 60 limit,
-        // though .Length says 85. The letters are there because a name needs one (#27).
-        var input = Valid() with { FirstName = "Nomsa" + string.Concat(Enumerable.Repeat("\U0001F600", 40)) };
+    [Theory]
+    [InlineData("Mitchells Plain \U0001F3E0")]   // house
+    [InlineData("❤️")]                 // red heart
+    [InlineData("\U0001F1FF\U0001F1E6")]         // South African flag
+    [InlineData("☀")]                       // sun
+    public void HasEmoji_FindsEmoji(string text) => Assert.True(TextInput.HasEmoji(text));
 
-        Assert.DoesNotContain("FirstName", SupportRequestValidator.Validate(input, SiteStrings.En).Keys);
+    [Theory]
+    [InlineData("N’wamitwa O'Brien-Ndlôvu")]
+    [InlineData("Khayelitsha, Site C (near the clinic) - 2nd road!")]
+    [InlineData("ukuhlukunyezwa ekhaya")]
+    [InlineData("€50 & 10% © R20")]
+    [InlineData("")]
+    [InlineData(null)]
+    public void HasEmoji_LeavesWordsAndEverydaySymbols(string? text) => Assert.False(TextInput.HasEmoji(text));
+
+    [Theory]
+    [InlineData("FirstName")]
+    [InlineData("Surname")]
+    [InlineData("Area")]
+    [InlineData("Situation")]
+    [InlineData("Extra")]
+    public void Emoji_AreRefusedInEveryTextField(string field)
+    {
+        var smile = "Nomsa \U0001F600";
+        var input = field switch
+        {
+            "FirstName" => Valid() with { FirstName = smile },
+            "Surname" => Valid() with { Surname = smile },
+            "Area" => Valid() with { Area = smile },
+            "Situation" => Valid() with { Situation = smile },
+            _ => Valid() with { Extra = smile }
+        };
+
+        var errors = SupportRequestValidator.Validate(input, SiteStrings.En);
+
+        Assert.Equal(SiteStrings.En["SupportRequestForm.NoEmoji"], errors[field]);
+    }
+
+    [Fact]
+    public void Emoji_AreRefusedOnTheContactForm()
+    {
+        var errors = ContactValidator.Validate(
+            new ContactInput("Nomsa \U0001F600", "nomsa@example.com", null, "General Enquiry", "Hello \U0001F44B"),
+            SiteStrings.En);
+
+        Assert.Contains("Name", errors.Keys);
+        Assert.Contains("Message", errors.Keys);
     }
 
     [Fact]
@@ -54,8 +94,7 @@ public class TextInputTests
     [InlineData("082-123-4567", "082 123 4567")]
     [InlineData("(082) 123 4567", "082 123 4567")]
     [InlineData("0821234567", "082 123 4567")]
-    [InlineData("+27 (0)82 123 4567", "082 123 4567")]
-    [InlineData("+49 151  2345 6789", "+49 151 2345 6789")] // other countries keep their own spacing
+    [InlineData("+49 151  2345 6789", "+49 151 2345 6789")] // refused, so only trimmed
     [InlineData("", "")]
     public void Tidy_StoresSouthAfricanNumbersOneWay(string typed, string stored) =>
         Assert.Equal(stored, PhoneNumber.Tidy(typed));

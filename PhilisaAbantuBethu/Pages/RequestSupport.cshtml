@@ -89,7 +89,11 @@
         </div>
     }
 
-    <form method="post" data-step-form
+    <form method="post" data-step-form data-live-checks
+          data-msg-emoji="@s["SupportRequestForm.NoEmoji"]"
+          data-msg-letter="@s["SupportRequestForm.NameNeedsLetter"]"
+          data-msg-phone="@s["SupportRequestForm.EnterSouthAfricanCellphone"]"
+          data-msg-email="@s["SupportRequestForm.PleaseCheckEmailAddress"]"
           data-start-step="@startStep"
           data-yes-label="@yesLabel"
           data-no-label="@noLabel"
@@ -120,6 +124,7 @@
                         <div>
                             <label class="@labelCls" for="firstName">@f.FirstName *</label>
                             <input id="firstName" name="FirstName" value="@Model.FirstName" data-required required aria-required="true"
+                                   data-check="name" data-msg-required="@s["SupportRequestForm.PleaseEnterFirstName"]"
                                    type="text" autocomplete="given-name" maxlength="60" class="@Cls("FirstName")"
                                    aria-invalid="@Invalid("FirstName")" aria-describedby="@Described("FirstName", "firstName")" />
                             @if (Err("FirstName") is string firstNameError)
@@ -130,6 +135,7 @@
                         <div>
                             <label class="@labelCls" for="surname">@f.Surname *</label>
                             <input id="surname" name="Surname" value="@Model.Surname" data-required required aria-required="true"
+                                   data-check="name" data-msg-required="@s["SupportRequestForm.PleaseEnterSurname"]"
                                    type="text" autocomplete="family-name" maxlength="60" class="@Cls("Surname")"
                                    aria-invalid="@Invalid("Surname")" aria-describedby="@Described("Surname", "surname")" />
                             @if (Err("Surname") is string surnameError)
@@ -141,7 +147,8 @@
                     <div>
                         <label class="@labelCls" for="phone">@f.Phone *</label>
                         <input id="phone" name="Phone" value="@Model.Phone" data-required required aria-required="true"
-                               type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="082 123 4567" class="@Cls("Phone")"
+                               data-check="phone" data-msg-required="@s["SupportRequestForm.PleaseEnterPhoneNumber"]"
+                               type="tel" autocomplete="tel" inputmode="tel" maxlength="12" placeholder="0821234567" class="@Cls("Phone")"
                                aria-invalid="@Invalid("Phone")" aria-describedby="@Described("Phone", "phone")" />
                         @if (Err("Phone") is string phoneError)
                         {
@@ -150,7 +157,8 @@
                     </div>
                     <div>
                         <label class="@labelCls" for="email">@f.Email</label>
-                        <input id="email" name="Email" value="@Model.Email" type="email" autocomplete="email" maxlength="254" class="@Cls("Email")"
+                        <input id="email" name="Email" value="@Model.Email" type="email"
+                               data-check="email" data-msg-needed-for-email="@s["SupportRequestForm.AddEmailAddressChoose"]" autocomplete="email" maxlength="254" class="@Cls("Email")"
                                aria-invalid="@Invalid("Email")" aria-describedby="@Described("Email", "email")" />
                         @if (Err("Email") is string emailError)
                         {
@@ -160,6 +168,7 @@
                     <div>
                         <label class="@labelCls" for="area">@f.Area *</label>
                         <input id="area" name="Area" value="@Model.Area" data-required required aria-required="true"
+                               data-check="text" data-msg-required="@s["SupportRequestForm.PleaseTellUsArea"]"
                                type="text" autocomplete="address-level2" maxlength="100" placeholder="@f.AreaPlaceholder" class="@Cls("Area")"
                                aria-invalid="@Invalid("Area")" aria-describedby="@Described("Area", "area")" />
                         @if (Err("Area") is string areaError)
@@ -194,6 +203,7 @@
                     <div>
                         <label class="@labelCls" for="supportType">@f.SupportType *</label>
                         <select id="supportType" name="SupportType" data-required required aria-required="true" class="@Cls("SupportType")"
+                                data-msg-required="@s["SupportRequestForm.PleaseChooseTypeSupport"]"
                                 aria-invalid="@Invalid("SupportType")" aria-describedby="@Described("SupportType", "supportType")">
                             <option value="">@f.SupportTypePlaceholder</option>
                             @foreach (var type in s.SupportTypes)
@@ -210,6 +220,7 @@
                     <div>
                         <label class="@labelCls" for="situation">@f.Situation *</label>
                         <textarea id="situation" name="Situation" data-required required aria-required="true" rows="7" maxlength="3000"
+                                  data-check="text" data-msg-required="@s["SupportRequestForm.PleaseTellUsLittle"]"
                                   placeholder="@f.SituationPlaceholder"
                                   class="@Cls("Situation") resize-none"
                                   aria-invalid="@Invalid("Situation")" aria-describedby="@Described("Situation", "situation")">@Model.Situation</textarea>
@@ -250,7 +261,7 @@
                 <div class="space-y-6">
                     <div>
                         <label class="@labelCls" for="extra">@f.ExtraInfo</label>
-                        <textarea id="extra" name="Extra" rows="4" maxlength="2000"
+                        <textarea id="extra" name="Extra" rows="4" maxlength="2000" data-check="text"
                                   placeholder="@f.ExtraInfoPlaceholder"
                                   class="@Cls("Extra") resize-none"
                                   aria-invalid="@Invalid("Extra")" aria-describedby="@Described("Extra", "extra")">@Model.Extra</textarea>
@@ -303,6 +314,7 @@
                     <div>
                         <div class="flex items-start gap-3">
                             <input id="declaration" name="Declaration" value="true" data-required required aria-required="true" type="checkbox"
+                                   data-msg-required="@s["SupportRequestForm.PleaseTickBoxConfirm"]"
                                    checked="@Model.Declaration"
                                    aria-invalid="@Invalid("Declaration")" aria-describedby="@Described("Declaration", "declaration")"
                                    class="mt-1 w-4 h-4 rounded accent-brand-700 flex-shrink-0" />

@@ -472,7 +472,7 @@
     <value>Kontroleer asseblief die e-posadres.</value>
   </data>
   <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
-    <value>Vul 'n Suid-Afrikaanse telefoonnommer in, soos 082 123 4567 of 021 123 4567, of 'n internasionale nommer wat met + begin.</value>
+    <value>Vul 'n Suid-Afrikaanse telefoonnommer in: 10 syfers wat met 0 begin, soos 0821234567, of +27 en 9 syfers, soos +27821234567.</value>
   </data>
   <data name="ContactForm.PleaseEnterName" xml:space="preserve">
     <value>Vul asseblief jou naam in.</value>
@@ -956,6 +956,9 @@
   </data>
   <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
     <value>Skryf asseblief jou naam met letters.</value>
+  </data>
+  <data name="SupportRequestForm.NoEmoji" xml:space="preserve">
+    <value>Gebruik asseblief net woorde en letters, sonder emoji's.</value>
   </data>
   <data name="RequestSupport.ContactBy" xml:space="preserve">
     <value>Kontakmetode</value>

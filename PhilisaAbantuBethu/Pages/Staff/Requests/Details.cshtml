@@ -70,14 +70,15 @@
 
         @* One form, so a note is saved together with the status it was written about. The fragment
            brings staff back to this section when the page asks them to confirm a close. *@
-        <form method="post" asp-page-handler="Status" asp-route-id="@r.Id" asp-fragment="move">
+        <form method="post" asp-page-handler="Status" asp-route-id="@r.Id" asp-fragment="move"
+              data-live-checks data-msg-emoji="@s["SupportRequestForm.NoEmoji"]">
             <label for="staff-notes" class="block text-sm font-semibold text-ink-900">
                 @s["Staff.Details.WhatHasBeenDone"]
             </label>
             <p id="staff-notes-hint" class="mt-1 text-sm text-ink-600">
                 @s["Staff.Details.TeamNotPersonWho"]
             </p>
-            <textarea id="staff-notes" name="StaffNotes" rows="3"
+            <textarea id="staff-notes" name="StaffNotes" rows="3" data-check="text"
                       maxlength="@PhilisaAbantuBethu.Forms.SupportRequestValidator.StaffNotesMax"
                       aria-describedby="@(Model.NotesError is null ? "staff-notes-hint" : "staff-notes-hint staff-notes-error")"
                       aria-invalid="@(Model.NotesError is null ? "false" : "true")"

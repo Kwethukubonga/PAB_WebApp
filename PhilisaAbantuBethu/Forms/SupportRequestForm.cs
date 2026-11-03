@@ -61,6 +61,8 @@ public static class SupportRequestValidator
             errors["FirstName"] = s["SupportRequestForm.PleaseEnterFirstName"];
         else if (TextInput.Length(input.FirstName.Trim()) > NameMax)
             errors["FirstName"] = TooLong(s, NameMax);
+        else if (TextInput.HasEmoji(input.FirstName))
+            errors["FirstName"] = NoEmoji(s);
         else if (!HasLetter(input.FirstName))
             errors["FirstName"] = NeedsLetter(s);
 
@@ -68,6 +70,8 @@ public static class SupportRequestValidator
             errors["Surname"] = s["SupportRequestForm.PleaseEnterSurname"];
         else if (TextInput.Length(input.Surname.Trim()) > NameMax)
             errors["Surname"] = TooLong(s, NameMax);
+        else if (TextInput.HasEmoji(input.Surname))
+            errors["Surname"] = NoEmoji(s);
         else if (!HasLetter(input.Surname))
             errors["Surname"] = NeedsLetter(s);
 
@@ -83,6 +87,8 @@ public static class SupportRequestValidator
             errors["Area"] = s["SupportRequestForm.PleaseTellUsArea"];
         else if (TextInput.Length(input.Area.Trim()) > AreaMax)
             errors["Area"] = TooLong(s, AreaMax);
+        else if (TextInput.HasEmoji(input.Area))
+            errors["Area"] = NoEmoji(s);
 
         if (!ContactMethods.Contains(input.ContactMethod))
             errors["ContactMethod"] = s["SupportRequestForm.PleaseChooseHowShould"];
@@ -96,12 +102,16 @@ public static class SupportRequestValidator
             errors["Situation"] = s["SupportRequestForm.PleaseTellUsLittle"];
         else if (TextInput.Length(input.Situation.Trim()) > SituationMax)
             errors["Situation"] = TooLong(s, SituationMax);
+        else if (TextInput.HasEmoji(input.Situation))
+            errors["Situation"] = NoEmoji(s);
 
         if (!UrgentValues.Contains(input.Urgent))
             errors["Urgent"] = s["SupportRequestForm.PleaseTellUsWhether"];
 
         if (TextInput.Length(input.Extra?.Trim() ?? "") > ExtraMax)
             errors["Extra"] = TooLong(s, ExtraMax);
+        else if (TextInput.HasEmoji(input.Extra))
+            errors["Extra"] = NoEmoji(s);
 
         if (!input.Declaration)
             errors["Declaration"] = s["SupportRequestForm.PleaseTickBoxConfirm"];
@@ -125,6 +135,8 @@ public static class SupportRequestValidator
     internal static bool HasLetter(string value) => value.Any(char.IsLetter);
 
     internal static string NeedsLetter(SiteStrings s) => s["SupportRequestForm.NameNeedsLetter"];
+
+    internal static string NoEmoji(SiteStrings s) => s["SupportRequestForm.NoEmoji"];
 
     internal static string TooLong(SiteStrings s, int max) => s.Format("SupportRequestForm.PleaseKeepUnderCharacters", max);
 

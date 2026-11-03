@@ -179,6 +179,13 @@ public static class SupportRequestEndpoints
                 ["staffNotes"] = $"Please keep notes under {SupportRequestValidator.StaffNotesMax} characters."
             });
         }
+        if (TextInput.HasEmoji(change.StaffNotes))
+        {
+            return ApiProblem.Validation(new Dictionary<string, string>
+            {
+                ["staffNotes"] = "Please use words and letters only, without emojis."
+            });
+        }
 
         var staff = StaffAuth.DisplayName(http.User);
         var updated = await requests.SetStatusAsync(id, change.Status, staff, change.StaffNotes, ct)
