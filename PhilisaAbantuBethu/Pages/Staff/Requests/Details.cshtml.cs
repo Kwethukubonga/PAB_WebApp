@@ -64,11 +64,14 @@ public class DetailsModel : StaffPageModel
 
         // Counted the way the database counts (G7), and shown again rather than redirected, so
         // a long note isn't thrown away (#27).
-        if (TextInput.Length(StaffNotes ?? "") > SupportRequestValidator.StaffNotesMax)
+        var tooLong = TextInput.Length(StaffNotes ?? "") > SupportRequestValidator.StaffNotesMax;
+        if (tooLong || TextInput.HasEmoji(StaffNotes))
         {
             SupportRequest = await _requests.FindAsync(Id, HttpContext.RequestAborted);
             if (SupportRequest is null) return NotFound();
-            NotesError = s.Format("Staff.Details.PleaseKeepNotesUnder", SupportRequestValidator.StaffNotesMax);
+            NotesError = tooLong
+                ? s.Format("Staff.Details.PleaseKeepNotesUnder", SupportRequestValidator.StaffNotesMax)
+                : SupportRequestValidator.NoEmoji(s);
             return Page();
         }
 

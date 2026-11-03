@@ -100,6 +100,12 @@
 
     function validateStep() {
         var panel = steps[current - 1];
+        // Every problem on the step is shown under its field at once (form-checks.js), not one
+        // browser bubble at a time.
+        if (window.PabFormChecks) {
+            var bad = window.PabFormChecks.firstProblem(panel);
+            if (bad) { bad.focus(); return false; }
+        }
         var fields = panel.querySelectorAll('input, select, textarea');
         for (var i = 0; i < fields.length; i++) {
             if (!fields[i].checkValidity()) { fields[i].reportValidity(); return false; }

@@ -51,6 +51,8 @@ public static class ContactValidator
             errors["Name"] = s["ContactForm.PleaseEnterName"];
         else if (TextInput.Length(input.Name.Trim()) > NameMax)
             errors["Name"] = SupportRequestValidator.TooLong(s, NameMax);
+        else if (TextInput.HasEmoji(input.Name))
+            errors["Name"] = SupportRequestValidator.NoEmoji(s);
         else if (!SupportRequestValidator.HasLetter(input.Name))
             errors["Name"] = SupportRequestValidator.NeedsLetter(s);
 
@@ -74,6 +76,8 @@ public static class ContactValidator
             errors["Message"] = s["ContactForm.PleaseWriteMessage"];
         else if (TextInput.Length(input.Message.Trim()) > MessageMax)
             errors["Message"] = SupportRequestValidator.TooLong(s, MessageMax);
+        else if (TextInput.HasEmoji(input.Message))
+            errors["Message"] = SupportRequestValidator.NoEmoji(s);
 
         return errors;
     }

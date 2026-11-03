@@ -178,6 +178,16 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
     }
 
     [Fact]
+    public async Task Staff_SignInOffersEmailAndPasswordOnly()
+    {
+        var html = await _site.CreateBrowser().GetStringAsync("/Staff/SignIn");
+
+        Assert.Contains("data-signin-form", html);
+        Assert.Contains("staff-password", html);
+        Assert.DoesNotContain("Google", html);
+    }
+
+    [Fact]
     public async Task Staff_SignInTurnsAwayAVolunteerAndAnInvalidToken()
     {
         var browser = _site.CreateBrowser();

@@ -472,7 +472,7 @@
     <value>Please check the email address.</value>
   </data>
   <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
-    <value>Enter a South African phone number, like 082 123 4567 or 021 123 4567, or an international number starting with +.</value>
+    <value>Enter a South African phone number: 10 digits starting with 0, like 0821234567, or +27 and 9 digits, like +27821234567.</value>
   </data>
   <data name="ContactForm.PleaseEnterName" xml:space="preserve">
     <value>Please enter your name.</value>
@@ -518,12 +518,6 @@
   </data>
   <data name="Staff.SignIn.SignIn" xml:space="preserve">
     <value>Sign in</value>
-  </data>
-  <data name="Staff.SignIn.Or" xml:space="preserve">
-    <value>or</value>
-  </data>
-  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
-    <value>Continue with Google</value>
   </data>
   <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
     <value>Only Philisa Volunteers admin accounts can sign in here. Forgot your password? Reset it from the Philisa Volunteers app's sign-in screen.</value>
@@ -956,6 +950,9 @@
   </data>
   <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
     <value>Please write your name using letters.</value>
+  </data>
+  <data name="SupportRequestForm.NoEmoji" xml:space="preserve">
+    <value>Please use words and letters only, without emojis.</value>
   </data>
   <data name="RequestSupport.ContactBy" xml:space="preserve">
     <value>Contact by</value>

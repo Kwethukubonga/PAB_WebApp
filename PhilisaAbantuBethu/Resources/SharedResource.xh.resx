@@ -472,7 +472,7 @@
     <value>Nceda ujonge idilesi ye-imeyile.</value>
   </data>
   <data name="SupportRequestForm.EnterSouthAfricanCellphone" xml:space="preserve">
-    <value>Faka inombolo yefowuni yaseMzantsi Afrika, efana no-082 123 4567 okanye 021 123 4567, okanye inombolo yamanye amazwe eqala ngo-+.</value>
+    <value>Faka inombolo yefowuni yaseMzantsi Afrika: amanani ali-10 aqala ngo-0, afana no-0821234567, okanye u-+27 namanani ali-9, afana no-+27821234567.</value>
   </data>
   <data name="ContactForm.PleaseEnterName" xml:space="preserve">
     <value>Nceda ubhale igama lakho.</value>
@@ -518,12 +518,6 @@
   </data>
   <data name="Staff.SignIn.SignIn" xml:space="preserve">
     <value>Ngena</value>
-  </data>
-  <data name="Staff.SignIn.Or" xml:space="preserve">
-    <value>okanye</value>
-  </data>
-  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
-    <value>Qhubeka ngeGoogle</value>
   </data>
   <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
     <value>Ziiakhawunti zolawulo ze-Philisa Volunteers kuphela ezinokungena apha. Ulilibele igama lokugqithisa? Lisete kwakhona kwiscreen sokungena se-app ye-Philisa Volunteers.</value>
@@ -956,6 +950,9 @@
   </data>
   <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
     <value>Nceda ubhale igama lakho usebenzisa oonobumba.</value>
+  </data>
+  <data name="SupportRequestForm.NoEmoji" xml:space="preserve">
+    <value>Nceda usebenzise amagama noonobumba kuphela, ngaphandle kwee-emoji.</value>
   </data>
   <data name="RequestSupport.ContactBy" xml:space="preserve">
     <value>Indlela yoqhagamshelwano</value>

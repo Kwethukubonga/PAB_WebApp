@@ -146,17 +146,33 @@ public class StaffCloseTests : IClassFixture<SiteFactory>
         Assert.Null(saved.StaffNotes);
     }
 
-    // Counted the way the database counts: 2000 emoji are 2000 characters, not 4000 (G7, #27).
+    // Counted the way the database counts: a character .NET stores as two units is one (G7, #27).
+    // Emojis are refused, so this uses a rare Chinese character, which is also two units.
     [Fact]
     public async Task NotesAreCountedAsCharacters_NotCodeUnits()
     {
         var id = AddRequest("PAB-CLOSE6");
         var browser = await SignedInAsync();
-        var notes = string.Concat(Enumerable.Repeat("😊", 1500));
+        var notes = string.Concat(Enumerable.Repeat("\U0002070E", 1500));
 
         var response = await MoveAsync(browser, id, SupportRequestStatus.InProgress, notes);
 
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
         Assert.Equal(notes, Saved(id).StaffNotes);
+    }
+
+    [Fact]
+    public async Task NotesWithEmoji_ComeBackAsTyped_AndChangeNothing()
+    {
+        var id = AddRequest("PAB-CLOSE7");
+        var browser = await SignedInAsync();
+
+        var response = await MoveAsync(browser, id, SupportRequestStatus.InProgress, "Called her \U0001F44D");
+        var html = await response.Content.ReadAsStringAsync();
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Contains("staff-notes-error", html);
+        Assert.Contains("without emojis", html);
+        Assert.Equal(SupportRequestStatus.New, Saved(id).Status);
     }
 }

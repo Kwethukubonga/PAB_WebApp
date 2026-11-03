@@ -62,7 +62,11 @@
                     </div>
                 }
 
-                <form method="post" data-contact-form data-busy-form hidden="@sent" class="space-y-5">
+                <form method="post" data-contact-form data-busy-form hidden="@sent" class="space-y-5" data-live-checks
+                      data-msg-emoji="@s["SupportRequestForm.NoEmoji"]"
+                      data-msg-letter="@s["SupportRequestForm.NameNeedsLetter"]"
+                      data-msg-phone="@s["SupportRequestForm.EnterSouthAfricanCellphone"]"
+                      data-msg-email="@s["SupportRequestForm.PleaseCheckEmailAddress"]">
                     <!-- Only bots fill this in. People never see it. -->
                     <div class="hp-field" aria-hidden="true">
                         <label for="c-website">Website</label>
@@ -72,7 +76,8 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-name">@s["Contact.FullName"] *</label>
-                            <input id="c-name" name="Name" value="@Model.Name" required aria-required="true" type="text" autocomplete="name" maxlength="100"
+                            <input id="c-name" name="Name" value="@Model.Name" required aria-required="true"
+                                   data-check="name" data-msg-required="@s["ContactForm.PleaseEnterName"]" type="text" autocomplete="name" maxlength="100"
                                    class="@Cls("Name")" aria-invalid="@Invalid("Name")" aria-describedby="@Described("Name", "c-name")" />
                             @if (Err("Name") is string nameError)
                             {
@@ -81,7 +86,8 @@
                         </div>
                         <div>
                             <label class="@labelCls" for="c-email">@s["Contact.EmailAddress"]</label>
-                            <input id="c-email" name="Email" value="@Model.Email" type="email" autocomplete="email" maxlength="254"
+                            <input id="c-email" name="Email" value="@Model.Email" type="email"
+                                   data-check="email" data-either="c-phone" data-msg-either="@s["ContactForm.PleaseGiveEmailAddress"]" autocomplete="email" maxlength="254"
                                    class="@Cls("Email")" aria-invalid="@Invalid("Email")" aria-describedby="@Described("Email", "c-email")" />
                             @if (Err("Email") is string emailError)
                             {
@@ -93,7 +99,8 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                             <label class="@labelCls" for="c-phone">@s["Contact.PhoneNumber"]</label>
-                            <input id="c-phone" name="Phone" value="@Model.Phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="082 123 4567"
+                            <input id="c-phone" name="Phone" value="@Model.Phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="12" placeholder="0821234567"
+                                   data-check="phone"
                                    class="@Cls("Phone")" aria-invalid="@Invalid("Phone")" aria-describedby="@Described("Phone", "c-phone")" />
                             @if (Err("Phone") is string phoneError)
                             {
@@ -103,6 +110,7 @@
                         <div>
                             <label class="@labelCls" for="c-subject">@s["Contact.Subject"] *</label>
                             <select id="c-subject" name="Subject" required aria-required="true"
+                                    data-msg-required="@s["ContactForm.PleaseChooseSubject"]"
                                     class="@Cls("Subject")" aria-invalid="@Invalid("Subject")" aria-describedby="@Described("Subject", "c-subject")">
                                 <option value="">@s["Contact.SelectSubject"]</option>
                                 @foreach (var subject in subjects)
@@ -120,6 +128,7 @@
                     <div>
                         <label class="@labelCls" for="c-message">@s["Contact.Message"] *</label>
                         <textarea id="c-message" name="Message" required aria-required="true" rows="6" maxlength="3000"
+                                  data-check="text" data-msg-required="@s["ContactForm.PleaseWriteMessage"]"
                                   placeholder="@messagePlaceholder"
                                   class="@Cls("Message") resize-none" aria-invalid="@Invalid("Message")" aria-describedby="@Described("Message", "c-message")">@Model.Message</textarea>
                         @if (Err("Message") is string messageError)
