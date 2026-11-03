@@ -2,15 +2,13 @@
    server, which checks the admin role and starts the staff session. */
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {
-    getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword,
-    signInWithPopup, GoogleAuthProvider, signOut
+    getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, signOut
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
 const root = document.querySelector('[data-staff-signin]');
 if (root) {
     const form = root.querySelector('[data-signin-form]');
     const submit = root.querySelector('[data-signin-submit]');
-    const google = root.querySelector('[data-signin-google]');
     const errorBox = root.querySelector('[data-signin-error]');
     const submitLabel = submit.textContent;
 
@@ -24,7 +22,6 @@ if (root) {
 
     const setBusy = (busy) => {
         submit.disabled = busy;
-        google.disabled = busy;
         submit.textContent = busy ? root.dataset.busyLabel : submitLabel;
     };
 
@@ -74,8 +71,6 @@ if (root) {
             await startSession(await signIn());
         } catch (error) {
             setBusy(false);
-            // Closing Google's window is a choice, not an error.
-            if (error && error.code === 'auth/popup-closed-by-user') return;
             showError(error && error.fromServer ? error.message : messageFor(error));
         }
     };
@@ -83,9 +78,5 @@ if (root) {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         run(() => signInWithEmailAndPassword(auth, form.email.value.trim(), form.password.value));
-    });
-
-    google.addEventListener('click', () => {
-        run(() => signInWithPopup(auth, new GoogleAuthProvider()));
     });
 }

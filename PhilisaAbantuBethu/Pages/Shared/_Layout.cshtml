@@ -222,21 +222,23 @@
     </a>
 }
 
+@* Kept short: two columns of links side by side on a phone, and less space around them. It
+   was a whole phone screen tall before. *@
 <footer class="bg-brand-900 text-brand-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-24">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-            <div class="md:col-span-2">
-                <div class="flex items-center gap-2.5 mb-4">
-                    <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" width="36" height="36" loading="lazy" decoding="async" class="w-9 h-9 rounded-full bg-white/15" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
+            <div class="col-span-2">
+                <div class="flex items-center gap-2.5 mb-2">
+                    <img src="~/img/brand/logo.png" alt="Philisa Abafazi Bethu" width="36" height="36" loading="lazy" decoding="async" class="w-8 h-8 rounded-full bg-white/15" />
                     <span class="text-white font-semibold font-serif">Philisa Abafazi Bethu</span>
                 </div>
                 <p class="text-sm leading-relaxed max-w-md">@s.Home.ServiceNote</p>
-                <p class="text-on-brand-muted text-xs mt-5">55 Strauss Road, Steenberg, 7965, @s["Layout.WesternCape"]</p>
+                <p class="text-on-brand-muted text-xs mt-2">55 Strauss Road, Steenberg, 7965, @s["Layout.WesternCape"]</p>
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s["Layout.Explore"]</h2>
-                <ul class="space-y-2.5 text-sm">
+                <h2 class="text-white font-semibold text-sm mb-2 font-serif">@s["Layout.Explore"]</h2>
+                <ul class="space-y-1.5 text-sm">
                     <li><a href="/About" class="hover:text-white transition-colors">@aboutLabel</a></li>
                     <li><a href="/Programmes" class="hover:text-white transition-colors">@s.Nav.Programmes</a></li>
                     <li><a href="/Resources" class="hover:text-white transition-colors">@s.Nav.Resources</a></li>
@@ -245,17 +247,17 @@
             </div>
 
             <div>
-                <h2 class="text-white font-semibold text-sm mb-4 font-serif">@s["Layout.GetHelpNow"]</h2>
-                <ul class="space-y-2.5 text-sm">
+                <h2 class="text-white font-semibold text-sm mb-2 font-serif">@s["Layout.GetHelpNow"]</h2>
+                <ul class="space-y-1.5 text-sm">
                     <li>@s["Offline.Office"]: <a href="tel:+27215650668" class="hover:text-white">+27 (0)21 565 0668</a></li>
                     <li>@s["Offline.CrisisLine"]: <a href="tel:+27817469889" class="text-amber-300 font-semibold hover:text-amber-200">+27 (0)81 746 9889</a></li>
                     <li>@s["Layout.Email"]: <a href="mailto:admin@@philisaabafazi.org" class="hover:text-white">admin@@philisaabafazi.org</a></li>
-                    <li class="pt-2 text-on-brand-muted text-xs">@s["Layout.GBVHelpline"]: 0800 428 428 (24/7)</li>
+                    <li class="pt-1 text-on-brand-muted text-xs">@s["Layout.GBVHelpline"]: 0800 428 428 (24/7)</li>
                 </ul>
             </div>
         </div>
 
-        <div class="mt-12 pt-6 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-brand-muted">
+        <div class="mt-6 pt-4 border-t border-brand-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-on-brand-muted">
             <p>&copy; @DateTime.Now.Year Philisa Abafazi Bethu Women Centre SA.</p>
         </div>
     </div>

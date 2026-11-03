@@ -519,12 +519,6 @@
   <data name="Staff.SignIn.SignIn" xml:space="preserve">
     <value>Ngena</value>
   </data>
-  <data name="Staff.SignIn.Or" xml:space="preserve">
-    <value>okanye</value>
-  </data>
-  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
-    <value>Qhubeka ngeGoogle</value>
-  </data>
   <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
     <value>Ziiakhawunti zolawulo ze-Philisa Volunteers kuphela ezinokungena apha. Ulilibele igama lokugqithisa? Lisete kwakhona kwiscreen sokungena se-app ye-Philisa Volunteers.</value>
   </data>

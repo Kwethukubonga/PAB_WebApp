@@ -519,12 +519,6 @@
   <data name="Staff.SignIn.SignIn" xml:space="preserve">
     <value>Meld aan</value>
   </data>
-  <data name="Staff.SignIn.Or" xml:space="preserve">
-    <value>of</value>
-  </data>
-  <data name="Staff.SignIn.ContinueGoogle" xml:space="preserve">
-    <value>Gaan voort met Google</value>
-  </data>
   <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
     <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanmeld. Wagwoord vergeet? Stel dit terug op die Philisa Volunteers-toepassing se aanmeldskerm.</value>
   </data>
