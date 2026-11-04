@@ -137,7 +137,8 @@ These are known gaps. Each one has a suggested next step.
 | R9 | If the key certificate is lost, saved situation text can never be opened again. | Old requests become unreadable to staff. | Keep the certificate in Render's settings and a password manager only, and run `tools/database/Test-Restore.ps1` after any change. |
 | R10 | The API error handler logs the raw path, so a failed `/api/support-requests/41` is logged with its id rather than `{id}`. | Low: an id isn't personal, but it is inconsistent with the logging rule. | Use `RequestLoggingMiddleware.Shape()` in `Api/ApiErrorMiddleware.cs` too. |
 | R11 | Backups are made by hand and saved on a team member's computer. | They contain names and phone numbers, and a laptop can be lost or shared. | Schedule backups to private storage, encrypt the backup folder, and delete old ones. |
+| R12 | Staff now sign in with email and password only, but the Content Security Policy still allows Google's sign-in scripts and window (`apis.google.com`, `accounts.google.com`). | Each allowed outside source is one more place a script could come from. | Check whether Firebase's email sign-in still needs them, and remove them from `Security/SecurityHeaders.cs` if not. |
 
 ---
 
-*Last reviewed against the `develop` branch on 25 October 2026 (Render hosting, Neon Postgres, Resend email alerts).*
+*Last reviewed against the `develop` branch on 4 November 2026 (Render hosting, Neon Postgres, Resend email alerts, email-only staff sign-in).*
