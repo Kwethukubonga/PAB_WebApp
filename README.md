@@ -501,6 +501,8 @@ If the live address ever changes, set a repository variable called `SITE_URL` to
 
 `main` is the deployed version, and `develop` is where features are brought together.
 
+Both branches are protected in GitHub (**Settings → Branches**), for everyone including admins. Nothing can be pushed to them directly: every change arrives through a pull request that needs **one approving review** and a passing **Build and test** check (`.github/workflows/dotnet-tests.yml`), on a branch that is up to date with its target. Pull requests are merged with **Create a merge commit**, so the history keeps each one.
+
 ### 12.4 Database, encryption keys and backups
 
 Windows refuses to run `.ps1` scripts by default, so each of the three tools below is started as `powershell -ExecutionPolicy Bypass -File <script>`. That allows that one run only and changes nothing on the computer.
