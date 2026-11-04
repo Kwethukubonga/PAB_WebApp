@@ -49,7 +49,7 @@ public class ReferenceGeneratorTests
         var service = new SupportRequestService(db, new ScriptedGenerator("PAB-AAAAAA", "PAB-BBBBBB"), new NoAlerts(), NullLogger<SupportRequestService>.Instance);
         var reference = await service.SubmitAsync(new SupportRequestInput(
             "Nomsa", "Dlamini", "071 123 4567", "", "Lavender Hill", "phone",
-            "Food Assistance", "Need groceries", "no", "", true));
+            "General Help / Not Sure", "Need groceries", "no", "", true));
 
         Assert.Equal("PAB-BBBBBB", reference);
         Assert.Equal(2, db.SupportRequests.Select(r => r.Reference).Distinct().Count());

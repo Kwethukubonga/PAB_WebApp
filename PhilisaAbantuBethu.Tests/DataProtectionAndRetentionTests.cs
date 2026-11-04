@@ -98,7 +98,7 @@ public class RetentionServiceTests
     private static SupportRequest Request(string status, DateTime submitted, DateTime? closed = null) => new()
     {
         FirstName = "Test", Surname = "Person", Phone = "082 123 4567", Email = "", Area = "Steenberg",
-        ContactMethod = "phone", SupportType = "Food Assistance", Situation = "A situation.",
+        ContactMethod = "phone", SupportType = "General Help / Not Sure", Situation = "A situation.",
         Urgent = "no", Extra = "", Declaration = true, Reference = $"PAB-{Guid.NewGuid():N}"[..10],
         SubmittedAt = submitted, Status = status, StatusUpdatedAt = closed
     };

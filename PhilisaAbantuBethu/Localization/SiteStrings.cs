@@ -3,7 +3,6 @@ namespace PhilisaAbantuBethu.Localization;
 public class NavStrings
 {
 	public string Home { get; init; } = "";
-	public string Programmes { get; init; } = "";
 	public string Resources { get; init; } = "";
 	public string Contact { get; init; } = "";
 	public string RequestSupport { get; init; } = "";
@@ -16,10 +15,6 @@ public class HomeStrings
 	public string HeroSub { get; init; } = "";
 	public string HeroParagraph { get; init; } = "";
 	public string RequestSupport { get; init; } = "";
-	public string ExplorePrograms { get; init; } = "";
-	public string ProgrammesSectionTitle { get; init; } = "";
-	public string ProgrammesSectionSub { get; init; } = "";
-	public string ViewAll { get; init; } = "";
 	public string ResourcesTitle { get; init; } = "";
 	public string ResourcesSub { get; init; } = "";
 	public string ViewResources { get; init; } = "";
@@ -122,7 +117,6 @@ public class SiteStrings
 			Nav = new NavStrings
 			{
 				Home = T("Nav.Home"),
-				Programmes = T("Nav.Programmes"),
 				Resources = T("Nav.Resources"),
 				Contact = T("Nav.Contact"),
 				RequestSupport = T("Nav.RequestSupport")
@@ -134,10 +128,6 @@ public class SiteStrings
 				HeroSub = T("Home.HeroSub"),
 				HeroParagraph = T("Home.HeroParagraph"),
 				RequestSupport = T("Home.RequestSupport"),
-				ExplorePrograms = T("Home.ExplorePrograms"),
-				ProgrammesSectionTitle = T("Home.ProgrammesSectionTitle"),
-				ProgrammesSectionSub = T("Home.ProgrammesSectionSub"),
-				ViewAll = T("Home.ViewAll"),
 				ResourcesTitle = T("Home.ResourcesTitle"),
 				ResourcesSub = T("Home.ResourcesSub"),
 				ViewResources = T("Home.ViewResources"),
