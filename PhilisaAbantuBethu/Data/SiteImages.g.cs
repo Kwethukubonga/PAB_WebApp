@@ -91,12 +91,6 @@ public static class SiteImages
         ["/img/team/sylvia-kruger.jpg"] = new(800, 800, [new(400, "/img/team/sylvia-kruger-400.webp")]),
         ["/img/team/yvonne-botha.jpg"] = new(800, 800, [new(400, "/img/team/yvonne-botha-400.webp")]),
         ["/img/team/zimvo-katsala.jpg"] = new(800, 800, [new(400, "/img/team/zimvo-katsala-400.webp")]),
-        ["/img/testimonials/anna.jpg"] = new(300, 300, [new(300, "/img/testimonials/anna-300.webp")]),
-        ["/img/testimonials/carley.jpg"] = new(300, 300, [new(300, "/img/testimonials/carley-300.webp")]),
-        ["/img/testimonials/ira.jpg"] = new(300, 300, [new(300, "/img/testimonials/ira-300.webp")]),
-        ["/img/testimonials/michelle.jpg"] = new(300, 300, [new(300, "/img/testimonials/michelle-300.webp")]),
-        ["/img/testimonials/sarah.jpg"] = new(300, 300, [new(300, "/img/testimonials/sarah-300.webp")]),
-        ["/img/testimonials/thea.jpg"] = new(300, 300, [new(300, "/img/testimonials/thea-300.webp")]),
     };
 
     /// <summary>What is known about this photo, or null for one that was never converted.</summary>

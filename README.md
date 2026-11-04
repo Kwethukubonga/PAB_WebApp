@@ -1,4 +1,4 @@
-# Philisa Abantu Bethu – Help Centre
+# Philisa Abafazi Bethu Help Centre
 
 [![CI/CD](https://github.com/Kwethukubonga/PAB_WebApp/actions/workflows/dotnet-tests.yml/badge.svg)](https://github.com/Kwethukubonga/PAB_WebApp/actions/workflows/dotnet-tests.yml)
 
@@ -32,9 +32,9 @@ Developed by **Team KANTU** for **Philisa Abafazi Bethu**
 
 ## 1. Overview
 
-The Philisa Abantu Bethu Help Centre is a public website where community members can ask Philisa Abafazi Bethu (PAB) for help, **without creating an account**. The name means *"Heal Our People"*.
+The Philisa Abafazi Bethu (PAB) Help Centre is a public website where community members can ask PAB for help, **without creating an account**. The name means *"Heal Our Women"*.
 
-- **Why it was built:** asking PAB for help currently means phoning them, so people need to already know the organisation. The Help Centre gives anyone a simple online way to reach PAB, and one place to find programmes and resources.
+- **Why it was built:** asking PAB for help currently means phoning them, so people need to already know the organisation. The Help Centre gives anyone a simple online way to reach PAB, and one place to find resources and contact details.
 - **Who uses it:** community members only. There is deliberately no login, because an account would be a barrier for someone in a difficult or unsafe situation.
 
 > For background on PAB and how the requirements were gathered, see the **Philisa Volunteers** README.
@@ -60,7 +60,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | PAB-FR05 | Give PAB the information it needs to respond. | Steps 1–2 | `SupportRequestValidator.Validate` | `FormValidatorTests`, `ApiIntegrationTests.Posting_an_empty_request_returns_400…` |
 | PAB-FR06 | Receive confirmation once a request is submitted. | `/Confirmation` | `RequestSupportModel.OnPostAsync`, `ReferenceGenerator` | `RequestSupport_SavesAValidRequest_AndShowsItsReference`, `ReferenceGeneratorTests` |
 | PAB-FR07 | Access helpful resources. | `/Resources`, `/offline` | `Data/ResourceData.cs` | `ApiIntegrationTests.Resources_lead_with_the_emergency_numbers` |
-| PAB-FR08 | View information about PAB's programmes. | `/Programmes`, `/Programmes/{id}` | `Content/programmes.json`, `Data/ProgrammeContent.cs`, `Api/ContentEndpoints.cs` | `ProgrammeContentTests`, `ApiIntegrationTests.A_programme_comes_back_in_the_language_asked_for` |
+| PAB-FR08 | View information about PAB's programmes. **Withdrawn at PAB's request (November 2026):** the Programmes page and the testimonials came off the website. | No page. The text is still served by `GET /api/programmes` | `Content/programmes.json`, `Data/ProgrammeContent.cs`, `Api/ContentEndpoints.cs` | `ProgrammeContentTests`, `ApiIntegrationTests.A_programme_comes_back_in_the_language_asked_for` |
 | PAB-FR09 | Switch between English, isiXhosa and Afrikaans. | Every page | `Localization/`, `LangExtensions` | `PublicPageTests.A_page_comes_back_in_the_language_asked_for`, `…The_chosen_language_is_remembered_for_the_next_page`, `ApiIntegrationTests.A_programme_comes_back_in_the_language_asked_for` |
 | PAB-FR10 | Submit a request from outside PAB's main service areas. | Step 1 | Area is free text with no area check | `FormValidatorTests` (any area passes) |
 
@@ -95,10 +95,8 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 
 | Page | What It Does |
 |------|--------------|
-| **Home** | Introduces PAB, with buttons to request support or explore programmes |
-| **About Us** | PAB's story, mission, values, founder and team |
-| **Our Programmes** | All ten programmes, each with its own page |
-| **Programme detail** | Overview, objectives, activities, a photo gallery and testimonials |
+| **Home** | Introduces PAB, with a button to request support and links to resources and contact |
+| **About Us** | PAB's story, mission and vision |
 | **Resources** | Emergency numbers and helpful contacts, plus FAQs |
 | **Request Support** | The three-step support request form |
 | **Confirmation** | Confirms the request and gives a reference number |
@@ -118,11 +116,10 @@ After submitting, the person sees a **reference number** (for example `PAB-7KQ39
 
 If something is missing or wrong, the form comes back with what they typed still filled in, a message next to each field that needs attention, and the step with the first problem open. The Submit button locks and shows "Sending…" so a request can't be sent twice.
 
-**Types of support:** Food Assistance, Women's Empowerment, Youth Support, After-school Programme, Senior Care, Baby Saver Programme, Emergency Shelter, Search & Rescue, Social Work Services, and General Help / Not Sure.
+**Types of support:** Emergency Safehouse, Youth Support/Youth Empowerment, Youth and GBV support/advice, Report child abuse/ child in need of care and protection, Report older person abuse, Emergency safehouse (LGBTQ+, cis-gender male), Social work/Internship, and General Help / Not Sure. PAB chose this list. Requests sent before it changed keep the type they were sent with.
 
-### 4.3 Programmes and Resources
+### 4.3 Resources
 
-- **Programmes:** Women's Empowerment, Youth Programme, After-school Programmes, Senior Programme, Community Feeding, Baby Saver, Emergency Safe Houses, Search & Rescue, Social Work Services and Men's Café. Each page uses PAB's own photos, with a gallery that opens pictures full size.
 - **Resources:** contacts grouped into Community Services, Emergency Contacts, Women's Rights, Parenting Resources and Mental Health, plus frequently asked questions such as *"Is my request kept private?"*
 
 ---
@@ -303,7 +300,7 @@ erDiagram
 
 Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists quick.
 
-**Programmes** are not stored in the database. They live in `Content/programmes.json`, with each programme's words in English, isiXhosa and Afrikaans side by side, because they rarely change and are the same for every visitor. The file is built into the app, and `ProgrammeContentTests` checks every programme has its English words, matching translations and pictures that exist.
+**Programmes** are not stored in the database. They live in `Content/programmes.json`, with each programme's words in English, isiXhosa and Afrikaans side by side, because they rarely change and are the same for every visitor. The website no longer shows them (PAB asked for the Programmes page to come off), but `GET /api/programmes` still serves them. The file is built into the app, and `ProgrammeContentTests` checks every programme has its English words, matching translations and pictures that exist.
 
 ---
 
@@ -489,7 +486,7 @@ The website is hosted on **Render** (free plan), built from the project's `Docke
 | **Build and test** | Restores, builds and runs every unit and integration test, keeps the results as a download, and builds the Docker image Render will use |
 | **Deploy to Render** | Only on `main`, and only after the job above passes: asks Render to deploy that exact commit through its deploy hook, then checks the live `/health` |
 
-`.github/workflows/lighthouse.yml` runs on every pull request into `develop` or `main`. It starts the site with production settings and runs Lighthouse three times on the main public pages (Home, About, Programmes, Resources, Request Support, Contact, Privacy). The PR fails if a page's median **Performance** score is below **80** or **Accessibility** below **90**; Best Practices and SEO are reported as warnings. The scores are posted as a comment on the PR and on the run's summary page, with the full reports as a download. The minimums are in `lighthouserc.json`.
+`.github/workflows/lighthouse.yml` runs on every pull request into `develop` or `main`. It starts the site with production settings and runs Lighthouse three times on the main public pages (Home, About, Resources, Request Support, Contact, Privacy). The PR fails if a page's median **Performance** score is below **80** or **Accessibility** below **90**; Best Practices and SEO are reported as warnings. The scores are posted as a comment on the PR and on the run's summary page, with the full reports as a download. The minimums are in `lighthouserc.json`.
 
 To turn the deploy on, add one repository secret under **Settings → Secrets and variables → Actions**:
 - `RENDER_DEPLOY_HOOK`: the service's deploy hook, from Render under **Settings → Deploy Hook**. Treat it like a password: anyone who has it can start a deploy.
@@ -545,13 +542,13 @@ The site creates its tables the first time it starts. If the connection string o
 |------|:------:|
 | All pages, the support form and the contact form | ✔ Complete |
 | English, isiXhosa and Afrikaans | ✔ Complete |
-| PAB's real photos and programme galleries | ✔ Complete |
+| PAB's real photos | ✔ Complete |
 | Saving submissions, Docker and Render hosting | ✔ Complete |
 | Server-side checks, rate limiting and spam trap on both forms | ✔ Complete |
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
 | Security headers, health check and quick exit | ✔ Complete |
-| Automated tests (362) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
+| Automated tests (407) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |
 | Constrained schema, staff notes and indexes | ✔ Complete |

@@ -21,7 +21,7 @@ public class SecurityHeadersMiddleware
         // The stylesheet and both fonts are served from this site now, so the Tailwind CDN and
         // Google Fonts are no longer allowed at all (H1, H3). 'unsafe-inline' has gone from
         // script-src with them: every script here is a file of ours. It stays on style-src only
-        // because a few elements carry a style attribute for a programme's own colour.
+        // because a few elements carry a style attribute (a resource category's own colour, a photo's reserved space).
         //
         // What is still allowed from elsewhere is the staff sign-in: Firebase's own scripts and
         // Google's sign-in window.

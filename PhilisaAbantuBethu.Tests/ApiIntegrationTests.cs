@@ -26,7 +26,7 @@ public class ApiIntegrationTests : IClassFixture<SiteFactory>
         email = "",
         area = "Lavender Hill",
         contactMethod = "phone",
-        supportType = "Emergency Shelter",
+        supportType = "Emergency Safehouse",
         situation = "I need somewhere safe for tonight.",
         urgent = "yes",
         extra = "",
@@ -87,7 +87,7 @@ public class ApiIntegrationTests : IClassFixture<SiteFactory>
         var response = await Caller().PostAsJsonAsync("/api/support-requests", new
         {
             firstName = "Thandi", surname = "Nkosi", phone = "12345", area = "Steenberg",
-            contactMethod = "phone", supportType = "Food Assistance",
+            contactMethod = "phone", supportType = "General Help / Not Sure",
             situation = "We need food parcels.", urgent = "no", declaration = true
         });
 
@@ -342,7 +342,7 @@ public class ApiRateLimitTests
         var body = new
         {
             firstName = "Nomsa", surname = "Mkoka", phone = "082 123 4567", area = "Lavender Hill",
-            contactMethod = "phone", supportType = "Emergency Shelter",
+            contactMethod = "phone", supportType = "Emergency Safehouse",
             situation = "I need somewhere safe for tonight.", urgent = "yes", declaration = true
         };
 
@@ -375,7 +375,7 @@ public class ApiRateLimitTests
     private static readonly object SupportBody = new
     {
         firstName = "Nomsa", surname = "Mkoka", phone = "082 123 4567", area = "Lavender Hill",
-        contactMethod = "phone", supportType = "Emergency Shelter",
+        contactMethod = "phone", supportType = "Emergency Safehouse",
         situation = "I need somewhere safe for tonight.", urgent = "yes", declaration = true
     };
 

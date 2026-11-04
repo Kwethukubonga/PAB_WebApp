@@ -101,7 +101,7 @@ public class TextInputTests
 
     private static SupportRequestInput Valid() => new(
         "Nomsa", "Dlamini", "071 123 4567", "", "Lavender Hill", "phone",
-        "Food Assistance", "We need help with food.", "no", "", true);
+        "General Help / Not Sure", "We need help with food.", "no", "", true);
 }
 
 /// <summary>The same awkward input sent through the whole site.</summary>
@@ -118,7 +118,7 @@ public class EdgeCaseTests : IClassFixture<SiteFactory>
     {
         ["__RequestVerificationToken"] = token, ["FirstName"] = firstName, ["Surname"] = "Dlamini",
         ["Phone"] = "071 123 4567", ["Email"] = "", ["Area"] = "Lavender Hill", ["ContactMethod"] = "phone",
-        ["SupportType"] = "Food Assistance", ["Situation"] = "We need help with food this month.",
+        ["SupportType"] = "General Help / Not Sure", ["Situation"] = "We need help with food this month.",
         ["Urgent"] = "no", ["Extra"] = "", ["Declaration"] = "true", ["Website"] = ""
     };
 
@@ -165,7 +165,7 @@ public class EdgeCaseTests : IClassFixture<SiteFactory>
         var form = Form(token, "TwoNeeds");
         await browser.PostAsync("/RequestSupport", new FormUrlEncodedContent(form));
 
-        form["SupportType"] = "Emergency Shelter";
+        form["SupportType"] = "Emergency Safehouse";
         await browser.PostAsync("/RequestSupport", new FormUrlEncodedContent(form));
 
         Assert.Equal(2, Saved("TwoNeeds"));

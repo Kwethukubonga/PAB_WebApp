@@ -248,7 +248,7 @@ Each link carries its own `lang` attribute, so screen readers say "isiXhosa" cor
 | | |
 |--|--|
 | **Class** | `card`: white, `ink-200` border, 16 px corners, small shadow |
-| **Used for** | Programme cards, resource cards, the reference number, staff request details |
+| **Used for** | Resource cards, the reference number, staff request details |
 | **Linked cards** | Hover deepens the shadow (`hover:shadow-md`); focus shows the purple outline on the whole card |
 
 ### 5.12 Success panel
@@ -306,7 +306,7 @@ The site is server-rendered, so there are no spinners or skeleton screens. The o
 ## 6. Motion
 
 - Short colour transitions on hover and focus only.
-- Nothing moves on its own except the testimonial carousel, which the visitor controls.
+- Nothing moves on its own except two small cues on the home page hero: a pulsing dot and a bouncing arrow.
 - When the phone or computer asks for reduced motion, every animation and smooth scroll is switched off (`prefers-reduced-motion`), including the form's own scrolling.
 
 ---

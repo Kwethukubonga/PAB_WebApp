@@ -22,9 +22,9 @@ public static class DevelopmentSeed
 
     private static readonly Example[] Examples =
     {
-        new(0, "Nomsa", "Mkoka", "Lavender Hill", "Emergency Shelter", "phone", true,
+        new(0, "Nomsa", "Mkoka", "Lavender Hill", "Emergency Safehouse", "phone", true,
             "I had to leave home last night with my two children and we have nowhere to sleep tonight."),
-        new(1, "Thandi", "Nkosi", "Steenberg", "Food Assistance", "whatsapp", false,
+        new(1, "Thandi", "Nkosi", "Steenberg", "General Help / Not Sure", "whatsapp", false,
             "I lost my job last month and the food parcels would help until my grant comes through."),
         new(4, "Gail", "Peters", "Retreat", "Counselling", "phone", true,
             "My daughter is struggling after what happened at school and we would like to speak to someone."),
@@ -32,7 +32,7 @@ public static class DevelopmentSeed
             "I need help understanding a protection order and what happens at the court date."),
         new(26, "Olivia", "Maart", "Seawinds", "Skills Training", "visit", false,
             "I would like to join the sewing workshops and hear about the savings group."),
-        new(70, "Zimvo", "Katsala", "Lotus River", "Youth Support", "whatsapp", false,
+        new(70, "Zimvo", "Katsala", "Lotus River", "Youth Support/Youth Empowerment", "whatsapp", false,
             "My son is 16 and out of school. I want to know what the youth programme offers.")
     };
 

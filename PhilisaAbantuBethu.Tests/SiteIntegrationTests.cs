@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using PhilisaAbantuBethu.Models;
@@ -26,7 +27,7 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
         ["Email"] = "",
         ["Area"] = "Lavender Hill",
         ["ContactMethod"] = "phone",
-        ["SupportType"] = "Food Assistance",
+        ["SupportType"] = "General Help / Not Sure",
         ["Situation"] = "We need help with food this month.",
         ["Urgent"] = "yes",
         ["Extra"] = "",
@@ -116,6 +117,24 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
         var again = await browser.GetAsync("/Confirmation");
         Assert.Equal(HttpStatusCode.Redirect, again.StatusCode);
         Assert.Equal("/RequestSupport", again.Headers.Location!.OriginalString);
+    }
+
+    [Fact]
+    public async Task RequestSupport_SavesTheSafehouseOptionWithItsPunctuationIntact()
+    {
+        // The longest and oddest label on the list: brackets, a plus sign and a comma.
+        const string label = "Emergency safehouse (LGBTQ+, cis-gender male)";
+        var browser = _site.CreateBrowser();
+        var token = await SiteFactory.FormTokenAsync(browser, "/RequestSupport");
+        var form = ValidRequest(token);
+        form["FirstName"] = "Safehouse";
+        form["SupportType"] = label;
+
+        var response = await browser.PostAsync("/RequestSupport", new FormUrlEncodedContent(form));
+
+        Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        var saved = _site.WithDb(db => db.SupportRequests.AsNoTracking().Single(r => r.FirstName == "Safehouse"));
+        Assert.Equal(label, saved.SupportType);
     }
 
     [Theory]
@@ -217,7 +236,7 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
             var request = new SupportRequest
             {
                 FirstName = "Lindiwe", Surname = "Mokoena", Phone = "082 123 4567", Area = "Steenberg",
-                ContactMethod = "whatsapp", SupportType = "Food Assistance", Situation = "Private details",
+                ContactMethod = "whatsapp", SupportType = "General Help / Not Sure", Situation = "Private details",
                 Urgent = "yes", Declaration = true, Reference = "PAB-TESTAB", SubmittedAt = DateTime.UtcNow
             };
             db.SupportRequests.Add(request);

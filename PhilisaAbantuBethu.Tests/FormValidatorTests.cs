@@ -7,7 +7,7 @@ public class FormValidatorTests
 {
     private static SupportRequestInput ValidRequest() => new(
         "Nomsa", "Dlamini", "071 123 4567", "nomsa@example.com", "Lavender Hill", "phone",
-        "Food Assistance", "Need help with groceries this month.", "no", "", true);
+        "General Help / Not Sure", "Need help with groceries this month.", "no", "", true);
 
     [Fact]
     public void SupportRequest_PassesWhenComplete() =>
@@ -23,6 +23,26 @@ public class FormValidatorTests
             new[] { "Area", "ContactMethod", "Declaration", "FirstName", "Phone", "Situation", "SupportType", "Surname", "Urgent" },
             errors.Keys.OrderBy(k => k));
     }
+
+    public static TheoryData<string> EverySupportType()
+    {
+        var data = new TheoryData<string>();
+        foreach (var label in SiteStrings.En.SupportTypes.Concat(SiteStrings.Xh.SupportTypes).Concat(SiteStrings.Af.SupportTypes).Distinct())
+            data.Add(label);
+        return data;
+    }
+
+    [Theory]
+    [MemberData(nameof(EverySupportType))]
+    public void SupportRequest_AcceptsEveryOptionTheFormOffers(string label) =>
+        Assert.DoesNotContain("SupportType", SupportRequestValidator.Validate(ValidRequest() with { SupportType = label }, SiteStrings.En).Keys);
+
+    [Theory]
+    [InlineData("Food Assistance")]
+    [InlineData("Baby Saver Programme")]
+    [InlineData("Search & Rescue")]
+    public void SupportRequest_RefusesAnOptionThatWasTakenOffTheList(string removed) =>
+        Assert.Contains("SupportType", SupportRequestValidator.Validate(ValidRequest() with { SupportType = removed }, SiteStrings.En).Keys);
 
     [Fact]
     public void SupportRequest_RefusesAnInventedSupportType() =>

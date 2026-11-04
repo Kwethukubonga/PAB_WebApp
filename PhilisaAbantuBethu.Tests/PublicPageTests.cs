@@ -15,8 +15,7 @@ public class PublicPageTests : IClassFixture<SiteFactory>
 
     public static TheoryData<string> PublicPages() => new()
     {
-        "/", "/About", "/Programmes", "/Programmes/womens-empowerment",
-        "/Resources", "/Contact", "/RequestSupport", "/Privacy", "/offline"
+        "/", "/About", "/Resources", "/Contact", "/RequestSupport", "/Privacy", "/offline"
     };
 
     [Theory]
@@ -136,7 +135,7 @@ public class PublicPageTests : IClassFixture<SiteFactory>
     [Fact]
     public async Task The_photos_are_lazy_and_say_how_big_they_are()
     {
-        var html = await _site.CreateBrowser().GetStringAsync("/Programmes");
+        var html = await _site.CreateBrowser().GetStringAsync("/About");
 
         // Every photo below the first screen waits, and each one reserves its own space so the
         // page does not jump as they arrive (H2).
@@ -146,26 +145,55 @@ public class PublicPageTests : IClassFixture<SiteFactory>
     }
 
     [Theory]
+    [InlineData("/Programmes")]
+    [InlineData("/Programmes/baby-saver")]
     [InlineData("/Programmes/nope")]
     [InlineData("/Programmes/%3Cscript%3E")]
-    [InlineData("/Programmes/Womens-Empowerment")]
-    public async Task An_address_that_is_not_a_programme_gets_the_404_page(string url)
+    public async Task The_programmes_pages_are_gone_and_give_the_404_page(string url)
     {
         var response = await _site.CreateBrowser().GetAsync(url);
         var html = await response.Content.ReadAsStringAsync();
 
-        // Not another programme's page with 200 (#25): the site's own 404, with a way to reach PAB.
+        // PAB asked for the Programmes page and the testimonials on it to come off the site.
+        // An old link gets the site's own 404 (#25), with a way to reach PAB.
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         Assert.Contains("We can&#x27;t find that page", html);
         Assert.Contains("data-quick-exit", html);
     }
 
-    [Fact]
-    public async Task A_real_programme_still_opens()
+    [Theory]
+    [MemberData(nameof(PublicPages))]
+    public async Task No_public_page_links_to_the_programmes_pages(string url)
     {
-        var response = await _site.CreateBrowser().GetAsync("/Programmes/baby-saver");
+        var html = await _site.CreateBrowser().GetStringAsync(url);
 
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Contains("Baby Saver", await response.Content.ReadAsStringAsync());
+        // The header, the footer and the buttons used to point there; a link now would be a dead end.
+        Assert.DoesNotContain("href=\"/Programmes", html);
+        Assert.DoesNotContain("data-testimonial", html);
+    }
+
+    [Fact]
+    public async Task The_about_page_is_the_short_one()
+    {
+        var html = await _site.CreateBrowser().GetStringAsync("/About");
+
+        // The history and the mission stay. Core values, the founder's journey and the team are off.
+        Assert.Contains("Mission", html);
+        Assert.DoesNotContain("Our Core Values", html);
+        Assert.DoesNotContain("Our Journey", html);
+        Assert.DoesNotContain("Meet the Team", html);
+        Assert.DoesNotContain("/img/team/", html);
+    }
+
+    [Fact]
+    public async Task The_request_form_offers_each_support_type_and_nothing_else()
+    {
+        var html = await _site.CreateBrowser().GetStringAsync("/RequestSupport");
+
+        var select = Regex.Match(html, "<select id=\"supportType\".*?</select>", RegexOptions.Singleline).Value;
+        var offered = Regex.Matches(select, "<option value=\"([^\"]+)\"")
+            .Select(m => WebUtility.HtmlDecode(m.Groups[1].Value));
+
+        Assert.Equal(PhilisaAbantuBethu.Localization.SiteStrings.En.SupportTypes, offered);
     }
 }

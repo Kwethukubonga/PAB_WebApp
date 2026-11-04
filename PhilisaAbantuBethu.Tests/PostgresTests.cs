@@ -196,7 +196,7 @@ public class PostgresTests
     private static readonly object SupportBody = new
     {
         firstName = "Nomsa", surname = "Mkoka", phone = "082 123 4567", area = "Lavender Hill",
-        contactMethod = "phone", supportType = "Emergency Shelter",
+        contactMethod = "phone", supportType = "Emergency Safehouse",
         situation = "I need somewhere safe for tonight.", urgent = "yes", declaration = true
     };
 

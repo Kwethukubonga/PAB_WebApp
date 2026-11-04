@@ -10,7 +10,7 @@ namespace PhilisaAbantuBethu.Tests;
 public class StaffAlertsTests
 {
     // Every personal field is distinctive, so the test can prove none of them reach the email.
-    private static SupportRequest Request(string supportType = "Emergency Shelter", string urgent = "yes") => new()
+    private static SupportRequest Request(string supportType = "Emergency Safehouse", string urgent = "yes") => new()
     {
         Id = 42,
         Reference = "PAB-7K2Q9M",
@@ -41,7 +41,7 @@ public class StaffAlertsTests
     {
         var email = StaffAlerts.ForSupportRequest(Request(), "https://pab.test/");
 
-        Assert.Equal("New support request · URGENT · Emergency Shelter", email.Subject);
+        Assert.Equal("New support request · URGENT · Emergency Safehouse", email.Subject);
         Assert.Contains("PAB-7K2Q9M", email.Text);
         Assert.Contains("Urgent:     Yes", email.Text);
         // Stored in UTC, shown in Cape Town time.
@@ -63,17 +63,19 @@ public class StaffAlertsTests
     [Fact]
     public void ANonUrgentRequest_SaysSo()
     {
-        var email = StaffAlerts.ForSupportRequest(Request("Food Assistance", "no"), "");
+        var email = StaffAlerts.ForSupportRequest(Request("General Help / Not Sure", "no"), "");
 
-        Assert.Equal("New support request · Food Assistance", email.Subject);
+        Assert.Equal("New support request · General Help / Not Sure", email.Subject);
         Assert.Contains("Urgent:     No", email.Text);
         Assert.Contains("Staff → Support requests", email.Text);
     }
 
     [Theory]
-    [InlineData("Inkxaso Yokutya", "Food Assistance")]
-    [InlineData("Voedselbystand", "Food Assistance")]
-    [InlineData("Emergency Shelter", "Emergency Shelter")]
+    [InlineData("Uncedo Ngokubanzi / Andiqinisekanga", "General Help / Not Sure")]
+    [InlineData("Veilige Noodhuis", "Emergency Safehouse")]
+    [InlineData("Emergency Safehouse", "Emergency Safehouse")]
+    // A request sent before the list changed keeps its old label.
+    [InlineData("Food Assistance", "Food Assistance")]
     [InlineData("Something else", "Something else")]
     public void TheSupportType_IsAlwaysInEnglish(string chosen, string english) =>
         Assert.Equal(english, StaffAlerts.EnglishSupportType(chosen));
@@ -134,7 +136,7 @@ public class ResendEmailSenderTests
     {
         var handler = new CatchingHandler(HttpStatusCode.OK);
 
-        await Sender(handler).SendAsync(new EmailMessage("New support request · Food Assistance", "Reference: PAB-7K2Q9M"));
+        await Sender(handler).SendAsync(new EmailMessage("New support request · General Help / Not Sure", "Reference: PAB-7K2Q9M"));
 
         Assert.Equal(HttpMethod.Post, handler.Request!.Method);
         Assert.Equal("https://api.resend.com/emails", handler.Request.RequestUri!.ToString());
@@ -179,7 +181,7 @@ public class StaffAlertsSiteTests : IClassFixture<SiteFactory>
             ["Email"] = "",
             ["Area"] = "Lavender Hill",
             ["ContactMethod"] = "phone",
-            ["SupportType"] = "Inkxaso Yokutya",
+            ["SupportType"] = "Uncedo Ngokubanzi / Andiqinisekanga",
             ["Situation"] = "We need help with food this month.",
             ["Urgent"] = "yes",
             ["Extra"] = "",
@@ -200,7 +202,7 @@ public class StaffAlertsSiteTests : IClassFixture<SiteFactory>
         var (_, reference) = await SubmitAsync("Nomsa");
 
         var email = Assert.Single(_site.Emails.Sent, e => e.Text.Contains(reference));
-        Assert.Equal("New support request · URGENT · Food Assistance", email.Subject);
+        Assert.Equal("New support request · URGENT · General Help / Not Sure", email.Subject);
         Assert.DoesNotContain("Nomsa", email.Text);
         Assert.DoesNotContain("food this month", email.Text);
     }

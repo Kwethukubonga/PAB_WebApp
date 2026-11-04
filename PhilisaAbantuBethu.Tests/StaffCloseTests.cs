@@ -18,7 +18,7 @@ public class StaffCloseTests : IClassFixture<SiteFactory>
         var request = new SupportRequest
         {
             FirstName = "Lindiwe", Surname = "Mokoena", Phone = "082 123 4567", Area = "Steenberg",
-            ContactMethod = "phone", SupportType = "Food Assistance", Situation = "Private details",
+            ContactMethod = "phone", SupportType = "General Help / Not Sure", Situation = "Private details",
             Urgent = "no", Declaration = true, Reference = reference, SubmittedAt = DateTime.UtcNow, Status = status
         };
         db.SupportRequests.Add(request);

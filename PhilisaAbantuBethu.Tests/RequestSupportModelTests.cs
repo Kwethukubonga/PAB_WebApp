@@ -29,7 +29,7 @@ public class RequestSupportModelTests
             Email = "nomsa@example.com",
             Area = "Lavender Hill",
             ContactMethod = "phone",
-            SupportType = "Food Assistance",
+            SupportType = "General Help / Not Sure",
             Situation = "Need help with groceries this month.",
             Urgent = "no",
             Extra = "",

@@ -1,3 +1,4 @@
+using PhilisaAbantuBethu.Data;
 using PhilisaAbantuBethu.Localization;
 
 namespace PhilisaAbantuBethu.Tests;
@@ -5,9 +6,9 @@ namespace PhilisaAbantuBethu.Tests;
 public class SiteStringsTests
 {
     [Theory]
-    [InlineData("en", "Home", "Food Assistance")]
-    [InlineData("xh", "Ikhaya", "Inkxaso Yokutya")]
-    [InlineData("af", "Tuis", "Voedselbystand")]
+    [InlineData("en", "Home", "Emergency Safehouse")]
+    [InlineData("xh", "Ikhaya", "Emergency Safehouse")]
+    [InlineData("af", "Tuis", "Veilige Noodhuis")]
     public void EachLanguage_IsFilledFromItsOwnFile(string lang, string home, string firstSupportType)
     {
         var s = SiteStrings.For(lang);
@@ -35,9 +36,36 @@ public class SiteStringsTests
     }
 
     [Fact]
+    public void TheSupportTypes_AreTheOnesPabAskedFor_InThatOrder()
+    {
+        Assert.Equal(new[]
+        {
+            "Emergency Safehouse",
+            "Youth Support/Youth Empowerment",
+            "Youth and GBV support/advice",
+            "Report child abuse/ child in need of care and protection",
+            "Report older person abuse",
+            "Emergency safehouse (LGBTQ+, cis-gender male)",
+            "Social work/Internship",
+            "General Help / Not Sure"
+        }, SiteStrings.En.SupportTypes);
+    }
+
+    [Theory]
+    [InlineData("en")]
+    [InlineData("xh")]
+    [InlineData("af")]
+    public void EverySupportType_FitsTheDatabaseColumn(string lang)
+    {
+        // The label is saved as text; a longer one would be refused by PostgreSQL at the last step.
+        Assert.All(SiteStrings.For(lang).SupportTypes,
+            label => Assert.InRange(label.Length, 1, AppDbContext.ChoiceMax));
+    }
+
+    [Fact]
     public void Lists_KeepTheirLength()
     {
-        Assert.Equal(10, SiteStrings.En.SupportTypes.Length);
+        Assert.Equal(8, SiteStrings.En.SupportTypes.Length);
         Assert.Equal(4, SiteStrings.En.Confirmation.Steps.Length);
     }
 
