@@ -138,7 +138,7 @@ sequenceDiagram
     participant A as App (/Staff/SignIn)
     participant FS as Firestore
 
-    St->>FA: email + password, or Google
+    St->>FA: email + password
     FA-->>St: ID token
     St->>A: POST ID token
     A->>A: check Google's signature, issuer, audience, expiry
