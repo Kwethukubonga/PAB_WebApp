@@ -41,7 +41,6 @@ It covers the web app in this repository. The Android app's side (Firebase, Fire
 
 | What stops it | Where in the code |
 |---------------|-------------------|
-| **Leave this site** button, or Esc twice, swaps the page for a weather search. `location.replace()` means Back doesn't return here. | `Pages/Shared/_Layout.cshtml`, `wwwroot/js/site.js` (quick exit) |
 | `Referrer-Policy: no-referrer`, so the next site visited never learns the person came from a help page | `Security/SecurityHeaders.cs` |
 | The offline copy keeps only the public Resources page. Nothing typed, no reference number, no staff page, no API answer. The Resources FAQ has a button to clear it. | `wwwroot/sw.js`, `wwwroot/js/site.js` |
 | No public account, so there is no password for an abuser to force out of someone, and nothing to log in to later | By design: `POST /RequestSupport` and `POST /api/support-requests` are anonymous |
@@ -114,7 +113,7 @@ It covers the web app in this repository. The Android app's side (Firebase, Fire
 | **S**poofing | Pretending to be PAB staff | Firebase token check + Firestore admin role |
 | **T**ampering | Changing a request or its status | Staff-only API and pages; anti-forgery tokens; server-side validation |
 | **R**epudiation | Denying who closed a request | `HandledBy` and `StatusUpdatedAt` recorded on every status change |
-| **I**nformation disclosure | Someone reading what a person wrote | Encryption at rest, staff-only reads, no personal data in logs or emails, quick exit, no-referrer |
+| **I**nformation disclosure | Someone reading what a person wrote | Encryption at rest, staff-only reads, no personal data in logs or emails, no-referrer |
 | **D**enial of service | Flooding the forms | Rate limiting, request size limits, spam trap |
 | **E**levation of privilege | A volunteer acting as an admin | Role only set in the Firebase console; checked on every API call |
 
@@ -132,7 +131,7 @@ These are known gaps. Each one has a suggested next step.
 | R4 | Viewing a request is not logged, only status changes. | A nosy staff member could read requests without leaving a trace. | Log "staff X opened request Y" (no contents) for the detail page and API. |
 | R5 | Every admin can see every request. | Volunteers with the admin role may not need GBV details. | A separate "case worker" role for the staff area. |
 | R6 | Staff sign-in strength depends on Firebase. Two-factor sign-in isn't required. | A guessed or phished admin password opens every request. | Turn on multi-factor authentication for admin accounts in Firebase. |
-| R7 | Pages a person visited stay in their browser history; the quick exit only replaces the current page. | An abuser checking the history can see the site was used. | Add a short "browse safely" tip (private window, clear history) on the Home and Request Support pages. |
+| R7 | Pages a person visited stay in their browser history, and nothing on the page lets someone leave at once if somebody walks in while the site is open. | An abuser checking the history, or walking in, can see the site was used. | None planned. The Resources FAQ already explains how to clear this site from the history and use a private window. |
 | R8 | The rate limit is per address. | Many machines can still send spam, and people sharing one address (a clinic's Wi-Fi) share a limit. | Watch the logs once live; add a CAPTCHA only if spam gets through. |
 | R9 | If the key certificate is lost, saved situation text can never be opened again. | Old requests become unreadable to staff. | Keep the certificate in Render's settings and a password manager only, and run `tools/database/Test-Restore.ps1` after any change. |
 | R10 | The API error handler logs the raw path, so a failed `/api/support-requests/41` is logged with its id rather than `{id}`. | Low: an id isn't personal, but it is inconsistent with the logging rule. | Use `RequestLoggingMiddleware.Shape()` in `Api/ApiErrorMiddleware.cs` too. |

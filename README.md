@@ -70,7 +70,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 |----|-------------|----------------|------|-----------|
 | PAB-FR11 | Send the PAB office a general message. | `/Contact` | `ContactValidator`, `ContactService` | `ContactModelTests`, `ApiIntegrationTests.A_valid_contact_message_returns_204…` |
 | PAB-FR12 | PAB staff can see and act on requests. | `/Staff/Requests` | `Pages/Staff/`, `SupportRequestService` | `SiteIntegrationTests` staff cases, `ApiIntegrationTests` listing and status cases |
-| PAB-FR13 | Leave the site at once if somebody walks in. | Every public page | `site.js` quick exit, Esc twice | `PublicPageTests.Every_public_page_has_the_quick_exit_button` (all nine pages) |
+| PAB-FR13 | Withdrawn. The "Leave this site" button and the Esc-twice shortcut were taken off the site. | None | None | `PublicPageTests.No_public_page_has_a_quick_exit_button` checks that it stays off every public page |
 | PAB-FR14 | One API that both clients can use. | `/api/*` | `Api/` | The whole of `ApiIntegrationTests`. The Android app does not call it yet (planned: admins read web requests through it). |
 | PAB-FR15 | The emergency numbers work with no data. | `/Resources`, `/offline` | `wwwroot/sw.js` | `ServiceWorkerTests` (what the worker keeps and what it never keeps), and checked by hand with the network switched off |
 
@@ -85,7 +85,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | **Usability** | The support form is split into three short steps with a progress bar and a summary before submitting. **Request Support** is always in the header. |
 | **Reliability** | Requests are saved before the confirmation page is shown, and Render only switches to a new deploy once `/health` answers. |
 | **Security** | Every submission is checked on the server, the forms are rate-limited and have a spam trap, staff pages need a PAB admin sign-in, and every page sends strict security headers (see section 9). |
-| **Safety** | A **Leave this site** button on every public page (or Esc twice) swaps the page for a weather search and opens the same search in a new tab, for someone who needs to hide that they were looking for help. |
+| **Safety** | The emergency numbers work with no data, and the Resources page explains how to clear this site from a phone's history and take its offline copy off the phone. |
 
 ---
 
@@ -131,7 +131,7 @@ If something is missing or wrong, the form comes back with what they typed still
 | Framework | ASP.NET Core Razor Pages (.NET 10), C# |
 | Database | Postgres on the live site and SQLite on a developer's computer, both through Entity Framework Core 10 |
 | Styling | Tailwind CSS, with Lora and Source Sans 3 fonts |
-| Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery, quick exit) |
+| Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery) |
 | Staff sign-in | Firebase Authentication, the same accounts as the Philisa Volunteers app |
 | Hosting | Docker, on Render |
 | Testing and CI/CD | xUnit, ASP.NET Core integration tests, GitHub Actions |
@@ -320,7 +320,6 @@ Who could misuse the information on this site, what stops each of them, and the 
 | Cross-site request forgery | Razor Pages add and check an anti-forgery token on every form |
 | Cross-site scripting | Razor encodes anything a user types before displaying it |
 | SQL injection | Entity Framework uses parameterised queries |
-| Quick exit | **Leave this site** (or Esc twice) opens a weather search in a new tab and swaps the current tab for it too. The new tab has no history of this site. Back in the old tab can still reach the page before it, because a page can't clear a tab's history. |
 | Logs | One line per request: method, path, status and time. The parts of a path that identify a request are reduced to a shape, so `/api/support-requests/41` is logged as `/api/support-requests/{id}`. No addresses, no query strings, nothing from a form. |
 | Encryption at rest | The two columns that hold what somebody wrote about their situation are encrypted with ASP.NET Data Protection, so a copy of the database or a backup can't be read. The keys are kept in the database too, locked with a certificate that only the host holds (section 12.4). Everything else stays readable so staff can work. |
 | Staff email alerts | The email about a new request carries only the reference, the kind of help, whether it's urgent and the time. Names, phone numbers, email addresses, the area and what the person wrote are never emailed, because inboxes get forwarded, synced to phones and read over shoulders. Staff sign in to see the rest. Contact message emails carry only the subject and the time; who sent it and what they wrote are on **Staff → Messages**. |
@@ -549,7 +548,7 @@ The site creates its tables the first time it starts. If the connection string o
 | Server-side checks, rate limiting and spam trap on both forms | ✔ Complete |
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
-| Security headers, health check and quick exit | ✔ Complete |
+| Security headers and health check | ✔ Complete |
 | Automated tests (407) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |

@@ -21,7 +21,6 @@
 
 - [ ] No personal details (names, phone numbers, emails, what someone wrote) in logs, emails or error messages
 - [ ] Staff pages stay behind the staff sign-in, `no-store` and `noindex`
-- [ ] The quick exit button is still on every public page
 
 ## Before merging
 

@@ -117,12 +117,6 @@
   <data name="Layout.SkipContent" xml:space="preserve">
     <value>Tsibela kumxholo</value>
   </data>
-  <data name="Layout.LeaveSite" xml:space="preserve">
-    <value>Phuma kule sayithi</value>
-  </data>
-  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
-    <value>Ihamba ngoko nangoko iye kwiphepha lemozulu. Ungacofa kwakhona u-Esc kabini.</value>
-  </data>
   <data name="Layout.Main" xml:space="preserve">
     <value>Ephambili</value>
   </data>
@@ -830,8 +824,5 @@
   </data>
   <data name="Staff.Details.UnknownStatus" xml:space="preserve">
     <value>Elo nqanaba asilolinye kwala: Entsha, Iyaqhubeka okanye Ivaliwe, ngoko akukho nto itshintshiweyo.</value>
-  </data>
-  <data name="Layout.LeaveShort" xml:space="preserve">
-    <value>Phuma</value>
   </data>
 </root>

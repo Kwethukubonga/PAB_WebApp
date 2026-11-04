@@ -13,7 +13,7 @@ The dashed boxes are trust boundaries: data crossing one of them is checked befo
 ```mermaid
 flowchart LR
     subgraph Public["Public internet - untrusted"]
-        Visitor["Visitor's browser<br/>forms, quick exit, offline Resources"]
+        Visitor["Visitor's browser<br/>forms, offline Resources"]
     end
 
     subgraph StaffSide["PAB staff - signed in"]

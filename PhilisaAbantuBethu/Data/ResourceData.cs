@@ -178,8 +178,7 @@ public static class ResourceData
                 "Hayi. Nangona i-Philisa ixhasa ngokukodwa indawo ye-Cape Flats, unokwanela ukuthumela isicelo ngaphandle kwezo ndawo kwaye iqela liza kunika ingcebiso apho kunokwenzeka.",
                 "Nee. Alhoewel Philisa hoofsaaklik die Cape Flats-area bedien, kan jy steeds 'n versoek van buite hierdie areas indien en die span sal jou waar moontlik adviseer.")),
 
-        // Part of the quick exit work (G4): leaving the page is not enough if the visit is still
-        // in the browser's history.
+        // Part of keeping a visit private (G4): the visit can still be in the browser's history.
         new(new("How do I remove this site from my browser history?",
                 "Ndiyisusa njani le sayithi kwimbali yesikhangeli sam?",
                 "Hoe verwyder ek hierdie werf uit my blaaigeskiedenis?"),

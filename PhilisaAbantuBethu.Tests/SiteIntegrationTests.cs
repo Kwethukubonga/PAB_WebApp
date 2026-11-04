@@ -90,7 +90,6 @@ public class SiteIntegrationTests : IClassFixture<SiteFactory>
         var html = await _site.CreateBrowser().GetStringAsync("/");
 
         Assert.DoesNotContain("NPO 123-456", html);
-        Assert.Contains("data-quick-exit", html);
     }
 
     [Fact]
