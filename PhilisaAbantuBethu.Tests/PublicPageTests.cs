@@ -30,6 +30,16 @@ public class PublicPageTests : IClassFixture<SiteFactory>
 
     [Theory]
     [MemberData(nameof(PublicPages))]
+    public async Task Every_public_page_has_a_link_to_the_staff_sign_in(string url)
+    {
+        var html = await _site.CreateBrowser().GetStringAsync(url);
+
+        // Staff used to have to know the address. The footer links to it from every page.
+        Assert.Contains("href=\"/Staff/SignIn\"", html);
+    }
+
+    [Theory]
+    [MemberData(nameof(PublicPages))]
     public async Task No_public_page_asks_another_server_for_anything(string url)
     {
         var html = await _site.CreateBrowser().GetStringAsync(url);
