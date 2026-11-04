@@ -9,7 +9,7 @@ How both apps look and behave: the colours, type and spacing they share, and eve
 | Principle | What it means on screen |
 |-----------|-------------------------|
 | **Calm, not alarming** | Lavender and cream, not red. Red is kept for urgent things only: errors, the urgent pill, the crisis line. |
-| **Safe to be seen using** | A quick exit on every public page (in the header on phones), no imagery that shouts "abuse", nothing that would look alarming over someone's shoulder. |
+| **Safe to be seen using** | No imagery that shouts "abuse", nothing that would look alarming over someone's shoulder. |
 | **Plain and warm** | Short sentences, the same words in all three languages, never jokey. |
 | **Works on a cheaper phone** | Self-hosted fonts (152 KB for both), no CDN, one small stylesheet, 44 px touch targets. |
 | **Readable by everyone** | Every text colour pair passes WCAG AA (4.5:1). Focus is always visible. Motion stops when the phone asks for less. |
@@ -37,7 +37,7 @@ Greys tinted slightly warm rather than flat grey. `ink-500` is the lightest colo
 
 | Token | Hex | Used for | Contrast |
 |-------|-----|----------|----------|
-| `ink-900` | `#1F2937` | Headings and body text, quick exit button | 14.2:1 on cream |
+| `ink-900` | `#1F2937` | Headings and body text | 14.2:1 on cream |
 | `ink-700` | `#374151` | Secondary text, field labels | 10.3:1 on white |
 | `ink-600` | `#57534E` | Muted text, inactive tabs | 7.4:1 on cream |
 | `ink-500` | `#6B7280` | Placeholders, step labels (the lightest text) | 4.8:1 on white, 4.7:1 on cream |
@@ -149,17 +149,7 @@ All three are pill-shaped, at least 44 px high, `text-sm` semibold, with an opti
 
 The busy state stops a form being sent twice. It resets if the visitor comes back with the browser's Back button.
 
-### 5.2 Quick exit
-
-| | |
-|--|--|
-| **Where** | On every public page; hidden on staff pages. **Phones:** a short **Leave** button in the header, so it never covers the page. **Tablets and up:** **Leave this site**, fixed bottom-right. |
-| **Looks like** | `ink-900` pill with white text and an × icon. The corner button has a shadow and sits above everything else (`z-60`). |
-| **States** | Hover: black. Focus: purple outline. |
-| **Behaviour** | Tap, or press Esc twice within a second, and a weather search opens in a new tab while this tab is swapped for the same page. The new tab has no history of the site, so Back there can't return to it. If a pop-up blocker stops the new tab, this tab still leaves. |
-| **Accessibility** | Screen readers hear the label and a hint that it leaves straight away |
-
-### 5.3 Text fields
+### 5.2 Text fields
 
 Inputs, selects and text areas on the Request Support and Contact forms.
 
@@ -173,14 +163,14 @@ Inputs, selects and text areas on the Request Support and Contact forms.
 
 Every field has a visible `label` above it (`text-sm`, medium, `ink-700`). Required fields end with `*`.
 
-### 5.4 Field error message
+### 5.3 Field error message
 
 | | |
 |--|--|
 | **Looks like** | `text-sm`, medium, red (`text-red-700`, 6.5:1 on white), 6 px under the field |
 | **Content** | What to do, not what went wrong: "Enter a South African cellphone number, like 082 123 4567" |
 
-### 5.5 Form error banner
+### 5.4 Form error banner
 
 Shown above a form when something stops the whole form, such as an expired page.
 
@@ -189,7 +179,7 @@ Shown above a form when something stops the whole form, such as an expired page.
 | **Looks like** | Light red panel (`red-50`), `red-200` border, 12 px corners, semibold `red-800` text (7.6:1) |
 | **Accessibility** | `role="alert"`, so it is read out as soon as it appears |
 
-### 5.6 Choice cards (radio buttons)
+### 5.5 Choice cards (radio buttons)
 
 Used for "How should we contact you?", support type and urgency.
 
@@ -200,7 +190,7 @@ Used for "How should we contact you?", support type and urgency.
 | Chosen | `brand-700` border and `brand-50` background across the whole card, not only the small circle |
 | Focus | 2 px purple ring round the whole card |
 
-### 5.7 Step indicator (Request Support)
+### 5.6 Step indicator (Request Support)
 
 The form is split into three steps: About you, Support needed, Confirm and submit.
 
@@ -212,7 +202,7 @@ The form is split into three steps: About you, Support needed, Confirm and submi
 
 The lines between circles turn green once the step before is complete. On phones the step names are hidden and only the circles show. **Back** is hidden on step 1 rather than greyed out. On the last step, **Next** is replaced by the Submit button, and the summary is filled in from the earlier steps.
 
-### 5.8 Status pills (staff area)
+### 5.7 Status pills (staff area)
 
 | Pill | Class | Colours |
 |------|-------|---------|
@@ -223,7 +213,7 @@ The lines between circles turn green once the step before is complete. On phones
 
 `text-xs`, bold, uppercase, fully rounded. The pill for a status is chosen in one place, `Staff/StaffText.cs` (`StatusPill`), so the same status is always the same colour.
 
-### 5.9 Filter tabs (staff request list)
+### 5.8 Filter tabs (staff request list)
 
 | State | Looks like |
 |-------|------------|
@@ -231,7 +221,7 @@ The lines between circles turn green once the step before is complete. On phones
 | Hover | Border turns `brand-700` |
 | Selected | `brand-700` fill, white text, count bubble in translucent white; `aria-current="page"` |
 
-### 5.10 Language switcher
+### 5.9 Language switcher
 
 A pill-shaped group of three links (English, isiXhosa, Afrikaans) in the header and the mobile menu.
 
@@ -243,7 +233,7 @@ A pill-shaped group of three links (English, isiXhosa, Afrikaans) in the header 
 
 Each link carries its own `lang` attribute, so screen readers say "isiXhosa" correctly.
 
-### 5.11 Cards
+### 5.10 Cards
 
 | | |
 |--|--|
@@ -251,7 +241,7 @@ Each link carries its own `lang` attribute, so screen readers say "isiXhosa" cor
 | **Used for** | Resource cards, the reference number, staff request details |
 | **Linked cards** | Hover deepens the shadow (`hover:shadow-md`); focus shows the purple outline on the whole card |
 
-### 5.12 Success panel
+### 5.11 Success panel
 
 Shown after the Contact form is sent, and on the Confirmation page.
 
@@ -260,14 +250,14 @@ Shown after the Contact form is sent, and on the Confirmation page.
 | **Looks like** | Light green panel with a round `status-success` tick, a heading and a short message |
 | **Confirmation page** | Also shows the reference number in a card with a **Copy** button |
 
-### 5.13 Copy button (reference number)
+### 5.12 Copy button (reference number)
 
 | State | Looks like |
 |-------|------------|
 | Default | "Copy" with a copy icon |
 | Copied | Label changes to "Copied" in the page's language for a moment, then changes back |
 
-### 5.14 FAQ accordion (Resources)
+### 5.13 FAQ accordion (Resources)
 
 | State | Looks like |
 |-------|------------|
@@ -276,18 +266,18 @@ Shown after the Contact form is sent, and on the Confirmation page.
 
 Only one answer is open at a time.
 
-### 5.15 Mobile menu
+### 5.14 Mobile menu
 
 | State | Looks like |
 |-------|------------|
 | Closed | Hamburger button; `aria-expanded="false"` |
 | Open | Full-width menu under the header with the links and the language switcher; `aria-expanded="true"` |
 
-### 5.16 Skip link
+### 5.15 Skip link
 
 Off screen until the first Tab press, then shown top-left as a white pill: "Skip to content". It jumps past the header to `<main>`.
 
-### 5.17 Error pages
+### 5.16 Error pages
 
 | Page | When | What it shows |
 |------|------|---------------|
@@ -295,9 +285,9 @@ Off screen until the first Tab press, then shown top-left as a white pill: "Skip
 | 429 | More than 5 forms from one connection in 10 minutes | "Please wait a few minutes", and the crisis line, so nobody in danger is turned away with nothing |
 | 500 | Something broke | "Something went wrong", "Please try again, or call us" |
 
-Every error page keeps the header, the quick exit and the emergency numbers.
+Every error page keeps the header and the emergency numbers.
 
-### 5.18 Loading
+### 5.17 Loading
 
 The site is server-rendered, so there are no spinners or skeleton screens. The only waiting state is a form being sent (5.1, busy). Photos are WebP at a width the browser picks for the screen. Those below the fold load lazily, and each has its real width and height set, so the page doesn't jump while they load (`Pages/Shared/_Image.cshtml`).
 

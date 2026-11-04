@@ -117,12 +117,6 @@
   <data name="Layout.SkipContent" xml:space="preserve">
     <value>Spring na inhoud</value>
   </data>
-  <data name="Layout.LeaveSite" xml:space="preserve">
-    <value>Verlaat hierdie webwerf</value>
-  </data>
-  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
-    <value>Gaan dadelik na 'n weerblad. Jy kan ook Esc twee keer druk.</value>
-  </data>
   <data name="Layout.Main" xml:space="preserve">
     <value>Hoof</value>
   </data>
@@ -830,8 +824,5 @@
   </data>
   <data name="Staff.Details.UnknownStatus" xml:space="preserve">
     <value>Daardie status is nie Nuut, Aan die gang of Gesluit nie, so niks is verander nie.</value>
-  </data>
-  <data name="Layout.LeaveShort" xml:space="preserve">
-    <value>Verlaat</value>
   </data>
 </root>

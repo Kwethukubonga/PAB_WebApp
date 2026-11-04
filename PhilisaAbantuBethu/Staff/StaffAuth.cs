@@ -29,7 +29,7 @@ public static class StaffAuth
 
 /// <summary>
 /// Base for the staff pages. Requests can describe abuse, so the pages are never stored in a
-/// browser or proxy cache, never indexed, and leave out the public quick exit button.
+/// browser or proxy cache and never indexed.
 /// </summary>
 public abstract class StaffPageModel : PageModel
 {
@@ -37,7 +37,6 @@ public abstract class StaffPageModel : PageModel
     {
         Response.Headers.CacheControl = "no-store";
         Response.Headers["X-Robots-Tag"] = "noindex, nofollow";
-        ViewData["HideQuickExit"] = true;
         ViewData["NoIndex"] = true;
         base.OnPageHandlerExecuting(context);
     }

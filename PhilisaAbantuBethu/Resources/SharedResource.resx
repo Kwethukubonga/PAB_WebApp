@@ -117,12 +117,6 @@
   <data name="Layout.SkipContent" xml:space="preserve">
     <value>Skip to content</value>
   </data>
-  <data name="Layout.LeaveSite" xml:space="preserve">
-    <value>Leave this site</value>
-  </data>
-  <data name="Layout.LeavesStraightAwayWeather" xml:space="preserve">
-    <value>Leaves straight away for a weather page. You can also press Esc twice.</value>
-  </data>
   <data name="Layout.Main" xml:space="preserve">
     <value>Main</value>
   </data>
@@ -830,8 +824,5 @@
   </data>
   <data name="Staff.Details.UnknownStatus" xml:space="preserve">
     <value>That status is not one of New, In progress or Closed, so nothing was changed.</value>
-  </data>
-  <data name="Layout.LeaveShort" xml:space="preserve">
-    <value>Leave</value>
   </data>
 </root>

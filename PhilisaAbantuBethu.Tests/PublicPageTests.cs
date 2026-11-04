@@ -4,8 +4,8 @@ using System.Text.RegularExpressions;
 namespace PhilisaAbantuBethu.Tests;
 
 /// <summary>
-/// The things every public page has to get right, whichever page somebody lands on: a way out,
-/// the right language, and no requests going to anybody else's server (F1 to F5, G4, H1, H3).
+/// The things every public page has to get right, whichever page somebody lands on: the right
+/// language, and no requests going to anybody else's server (F1 to F5, H1, H3).
 /// </summary>
 public class PublicPageTests : IClassFixture<SiteFactory>
 {
@@ -20,12 +20,12 @@ public class PublicPageTests : IClassFixture<SiteFactory>
 
     [Theory]
     [MemberData(nameof(PublicPages))]
-    public async Task Every_public_page_has_the_quick_exit_button(string url)
+    public async Task No_public_page_has_a_quick_exit_button(string url)
     {
         var html = await _site.CreateBrowser().GetStringAsync(url);
 
-        // Somebody may need to leave the moment the person hurting them walks in (G4).
-        Assert.Contains("data-quick-exit", html);
+        // The "Leave this site" button came off every page, on a phone and on a bigger screen.
+        Assert.DoesNotContain("data-quick-exit", html);
     }
 
     [Theory]
@@ -158,7 +158,6 @@ public class PublicPageTests : IClassFixture<SiteFactory>
         // An old link gets the site's own 404 (#25), with a way to reach PAB.
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         Assert.Contains("We can&#x27;t find that page", html);
-        Assert.Contains("data-quick-exit", html);
     }
 
     [Theory]
