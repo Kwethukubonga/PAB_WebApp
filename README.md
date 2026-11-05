@@ -189,7 +189,7 @@ The **Contact** form works the same way, saving to `ContactInquiries`. PAB gets 
 
 ### 6.2 How Staff Sign In
 
-Staff use the admin account they already have in the Philisa Volunteers app, so there's no second set of passwords. They reach the sign-in page from the **Staff sign-in** link at the bottom of every public page.
+Staff use the admin account they already have in the Philisa Volunteers app, so there's no second set of passwords. There is no link to the sign-in page on the public site. PAB's team are given the address, `/Staff/SignIn`, directly.
 
 1. On `/Staff/SignIn` the browser signs in to Firebase with an email and password and sends the ID token to the server.
 2. The server checks the token's signature and that it was issued for the `pab-volunteers` project (`Staff/FirebaseTokenVerifier.cs`).
@@ -549,7 +549,7 @@ The site creates its tables the first time it starts. If the connection string o
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
 | Security headers and health check | ✔ Complete |
-| Automated tests (414) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
+| Automated tests (407) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |
 | Constrained schema, staff notes and indexes | ✔ Complete |
