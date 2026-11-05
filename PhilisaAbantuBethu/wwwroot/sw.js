@@ -8,12 +8,10 @@
  * Deliberately narrow. Nothing a person types is cached, no page under /Staff, no API answer and
  * no page carrying a reference number: on a shared or watched phone, a cached page is a page
  * somebody else can open. Resources is a public list of phone numbers, which is the one thing
- * worth that trade.
+ * worth that trade. The Resources FAQ explains how to clear it.
  */
 
-// Changed whenever a saved page changes (here, the street address on /offline), so a phone that
-// saved the old one drops it and saves the new one.
-const VERSION = 'pab-v2';
+const VERSION = 'pab-v1';
 
 // Fetched when the worker installs, so they are there before the data runs out.
 const ESSENTIAL = [
@@ -83,4 +81,12 @@ self.addEventListener('fetch', (event) => {
                 return Response.error();
             })
     );
+});
+
+// Sent by the "clear what this site has saved" button in the Resources FAQ.
+self.addEventListener('message', (event) => {
+    if (event.data === 'forget') {
+        caches.keys().then((names) => Promise.all(names.map((name) => caches.delete(name))));
+        self.registration.unregister();
+    }
 });

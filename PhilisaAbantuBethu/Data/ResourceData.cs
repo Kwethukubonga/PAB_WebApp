@@ -143,6 +143,13 @@ public static class ResourceData
 
     public static readonly List<ResourceQuestion> Questions = new()
     {
+        new(new("How do I apply for a SASSA grant?",
+                "Ndifake njani isicelo se-SASSA grant?",
+                "Hoe doen ek aansoek om 'n SASSA-toelaag?"),
+            new("Visit your nearest SASSA office or speak to our social work team who can assist you with the application process.",
+                "Tyelela ihhovisi le-SASSA ekufutshane nawe okanye uthethe neqela lethu lomsebenzi womphakathi elinokukunceda nenkqubo yesicelo.",
+                "Besoek jou naaste SASSA-kantoor of praat met ons maatskaplike werk-span wat jou met die aansoekproses kan help.")),
+
         new(new("Can men access support from Philisa?",
                 "Amadoda anokufumana inkxaso kwa-Philisa?",
                 "Kan mans ondersteuning van Philisa kry?"),
@@ -169,7 +176,15 @@ public static class ResourceData
                 "Moet ek in Lavender Hill of Steenberg woon om hulp te kry?"),
             new("No. While Philisa primarily serves the Cape Flats area, you may still submit a request from outside these areas and the team will advise where possible.",
                 "Hayi. Nangona i-Philisa ixhasa ngokukodwa indawo ye-Cape Flats, unokwanela ukuthumela isicelo ngaphandle kwezo ndawo kwaye iqela liza kunika ingcebiso apho kunokwenzeka.",
-                "Nee. Alhoewel Philisa hoofsaaklik die Cape Flats-area bedien, kan jy steeds 'n versoek van buite hierdie areas indien en die span sal jou waar moontlik adviseer."))
+                "Nee. Alhoewel Philisa hoofsaaklik die Cape Flats-area bedien, kan jy steeds 'n versoek van buite hierdie areas indien en die span sal jou waar moontlik adviseer.")),
+
+        // Part of keeping a visit private (G4): the visit can still be in the browser's history.
+        new(new("How do I remove this site from my browser history?",
+                "Ndiyisusa njani le sayithi kwimbali yesikhangeli sam?",
+                "Hoe verwyder ek hierdie werf uit my blaaigeskiedenis?"),
+            new("Press Ctrl+Shift+Delete (or on a phone, open your browser menu, then History) and clear your browsing history. Browsing in a private or incognito window keeps no history at all. If the phone is shared or watched, a friend's phone or a public computer at a library is safer.",
+                "Cofa u-Ctrl+Shift+Delete (okanye kwifowuni, vula imenyu yesikhangeli, emva koko uye kwiHistory) uze ususe imbali yokhangelo lwakho. Ukukhangela kwifestile eyimfihlo okanye ye-incognito akugcini nto konke konke. Ukuba ifowuni isetyenziswa ngabanye okanye ijongwe, ifowuni yomhlobo okanye ikhompyutha yasethala leencwadi ikhuselekile ngakumbi.",
+                "Druk Ctrl+Shift+Delete (of op 'n foon, maak jou blaaier se kieslys oop en kies Geskiedenis) en maak jou blaaigeskiedenis skoon. 'n Privaat- of incognito-venster hou glad nie geskiedenis nie. As die foon gedeel of dopgehou word, is 'n vriend se foon of 'n publieke rekenaar by 'n biblioteek veiliger."))
     };
 
 }

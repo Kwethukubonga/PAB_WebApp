@@ -42,7 +42,7 @@ It covers the web app in this repository. The Android app's side (Firebase, Fire
 | What stops it | Where in the code |
 |---------------|-------------------|
 | `Referrer-Policy: no-referrer`, so the next site visited never learns the person came from a help page | `Security/SecurityHeaders.cs` |
-| The offline copy keeps only the public Resources page. Nothing typed, no reference number, no staff page, no API answer. | `wwwroot/sw.js`, `wwwroot/js/site.js` |
+| The offline copy keeps only the public Resources page. Nothing typed, no reference number, no staff page, no API answer. The Resources FAQ has a button to clear it. | `wwwroot/sw.js`, `wwwroot/js/site.js` |
 | No public account, so there is no password for an abuser to force out of someone, and nothing to log in to later | By design: `POST /RequestSupport` and `POST /api/support-requests` are anonymous |
 
 **1b. Trying to find the person's request on the site.**
@@ -131,7 +131,7 @@ These are known gaps. Each one has a suggested next step.
 | R4 | Viewing a request is not logged, only status changes. | A nosy staff member could read requests without leaving a trace. | Log "staff X opened request Y" (no contents) for the detail page and API. |
 | R5 | Every admin can see every request. | Volunteers with the admin role may not need GBV details. | A separate "case worker" role for the staff area. |
 | R6 | Staff sign-in strength depends on Firebase. Two-factor sign-in isn't required. | A guessed or phished admin password opens every request. | Turn on multi-factor authentication for admin accounts in Firebase. |
-| R7 | Pages a person visited stay in their browser history, the saved offline copy of the Resources page stays on the phone until its site data is cleared, and nothing on the page lets someone leave at once if somebody walks in while the site is open. | An abuser checking the history or the phone, or walking in, can see the site was used. | None planned. |
+| R7 | Pages a person visited stay in their browser history, and nothing on the page lets someone leave at once if somebody walks in while the site is open. | An abuser checking the history, or walking in, can see the site was used. | None planned. The Resources FAQ already explains how to clear this site from the history and use a private window. |
 | R8 | The rate limit is per address. | Many machines can still send spam, and people sharing one address (a clinic's Wi-Fi) share a limit. | Watch the logs once live; add a CAPTCHA only if spam gets through. |
 | R9 | If the key certificate is lost, saved situation text can never be opened again. | Old requests become unreadable to staff. | Keep the certificate in Render's settings and a password manager only, and run `tools/database/Test-Restore.ps1` after any change. |
 | R10 | The API error handler logs the raw path, so a failed `/api/support-requests/41` is logged with its id rather than `{id}`. | Low: an id isn't personal, but it is inconsistent with the logging rule. | Use `RequestLoggingMiddleware.Shape()` in `Api/ApiErrorMiddleware.cs` too. |
