@@ -8,7 +8,7 @@ public class SiteStringsTests
     [Theory]
     [InlineData("en", "Home", "Emergency Safehouse")]
     [InlineData("xh", "Ikhaya", "Emergency Safehouse")]
-    [InlineData("af", "Tuis", "Veilige Noodhuis")]
+    [InlineData("af", "Tuis", "Nood-veiligehuis")]
     public void EachLanguage_IsFilledFromItsOwnFile(string lang, string home, string firstSupportType)
     {
         var s = SiteStrings.For(lang);

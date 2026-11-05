@@ -88,7 +88,7 @@
     <value>Geen verbinding</value>
   </data>
   <data name="Offline.Offline" xml:space="preserve">
-    <value>Jy is vanlyn</value>
+    <value>Jy is aflyn</value>
   </data>
   <data name="Offline.PageNeedsDataLoad" xml:space="preserve">
     <value>Hierdie bladsy het data nodig om te laai. Die nommers hieronder werk sonder data op hierdie foon.</value>
@@ -109,7 +109,7 @@
     <value>Maak kieslys oop</value>
   </data>
   <data name="Layout.SkipContent" xml:space="preserve">
-    <value>Spring na inhoud</value>
+    <value>Gaan na inhoud</value>
   </data>
   <data name="Layout.Main" xml:space="preserve">
     <value>Hoof</value>
@@ -187,7 +187,7 @@
     <value>Ma–Vr, 8:00–17:00</value>
   </data>
   <data name="Contact.ResponseWithin2448" xml:space="preserve">
-    <value>Reaksie binne 24–48 uur</value>
+    <value>Reaksie binne 24–48 ure</value>
   </data>
   <data name="Contact.Address" xml:space="preserve">
     <value>Adres</value>
@@ -208,7 +208,7 @@
     <value>Kontak Ons</value>
   </data>
   <data name="Contact.WedLoveHearWhether" xml:space="preserve">
-    <value>Ons hoor graag van jou, of jy nou ondersteuning soek, wil vrywillig werk, of met ons wil vennoot word.</value>
+    <value>Ons hoor graag van jou, ongeag of jy nou ondersteuning benodig, vrywillig wil werk, of ons vennoot wil word.</value>
   </data>
   <data name="Contact.SendUsMessage" xml:space="preserve">
     <value>Stuur Vir Ons 'n Boodskap</value>
@@ -283,7 +283,7 @@
     <value>Philisa-krisislyn</value>
   </data>
   <data name="Confirmation.GBVHelpline247" xml:space="preserve">
-    <value>GGG-hulplyn, 24/7</value>
+    <value>GBG-hulplyn, 24/7</value>
   </data>
   <data name="StatusCode.PleaseWaitFewMinutes" xml:space="preserve">
     <value>Wag asseblief 'n paar minute</value>
@@ -361,16 +361,16 @@
     <value>Skryf asseblief jou boodskap.</value>
   </data>
   <data name="Staff.SignIn.Title" xml:space="preserve">
-    <value>Personeel-aanmelding</value>
+    <value>Aanteken vir personeel</value>
   </data>
   <data name="Staff.SignIn.PhilisaAbafaziBethuStaff" xml:space="preserve">
     <value>Vir Philisa Abafazi Bethu-personeel, om ondersteuningsversoeke te sien en te beantwoord.</value>
   </data>
   <data name="Staff.SignIn.StaffSignIsntSet" xml:space="preserve">
-    <value>Personeel-aanmelding is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).</value>
+    <value>Aanteken vir personeel is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).</value>
   </data>
   <data name="Staff.SignIn.Signing" xml:space="preserve">
-    <value>Besig om aan te meld…</value>
+    <value>Besig om aan te teken…</value>
   </data>
   <data name="Staff.SignIn.EmailPasswordDontMatch" xml:space="preserve">
     <value>Daardie e-pos en wagwoord stem nie ooreen nie. Probeer asseblief weer.</value>
@@ -391,28 +391,28 @@
     <value>Wagwoord</value>
   </data>
   <data name="Staff.SignIn.SignIn" xml:space="preserve">
-    <value>Meld aan</value>
+    <value>Teken aan</value>
   </data>
   <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
-    <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanmeld. Wagwoord vergeet? Stel dit terug op die Philisa Volunteers-toepassing se aanmeldskerm.</value>
+    <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanteken. Wagwoord vergeet? Herstel dit op die Philisa Volunteers-toepassing se aantekenskerm.</value>
   </data>
   <data name="Staff.SignIn.SignIsntAvailableRight" xml:space="preserve">
-    <value>Aanmelding is nie nou beskikbaar nie. Probeer asseblief oor 'n paar minute weer.</value>
+    <value>Aanteken is nie nou beskikbaar nie. Probeer asseblief oor 'n paar minute weer.</value>
   </data>
   <data name="Staff.SignIn.SignDidntWorkPlease" xml:space="preserve">
-    <value>Daardie aanmelding het nie gewerk nie. Probeer asseblief weer.</value>
+    <value>Daardie aantekenpoging het nie gewerk nie. Probeer asseblief weer.</value>
   </data>
   <data name="Staff.SignIn.AccountIsntPABStaff" xml:space="preserve">
-    <value>Hierdie rekening is nie 'n PAB-personeelrekening nie. Gebruik die admin-rekening waarmee jy by die Philisa Volunteers-toepassing aanmeld.</value>
+    <value>Hierdie rekening is nie 'n PAB-personeelrekening nie. Gebruik die admin-rekening waarmee jy by die Philisa Volunteers-toepassing aanteken.</value>
   </data>
   <data name="Staff.StaffBar.Staff" xml:space="preserve">
     <value>Personeel</value>
   </data>
   <data name="Staff.StaffBar.SignedInAs" xml:space="preserve">
-    <value>Aangemeld as</value>
+    <value>Aangeteken as</value>
   </data>
   <data name="Staff.StaffBar.SignOut" xml:space="preserve">
-    <value>Meld af</value>
+    <value>Teken af</value>
   </data>
   <data name="Staff.Index.SupportRequests" xml:space="preserve">
     <value>Ondersteuningsversoeke</value>
@@ -484,7 +484,7 @@
     <value>Nuut</value>
   </data>
   <data name="StaffText.JustNow" xml:space="preserve">
-    <value>net nou</value>
+    <value>onlangs</value>
   </data>
   <data name="StaffText.MinAgo" xml:space="preserve">
     <value>{0} min gelede</value>
@@ -493,7 +493,7 @@
     <value>{0} uur gelede</value>
   </data>
   <data name="StaffText.HoursAgo" xml:space="preserve">
-    <value>{0} uur gelede</value>
+    <value>{0} ure gelede</value>
   </data>
   <data name="StaffText.DayAgo" xml:space="preserve">
     <value>{0} dag gelede</value>
@@ -670,7 +670,7 @@
     <value>'n Spanlid sal jou versoek hersien en met jou in verbinding tree deur jou verkose kontakmetode.</value>
   </data>
   <data name="Confirmation.Steps.2" xml:space="preserve">
-    <value>As jou versoek dringend is, sal die span prioriteit gee om so gou moontlik met jou in verbinding te tree.</value>
+    <value>As jou versoek dringend is, sal die span dit prioriteit gee om so gou moontlik met jou in verbinding te tree.</value>
   </data>
   <data name="Confirmation.Steps.3" xml:space="preserve">
     <value>Hou asseblief jou verwysingsnommer byderhand indien jy moet opvolg.</value>
@@ -682,7 +682,7 @@
     <value>Dien Nog 'n Versoek In</value>
   </data>
   <data name="SupportTypes.0" xml:space="preserve">
-    <value>Veilige Noodhuis</value>
+    <value>Nood-veiligehuis</value>
   </data>
   <data name="SupportTypes.1" xml:space="preserve">
     <value>Jeugondersteuning/Jeugbemagtiging</value>
@@ -697,7 +697,7 @@
     <value>Meld mishandeling van 'n ouer persoon</value>
   </data>
   <data name="SupportTypes.5" xml:space="preserve">
-    <value>Veilige noodhuis (LGBTQ+, cisgender man)</value>
+    <value>Nood-veiligehuis (LGBTQ+, cisgender man)</value>
   </data>
   <data name="SupportTypes.6" xml:space="preserve">
     <value>Maatskaplike werk/Internskap</value>
@@ -724,7 +724,7 @@
     <value>Sluit {0}?</value>
   </data>
   <data name="Staff.Details.ConfirmCloseExplain" xml:space="preserve">
-    <value>Dit verdwyn van die Nuut- en Aan die gang-lyste. Jy kan dit weer oopmaak onder Gesluit as dit nodig is.</value>
+    <value>Dit verdwyn uit die lyste Nuut en Aan die gang. Jy kan dit weer oopmaak onder Gesluit as dit nodig is.</value>
   </data>
   <data name="Staff.Details.ConfirmCloseYes" xml:space="preserve">
     <value>Ja, sluit dit</value>
@@ -784,7 +784,7 @@
     <value>Hoe ons dit beskerm</value>
   </data>
   <data name="Privacy.ProtectBody" xml:space="preserve">
-    <value>Jou inligting word veilig gestoor en is slegs toeganklik vir gemagtigde personeel van Philisa Abafazi Bethu wat dit nodig het om jou te help. Ons hou dit net so lank as wat nodig is om jou by te staan en akkurate rekords van ons werk te hou, en ons verkoop of verruil nooit jou inligting aan enigiemand nie, onder geen omstandighede nie.</value>
+    <value>Jou inligting word veilig gestoor en is slegs toeganklik vir gemagtigde personeel van Philisa Abafazi Bethu wat dit nodig het om jou te help. Ons hou dit net so lank as wat nodig is om jou by te staan en akkurate rekords van ons werk te hou, en ons verkoop of verruil nooit jou inligting aan enigiemand nie, onder enige omstandighede nie.</value>
   </data>
   <data name="Privacy.RightsTitle" xml:space="preserve">
     <value>Jou regte</value>
@@ -799,7 +799,7 @@
     <value>Het jy nog vrae?</value>
   </data>
   <data name="Privacy.QuestionsBody" xml:space="preserve">
-    <value>Ons verduidelik graag enige hiervan voordat jy uitreik.</value>
+    <value>Ons verduidelik graag enige van hierdie voordat jy uitreik.</value>
   </data>
   <data name="SupportRequestForm.NameNeedsLetter" xml:space="preserve">
     <value>Skryf asseblief jou naam met letters.</value>
@@ -808,7 +808,7 @@
     <value>Gebruik asseblief net woorde en letters, sonder emoji's.</value>
   </data>
   <data name="RequestSupport.ContactBy" xml:space="preserve">
-    <value>Kontakmetode</value>
+    <value>Kontak teen</value>
   </data>
   <data name="RequestSupport.Email" xml:space="preserve">
     <value>E-pos</value>
