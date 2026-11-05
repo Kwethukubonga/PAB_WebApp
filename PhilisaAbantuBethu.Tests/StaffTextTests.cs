@@ -21,10 +21,10 @@ public class StaffTextTests
     [InlineData("xh", 180, "iiyure ezingu-3 ezidlulileyo")]
     [InlineData("xh", 1440, "iintsuku ezingu-1 ezidlulileyo")]
     [InlineData("xh", 2880, "iintsuku ezingu-2 ezidlulileyo")]
-    [InlineData("af", 0, "net nou")]
+    [InlineData("af", 0, "onlangs")]
     [InlineData("af", 5, "5 min gelede")]
     [InlineData("af", 60, "1 uur gelede")]
-    [InlineData("af", 180, "3 uur gelede")]
+    [InlineData("af", 180, "3 ure gelede")]
     [InlineData("af", 1440, "1 dag gelede")]
     [InlineData("af", 2880, "2 dae gelede")]
     public void Ago_SaysHowLongItsBeen_InEachLanguage(string lang, int minutesAgo, string expected) =>

@@ -72,7 +72,7 @@ public class StaffAlertsTests
 
     [Theory]
     [InlineData("Uncedo Ngokubanzi / Andiqinisekanga", "General Help / Not Sure")]
-    [InlineData("Veilige Noodhuis", "Emergency Safehouse")]
+    [InlineData("Nood Veilige Huis", "Emergency Safehouse")]
     [InlineData("Emergency Safehouse", "Emergency Safehouse")]
     // A request sent before the list changed keeps its old label.
     [InlineData("Food Assistance", "Food Assistance")]
