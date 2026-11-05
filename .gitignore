@@ -366,3 +366,19 @@ FodyWeavers.xsd
 *.db
 *.db-shm
 *.db-wal
+# Installed by `npm install` for the Tailwind build; the built CSS is committed instead.
+node_modules/
+
+# Local editor/tool config, not part of the project.
+.claude/
+
+# Secrets and backups. Certificates, database backups and the folders the tools write them to
+# must never be committed: a backup holds names and phone numbers.
+*.pfx
+*.dump
+pab-secrets/
+pab-backups/
+
+# Lighthouse CI reports (H4)
+lighthouse-reports/
+.lighthouseci/

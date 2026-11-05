@@ -1,0 +1,204 @@
+/*
+ * The Help Centre's one stylesheet. Built with `npm run build`, which writes
+ * PhilisaAbantuBethu/wwwroot/css/app.css with only the classes the pages use (H1).
+ *
+ * Colours, type, spacing and radii come from design/tokens.json through tailwind.config.js,
+ * so they match the Android app (E1). The fonts are served from this site rather than from
+ * Google, which is faster on an expensive connection and sends nothing about the visitor to a
+ * third party: it matters here, because the pages someone reads are the fact that they are
+ * looking for help (H3, POPIA).
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ fonts */
+
+/* Both are variable fonts, so one file per subset covers every weight: four files, 152KB. */
+
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/fonts/lora-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Afrikaans and isiXhosa diacritics live here (ê, ô, ū, and the digraphs' accents). */
+@font-face {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/fonts/lora-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/fonts/source-sans-3-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Source Sans 3';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/fonts/source-sans-3-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ------------------------------------------------------------------- base */
+
+@layer base {
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Tailwind's flex/grid/block utilities have the same specificity as the browser's [hidden]
+       default and win the tie, so hidden is forced to win. */
+    [hidden] {
+        display: none !important;
+    }
+
+    :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+        outline: 2px solid theme('colors.brand.500');
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+}
+
+/* ------------------------------------------------------------- components */
+
+@layer components {
+
+    /*
+     * Built once here rather than repeated as a string of utilities on every page (E8).
+     * Each one is at least 44px tall, which is the smallest a control may be (F5).
+     */
+
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 min-h-target rounded-full
+               px-6 py-3 text-sm font-semibold transition-colors;
+    }
+
+    .btn-primary {
+        @apply btn bg-brand-700 text-white hover:bg-brand-800;
+    }
+
+    .btn-secondary {
+        @apply btn border border-ink-300 text-ink-900 hover:bg-ink-50;
+    }
+
+    .btn-on-brand {
+        @apply btn bg-white text-brand-800 hover:bg-brand-50;
+    }
+
+    /* The field itself. The border darkens rather than disappearing on focus. */
+    .field {
+        @apply w-full min-h-target rounded-xl border border-ink-300 px-4 py-3 text-ink-900
+               placeholder:text-ink-500
+               focus:border-brand-700 focus:ring-2 focus:ring-brand-100;
+    }
+
+    .field-error {
+        @apply border-status-urgent focus:border-status-urgent focus:ring-status-urgentSurface;
+    }
+
+    .label {
+        @apply block text-sm font-semibold text-ink-900 mb-1.5;
+    }
+
+    /* The message under a field that was filled in wrongly. */
+    .field-message {
+        @apply mt-1.5 text-sm font-medium text-status-urgent;
+    }
+
+    .card {
+        @apply bg-white rounded-2xl border border-ink-200 shadow-sm;
+    }
+
+    /* One colour per status, everywhere it appears (W12). */
+    .pill {
+        @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide;
+    }
+
+    .pill-urgent  { @apply pill bg-status-urgentSurface text-status-urgent; }
+    .pill-new     { @apply pill bg-status-newSurface text-status-new; }
+    .pill-working { @apply pill bg-status-inProgressSurface text-status-inProgress; }
+    .pill-closed  { @apply pill bg-status-closedSurface text-status-closed; }
+
+    /*
+     * Skip link: off screen until it is focused, so a keyboard user's first Tab reaches the
+     * content without walking the whole header.
+     */
+    .skip-link {
+        position: absolute;
+        left: -9999px;
+    }
+
+    .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+        z-index: 100;
+        background: #fff;
+        padding: 0.75rem 1.25rem;
+        border-radius: 9999px;
+    }
+
+    /*
+     * Spam trap: moved off screen rather than display:none, because some bots skip fields that
+     * are hidden outright. People never see it or tab to it.
+     */
+    .hp-field {
+        position: absolute;
+        left: -10000px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+
+}
+
+/* ------------------------------------------------------------- utilities */
+
+@layer utilities {
+
+    /*
+     * Someone who has asked their system for less movement gets none. The form's own scrolling
+     * checks this in JavaScript as well, because scroll-behavior alone doesn't stop it (F8).
+     */
+    @media (prefers-reduced-motion: reduce) {
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+
+    }
+
+    /* A chosen radio card shows it on the whole card, not only in the small circle (F6). */
+    label:has(input[type="radio"]:checked) {
+        border-color: theme('colors.brand.700');
+        background-color: theme('colors.brand.50');
+    }
+
+    label:has(input[type="radio"]:focus-visible),
+    label:has(input[type="checkbox"]:focus-visible) {
+        outline: 2px solid theme('colors.brand.500');
+        outline-offset: 2px;
+    }
+
+}

@@ -1,0 +1,60 @@
+@page "{id:int}"
+@model PhilisaAbantuBethu.Pages.Staff.Messages.DetailsModel
+@using PhilisaAbantuBethu.Forms
+@using PhilisaAbantuBethu.Staff
+@{
+    var s = HttpContext.Strings();
+    var m = Model.Message!;
+    var subject = ContactValidator.EnglishSubject(m.Subject);
+    ViewData["Title"] = subject;
+    var now = DateTime.UtcNow;
+}
+
+<partial name="_StaffBar" />
+
+<div class="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+    <a asp-page="./Index" class="inline-flex items-center gap-2 min-h-[44px] text-sm font-semibold text-brand-700 hover:underline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 12H5M12 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        @s["Staff.Messages.AllMessages"]
+    </a>
+
+    <h1 class="mt-4 text-2xl font-bold text-ink-900 font-serif">@subject</h1>
+    <p class="mt-1 text-sm text-ink-600">@StaffText.LocalTime(m.SubmittedAt) · @StaffText.Ago(s, m.SubmittedAt, now)</p>
+
+    <section class="mt-8 bg-white border border-ink-200 rounded-2xl p-6">
+        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
+            <div><dt class="text-ink-600">@s["Contact.FullName"]</dt><dd class="font-semibold text-ink-900">@m.Name</dd></div>
+            <div>
+                <dt class="text-ink-600">@s["Staff.Details.Email"]</dt>
+                <dd class="font-semibold">
+                    @if (string.IsNullOrEmpty(m.Email))
+                    {
+                        <span class="text-ink-900">-</span>
+                    }
+                    else
+                    {
+                        <a href="mailto:@m.Email" class="text-brand-700 hover:underline">@m.Email</a>
+                    }
+                </dd>
+            </div>
+            <div>
+                <dt class="text-ink-600">@s["Contact.Phone"]</dt>
+                <dd class="font-semibold">
+                    @if (string.IsNullOrEmpty(m.Phone))
+                    {
+                        <span class="text-ink-900">-</span>
+                    }
+                    else
+                    {
+                        <a href="tel:@m.Phone.Replace(" ", "")" class="text-brand-700 hover:underline">@m.Phone</a>
+                    }
+                </dd>
+            </div>
+        </dl>
+
+        <p class="mt-6 text-sm text-ink-600">@s["Contact.Message"]</p>
+        <p class="mt-1 text-ink-900 whitespace-pre-line leading-relaxed">@m.Message</p>
+    </section>
+</div>

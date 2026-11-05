@@ -21,4 +21,31 @@ internal static class PageModelTestHelpers
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), modelState)
         };
     }
+
+    /// <summary>TempData kept in memory, for handlers that pass something to the next page.</summary>
+    public static ITempDataDictionary CreateTempData() =>
+        new TempDataDictionary(new DefaultHttpContext(), new InMemoryTempDataProvider());
+
+    private sealed class InMemoryTempDataProvider : ITempDataProvider
+    {
+        private IDictionary<string, object> _values = new Dictionary<string, object>();
+
+        public IDictionary<string, object> LoadTempData(HttpContext context) => _values;
+
+        public void SaveTempData(HttpContext context, IDictionary<string, object> values) => _values = values;
+    }
+}
+
+/// <summary>
+/// Stands in for the form-token check in tests that call a page handler directly, where there is
+/// no real request to carry a token. The real check is covered through the whole site in
+/// EdgeCaseTests.
+/// </summary>
+internal class AcceptingAntiforgery : Microsoft.AspNetCore.Antiforgery.IAntiforgery
+{
+    public Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet GetAndStoreTokens(HttpContext httpContext) => new("request", "cookie", "form", "header");
+    public Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet GetTokens(HttpContext httpContext) => new("request", "cookie", "form", "header");
+    public Task<bool> IsRequestValidAsync(HttpContext httpContext) => Task.FromResult(true);
+    public Task ValidateRequestAsync(HttpContext httpContext) => Task.CompletedTask;
+    public void SetCookieTokenAndHeader(HttpContext httpContext) { }
 }

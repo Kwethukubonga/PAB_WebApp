@@ -1,19 +1,31 @@
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PhilisaAbantuBethu.Data;
-using PhilisaAbantuBethu.Models;
+using PhilisaAbantuBethu.Forms;
+using PhilisaAbantuBethu.Localization;
+using PhilisaAbantuBethu.Services;
 
 namespace PhilisaAbantuBethu.Pages;
 
+// The form's longest field is capped at 3000 characters, so the whole post fits comfortably in
+// 64KB. Kestrel's default 30MB would otherwise let someone force a 30MB allocation per post, and
+// with the rate limit only 5 posts a window, that is a cheap way to lean on the server's memory.
+[RequestSizeLimit(64 * 1024)]
+// The token is still checked on every post, but in OnPostAsync rather than by the framework, so an
+// expired form comes back with what was typed instead of turning into an error page (G7).
+[IgnoreAntiforgeryToken]
+[Security.LimitFormSends]
 public class RequestSupportModel : PageModel
 {
 
-    private readonly AppDbContext _db;
+    private readonly ISupportRequestService _requests;
+    private readonly IAntiforgery _antiforgery;
 
-    public RequestSupportModel(AppDbContext db)
+    public RequestSupportModel(ISupportRequestService requests, IAntiforgery antiforgery)
     {
 
-        _db = db;
+        _requests = requests;
+        _antiforgery = antiforgery;
 
     }
 
@@ -22,47 +34,75 @@ public class RequestSupportModel : PageModel
     [BindProperty] public string? Phone { get; set; }
     [BindProperty] public string? Email { get; set; }
     [BindProperty] public string? Area { get; set; }
-    [BindProperty] public string? ContactMethod { get; set; }
+    [BindProperty] public string? ContactMethod { get; set; } = "phone";
     [BindProperty] public string? SupportType { get; set; }
     [BindProperty] public string? Situation { get; set; }
-    [BindProperty] public string? Urgent { get; set; }
+    [BindProperty] public string? Urgent { get; set; } = "no";
     [BindProperty] public string? Extra { get; set; }
     [BindProperty] public bool Declaration { get; set; }
+
+    // Hidden from people, so only bots fill it in.
+    [BindProperty] public string? Website { get; set; }
+
+    /// <summary>A message for the whole form, shown above the fields.</summary>
+    public string? FormError { get; private set; }
 
     public void OnGet() { }
 
     public async Task<IActionResult> OnPostAsync()
     {
 
-        if (!ModelState.IsValid) 
-            return Page();
+        var s = HttpContext.Strings();
 
-        var reference = "PAB" + Random.Shared.Next(100, 1000);
-
-        var request = new SupportRequest
+        switch (await FormCheck.CheckAsync(_antiforgery, HttpContext))
         {
+            case FormCheckResult.Expired:
+                // Nothing is saved. The page comes back with a fresh token and everything they typed,
+                // which matters most to someone who has just written out what is happening to them.
+                FormError = s["Forms.ExpiredSendAgain"];
+                return Page();
+            case FormCheckResult.Unreadable:
+                FormError = s["Forms.UnreadableTypeAgain"];
+                return Page();
+        }
 
-            FirstName = FirstName ?? "",
-            Surname = Surname ?? "",
-            Phone = Phone ?? "",
-            Email = Email ?? "",
-            Area = Area ?? "",
-            ContactMethod = ContactMethod ?? "",
-            SupportType = SupportType ?? "",
-            Situation = Situation ?? "",
-            Urgent = Urgent ?? "",
-            Extra = Extra ?? "",
-            Declaration = Declaration,
-            Reference = reference,
-            SubmittedAt = DateTime.Now
+        if (!string.IsNullOrEmpty(Website))
+        {
+            // Nothing is saved. A real person who somehow filled it in still gets a way to reach PAB.
+            FormError = s["RequestSupport.CouldntSendRequestPlease"];
+            return Page();
+        }
 
-        };
+        var input = new SupportRequestInput(
+            FirstName, Surname, Phone, Email, Area, ContactMethod,
+            SupportType, Situation, Urgent, Extra, Declaration).Cleaned();
 
-        _db.SupportRequests.Add(request);
-        await _db.SaveChangesAsync();
+        foreach (var (field, message) in SupportRequestValidator.Validate(input, s))
+        {
+            ModelState.AddModelError(field, message);
+        }
 
-        return RedirectToPage("/Confirmation", new { reference = request.Reference });
+        if (!ModelState.IsValid)
+        {
+            FormError = s["RequestSupport.PleaseCheckHighlightedFields"];
+            return Page();
+        }
+
+        var reference = await _requests.SubmitAsync(input, HttpContext.RequestAborted);
+
+        // Passed in TempData rather than the address, so only a request that was really saved
+        // shows the confirmation (issue #24). The contact method lets that page say back how PAB
+        // will reach them (G6).
+        TempData[ConfirmationModel.ReferenceKey] = reference;
+        TempData[ConfirmationModel.ContactMethodKey] = ContactMethod;
+        return RedirectToPage("/Confirmation");
 
     }
+
+    /// <summary>The message for one field, or null when it has none.</summary>
+    public string? ErrorFor(string field) =>
+        ModelState.TryGetValue(field, out var entry) && entry.Errors.Count > 0
+            ? entry.Errors[0].ErrorMessage
+            : null;
 
 }
