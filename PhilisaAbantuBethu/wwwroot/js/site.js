@@ -84,38 +84,19 @@
    Keeping the emergency numbers reachable with no data (W11).
 
    The worker is deliberately narrow about what it keeps (see sw.js):
-   public phone numbers, and nothing anybody typed. Because a saved
-   page is a page somebody else with the phone could open, the
-   Resources FAQ carries a button to clear it again, which is wired
-   up here.
+   public phone numbers, and nothing anybody typed. The Resources page
+   only says the numbers are saved once the browser has really saved
+   them.
 --------------------------------------------------------------- */
 (function () {
     'use strict';
 
     if (!('serviceWorker' in navigator)) return;
 
-    var forgetButton = document.querySelector('[data-forget-site]');
-    var forgetDone = document.querySelector('[data-forget-done]');
     var offlineReady = document.querySelector('[data-offline-ready]');
 
-    navigator.serviceWorker.register('/sw.js').then(function (registration) {
+    navigator.serviceWorker.register('/sw.js').then(function () {
         if (offlineReady) offlineReady.removeAttribute('hidden');
-        if (forgetButton) forgetButton.removeAttribute('hidden');
-
-        if (forgetButton) {
-            forgetButton.addEventListener('click', function () {
-                var worker = registration.active;
-                if (worker) worker.postMessage('forget');
-                // Clear it from this page too, in case the worker has already gone.
-                if (window.caches) {
-                    caches.keys().then(function (names) {
-                        names.forEach(function (name) { caches.delete(name); });
-                    });
-                }
-                forgetButton.setAttribute('hidden', '');
-                if (forgetDone) forgetDone.removeAttribute('hidden');
-            });
-        }
     }).catch(function () {
         // No offline copy. Everything still works with data, so there is nothing to say.
     });

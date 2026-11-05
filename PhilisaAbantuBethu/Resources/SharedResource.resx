@@ -78,12 +78,6 @@
   <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
     <value>Frequently Asked Questions</value>
   </data>
-  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
-    <value>Clear what this site has saved on this phone</value>
-  </data>
-  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
-    <value>Cleared. The emergency numbers will need data again.</value>
-  </data>
   <data name="Resources.NeedMoreHelp" xml:space="preserve">
     <value>Need More Help?</value>
   </data>
