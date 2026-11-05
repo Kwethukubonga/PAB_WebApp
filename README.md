@@ -42,6 +42,7 @@ The Philisa Abafazi Bethu (PAB) Help Centre is a public website where community 
 ### 1.1 Links
 
 - **Live site:** [*Philisa Abafazi Bethu Website*](https://philisa-abafazi-bethu-web.onrender.com/) (on free hosting, which sleeps after 15 minutes without visitors, so the first page after a quiet spell can take about a minute to appear)
+- **Staff sign-in:** [philisa-abafazi-bethu-web.onrender.com/Staff/SignIn](https://philisa-abafazi-bethu-web.onrender.com/Staff/SignIn) (for PAB staff with an admin account; the public pages don't link to it, so the team are given the address)
 - **Demo video:** [*Unlisted YouTube Link*](https://youtu.be/vqdMx4jWI7Y?si=peVstoh2Mlyq2UHJ)
 
 ---
@@ -81,9 +82,9 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | Category | How the Website Meets It |
 |----------|--------------------------|
 | **Accessibility** | Three languages, a "Skip to content" link, labelled form fields and icon buttons, and a page `lang` attribute that matches the chosen language so screen readers pronounce it correctly. |
-| **Responsiveness** | Built mobile-first with Tailwind CSS, with a collapsible menu on small screens and cards and galleries that adapt to the screen width. |
+| **Responsiveness** | Built mobile-first with Tailwind CSS, with a collapsible menu on small screens and cards and photos that adapt to the screen width. |
 | **Usability** | The support form is split into three short steps with a progress bar and a summary before submitting. **Request Support** is always in the header. |
-| **Reliability** | Requests are saved before the confirmation page is shown, and Render only switches to a new deploy once `/health` answers. |
+| **Reliability** | Requests are saved before the confirmation page is shown, and Render only switches to a new deploy once `/alive` answers. |
 | **Security** | Every submission is checked on the server, the forms are rate-limited and have a spam trap, staff pages need a PAB admin sign-in, and every page sends strict security headers (see section 9). |
 | **Safety** | The emergency numbers work with no data. |
 
@@ -131,7 +132,7 @@ If something is missing or wrong, the form comes back with what they typed still
 | Framework | ASP.NET Core Razor Pages (.NET 10), C# |
 | Database | Postgres on the live site and SQLite on a developer's computer, both through Entity Framework Core 10 |
 | Styling | Tailwind CSS, with Lora and Source Sans 3 fonts |
-| Client-side scripts | Plain JavaScript (form steps, mobile menu, FAQ, photo gallery) |
+| Client-side scripts | Plain JavaScript (form steps and checks, mobile menu, FAQ, copying the reference number, staff sign-in) |
 | Staff sign-in | Firebase Authentication, the same accounts as the Philisa Volunteers app |
 | Hosting | Docker, on Render |
 | Testing and CI/CD | xUnit, ASP.NET Core integration tests, GitHub Actions |
@@ -189,7 +190,7 @@ The **Contact** form works the same way, saving to `ContactInquiries`. PAB gets 
 
 ### 6.2 How Staff Sign In
 
-Staff use the admin account they already have in the Philisa Volunteers app, so there's no second set of passwords. There is no link to the sign-in page on the public site. PAB's team are given the address, `/Staff/SignIn`, directly.
+Staff use the admin account they already have in the Philisa Volunteers app, so there's no second set of passwords. There is no link to the sign-in page on the public site. PAB's team are given the address directly: [https://philisa-abafazi-bethu-web.onrender.com/Staff/SignIn](https://philisa-abafazi-bethu-web.onrender.com/Staff/SignIn).
 
 1. On `/Staff/SignIn` the browser signs in to Firebase with an email and password and sends the ID token to the server.
 2. The server checks the token's signature and that it was issued for the `pab-volunteers` project (`Staff/FirebaseTokenVerifier.cs`).
@@ -272,6 +273,7 @@ erDiagram
         string Status
         datetime StatusUpdatedAt
         string HandledBy
+        string StaffNotes
     }
 
     CONTACT_INQUIRIES {
@@ -296,6 +298,7 @@ erDiagram
 | `SubmittedAt`, `StatusUpdatedAt` | Stored in UTC and shown to staff in South African time |
 | `Status` | `new`, `in-progress` or `closed`, changed by staff only |
 | `HandledBy` | The staff member who last changed the status |
+| `StaffNotes` | What staff have done about the request, written on its detail page and never shown publicly |
 | `Subject` | General Enquiry, Volunteering, Donations & Partnerships, Media, or Other |
 
 Indexes on `Reference` (unique), `Status` and `SubmittedAt` keep the staff lists quick.
@@ -334,7 +337,7 @@ The **Privacy Policy** page explains what is collected and why, that it's never 
 
 ## 10. Getting Started
 
-**You need:** the .NET 10 SDK, Visual Studio 2022 or later (or the `dotnet` command line), and Git. Docker Desktop is optional.
+**You need:** the .NET 10 SDK, Visual Studio 2026 (Visual Studio 2022 doesn't support .NET 10) or the `dotnet` command line, and Git. Docker Desktop is optional.
 
 **Step 1: Clone the repository**
 
@@ -360,11 +363,11 @@ Go to `http://localhost:5277`.
 
 **With Docker (Windows):** double-click `docker-setup.bat`. It makes a local development certificate, builds and starts the container, and opens `https://localhost:8443` (plain HTTP is on `http://localhost:8080`). After the first run, `docker compose up --build` is enough. Submissions are kept in the `philisa-data` volume. The container runs as a non-root user, and `TrustProxy` is off locally so the rate limiter uses the real connection address; it is only switched on behind the host's proxy (section 12.1).
 
-**Staff sign-in:** register a **Web app** in the Firebase console for the `pab-volunteers` project (Project settings → Your apps → Add app → Web), then give the site its API key:
-- **Locally:** put it in `"Firebase": { "ApiKey": "…" }` in `appsettings.Development.json`.
+**Staff sign-in:** the site needs the Firebase web API key for the `pab-volunteers` project (Firebase console → Project settings → Your apps → Web app).
+- **Locally:** the key is already in `appsettings.Development.json`, so there is nothing to set up. Sign in at `http://localhost:5277/Staff/SignIn` with a Philisa Volunteers admin account.
 - **On Render:** set the variable `Firebase__ApiKey`.
 
-Firebase web API keys aren't secret; every web page that uses Firebase sends one. For Google sign-in, also add the site's domain under Firebase → Authentication → Settings → Authorised domains.
+Firebase web API keys aren't secret; every web page that uses Firebase sends one. Staff sign in with their email and password; Google sign-in isn't offered.
 
 **Email alerts (optional):** with no settings the site simply doesn't send them. Alerts go through [Resend](https://resend.com) (free for this volume), because free and cheap hosting plans block ordinary email (SMTP).
 
@@ -431,6 +434,7 @@ the WebP at the width the browser needs and keeps the original as the fallback.
 PAB_WebApp/
 ├── PhilisaAbantuBethu/
 │   ├── Api/             # The REST endpoints, one file per resource, and the error format
+│   ├── Content/         # Programme text in three languages, served by the API
 │   ├── Data/            # AppDbContext, programme and resource content, the development seed
 │   │   └── Protection/  # Encrypting the columns that describe what happened to somebody
 │   ├── Forms/           # Server-side checks for the support and contact forms
@@ -438,19 +442,22 @@ PAB_WebApp/
 │   ├── Migrations/      # Database migrations for SQLite; Postgres/ holds the set for Postgres
 │   ├── Models/          # SupportRequest, ContactInquiry, Programme
 │   ├── Pages/           # Every page, the shared layout, and Staff/ for PAB staff
+│   ├── Resources/       # The text of every page, one file per language
 │   ├── Security/        # Rate limiting, security headers, request logging
 │   ├── Services/        # Saving and reading requests, references, phone numbers, retention
 │   ├── Staff/           # Firebase sign-in check, the admin role lookup, the bearer scheme
 │   ├── wwwroot/         # The built stylesheet, the fonts, the scripts, PAB's photos, sw.js
 │   └── Program.cs       # App start-up: services, security, API, language cookie
 ├── PhilisaAbantuBethu.Tests/   # Unit and integration tests
+├── docs/                # The architecture diagram and the threat model
+├── DESIGN.md            # How both apps look: the shared colours, type and every component
 ├── Styles/app.css       # The stylesheet's source; `npm run build` writes wwwroot/css/app.css
 ├── design/tokens.json   # The one place the colours, type, spacing and radii are written down
 ├── tools/tokens/        # Writes the Tailwind theme and Android's colors.xml from the tokens
 ├── tools/images/        # Writes the WebP copies and records every photo's size
 ├── tools/data-protection/  # Makes the certificate that locks the encryption keys
 ├── tools/database/      # Backs up the live database and proves a backup restores
-├── .github/workflows/   # CI/CD: build, test, coverage, Docker build, deploy
+├── .github/workflows/   # CI/CD: build, test, coverage, Docker build, deploy, Lighthouse
 ├── .github/dependabot.yml
 ├── Dockerfile
 ├── docker-compose.yml
@@ -487,10 +494,10 @@ The website is hosted on **Render** (free plan), built from the project's `Docke
 
 `.github/workflows/lighthouse.yml` runs on every pull request into `develop` or `main`. It starts the site with production settings and runs Lighthouse three times on the main public pages (Home, About, Resources, Request Support, Contact, Privacy). The PR fails if a page's median **Performance** score is below **80** or **Accessibility** below **90**; Best Practices and SEO are reported as warnings. The scores are posted as a comment on the PR and on the run's summary page, with the full reports as a download. The minimums are in `lighthouserc.json`.
 
-To turn the deploy on, add one repository secret under **Settings → Secrets and variables → Actions**:
+The deploy needs one repository secret under **Settings → Secrets and variables → Actions**. It is set on the team's repository:
 - `RENDER_DEPLOY_HOOK`: the service's deploy hook, from Render under **Settings → Deploy Hook**. Treat it like a password: anyone who has it can start a deploy.
 
-If the live address ever changes, set a repository variable called `SITE_URL` to it. The Render service has no automatic deploys from GitHub, so every release goes through the tests first. Until the secret exists, the deploy job reports that it was skipped instead of failing.
+If the live address ever changes, set a repository variable called `SITE_URL` to it. The Render service has no automatic deploys from GitHub, so every release goes through the tests first. On a copy of the repository without the secret, the deploy job reports that it was skipped instead of failing.
 
 ### 12.3 Branching
 
@@ -549,7 +556,8 @@ The site creates its tables the first time it starts. If the connection string o
 | Unique reference numbers | ✔ Complete |
 | Staff area to see and move requests along | ✔ Complete |
 | Security headers and health check | ✔ Complete |
-| Automated tests (407) and CI/CD | ✔ Complete (deploy needs the Render deploy hook) |
+| Automated tests (407) and CI/CD | ✔ Complete (a merge to `main` deploys through the Render deploy hook) |
+| Lighthouse checks on every pull request | ✔ Complete |
 | Shared REST API with OpenAPI, used by both clients | ✔ Complete |
 | Service layer, so no page touches the DbContext | ✔ Complete |
 | Constrained schema, staff notes and indexes | ✔ Complete |
@@ -566,7 +574,6 @@ The site creates its tables the first time it starts. If the connection string o
 
 - **Managed database, finishing touches:** the site uses Postgres wherever the connection string points at one, with its own migrations and its encryption keys in the database (section 12.4). What is left is scheduling the backups instead of running them by hand, and checking the database server's certificate: the connection to Neon is encrypted, but `Data/DatabaseProvider.cs` still sets `Trust Server Certificate=true`, so it does not yet prove it is talking to Neon itself.
 - **Android reads the API:** PAB admins seeing web support requests inside the Philisa Volunteers app, through `GET /api/support-requests` with their existing admin token. The API side of this is finished and tested.
-- **Lighthouse in CI:** a minimum score for performance and accessibility on every pull request.
 
 ---
 
