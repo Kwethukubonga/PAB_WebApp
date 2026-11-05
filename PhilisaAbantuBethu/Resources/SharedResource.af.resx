@@ -78,12 +78,6 @@
   <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
     <value>Gereelde Vrae</value>
   </data>
-  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
-    <value>Vee uit wat hierdie werf op hierdie foon gestoor het</value>
-  </data>
-  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
-    <value>Uitgevee. Die noodnommers sal weer data nodig hê.</value>
-  </data>
   <data name="Resources.NeedMoreHelp" xml:space="preserve">
     <value>Benodig Jy Meer Hulp?</value>
   </data>

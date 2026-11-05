@@ -78,12 +78,6 @@
   <data name="Resources.FrequentlyAskedQuestions" xml:space="preserve">
     <value>Imibuzo Ebuzwa Rhoqo</value>
   </data>
-  <data name="Resources.ClearWhatSiteHas" xml:space="preserve">
-    <value>Susa oko le sayithi iyigcinileyo kule fowuni</value>
-  </data>
-  <data name="Resources.ClearedEmergencyNumbersWill" xml:space="preserve">
-    <value>Kususwe. Amanani ongxamiseko aza kufuna idatha kwakhona.</value>
-  </data>
   <data name="Resources.NeedMoreHelp" xml:space="preserve">
     <value>Ufuna Uncedo Oluninzi?</value>
   </data>
