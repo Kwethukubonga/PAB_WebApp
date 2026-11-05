@@ -88,7 +88,7 @@
     <value>Geen verbinding</value>
   </data>
   <data name="Offline.Offline" xml:space="preserve">
-    <value>Jy is vanlyn</value>
+    <value>Jy is aflyn</value>
   </data>
   <data name="Offline.PageNeedsDataLoad" xml:space="preserve">
     <value>Hierdie bladsy het data nodig om te laai. Die nommers hieronder werk sonder data op hierdie foon.</value>
@@ -157,7 +157,7 @@
     <value>As jy in onmiddellike gevaar is, skakel 10111 of ons krisislyn na-ure by</value>
   </data>
   <data name="RequestSupport.RequestSummary" xml:space="preserve">
-    <value>Versoek Opsomming</value>
+    <value>Versoekopsomming</value>
   </data>
   <data name="RequestSupport.Name" xml:space="preserve">
     <value>Naam</value>
@@ -361,13 +361,13 @@
     <value>Skryf asseblief jou boodskap.</value>
   </data>
   <data name="Staff.SignIn.Title" xml:space="preserve">
-    <value>Personeel aanteken</value>
+    <value>Aanteken vir personeel</value>
   </data>
   <data name="Staff.SignIn.PhilisaAbafaziBethuStaff" xml:space="preserve">
     <value>Vir Philisa Abafazi Bethu-personeel, om ondersteuningsversoeke te sien en te beantwoord.</value>
   </data>
   <data name="Staff.SignIn.StaffSignIsntSet" xml:space="preserve">
-    <value>Personeel aanteken is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).</value>
+    <value>Aanteken vir personeel is nog nie opgestel nie. Vra die span om die Firebase-web-API-sleutel by te voeg (Firebase__ApiKey).</value>
   </data>
   <data name="Staff.SignIn.Signing" xml:space="preserve">
     <value>Besig om aan te teken…</value>
@@ -394,13 +394,13 @@
     <value>Teken aan</value>
   </data>
   <data name="Staff.SignIn.OnlyPhilisaVolunteersAdmin" xml:space="preserve">
-    <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanteken. Wagwoord vergeet? Herstel dit op die Philisa Volunteers-toepassing se aanteken skerm.</value>
+    <value>Slegs Philisa Volunteers-admin-rekeninge kan hier aanteken. Wagwoord vergeet? Herstel dit op die Philisa Volunteers-toepassing se aantekenskerm.</value>
   </data>
   <data name="Staff.SignIn.SignIsntAvailableRight" xml:space="preserve">
     <value>Aanteken is nie nou beskikbaar nie. Probeer asseblief oor 'n paar minute weer.</value>
   </data>
   <data name="Staff.SignIn.SignDidntWorkPlease" xml:space="preserve">
-    <value>Daardie aanteken poging het nie gewerk nie. Probeer asseblief weer.</value>
+    <value>Daardie aantekenpoging het nie gewerk nie. Probeer asseblief weer.</value>
   </data>
   <data name="Staff.SignIn.AccountIsntPABStaff" xml:space="preserve">
     <value>Hierdie rekening is nie 'n PAB-personeelrekening nie. Gebruik die admin-rekening waarmee jy by die Philisa Volunteers-toepassing aanteken.</value>
@@ -418,7 +418,7 @@
     <value>Ondersteuningsversoeke</value>
   </data>
   <data name="Staff.Index.RequestStatus" xml:space="preserve">
-    <value>Versoek status</value>
+    <value>Versoekstatus</value>
   </data>
   <data name="Staff.Index.Show" xml:space="preserve">
     <value>Wys</value>
@@ -682,10 +682,10 @@
     <value>Dien Nog 'n Versoek In</value>
   </data>
   <data name="SupportTypes.0" xml:space="preserve">
-    <value>Nood Veilige Huis</value>
+    <value>Nood-veiligehuis</value>
   </data>
   <data name="SupportTypes.1" xml:space="preserve">
-    <value>Jeug Ondersteuning/Jeug Bemagtiging</value>
+    <value>Jeugondersteuning/Jeugbemagtiging</value>
   </data>
   <data name="SupportTypes.2" xml:space="preserve">
     <value>Jeug- en GBV-ondersteuning/advies</value>
@@ -697,7 +697,7 @@
     <value>Meld mishandeling van 'n ouer persoon</value>
   </data>
   <data name="SupportTypes.5" xml:space="preserve">
-    <value>Nood Veilige Huis (LGBTQ+, cisgender man)</value>
+    <value>Nood-veiligehuis (LGBTQ+, cisgender man)</value>
   </data>
   <data name="SupportTypes.6" xml:space="preserve">
     <value>Maatskaplike werk/Internskap</value>
@@ -724,7 +724,7 @@
     <value>Sluit {0}?</value>
   </data>
   <data name="Staff.Details.ConfirmCloseExplain" xml:space="preserve">
-    <value>Dit verdwyn van die Nuut- en Aan die gang-lyste. Jy kan dit weer oopmaak onder Gesluit as dit nodig is.</value>
+    <value>Dit verdwyn uit die lyste Nuut en Aan die gang. Jy kan dit weer oopmaak onder Gesluit as dit nodig is.</value>
   </data>
   <data name="Staff.Details.ConfirmCloseYes" xml:space="preserve">
     <value>Ja, sluit dit</value>
@@ -784,7 +784,7 @@
     <value>Hoe ons dit beskerm</value>
   </data>
   <data name="Privacy.ProtectBody" xml:space="preserve">
-    <value>Jou inligting word veilig gestoor en is slegs toeganklik vir gemagtigde personeel van Philisa Abafazi Bethu wat dit nodig het om jou te help. Ons hou dit net so lank as wat nodig is om jou by te staan en akkurate rekords van ons werk te hou, en ons verkoop of verruil nooit jou inligting aan enigiemand nie, onder geen omstandighede nie.</value>
+    <value>Jou inligting word veilig gestoor en is slegs toeganklik vir gemagtigde personeel van Philisa Abafazi Bethu wat dit nodig het om jou te help. Ons hou dit net so lank as wat nodig is om jou by te staan en akkurate rekords van ons werk te hou, en ons verkoop of verruil nooit jou inligting aan enigiemand nie, onder enige omstandighede nie.</value>
   </data>
   <data name="Privacy.RightsTitle" xml:space="preserve">
     <value>Jou regte</value>
@@ -817,6 +817,6 @@
     <value>Jou situasie</value>
   </data>
   <data name="Staff.Details.UnknownStatus" xml:space="preserve">
-    <value>Daardie status is nie Nuut, Aan-die-gang of Gesluit nie, so niks is verander nie.</value>
+    <value>Daardie status is nie Nuut, Aan die gang of Gesluit nie, so niks is verander nie.</value>
   </data>
 </root>
