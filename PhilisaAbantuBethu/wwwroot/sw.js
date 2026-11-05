@@ -11,9 +11,9 @@
  * worth that trade.
  */
 
-// Changed whenever a saved page changes (here, the street address on /offline), so a phone that
-// saved the old one drops it and saves the new one.
-const VERSION = 'pab-v2';
+// Changed whenever a saved page changes (the street address, then the site's name in the header),
+// so a phone that saved the old one drops it and saves the new one.
+const VERSION = 'pab-v3';
 
 // Fetched when the worker installs, so they are there before the data runs out.
 const ESSENTIAL = [
