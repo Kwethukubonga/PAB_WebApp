@@ -85,7 +85,7 @@ works. Running `dotnet test` is therefore a check against this table, not just a
 | **Usability** | The support form is split into three short steps with a progress bar and a summary before submitting. **Request Support** is always in the header. |
 | **Reliability** | Requests are saved before the confirmation page is shown, and Render only switches to a new deploy once `/health` answers. |
 | **Security** | Every submission is checked on the server, the forms are rate-limited and have a spam trap, staff pages need a PAB admin sign-in, and every page sends strict security headers (see section 9). |
-| **Safety** | The emergency numbers work with no data, and the Resources page explains how to clear this site from a phone's history and take its offline copy off the phone. |
+| **Safety** | The emergency numbers work with no data. |
 
 ---
 
@@ -326,7 +326,7 @@ Who could misuse the information on this site, what stops each of them, and the 
 | Retention | Closed requests and contact messages are deleted after 12 months by a scheduled cleanup (`Services/RetentionService.cs`). A request nobody has closed is never deleted, however old. |
 | Consent | A consent declaration must be ticked before submitting |
 | Database file | `*.db` files are excluded from Git and the Docker image |
-| Offline copy | The service worker keeps only the Resources page and the files it needs. Nothing anybody typed, no staff page and no API answer, because on a shared phone a saved page is one somebody else can open. The Resources FAQ has a button to clear it. |
+| Offline copy | The service worker keeps only the Resources page and the files it needs. Nothing anybody typed, no staff page and no API answer, because on a shared phone a saved page is one somebody else can open. |
 
 The **Privacy Policy** page explains what is collected and why, that it's never sold or used for marketing, and people's POPIA rights to see, correct or delete their information.
 
